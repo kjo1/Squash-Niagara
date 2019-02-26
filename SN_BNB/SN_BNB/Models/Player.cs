@@ -30,7 +30,6 @@ namespace SN_BNB.Models
         public int TeamID { get; set; }
 
         public virtual Team Team { get; set; }
-        public virtual TeamCaptain TeamCaptain { get; set; }
 
         public virtual ICollection<MatchScore> MatchScores { get; set; }
 
