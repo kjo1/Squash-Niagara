@@ -19,8 +19,10 @@ namespace SN_BNB.Models
         [Display(Name ="Date/Time")]
         public DateTime Datetime { get; set; }
         [Required]
+        [Display(Name = "Home Team Score")]
         public int HomeScore { get; set; }
         [Required]
+        [Display(Name = "Away Team Score")]
         public int AwayScore { get; set; }
 
         public int HomeTeamID { get; set; }
