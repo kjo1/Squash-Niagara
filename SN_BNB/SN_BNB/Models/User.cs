@@ -8,6 +8,10 @@ namespace SN_BNB.Models
 {
     public class User
     {
+        public User()
+        {
+            this.ApprovedBys = new HashSet<ApprovedBy>();
+        }
         public int ID { get; set; }
         [Required]
         [Display(Name="User Role")]

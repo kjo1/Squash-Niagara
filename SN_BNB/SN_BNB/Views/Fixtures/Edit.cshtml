@@ -1,0 +1,64 @@
+﻿@model SN_BNB.Models.Fixture
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Fixture</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Datetime" class="control-label"></label>
+                <input asp-for="Datetime" class="form-control" />
+                <span asp-validation-for="Datetime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeScore" class="control-label"></label>
+                <input asp-for="HomeScore" class="form-control" />
+                <span asp-validation-for="HomeScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AwayScore" class="control-label"></label>
+                <input asp-for="AwayScore" class="form-control" />
+                <span asp-validation-for="AwayScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeTeamID" class="control-label"></label>
+                <input asp-for="HomeTeamID" class="form-control" />
+                <span asp-validation-for="HomeTeamID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AwayTeamID" class="control-label"></label>
+                <input asp-for="AwayTeamID" class="form-control" />
+                <span asp-validation-for="AwayTeamID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeasonID" class="control-label"></label>
+                <select asp-for="SeasonID" class="form-control" asp-items="ViewBag.SeasonID"></select>
+                <span asp-validation-for="SeasonID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationID" class="control-label"></label>
+                <select asp-for="LocationID" class="form-control" asp-items="ViewBag.LocationID"></select>
+                <span asp-validation-for="LocationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
