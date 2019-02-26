@@ -8,6 +8,10 @@ namespace SN_BNB.Models
 {
     public class Season
     {
+        public Season()
+        {
+            this.Fixtures = new HashSet<Fixture>();
+        }
         public int ID { get; set; }
         [Required]
         [Display(Name = "Season Start Date")]

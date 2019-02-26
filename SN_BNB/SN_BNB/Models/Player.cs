@@ -8,6 +8,10 @@ namespace SN_BNB.Models
 {
     public class Player
     {
+        public Player()
+        {
+            this.MatchScores = new HashSet<MatchScore>();
+        }
         public int ID { get; set; }
         [Required]
         [Display(Name="First Name")]

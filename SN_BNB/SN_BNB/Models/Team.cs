@@ -8,6 +8,11 @@ namespace SN_BNB.Models
 {
     public class Team
     {
+        public Team()
+        {
+            this.Players = new HashSet<Player>();
+            this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
+        }
         public int ID { get; set; }
         [Required]
         [Display(Name = "Team Name")]
@@ -17,6 +22,7 @@ namespace SN_BNB.Models
         [Display(Name = "Team Points")]
         public int TeamPoints { get; set; }
 
+        [Display(Name="Team Created")]
         public DateTime? TeamCreatedOn { get; set; }
 
         public int DivisionID { get; set; }
