@@ -14,6 +14,8 @@ namespace SN_BNB.Data
         {
         }
 
-        public DbSet<SN_BNB.Models.Division> Division { get; set; }
+        public DbSet<Division> Divisions { get; set; }
+        public DbSet<Team> Teams { get; set; }
+
     }
 }

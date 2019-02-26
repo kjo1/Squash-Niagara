@@ -10,22 +10,23 @@ using SN_BNB.Models;
 
 namespace SN_BNB.Controllers
 {
-    public class DivisionsController : Controller
+    public class TeamsController : Controller
     {
         private readonly SNContext _context;
 
-        public DivisionsController(SNContext context)
+        public TeamsController(SNContext context)
         {
             _context = context;
         }
 
-        // GET: Divisions
+        // GET: Teams
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Divisions.ToListAsync());
+            var sNContext = _context.Teams.Include(t => t.Division);
+            return View(await sNContext.ToListAsync());
         }
 
-        // GET: Divisions/Details/5
+        // GET: Teams/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var division = await _context.Divisions
+            var team = await _context.Teams
+                .Include(t => t.Division)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (division == null)
+            if (team == null)
             {
                 return NotFound();
             }
 
-            return View(division);
+            return View(team);
         }
 
-        // GET: Divisions/Create
+        // GET: Teams/Create
         public IActionResult Create()
         {
+            ViewData["DivisionID"] = new SelectList(_context.Divisions, "ID", "DivisionName");
             return View();
         }
 
-        // POST: Divisions/Create
+        // POST: Teams/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,DivisionName")] Division division)
+        public async Task<IActionResult> Create([Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(division);
+                _context.Add(team);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(division);
+            ViewData["DivisionID"] = new SelectList(_context.Divisions, "ID", "DivisionName", team.DivisionID);
+            return View(team);
         }
 
-        // GET: Divisions/Edit/5
+        // GET: Teams/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var division = await _context.Divisions.FindAsync(id);
-            if (division == null)
+            var team = await _context.Teams.FindAsync(id);
+            if (team == null)
             {
                 return NotFound();
             }
-            return View(division);
+            ViewData["DivisionID"] = new SelectList(_context.Divisions, "ID", "DivisionName", team.DivisionID);
+            return View(team);
         }
 
-        // POST: Divisions/Edit/5
+        // POST: Teams/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,DivisionName")] Division division)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team)
         {
-            if (id != division.ID)
+            if (id != team.ID)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace SN_BNB.Controllers
             {
                 try
                 {
-                    _context.Update(division);
+                    _context.Update(team);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DivisionExists(division.ID))
+                    if (!TeamExists(team.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace SN_BNB.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(division);
+            ViewData["DivisionID"] = new SelectList(_context.Divisions, "ID", "DivisionName", team.DivisionID);
+            return View(team);
         }
 
-        // GET: Divisions/Delete/5
+        // GET: Teams/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var division = await _context.Divisions
+            var team = await _context.Teams
+                .Include(t => t.Division)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (division == null)
+            if (team == null)
             {
                 return NotFound();
             }
 
-            return View(division);
+            return View(team);
         }
 
-        // POST: Divisions/Delete/5
+        // POST: Teams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var division = await _context.Divisions.FindAsync(id);
-            _context.Divisions.Remove(division);
+            var team = await _context.Teams.FindAsync(id);
+            _context.Teams.Remove(team);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DivisionExists(int id)
+        private bool TeamExists(int id)
         {
-            return _context.Divisions.Any(e => e.ID == id);
+            return _context.Teams.Any(e => e.ID == id);
         }
     }
 }
