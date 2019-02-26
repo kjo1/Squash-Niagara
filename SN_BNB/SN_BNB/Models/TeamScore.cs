@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SN_BNB.Models
+{
+    public class TeamScore
+    {
+        public int ID { get; set; }
+        [Required]
+        [Display(Name="Fixture Score")]
+        public string FixtureScore { get; set; }
+
+        public int TeamID { get; set; }
+        public int FixtureID { get; set; }
+
+        public virtual Team Team { get; set; }
+        public virtual Division Fixture { get; set; }
+
+        public virtual ICollection<ApprovedBy> ApprovedBys { get; set; }
+    }
+}
