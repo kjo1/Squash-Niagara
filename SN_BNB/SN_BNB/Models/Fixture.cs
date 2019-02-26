@@ -28,6 +28,7 @@ namespace SN_BNB.Models
         public int HomeTeamID { get; set; }
         public int AwayTeamID { get; set; }
         public int SeasonID { get; set; }
+        public int LocationID { get; set; }
 
         public virtual Location Location { get; set; }
         public virtual Season Season { get; set; }

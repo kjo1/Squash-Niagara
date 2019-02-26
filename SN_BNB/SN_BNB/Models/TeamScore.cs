@@ -21,7 +21,7 @@ namespace SN_BNB.Models
         public int FixtureID { get; set; }
 
         public virtual Team Team { get; set; }
-        public virtual Division Fixture { get; set; }
+        public virtual Fixture Fixture { get; set; }
 
         public virtual ICollection<ApprovedBy> ApprovedBys { get; set; }
     }

@@ -7,6 +7,7 @@ namespace SN_BNB.Models
 {
     public class Fixture_has_Team
     {
+        public int ID { get; set; }
         public int FixtureID { get; set; }
         public int TeamID { get; set; }
 

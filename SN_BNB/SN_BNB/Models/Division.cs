@@ -13,6 +13,7 @@ namespace SN_BNB.Models
             this.Teams = new HashSet<Team>();
         }
         public int ID { get; set; }
+
         [Required]
         [Display(Name = "Division")]
         public string DivisionName { get; set; }
