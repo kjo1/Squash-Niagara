@@ -25,6 +25,7 @@ namespace SN_BNB.Models
         [Display(Name="Team Created")]
         public DateTime? TeamCreatedOn { get; set; }
 
+        [Display(Name="Division")]
         public int DivisionID { get; set; }
 
         public virtual Division Division { get; set; }
