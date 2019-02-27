@@ -1,0 +1,2 @@
+﻿add-migration -context SNContext -output SNMigrations
+update-database -context SNContext
