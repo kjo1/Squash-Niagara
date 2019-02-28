@@ -34,6 +34,21 @@ namespace SN_BNB.Controllers
             return View();
         }
 
+        public IActionResult LeagueRules()
+        {
+            return View();
+        }
+
+        public IActionResult LeagueConstitution()
+        {
+            return View();
+        }
+
+        public IActionResult Documents()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

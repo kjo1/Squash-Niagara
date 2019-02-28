@@ -1,7 +1,67 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="overview.html">About</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="overview.html">Overview</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Rules
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Home/LeagueRules">League Rules</a>
+                        <a class="dropdown-item" href="/Home/LeagueConstitution">League Constitution</a>
+                    </div>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/Home/Documents">Documents</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <br />
+    <div class="card text-center">
+        <div class="card-header">
+            Squash Niagara Description
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        <!--<div class="card-body">
+            <a href="#" class="card-link">Download</a>
+        </div>-->
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>
+</div>
+<div class="container">
+    <br />
+    <div class="card text-center">
+        <div class="card-header">
+            League Rules Info
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">How to Get Involved (Contact info)</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        <!--<div class="card-body">
+            <a href="#" class="card-link">Download</a>
+        </div>-->
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
+    </div>
+</div>
