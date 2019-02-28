@@ -12,5 +12,5 @@ namespace SN_BNB.Data
             : base(options)
         {
         }
-    }
+    } 
 }
