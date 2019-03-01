@@ -22,7 +22,14 @@ namespace SN_BNB.Controllers
         // GET: Teams
         public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton)
         {
-            var sNContext = _context.Teams.Include(t => t.Division);
+            //var sNContext = _context.Teams.Include(t => t.Division);
+
+            var teams = from t in _context.Teams
+                        .Include(t => t.Division)
+                        .Include(t => t.Fixture_has_Teams)
+                        .Include(t => t.Players)
+                            //.Include(t => t.Teamscore)
+                        select t;
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
@@ -36,7 +43,81 @@ namespace SN_BNB.Controllers
                 }
             }
 
-            return View(await sNContext.ToListAsync());
+            if (sortField == "Team Name")//Sorting by Date Time
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamName);
+                    //.ThenBy(p => p.FirstName);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamName);
+                    //.ThenByDescending(p => p.FirstName);
+                }
+            }
+            else if (sortField == "Point(s)")
+
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamPoints);
+                    //.ThenBy(p => p.Doctor.FirstName);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamPoints);
+                    //.ThenByDescending(p => p.Doctor.FirstName);
+                }
+            else if (sortField == "Created On")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamCreatedOn);
+                    //.ThenBy(p => p.Doctor.FirstName);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamCreatedOn);
+                    //.ThenByDescending(p => p.Doctor.FirstName);
+                }
+            }
+            else if (sortField == "Division")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.Division.DivisionName);
+                    //.ThenBy(p => p.Doctor.FirstName);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.Division.DivisionName);
+                    //.ThenByDescending(p => p.Doctor.FirstName);
+                }
+            }
+            else //Sorting by Season - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams.OrderBy(t => t.TeamPoints);
+                }
+                else
+                {
+                    teams = teams.OrderByDescending(f => f.TeamPoints);
+                }
+            }
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
+            return View(await teams.ToListAsync());
         }
 
         // GET: Teams/Details/5
