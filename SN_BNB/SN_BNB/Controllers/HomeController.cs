@@ -5,6 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SN_BNB.Models;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System.Threading;
+using System.IO;
 
 namespace SN_BNB.Controllers
 {
@@ -55,6 +62,11 @@ namespace SN_BNB.Controllers
         }
 
         public IActionResult Schedule()
+        {
+            return View();
+        }
+
+        public IActionResult Standings()
         {
             return View();
         }
