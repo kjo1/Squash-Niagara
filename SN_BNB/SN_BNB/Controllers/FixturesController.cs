@@ -20,10 +20,10 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Fixtures
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, int? homeID)
         {
-            var sNContext = _context.Fixtures.Include(f => f.Location).Include(f => f.Season);
-
+            //var sNContext = _context.Fixtures.Include(f => f.Location).Include(f => f.Season);
+            PopulateDropDownLists();
             var fixtures = from f in _context.Fixtures
                                .Include(f => f.Season)
                                .Include(f => f.Location)
@@ -34,6 +34,11 @@ namespace SN_BNB.Controllers
                                .ThenInclude (f => f.Team)
                            select f;
 
+            if (homeID.HasValue)
+            {
+                fixtures = fixtures.Where(f => f.HomeTeamID == homeID);
+            }
+            
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
@@ -150,7 +155,7 @@ namespace SN_BNB.Controllers
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
 
-            return View(await sNContext.ToListAsync());
+            return View(await fixtures.ToListAsync());
         }
 
         // GET: Fixtures/Details/5
@@ -289,5 +294,26 @@ namespace SN_BNB.Controllers
         {
             return _context.Fixtures.Any(e => e.ID == id);
         }
+
+        private SelectList TeamSelectList(int? id)
+        {
+            var dQuery = from t in _context.Teams
+                         orderby t.TeamName
+                         select t;
+            return new SelectList(dQuery, "ID", "TeamName", id);
+        }
+
+        private void PopulateDropDownLists(Fixture fixture = null)
+        {
+            ViewData["TeamID"] = TeamSelectList(fixture?.HomeTeamID);
+        }
+
+        [HttpGet]
+        public JsonResult GetTeams(int? id)
+        {
+            return Json(TeamSelectList(id));
+        }
     }
+
+    
 }
