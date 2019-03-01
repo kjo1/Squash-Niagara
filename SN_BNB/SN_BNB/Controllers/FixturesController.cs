@@ -24,6 +24,17 @@ namespace SN_BNB.Controllers
         {
             var sNContext = _context.Fixtures.Include(f => f.Location).Include(f => f.Season);
 
+            var fixtures = from f in _context.Fixtures
+                               .Include(f => f.Season)
+                               .Include(f => f.Location)
+                               .Include(f => f.TeamScores)
+                               .Include(f => f.Matches)
+                               //.ThenInclude(f => f.MatchScores)
+                               .Include(f => f.Fixture_has_Teams)
+                               .ThenInclude (f => f.Team)
+                           select f;
+
+
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
                 if (actionButton != "Filter")//Change of sort is requested
@@ -36,63 +47,108 @@ namespace SN_BNB.Controllers
                 }
             }
 
-            //if (sortField == "Date Time")//Sorting by Date Time
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        Fixture = Fixtures
-            //            .OrderBy(p => p.LastName)
-            //            .ThenBy(p => p.FirstName);
-            //    }
-            //    else
-            //    {
-            //        patients = patients
-            //            .OrderByDescending(p => p.LastName)
-            //            .ThenByDescending(p => p.FirstName);
-            //    }
-            //}
-            //else if (sortField == "Exp. Yr. Visits")
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        patients = patients
-            //            .OrderBy(p => p.ExpYrVisits);
-            //    }
-            //    else
-            //    {
-            //        patients = patients
-            //            .OrderByDescending(p => p.ExpYrVisits);
-            //    }
-            //}
-            //else if (sortField == "Doctor")
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        patients = patients
-            //            .OrderBy(p => p.Doctor.LastName)
-            //            .ThenBy(p => p.Doctor.FirstName);
-            //    }
-            //    else
-            //    {
-            //        patients = patients
-            //            .OrderByDescending(p => p.Doctor.LastName)
-            //            .ThenByDescending(p => p.Doctor.FirstName);
-            //    }
-            //}
-            //else //Sorting by DOB - the default sort order
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        patients = patients.OrderBy(p => p.DOB);
-            //    }
-            //    else
-            //    {
-            //        patients = patients.OrderByDescending(p => p.DOB);
-            //    }
-            //}
-            ////Set sort for next time
-            //ViewData["sortField"] = sortField;
-            //ViewData["sortDirection"] = sortDirection;
+            if (sortField == "Date Time")//Sorting by Date Time
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.Datetime);
+                        //.ThenBy(p => p.FirstName);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.Datetime);
+                        //.ThenByDescending(p => p.FirstName);
+                }
+            }
+            else if (sortField == "Home Score")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.HomeScore);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.HomeScore);
+                }
+            }
+            else if (sortField == "Away Score")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.AwayScore);
+                        //.ThenBy(p => p.Doctor.FirstName);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.AwayScore);
+                        //.ThenByDescending(p => p.Doctor.FirstName);
+                }
+            }
+            else if (sortField == "Home Team")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.HomeTeamID);
+                        //.ThenBy(p => p.Doctor.FirstName);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.HomeTeamID);
+                    //.ThenByDescending(p => p.Doctor.FirstName);
+                }
+            }
+            else if (sortField == "Away Team")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.AwayTeamID);
+                        //.ThenBy(p => p.Doctor.FirstName);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.AwayTeamID);
+                    //.ThenByDescending(p => p.Doctor.FirstName);
+                }
+            }
+            else if (sortField == "Location")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.Location);
+                        //.ThenBy(p => p.Doctor.FirstName);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.Location);
+                    //.ThenByDescending(p => p.Doctor.FirstName);
+                }
+            }
+            else //Sorting by Season - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures.OrderBy(f => f.Season);
+                }
+                else
+                {
+                    fixtures = fixtures.OrderByDescending(f => f.Season);
+                }
+            }
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
 
             return View(await sNContext.ToListAsync());
         }
