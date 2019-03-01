@@ -11,6 +11,13 @@
 </p>
 <form asp-action="Index">
 
+    <div class="form-group">
+        <label for="Username">Season Name</label>
+        @Html.TextBox("searchString", null, new { @class = "form-control" })
+
+    </div>
+    <input type="submit" name="actionButton" value="Search Division" class="btn" />
+    <a asp-action="Index">Clear</a>
     <table class="table">
         <thead>
             <tr>
@@ -21,6 +28,7 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach (var item in Model)
             {
                 <tr>

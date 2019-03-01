@@ -20,8 +20,16 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Divisions
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString)
         {
+
+            var divisions = from d in _context.Divisions
+                          select d;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                divisions = divisions.Where(d => d.DivisionName.ToUpper().Contains(searchString));
+            }
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
