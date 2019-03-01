@@ -20,9 +20,80 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Fixtures
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton)
         {
             var sNContext = _context.Fixtures.Include(f => f.Location).Include(f => f.Season);
+
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
+            {
+                if (actionButton != "Filter")//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+
+            //if (sortField == "Date Time")//Sorting by Date Time
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        Fixture = Fixtures
+            //            .OrderBy(p => p.LastName)
+            //            .ThenBy(p => p.FirstName);
+            //    }
+            //    else
+            //    {
+            //        patients = patients
+            //            .OrderByDescending(p => p.LastName)
+            //            .ThenByDescending(p => p.FirstName);
+            //    }
+            //}
+            //else if (sortField == "Exp. Yr. Visits")
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        patients = patients
+            //            .OrderBy(p => p.ExpYrVisits);
+            //    }
+            //    else
+            //    {
+            //        patients = patients
+            //            .OrderByDescending(p => p.ExpYrVisits);
+            //    }
+            //}
+            //else if (sortField == "Doctor")
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        patients = patients
+            //            .OrderBy(p => p.Doctor.LastName)
+            //            .ThenBy(p => p.Doctor.FirstName);
+            //    }
+            //    else
+            //    {
+            //        patients = patients
+            //            .OrderByDescending(p => p.Doctor.LastName)
+            //            .ThenByDescending(p => p.Doctor.FirstName);
+            //    }
+            //}
+            //else //Sorting by DOB - the default sort order
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        patients = patients.OrderBy(p => p.DOB);
+            //    }
+            //    else
+            //    {
+            //        patients = patients.OrderByDescending(p => p.DOB);
+            //    }
+            //}
+            ////Set sort for next time
+            //ViewData["sortField"] = sortField;
+            //ViewData["sortDirection"] = sortDirection;
+
             return View(await sNContext.ToListAsync());
         }
 

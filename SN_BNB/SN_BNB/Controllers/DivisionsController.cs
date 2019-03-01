@@ -20,8 +20,21 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Divisions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton)
         {
+
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
+            {
+                if (actionButton != "Filter")//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+
             return View(await _context.Divisions.ToListAsync());
         }
 
