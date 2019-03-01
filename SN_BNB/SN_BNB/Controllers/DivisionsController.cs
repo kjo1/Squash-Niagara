@@ -42,7 +42,32 @@ namespace SN_BNB.Controllers
                     sortField = actionButton;//Sort by the button clicked
                 }
             }
-
+            if (sortField == "Division")//Sorting by Date Time
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    divisions = divisions
+                        .OrderBy(d => d.DivisionName);
+                    //.ThenBy(p => p.FirstName);
+                }
+                else
+                {
+                    divisions = divisions
+                        .OrderByDescending(d => d.DivisionName);
+                    //.ThenByDescending(p => p.FirstName);
+                }
+            }
+            else //Sorting by Season - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    divisions = divisions.OrderBy(d => d.DivisionName);
+                }
+                else
+                {
+                    divisions = divisions.OrderByDescending(d => d.DivisionName);
+                }
+            }
             return View(await _context.Divisions.ToListAsync());
         }
 
