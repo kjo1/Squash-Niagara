@@ -14,7 +14,7 @@
     <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
     <div class="form-group">
         <label>Search by Team</label>
-        @Html.DropDownList("TeamID", null, "All Teams", htmlAttributes: new{ @class = "form-control"})
+        @Html.DropDownList("homeID", null, "All Teams", htmlAttributes: new{ @class = "form-control"})
     </div>
     <input type="submit" name="actionButton" value="Search fixture" class="btn" />
     <a asp-action="Index">Clear</a>

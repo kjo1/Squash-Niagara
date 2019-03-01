@@ -8,6 +8,18 @@
     <a asp-action="Create">Create New</a>
 </p>
 <form asp-action="Index">
+
+    <div class="form-group">
+        <label>Search by team Name</label>
+        @Html.TextBox("searchString", null, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Select a Division:</label>
+        @Html.DropDownList("DivisionID", null, "All Divisions", htmlAttributes: new { @class = "form-control" })
+    </div>
+    <input type="submit" name="actionButton" value="Search" class="btn btn-link" />
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <a asp-action="Index">Clear</a>
     <table class="table">
         <thead>
             <tr>

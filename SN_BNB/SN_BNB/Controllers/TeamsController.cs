@@ -20,16 +20,25 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Teams
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? DivisionID)
         {
             //var sNContext = _context.Teams.Include(t => t.Division);
-
+            PopulateDropDownLists();
             var teams = from t in _context.Teams
                         .Include(t => t.Division)
                         .Include(t => t.Fixture_has_Teams)
                         .Include(t => t.Players)
                             //.Include(t => t.Teamscore)
                         select t;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                teams = teams.Where(t => t.TeamName.ToUpper().Contains(searchString));
+            }
+            if (DivisionID.HasValue)
+            {
+                teams = teams.Where(t => t.DivisionID == DivisionID);
+            }
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
@@ -249,6 +258,24 @@ namespace SN_BNB.Controllers
         private bool TeamExists(int id)
         {
             return _context.Teams.Any(e => e.ID == id);
+        }
+
+        private SelectList DivisionSelectList(int? id)
+        {
+            var dQuery = from d in _context.Divisions
+                         orderby d.DivisionName
+                         select d;
+            return new SelectList(dQuery, "ID", "DivisionName", id);
+        }
+
+        private void PopulateDropDownLists (Team team = null)
+        {
+            ViewData["DivisionID"] = DivisionSelectList(team?.DivisionID);
+        }
+        [HttpGet]
+        public JsonResult GetDivisions(int? id)
+        {
+            return Json(DivisionSelectList(id));
         }
     }
 }
