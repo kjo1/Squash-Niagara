@@ -28,8 +28,10 @@ namespace DatabaseLibrary
                 default:
                     break;
             }
+
             //a create command is generated
             string command = "INSERT INTO " + table + values + "VALUES ";
+
             //the command is sent to the database
             //a confirmation or error message is returned
         }
@@ -40,6 +42,7 @@ namespace DatabaseLibrary
             //also sent is the table to be updated
             //an update command is generated
             string command = "UPDATE " + table;
+
             //the command is sent to the database
             //a confirmation or error message is returned
         }
@@ -50,6 +53,7 @@ namespace DatabaseLibrary
             //also sent is the table to be updated
             //a delete command is generated
             string command = "DELETE FROM " + table;
+
             //the command is sent to the database
             //a confirmation or error message is returned
         }
