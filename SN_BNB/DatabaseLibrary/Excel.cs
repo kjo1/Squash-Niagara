@@ -8,5 +8,10 @@ namespace DatabaseLibrary
 {
     class Excel
     {
+        //create a struct to hold username, password, and role
+        //receive excel file
+        //parse the file and update struct
+        //update user tables
+        //send confirmation or error message
     }
 }
