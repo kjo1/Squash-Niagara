@@ -20,9 +20,11 @@ namespace DatabaseLibrary
         {
             //create a struct to hold username, password, and role
             DataStruct[] dataStructs = new DataStruct[2000];
+
             //receive excel file
             FileInfo file = new FileInfo(excelDocPath);
             ExcelPackage excelPackage = new ExcelPackage(file);
+
             //parse the file and update struct
             //update user table
             //send confirmation or error message
