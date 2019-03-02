@@ -9,7 +9,7 @@ namespace DatabaseLibrary
     public class DatabaseHandler
     {
 
-        public void Create()
+        public void Create(string table)
         {
             //controller sends data to this function
             //also sent is the table to be updated
@@ -18,7 +18,7 @@ namespace DatabaseLibrary
             //a confirmation or error message is returned
         }
 
-        public void Update()
+        public void Update(string table)
         {
             //controller sends data to this function
             //also sent is the table to be updated
@@ -27,7 +27,7 @@ namespace DatabaseLibrary
             //a confirmation or error message is returned
         }
 
-        public void Delete()
+        public void Delete(string table)
         {
             //controller sends data to this function
             //also sent is the table to be updated
