@@ -6,9 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\ScoreSheet.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.38.0.1508" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Files\" />
   </ItemGroup>
 
 </Project>
