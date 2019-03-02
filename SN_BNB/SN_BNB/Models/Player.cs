@@ -29,7 +29,7 @@ namespace SN_BNB.Models
         [Required]
         public int Phone { get; set; }
         [Required]
-        public string Position { get; set; }
+        public int Position { get; set; }
 
         public int TeamID { get; set; }
 

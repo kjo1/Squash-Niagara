@@ -22,6 +22,7 @@ namespace SN_BNB.Controllers
         // GET: Players
         public async Task<IActionResult> Index()
         {
+            PopulateDropDownLists();
             var sNContext = _context.Players.Include(p => p.Team);
             return View(await sNContext.ToListAsync());
         }
@@ -155,6 +156,19 @@ namespace SN_BNB.Controllers
         private bool PlayerExists(int id)
         {
             return _context.Players.Any(e => e.ID == id);
+        }
+
+        private SelectList PositionSelectList(int? id)
+        {
+            var dQuery = from p in _context.Players
+                         orderby p.Position
+                         select p;
+            return new SelectList(dQuery, "ID", "Position", id);
+        }
+
+        private void PopulateDropDownLists(Team team = null)
+        {
+            ViewData["Position"] = PositionSelectList(team?.DivisionID);
         }
     }
 }
