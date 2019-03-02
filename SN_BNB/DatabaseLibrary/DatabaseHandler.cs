@@ -9,7 +9,7 @@ namespace DatabaseLibrary
     public class DatabaseHandler
     {
 
-        public void Create(string table)
+        public void Create(string data, string table)
         {
             //controller sends data to this function
             //also sent is the table to be updated
@@ -30,7 +30,7 @@ namespace DatabaseLibrary
             }
 
             //a create command is generated
-            string command = "INSERT INTO " + table + values + "VALUES ";
+            string command = "INSERT INTO " + table + values + "VALUES " + data + ";";
 
             //the command is sent to the database
             //a confirmation or error message is returned

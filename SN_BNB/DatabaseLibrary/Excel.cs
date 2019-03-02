@@ -10,6 +10,7 @@ namespace DatabaseLibrary
 {
     class Excel
     {
+        /* The excel document will have three columns, in this order */
         protected struct DataStruct
         {
             string username;
@@ -24,6 +25,7 @@ namespace DatabaseLibrary
             //receive excel file
             FileInfo file = new FileInfo(excelDocPath);
             ExcelPackage excelPackage = new ExcelPackage(file);
+            ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
 
             //parse the file and update struct
             //update user table
