@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace DatabaseLibrary
 {
-    public class Class1
+    public class DatabaseHandler
     {
+        
+        public void Incoming()
+        {
+
+        }
     }
 }
