@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SN_BNB.Models.Fixture_has_Team>
+﻿@model IEnumerable<SN_BNB.Models.Season>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,22 +13,30 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Team)
+                @Html.DisplayNameFor(model => model.SeasonStart)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fixture)
+                @Html.DisplayNameFor(model => model.SeasonEnd)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Teams)
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Team.TeamName)
+                @Html.DisplayFor(modelItem => item.SeasonStart)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fixture.ID)
+                @Html.DisplayFor(modelItem => item.SeasonEnd)
+            </td>
+            <td>
+                @foreach(var t in item.Teams)
+                {
+                    @t.Team.TeamName <br />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

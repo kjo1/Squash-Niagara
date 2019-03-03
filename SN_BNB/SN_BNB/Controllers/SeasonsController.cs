@@ -7,26 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SN_BNB.Data;
 using SN_BNB.Models;
+using SN_BNB.ViewModels;
 
 namespace SN_BNB.Controllers
 {
-    public class FixturesController : Controller
+    public class SeasonsController : Controller
     {
         private readonly SNContext _context;
 
-        public FixturesController(SNContext context)
+        public SeasonsController(SNContext context)
         {
             _context = context;
         }
 
-        // GET: Fixtures
+        // GET: Seasons
         public async Task<IActionResult> Index()
         {
-            var sNContext = _context.Fixtures.Include(f => f.Location).Include(f => f.Season);
+            var sNContext = _context.Seasons
+                .Include(t => t.Fixtures)
+                .Include(t => t.Teams)
+                .ThenInclude(st => st.Team);
             return View(await sNContext.ToListAsync());
+            //return View(await _context.Seasons.ToListAsync());
         }
 
-        // GET: Fixtures/Details/5
+        // GET: Seasons/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +39,42 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var fixture = await _context.Fixtures
-                .Include(f => f.Location)
-                .Include(f => f.Season)
+            var season = await _context.Seasons
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (fixture == null)
+            if (season == null)
             {
                 return NotFound();
             }
 
-            return View(fixture);
+            return View(season);
         }
 
-        // GET: Fixtures/Create
+        // GET: Seasons/Create
         public IActionResult Create()
         {
-            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address");
-            ViewData["SeasonID"] = new SelectList(_context.Seasons, "ID", "ID");
+            var Season = new Season();
+            Season.Teams = new List<Season_has_Team>();
+            PopulateAssignedTeamData(Season);
             return View();
         }
 
-        // POST: Fixtures/Create
+        // POST: Seasons/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Datetime,HomeScore,AwayScore,HomeTeamID,AwayTeamID,SeasonID,LocationID")] Fixture fixture)
+        public async Task<IActionResult> Create([Bind("ID,SeasonStart,SeasonEnd")] Season season)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(fixture);
+                _context.Add(season);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", fixture.LocationID);
-            ViewData["SeasonID"] = new SelectList(_context.Seasons, "ID", "ID", fixture.SeasonID);
-            return View(fixture);
+            return View(season);
         }
 
-        // GET: Fixtures/Edit/5
+        // GET: Seasons/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +82,22 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var fixture = await _context.Fixtures.FindAsync(id);
-            if (fixture == null)
+            var season = await _context.Seasons.FindAsync(id);
+            if (season == null)
             {
                 return NotFound();
             }
-            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", fixture.LocationID);
-            ViewData["SeasonID"] = new SelectList(_context.Seasons, "ID", "ID", fixture.SeasonID);
-            return View(fixture);
+            return View(season);
         }
 
-        // POST: Fixtures/Edit/5
+        // POST: Seasons/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Datetime,HomeScore,AwayScore,HomeTeamID,AwayTeamID,SeasonID,LocationID")] Fixture fixture)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,SeasonStart,SeasonEnd")] Season season)
         {
-            if (id != fixture.ID)
+            if (id != season.ID)
             {
                 return NotFound();
             }
@@ -106,12 +106,12 @@ namespace SN_BNB.Controllers
             {
                 try
                 {
-                    _context.Update(fixture);
+                    _context.Update(season);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FixtureExists(fixture.ID))
+                    if (!SeasonExists(season.ID))
                     {
                         return NotFound();
                     }
@@ -122,12 +122,10 @@ namespace SN_BNB.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationID"] = new SelectList(_context.Locations, "ID", "Address", fixture.LocationID);
-            ViewData["SeasonID"] = new SelectList(_context.Seasons, "ID", "ID", fixture.SeasonID);
-            return View(fixture);
+            return View(season);
         }
 
-        // GET: Fixtures/Delete/5
+        // GET: Seasons/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +133,47 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var fixture = await _context.Fixtures
-                .Include(f => f.Location)
-                .Include(f => f.Season)
+            var season = await _context.Seasons
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (fixture == null)
+            if (season == null)
             {
                 return NotFound();
             }
 
-            return View(fixture);
+            return View(season);
         }
 
-        // POST: Fixtures/Delete/5
+        // POST: Seasons/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var fixture = await _context.Fixtures.FindAsync(id);
-            _context.Fixtures.Remove(fixture);
+            var season = await _context.Seasons.FindAsync(id);
+            _context.Seasons.Remove(season);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FixtureExists(int id)
+        private void PopulateAssignedTeamData(Season season)
         {
-            return _context.Fixtures.Any(e => e.ID == id);
+            var AllTeams = _context.Teams;
+            var sTeams = new HashSet<int>(season.Teams.Select(b => b.TeamID));
+            var viewModel = new List<AssignedTeamVM>();
+            foreach (var team in AllTeams)
+            {
+                viewModel.Add(new AssignedTeamVM
+                {
+                    TeamID = team.ID,
+                    TeamName = team.TeamName,
+                    Assigned = sTeams.Contains(team.ID)
+                });
+            }
+            ViewData["Teams"] = viewModel;
+        }
+
+        private bool SeasonExists(int id)
+        {
+            return _context.Seasons.Any(e => e.ID == id);
         }
     }
 }

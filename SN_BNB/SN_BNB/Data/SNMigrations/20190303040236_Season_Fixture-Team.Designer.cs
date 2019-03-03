@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SN_BNB.Data;
 
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    partial class SNContextModelSnapshot : ModelSnapshot
+    [Migration("20190303040236_Season_Fixture-Team")]
+    partial class Season_FixtureTeam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,9 +199,6 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<DateTime>("SeasonStart");
 
-                    b.Property<string>("Season_Title")
-                        .IsRequired();
-
                     b.HasKey("ID");
 
                     b.ToTable("Seasons");
@@ -307,7 +306,7 @@ namespace SN_BNB.Data.SNMigrations
             modelBuilder.Entity("SN_BNB.Models.Fixture_has_Team", b =>
                 {
                     b.HasOne("SN_BNB.Models.Fixture", "Fixture")
-                        .WithMany("Fixture_Has_Teams")
+                        .WithMany()
                         .HasForeignKey("FixtureID")
                         .OnDelete(DeleteBehavior.Cascade);
 

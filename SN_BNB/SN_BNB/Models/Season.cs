@@ -14,12 +14,16 @@ namespace SN_BNB.Models
         }
         public int ID { get; set; }
         [Required]
+        [Display(Name = "Season Title")]
+        public string Season_Title { get; set; }
+        [Required]
         [Display(Name = "Season Start Date")]
         public DateTime SeasonStart { get; set; }
         [Required]
         [Display(Name = "Season End Date")]
         public DateTime SeasonEnd { get; set; }
 
-        public virtual ICollection<Fixture> Fixtures { get; set; }
+        public ICollection<Fixture> Fixtures { get; set; }
+        public ICollection<Season_has_Team> Teams { get; set; }
     }
 }

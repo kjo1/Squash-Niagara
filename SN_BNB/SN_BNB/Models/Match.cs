@@ -15,6 +15,6 @@ namespace SN_BNB.Models
 
         public int FixtureID { get; set; }
 
-        public virtual Fixture Fixture { get; set; }
+        public Fixture Fixture { get; set; }
     }
 }

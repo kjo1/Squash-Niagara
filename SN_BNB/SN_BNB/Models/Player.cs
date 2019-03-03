@@ -49,7 +49,7 @@ namespace SN_BNB.Models
 
         public virtual Team Team { get; set; }
 
-        public virtual ICollection<MatchScore> MatchScores { get; set; }
+        public ICollection<MatchScore> MatchScores { get; set; }
 
     }
 }

@@ -268,7 +268,7 @@ namespace SN_BNB.Controllers
             return new SelectList(dQuery, "ID", "DivisionName", id);
         }
 
-        private void PopulateDropDownLists (Team team = null)
+        private void PopulateDropDownLists(Team team = null)
         {
             ViewData["DivisionID"] = DivisionSelectList(team?.DivisionID);
         }

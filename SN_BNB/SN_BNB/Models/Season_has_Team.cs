@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace SN_BNB.Models
 {
-    public class Fixture_has_Team
+    public class Season_has_Team
     {
-
         public int TeamID { get; set; }
         public Team Team { get; set; }
 
-        public int FixtureID { get; set; }
-        public Fixture Fixture { get; set; }
+        public int SeasonID { get; set; }
+        public Season Season { get; set; }
+
     }
 }

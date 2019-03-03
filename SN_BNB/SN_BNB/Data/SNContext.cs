@@ -18,7 +18,7 @@ namespace SN_BNB.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<ApprovedBy> Approved { get; set; }
         public DbSet<Fixture> Fixtures { get; set; }
-        public DbSet<Fixture_has_Team> FixtureTeams { get; set; }
+        public DbSet<Season_has_Team> SeasonTeams { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<MatchScore> MatchScores { get; set; }
@@ -31,16 +31,11 @@ namespace SN_BNB.Data
         {
             modelBuilder.HasDefaultSchema("SN");
 
+            //Cascade Deletes
             modelBuilder.Entity<Division>()
                 .HasMany<Team>(d => d.Teams)
                 .WithOne(t => t.Division)
                 .HasForeignKey(t => t.DivisionID)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Team>()
-                .HasMany<Fixture_has_Team>(d => d.Fixture_has_Teams)
-                .WithOne(t => t.Team)
-                .HasForeignKey(t => t.TeamID)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Team>()
@@ -55,7 +50,19 @@ namespace SN_BNB.Data
                 .HasForeignKey(t => t.SeasonID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Season_has_Team>()
+                .HasOne(t => t.Team)
+                .WithMany(st => st.Season_has_Teams)
+                .HasForeignKey(t => t.TeamID)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Fixture_has_Team>()
+                .HasOne(t => t.Team)
+                .WithMany(st => st.Fixture_has_Teams)
+                .HasForeignKey(t => t.TeamID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Unique Fields
             modelBuilder.Entity<Division>()
                 .HasIndex(d => d.DivisionName)
                 .IsUnique();
@@ -63,6 +70,14 @@ namespace SN_BNB.Data
             modelBuilder.Entity<Team>()
                 .HasIndex(d => d.TeamName)
                 .IsUnique();
+
+            // Insection Table Key Declarations
+            modelBuilder.Entity<Season_has_Team>()
+                .HasKey(t => new { t.TeamID, t.SeasonID });
+
+            modelBuilder.Entity<Fixture_has_Team>()
+                .HasKey(t => new { t.TeamID, t.FixtureID });
+
 
         }
 

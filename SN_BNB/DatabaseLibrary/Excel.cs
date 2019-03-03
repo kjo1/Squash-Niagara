@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using OfficeOpenXml;
+//using OfficeOpenXml;
 
 namespace DatabaseLibrary
 {
@@ -35,8 +35,8 @@ namespace DatabaseLibrary
 
             //receive excel file
             FileInfo file = new FileInfo(excelDocPath);
-            ExcelPackage excelPackage = new ExcelPackage(file);
-            ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+            //ExcelPackage excelPackage = new ExcelPackage(file);
+            //ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
 
             //parse the file and update struct
             //update user table
@@ -51,8 +51,8 @@ namespace DatabaseLibrary
 
             //receive excel file
             FileInfo file = new FileInfo(excelDocPath);
-            ExcelPackage excelPackage = new ExcelPackage(file);
-            ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+            //ExcelPackage excelPackage = new ExcelPackage(file);
+            //ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
 
             //parse the file and update struct
             //find location id, hometeam id, and awayteam id
