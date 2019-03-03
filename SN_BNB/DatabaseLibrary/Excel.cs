@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using OfficeOpenXml;
+using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseLibrary
 {
@@ -44,7 +45,7 @@ namespace DatabaseLibrary
 
         }
 
-        public void CreateFixtures(string excelDocPath)
+        public void CreateFixtures(string excelDocPath, DbContext context)
         {
             //create a struct to hold fixture data
             FixtureStruct[] dataStructs = new FixtureStruct[2000];

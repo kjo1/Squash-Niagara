@@ -32,6 +32,7 @@ namespace DatabaseLibrary
             //a create command is generated
             string command = "INSERT INTO " + table + values + "VALUES " + data + ";";
 
+            
             //the command is sent to the database
             //a confirmation or error message is returned
         }

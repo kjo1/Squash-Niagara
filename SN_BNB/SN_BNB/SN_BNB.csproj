@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EPPlus.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="EPPlus.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\ScoreSheet.pdf" />
   </ItemGroup>
 
@@ -21,7 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseLibrary\DatabaseLibrary.csproj" />
+    <Reference Include="EPPlus">
+      <HintPath>EPPlus.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
