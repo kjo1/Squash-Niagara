@@ -14,6 +14,6 @@ namespace SN_BNB.Models
         [Required]
         public string Address { get; set; }
 
-        public virtual Fixture Fixture { get; set; }
+        public Fixture Fixture { get; set; }
     }
 }

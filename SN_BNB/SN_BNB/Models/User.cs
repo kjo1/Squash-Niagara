@@ -17,6 +17,6 @@ namespace SN_BNB.Models
         [Display(Name="User Role")]
         public string UserRole { get; set; }
 
-        public virtual ICollection<ApprovedBy> ApprovedBys { get; set; }
+        public ICollection<ApprovedBy> ApprovedBys { get; set; }
     }
 }

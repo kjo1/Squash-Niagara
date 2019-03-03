@@ -23,6 +23,6 @@ namespace SN_BNB.Models
         public virtual Team Team { get; set; }
         public virtual Fixture Fixture { get; set; }
 
-        public virtual ICollection<ApprovedBy> ApprovedBys { get; set; }
+        public ICollection<ApprovedBy> ApprovedBys { get; set; }
     }
 }

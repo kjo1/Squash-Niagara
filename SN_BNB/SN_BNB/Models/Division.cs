@@ -18,6 +18,6 @@ namespace SN_BNB.Models
         [Display(Name = "Division")]
         public string DivisionName { get; set; }
 
-        public virtual ICollection<Team> Teams { get; set; }
+        public ICollection<Team> Teams { get; set; }
     }
 }

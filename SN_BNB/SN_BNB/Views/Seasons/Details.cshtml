@@ -1,4 +1,4 @@
-﻿@model SN_BNB.Models.Fixture_has_Team
+﻿@model SN_BNB.Models.Season
 
 @{
     ViewData["Title"] = "Details";
@@ -7,20 +7,20 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Fixture_has_Team</h4>
+    <h4>Season</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Team)
+            @Html.DisplayNameFor(model => model.SeasonStart)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Team.TeamName)
+            @Html.DisplayFor(model => model.SeasonStart)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Fixture)
+            @Html.DisplayNameFor(model => model.SeasonEnd)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Fixture.ID)
+            @Html.DisplayFor(model => model.SeasonEnd)
         </dd>
     </dl>
 </div>

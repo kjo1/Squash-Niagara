@@ -8,11 +8,11 @@ namespace SN_BNB.Models
 {
     public class Team
     {
-        public Team()
-        {
-            this.Players = new HashSet<Player>();
-            this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
-        }
+        //public Team()
+        //{
+        //    this.Players = new HashSet<Player>();
+        //    this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
+        //}
         public int ID { get; set; }
         [Required]
         [Display(Name = "Team Name")]
@@ -30,7 +30,12 @@ namespace SN_BNB.Models
 
         public virtual Division Division { get; set; }
 
-        public virtual ICollection<Player> Players { get; set; }
-        public virtual ICollection<Fixture_has_Team> Fixture_has_Teams { get; set; }
+        public ICollection<Player> Players { get; set; }
+        
+        [Display(Name="Seasons")]
+        public ICollection<Season_has_Team> Season_has_Teams { get; set; }
+
+        [Display(Name = "Fixtures")]
+        public ICollection<Fixture_has_Team> Fixture_has_Teams { get; set; }
     }
 }

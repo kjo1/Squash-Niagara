@@ -1,4 +1,4 @@
-﻿@model SN_BNB.Models.Fixture_has_Team
+﻿@model SN_BNB.Models.Season
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-<h4>Fixture_has_Team</h4>
+<h4>Season</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,14 +14,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label asp-for="FixtureID" class="control-label"></label>
-                <select asp-for="FixtureID" class="form-control" asp-items="ViewBag.FixtureID"></select>
-                <span asp-validation-for="FixtureID" class="text-danger"></span>
+                <label asp-for="SeasonStart" class="control-label"></label>
+                <input asp-for="SeasonStart" class="form-control" />
+                <span asp-validation-for="SeasonStart" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TeamID" class="control-label"></label>
-                <select asp-for="TeamID" class="form-control" asp-items="ViewBag.TeamID"></select>
-                <span asp-validation-for="TeamID" class="text-danger"></span>
+                <label asp-for="SeasonEnd" class="control-label"></label>
+                <input asp-for="SeasonEnd" class="form-control" />
+                <span asp-validation-for="SeasonEnd" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

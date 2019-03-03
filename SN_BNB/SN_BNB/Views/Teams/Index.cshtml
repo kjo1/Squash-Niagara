@@ -1,12 +1,10 @@
 ﻿@model IEnumerable<SN_BNB.Models.Team>
+
 @{
     ViewData["Title"] = "Index";
 }
 <br />
 <h2>Teams</h2>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <form asp-action="Index">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,22 +33,23 @@
             <button class="btn btn-outline-secondary" type="submit">Clear</button>
         </div>
     </nav>
-
-    <br />
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    <input type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
+                    @Html.DisplayNameFor(model => model.TeamName)
                 </th>
                 <th>
-                    <input type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
+                    @Html.DisplayNameFor(model => model.TeamPoints)
                 </th>
                 <th>
-                    <input type="submit" name="actionButton" value="Created On" class="btn btn-link" />
-                </th>  @*disabled="disabled"*@
+                    @Html.DisplayNameFor(model => model.TeamCreatedOn)
+                </th>
                 <th>
-                    <input type="submit" name="actionButton" value="Division" class="btn btn-link" />
+                    @Html.DisplayNameFor(model => model.Division)
                 </th>
                 <th></th>
             </tr>
@@ -80,4 +79,4 @@
             }
         </tbody>
     </table>
-</form>
+    </form>

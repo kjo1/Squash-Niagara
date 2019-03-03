@@ -4,9 +4,6 @@
 }
 <br />
 <h2>Players</h2>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <form asp-action="Index">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -34,6 +31,9 @@
             <button class="btn btn-outline-secondary" type="submit">Clear</button>
         </div>
     </nav>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
     <table class="table">
         <thead>
             <tr>
@@ -101,4 +101,4 @@
             }
         </tbody>
     </table>
-    </form>
+</form>

@@ -12,7 +12,18 @@ namespace SN_BNB.Models
         {
             this.MatchScores = new HashSet<MatchScore>();
         }
+
         public int ID { get; set; }
+
+        [Display(Name ="Player")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
         [Required]
         [Display(Name="First Name")]
         public string FirstName { get; set; }
@@ -27,16 +38,18 @@ namespace SN_BNB.Models
         [Required]
         public string Email { get; set; }
         [Required]
+        [MinLength(10)]
+        [MaxLength(10)]
         public int Phone { get; set; }
         [Required]
+        [Range(1,4)]
         public int Position { get; set; }
-
+        [Display(Name ="Team")]
         public int TeamID { get; set; }
 
         public virtual Team Team { get; set; }
 
-        public virtual ICollection<MatchScore> MatchScores { get; set; }
-
+        public ICollection<MatchScore> MatchScores { get; set; }
 
     }
 }
