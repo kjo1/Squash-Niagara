@@ -19,4 +19,8 @@
     <Folder Include="Assets\Files\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseLibrary\DatabaseLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
