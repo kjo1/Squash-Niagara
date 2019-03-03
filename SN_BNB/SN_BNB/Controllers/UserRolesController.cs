@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using SN_BNB.Data;
 using SN_BNB.ViewModels;
 
@@ -39,6 +42,7 @@ namespace SN_BNB.Controllers
             };
             return View(users);
         }
+
 
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(string id)
@@ -95,6 +99,32 @@ namespace SN_BNB.Controllers
 
             PopulateAssignedRoleData(user);
             return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertFromExcel(IFormFile theExcel)
+        {
+            ExcelPackage excel;
+            using (var memoryStream = new MemoryStream())
+            {
+                await theExcel.CopyToAsync(memoryStream);
+                excel = new ExcelPackage(memoryStream);
+            }
+            var workSheet = excel.Workbook.Worksheets[0];
+            var start = workSheet.Dimension.Start;
+            var end = workSheet.Dimension.End;
+            for (int row = start.Row; row <= end.Row; row++)
+                //{
+                //    // Row by row...
+                //    ApptReason a = new ApptReason
+                //    {
+                //        ReasonName = workSheet.Cells[row, 1].Text
+                //    };
+                //    _context.ApptReasons.Add(a);
+                //};
+                _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
 
         private void PopulateAssignedRoleData(UserVM user)
