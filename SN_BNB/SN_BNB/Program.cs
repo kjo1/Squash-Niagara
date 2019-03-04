@@ -20,6 +20,10 @@ namespace SN_BNB
             //CreateWebHostBuilder(args).Build().Run();
             var host = CreateWebHostBuilder(args).Build();
 
+            //Seed Data
+
+
+
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -30,6 +34,9 @@ namespace SN_BNB
                     context.Database.Migrate();
                     var identityContext = services.GetRequiredService<ApplicationDbContext>();
                     ApplicationSeedData.SeedAsync(identityContext, services).Wait();
+
+                    context.Database.Migrate();
+                    SNSeedData.Initialize(services);
                 }
                 catch (Exception ex)
                 {
