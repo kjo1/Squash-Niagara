@@ -47,7 +47,7 @@ namespace SN_BNB.Data
                          TeamName = "White Oaks 1",
                          TeamPoints = 0,
                          TeamCreatedOn = DateTime.Today,
-                         DivisionID = 5
+                         DivisionID = 1
 
                      },
                     new Team
@@ -55,14 +55,14 @@ namespace SN_BNB.Data
                         TeamName = "Ridley 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 6
+                        DivisionID = 2
                     },
                     new Team
                     {
                         TeamName = "BAC 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 7
+                        DivisionID = 3
 
                     },
                     new Team
@@ -70,7 +70,7 @@ namespace SN_BNB.Data
                         TeamName = "Brock 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 8
+                        DivisionID = 4
 
                     }
                 );
@@ -85,9 +85,9 @@ namespace SN_BNB.Data
                          LastName = "Bowie",
                          Gender = "M",
                          Email = "Matt_Bowie@outlook.com",
-                         Phone = Convert.ToInt32(8880008800),
-                             //Position = 1,
-                             TeamID = 7
+                         Phone = 8880000800,
+                         Position = 1,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID
                      },
 
                      new Player
@@ -96,9 +96,9 @@ namespace SN_BNB.Data
                          LastName = "Forgeron",
                          Gender = "M",
                          Email = "Dave_Forgeron@outlook.com",
-                         Phone = Convert.ToInt32(8880008800),
-                             //Position = 2,
-                             TeamID = 8
+                         Phone = 8880008000,
+                         Position = 2,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID
                      },
                      new Player
                      {
@@ -106,9 +106,9 @@ namespace SN_BNB.Data
                          LastName = "Forgeron",
                          Gender = "F",
                          Email = "Rachael_Forgeron@outlook.com",
-                         Phone = Convert.ToInt32(8880008800),
-                             //Position = 3,
-                             TeamID = 9
+                         Phone = 9055551202,
+                         Position = 3,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID
                      },
                      new Player
                      {
@@ -116,9 +116,9 @@ namespace SN_BNB.Data
                          LastName = "Lipinski",
                          Gender = "M",
                          Email = "Jakub_Lipinski@outlook.com",
-                         Phone = Convert.ToInt32(8880008800),
-                             //Position = 3,
-                             TeamID = 10
+                         Phone = 8880088000,
+                         Position = 3,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID
                      }
 
                 );
