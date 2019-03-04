@@ -67,7 +67,10 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<div>
+    <input id="excelFile" type="file" />
+    <input type="button" value="Create with Excel Document" class="btn btn-default" asp-action="CreateFixture" />
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
