@@ -23,7 +23,6 @@ namespace SN_BNB.Data
                      new Division
                      {
                          DivisionName = "2018-2019 Men's Division 1/2"
-
                      },
 
                      new Division
@@ -44,13 +43,13 @@ namespace SN_BNB.Data
                 if (!context.Teams.Any())
                 {
                     context.Teams.AddRange(
-                    new Team
-                    {
-                        TeamName = "White Oaks 1",
-                        TeamPoints = 0,
-                        TeamCreatedOn = DateTime.Today
-                        
-                    },
+                     new Team
+                     {
+                         TeamName = "White Oaks 1",
+                         TeamPoints = 0,
+                         TeamCreatedOn = DateTime.Today
+
+                     },
                     new Team
                     {
                         TeamName = "Ridley 1",
@@ -69,9 +68,42 @@ namespace SN_BNB.Data
                         TeamName = "Brock 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today
-                    });
+                    }
+                );
                     context.SaveChanges();
+                }
+                //if (!context.Teams.Any())
+                //{
+                //    context.Teams.AddRange(
+                //    new Team
+                //    {
+                //        TeamName = "White Oaks 1",
+                //        TeamPoints = 0,
+                //        TeamCreatedOn = DateTime.Today
 
+                //    },
+                //    new Team
+                //    {
+                //        TeamName = "Ridley 1",
+                //        TeamPoints = 0,
+                //        TeamCreatedOn = DateTime.Today
+                //    },
+                //    new Team
+                //    {
+                //        TeamName = "BAC 1",
+                //        TeamPoints = 0,
+                //        TeamCreatedOn = DateTime.Today
+
+                //    },
+                //    new Team
+                //    {
+                //        TeamName = "Brock 1",
+                //        TeamPoints = 0,
+                //        TeamCreatedOn = DateTime.Today
+                //    }
+                //    );
+                //    context.SaveChanges();
+                //}
                     if (!context.Players.Any())
                     {
                         context.Players.AddRange(
@@ -116,13 +148,23 @@ namespace SN_BNB.Data
                              Position = 3,
                              TeamID = 3
                          }
+                     
                     );
-                        
-                            context.SaveChanges();
-
-                        }
+                    context.SaveChanges();
                     }
+                if (!context.Seasons.Any())
+                {
+                    context.Seasons.AddRange(
+                     new Season
+                     {
+                         Season_Title = "First",
+                         SeasonStart = DateTime.Today,
+                         SeasonEnd = DateTime.Today
+                     }
+                     );
+                    context.SaveChanges();
                 }
             }
         }
     }
+}

@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h2>Index</h2>
+<br />
+<h2>Seasons</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,6 +12,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Season_Title)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.SeasonStart)
             </th>
@@ -27,13 +30,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Season_Title)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.SeasonStart)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SeasonEnd)
             </td>
             <td>
-                @foreach(var t in item.Teams)
+                @foreach (var t in item.Teams)
                 {
                     @t.Team.TeamName <br />
                 }

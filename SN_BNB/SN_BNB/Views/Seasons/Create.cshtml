@@ -13,6 +13,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Season_Title" class="control-label"></label>
+                <input asp-for="Season_Title" class="form-control" />
+                <span asp-validation-for="Season_Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="SeasonStart" class="control-label"></label>
                 <input asp-for="SeasonStart" class="form-control" />
                 <span asp-validation-for="SeasonStart" class="text-danger"></span>
@@ -23,17 +28,17 @@
                 <span asp-validation-for="SeasonEnd" class="text-danger"></span>
             </div>
 
-            <div class=""form-group">
+            <div class="" form-group">
                 <label class="control-label">Teams Assigned</label>
                 <div class="col-md-offset-1">
                     <table>
                         <tr>
-                            @{ 
+                            @{
                                 int cnt = 0;
                                 List<SN_BNB.ViewModels.AssignedTeamVM> Teams = ViewBag.Teams;
-                                foreach(var team in Teams)
+                                foreach (var team in Teams)
                                 {
-                                    if(cnt++ % 3 == 0)
+                                    if (cnt++ % 3 == 0)
                                     {
                                     @:</tr><tr>
                                     }
@@ -42,7 +47,7 @@
                                                name="selectedTeams"
                                                value="@team.TeamID"
                                                @(Html.Raw(team.Assigned ? "checked=\"checked\"" : "")) />
-                                               @team.TeamName @:&nbsp;&nbsp;                           
+                                        @team.TeamName @:&nbsp;&nbsp;
                                     @:</td>
                                 }
                             }
