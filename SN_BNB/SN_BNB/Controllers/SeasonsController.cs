@@ -116,7 +116,10 @@ namespace SN_BNB.Controllers
             }
             //find location id, hometeam id, and awayteam id
             //make a new season
+            _context.Add(new Season());
             //update fixture table
+            _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
