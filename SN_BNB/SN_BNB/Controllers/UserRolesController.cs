@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using SN_BNB.Data;
+using SN_BNB.Models;
 using SN_BNB.ViewModels;
 
 namespace SN_BNB.Controllers
@@ -114,15 +115,16 @@ namespace SN_BNB.Controllers
             var start = workSheet.Dimension.Start;
             var end = workSheet.Dimension.End;
             for (int row = start.Row; row <= end.Row; row++)
-                //{
-                //    // Row by row...
-                //    ApptReason a = new ApptReason
-                //    {
-                //        ReasonName = workSheet.Cells[row, 1].Text
-                //    };
-                //    _context.ApptReasons.Add(a);
-                //};
-                _context.SaveChanges();
+            {
+                // Row by row...
+                IdentityUser a = new IdentityUser();
+                {
+                    a.Email = workSheet.Cells[row, 1].Text;
+                    a.PhoneNumber = workSheet.Cells[row, 1].Text;
+                };
+                _context.Users.Add(a);
+            };
+            _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }

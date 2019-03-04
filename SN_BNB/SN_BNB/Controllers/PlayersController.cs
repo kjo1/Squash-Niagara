@@ -20,11 +20,19 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             PopulateDropDownLists();
-            var sNContext = _context.Players.Include(p => p.Team);
-            return View(await sNContext.ToListAsync());
+            PopulateDropDownListsT();
+            var players = from p in _context.Players
+                            .Include(p => p.Team)                           
+                            select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                players = players.Where(p => p.FullName.ToUpper().Contains(searchString));
+            }
+            return View(await players.ToListAsync());
         }
 
         // GET: Players/Details/5
@@ -169,6 +177,25 @@ namespace SN_BNB.Controllers
         private void PopulateDropDownLists(Team team = null)
         {
             ViewData["Position"] = PositionSelectList(team?.DivisionID);
+        }
+
+        private SelectList TeamSelectList(int? id)
+        {
+            var dQuery = from t in _context.Teams
+                         orderby t.TeamName
+                         select t;
+            return new SelectList(dQuery, "ID", "DivisionName", id);
+        }
+
+        private void PopulateDropDownListsT(Player player = null)
+        {
+            ViewData["TeamID"] = TeamSelectList(player?.TeamID);
+        }
+
+        [HttpGet]
+        public JsonResult GetTeams(int? id)
+        {
+            return Json(TeamSelectList(id));
         }
     }
 }
