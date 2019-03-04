@@ -46,27 +46,32 @@ namespace SN_BNB.Data
                      {
                          TeamName = "White Oaks 1",
                          TeamPoints = 0,
-                         TeamCreatedOn = DateTime.Today
+                         TeamCreatedOn = DateTime.Today,
+                         DivisionID = 5
 
                      },
                     new Team
                     {
                         TeamName = "Ridley 1",
                         TeamPoints = 0,
-                        TeamCreatedOn = DateTime.Today
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 6
                     },
                     new Team
                     {
                         TeamName = "BAC 1",
                         TeamPoints = 0,
-                        TeamCreatedOn = DateTime.Today
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 7
 
                     },
                     new Team
                     {
                         TeamName = "Brock 1",
                         TeamPoints = 0,
-                        TeamCreatedOn = DateTime.Today
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 8
+
                     }
                 );
                     context.SaveChanges();
@@ -103,54 +108,54 @@ namespace SN_BNB.Data
                 //    );
                 //    context.SaveChanges();
                 //}
-                    if (!context.Players.Any())
-                    {
-                        context.Players.AddRange(
-                         new Player
-                         {
-                             FirstName = "Matt",
-                             LastName = "Bowie",
-                             Gender = "M",
-                             Email = "Matt_Bowie@outlook.com",
-                             Phone = Convert.ToInt32(8880008800),
-                             Position = 1,
-                             TeamID = 1
-                         },
+                if (!context.Players.Any())
+                {
+                    context.Players.AddRange(
+                     new Player
+                     {
+                         FirstName = "Matt",
+                         LastName = "Bowie",
+                         Gender = "M",
+                         Email = "Matt_Bowie@outlook.com",
+                         Phone = Convert.ToInt32(8880008800),
+                             //Position = 1,
+                             TeamID = 7
+                     },
 
-                         new Player
-                         {
-                             FirstName = "Dave",
-                             LastName = "Forgeron",
-                             Gender = "M",
-                             Email = "Dave_Forgeron@outlook.com",
-                             Phone = Convert.ToInt32(8880008800),
-                             Position = 2,
-                             TeamID = 2
-                         },
-                         new Player
-                         {
-                             FirstName = "Rachael",
-                             LastName = "Forgeron",
-                             Gender = "F",
-                             Email = "Rachael_Forgeron@outlook.com",
-                             Phone = Convert.ToInt32(8880008800),
-                             Position = 3,
-                             TeamID = 3
-                         },
-                         new Player
-                         {
-                             FirstName = "Jakub",
-                             LastName = "Lipinski",
-                             Gender = "M",
-                             Email = "Jakub_Lipinski@outlook.com",
-                             Phone = Convert.ToInt32(8880008800),
-                             Position = 3,
-                             TeamID = 3
-                         }
-                     
-                    );
+                     new Player
+                     {
+                         FirstName = "Dave",
+                         LastName = "Forgeron",
+                         Gender = "M",
+                         Email = "Dave_Forgeron@outlook.com",
+                         Phone = Convert.ToInt32(8880008800),
+                             //Position = 2,
+                             TeamID = 8
+                     },
+                     new Player
+                     {
+                         FirstName = "Rachael",
+                         LastName = "Forgeron",
+                         Gender = "F",
+                         Email = "Rachael_Forgeron@outlook.com",
+                         Phone = Convert.ToInt32(8880008800),
+                             //Position = 3,
+                             TeamID = 9
+                     },
+                     new Player
+                     {
+                         FirstName = "Jakub",
+                         LastName = "Lipinski",
+                         Gender = "M",
+                         Email = "Jakub_Lipinski@outlook.com",
+                         Phone = Convert.ToInt32(8880008800),
+                             //Position = 3,
+                             TeamID = 10
+                     }
+
+                );
                     context.SaveChanges();
-                    }
+                }
                 if (!context.Seasons.Any())
                 {
                     context.Seasons.AddRange(
