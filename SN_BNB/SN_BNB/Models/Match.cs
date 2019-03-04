@@ -13,6 +13,7 @@ namespace SN_BNB.Models
         [Display(Name = "Date/Time")]
         public DateTime Datetime { get; set; }
 
+        [Display(Name = "Fixture")]
         public int FixtureID { get; set; }
 
         public Fixture Fixture { get; set; }

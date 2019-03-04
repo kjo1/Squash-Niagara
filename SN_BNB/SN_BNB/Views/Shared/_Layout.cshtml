@@ -55,6 +55,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/About" style="color: white; padding-right:30px;">About</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white; padding-right:30px;" aria-disabled="true"> | </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: white; padding-right:30px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin Options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Seasons/Index">Seasons</a>
+                            <a class="dropdown-item" href="/Fixtures/Index">Fixtures</a>
+                            <a class="dropdown-item" href="/Matches/Index">Matches</a>
+                        </div>
+                    </li>
                 </ul>
                 <partial name="_LoginPartial" />
                     @if (User.Identity.IsAuthenticated)
