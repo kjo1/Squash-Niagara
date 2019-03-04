@@ -30,7 +30,8 @@ namespace SN_BNB.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                players = players.Where(p => p.FullName.ToUpper().Contains(searchString));
+                players = players.Where(p => p.LastName.ToUpper().Contains(searchString.ToUpper())
+                                       || p.FirstName.ToUpper().Contains(searchString.ToUpper()));
             }
             return View(await players.ToListAsync());
         }
@@ -184,7 +185,7 @@ namespace SN_BNB.Controllers
             var dQuery = from t in _context.Teams
                          orderby t.TeamName
                          select t;
-            return new SelectList(dQuery, "ID", "DivisionName", id);
+            return new SelectList(dQuery, "ID", "TeamName", id);
         }
 
         private void PopulateDropDownListsT(Player player = null)
