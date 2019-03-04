@@ -23,9 +23,9 @@ namespace SN_BNB.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             PopulateDropDownLists();
+            PopulateDropDownListsT();
             var players = from p in _context.Players
-                            .Include(p => p.Team)
-                            .Include(p => p.Position)                            
+                            .Include(p => p.Team)                           
                             select p;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -177,6 +177,25 @@ namespace SN_BNB.Controllers
         private void PopulateDropDownLists(Team team = null)
         {
             ViewData["Position"] = PositionSelectList(team?.DivisionID);
+        }
+
+        private SelectList TeamSelectList(int? id)
+        {
+            var dQuery = from t in _context.Teams
+                         orderby t.TeamName
+                         select t;
+            return new SelectList(dQuery, "ID", "DivisionName", id);
+        }
+
+        private void PopulateDropDownListsT(Player player = null)
+        {
+            ViewData["TeamID"] = TeamSelectList(player?.TeamID);
+        }
+
+        [HttpGet]
+        public JsonResult GetTeams(int? id)
+        {
+            return Json(TeamSelectList(id));
         }
     }
 }
