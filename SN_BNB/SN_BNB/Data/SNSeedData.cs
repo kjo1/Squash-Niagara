@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SN_BNB.Data
 {
-    public class SNSeedData
+    public static class SNSeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -16,7 +16,6 @@ namespace SN_BNB.Data
             using (var context = new SNContext(
                 serviceProvider.GetRequiredService<DbContextOptions<SNContext>>()))
             {
-                // Look for any Patients.  Since we can't have patients without Doctors.
                 if (!context.Divisions.Any())
                 {
                     context.Divisions.AddRange(
