@@ -76,38 +76,6 @@ namespace SN_BNB.Data
                 );
                     context.SaveChanges();
                 }
-                //if (!context.Teams.Any())
-                //{
-                //    context.Teams.AddRange(
-                //    new Team
-                //    {
-                //        TeamName = "White Oaks 1",
-                //        TeamPoints = 0,
-                //        TeamCreatedOn = DateTime.Today
-
-                //    },
-                //    new Team
-                //    {
-                //        TeamName = "Ridley 1",
-                //        TeamPoints = 0,
-                //        TeamCreatedOn = DateTime.Today
-                //    },
-                //    new Team
-                //    {
-                //        TeamName = "BAC 1",
-                //        TeamPoints = 0,
-                //        TeamCreatedOn = DateTime.Today
-
-                //    },
-                //    new Team
-                //    {
-                //        TeamName = "Brock 1",
-                //        TeamPoints = 0,
-                //        TeamCreatedOn = DateTime.Today
-                //    }
-                //    );
-                //    context.SaveChanges();
-                //}
                 if (!context.Players.Any())
                 {
                     context.Players.AddRange(
@@ -172,3 +140,36 @@ namespace SN_BNB.Data
         }
     }
 }
+
+//if (!context.Teams.Any())
+//{
+//    context.Teams.AddRange(
+//    new Team
+//    {
+//        TeamName = "White Oaks 1",
+//        TeamPoints = 0,
+//        TeamCreatedOn = DateTime.Today
+
+//    },
+//    new Team
+//    {
+//        TeamName = "Ridley 1",
+//        TeamPoints = 0,
+//        TeamCreatedOn = DateTime.Today
+//    },
+//    new Team
+//    {
+//        TeamName = "BAC 1",
+//        TeamPoints = 0,
+//        TeamCreatedOn = DateTime.Today
+
+//    },
+//    new Team
+//    {
+//        TeamName = "Brock 1",
+//        TeamPoints = 0,
+//        TeamCreatedOn = DateTime.Today
+//    }
+//    );
+//    context.SaveChanges();
+//}
