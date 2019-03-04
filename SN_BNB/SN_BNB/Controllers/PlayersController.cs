@@ -20,11 +20,19 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             PopulateDropDownLists();
-            var sNContext = _context.Players.Include(p => p.Team);
-            return View(await sNContext.ToListAsync());
+            var players = from p in _context.Players
+                            .Include(p => p.Team)
+                            .Include(p => p.Position)                            
+                            select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                players = players.Where(p => p.FullName.ToUpper().Contains(searchString));
+            }
+            return View(await players.ToListAsync());
         }
 
         // GET: Players/Details/5
