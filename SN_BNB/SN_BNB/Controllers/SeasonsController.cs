@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using SN_BNB.Data;
 using SN_BNB.Models;
 using SN_BNB.ViewModels;
+using OfficeOpenXml;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace SN_BNB.Controllers
 {
@@ -72,6 +75,49 @@ namespace SN_BNB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(season);
+        }
+        public struct FixtureStruct
+        {
+            public string FixtureDateTime;
+            public string Location;     //need to find the location id for sql statement
+            public string HomeTeam;     //need to find team id for sql statement
+            public string AwayTeam;
+        }
+
+        public async Task<IActionResult> CreateFixtures(IFormFile excelDoc, SNContext context)
+        {
+            //create a struct to hold fixture data
+            FixtureStruct[] dataStructs = new FixtureStruct[2000];
+
+            //receive excel file
+            ExcelPackage excelPackage;
+            using (var memoryStream = new MemoryStream())
+            {
+                await excelDoc.CopyToAsync(memoryStream);
+                excelPackage = new ExcelPackage(memoryStream);
+            }
+            ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+
+            //parse the file and update struct
+            int row = 1;
+            while (true)
+            {
+
+                if (worksheet.Cells[row, 1].Value.ToString() == "") break;
+                FixtureStruct tempStruct = new FixtureStruct();
+
+                tempStruct.FixtureDateTime = worksheet.Cells[row, 1].Value.ToString();
+                tempStruct.Location = worksheet.Cells[row, 2].Value.ToString();
+                tempStruct.HomeTeam = worksheet.Cells[row, 3].Value.ToString();
+                tempStruct.AwayTeam = worksheet.Cells[row, 4].Value.ToString();
+
+                row += 1;
+                dataStructs.Append(tempStruct);
+            }
+            //find location id, hometeam id, and awayteam id
+            //make a new season
+            //update fixture table
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Seasons/Edit/5
