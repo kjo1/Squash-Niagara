@@ -1,0 +1,15 @@
+Kevin
+	Finish Data model
+	Database Creation
+	WBS
+	Dummy Data for database
+Evan
+	Helping with database
+	Dummy data for html
+Ryan
+	Global CSS
+	Navigation
+Yorguin, Kang
+	Skeletons
+	Sorting
+	Textboxes

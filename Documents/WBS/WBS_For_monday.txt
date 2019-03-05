@@ -1,0 +1,12 @@
+Kevin
+	Sitemap
+	Data Model
+	Github
+Evan
+	Stats Planning
+	Business Rules
+Ryan
+	Wireframes
+Yorguin, Kang
+	HTML Skeletons
+	Global CSS
