@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +25,8 @@ namespace SN_BNB.Models
         [Display(Name = "Season End Date")]
         public DateTime SeasonEnd { get; set; }
 
+        [NotMappedAttribute]
+        public IFormFile ExcelFile { get; set; }
         public ICollection<Fixture> Fixtures { get; set; }
         public ICollection<Season_has_Team> Teams { get; set; }
     }
