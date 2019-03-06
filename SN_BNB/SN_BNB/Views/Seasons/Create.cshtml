@@ -62,14 +62,10 @@
             </div>
         </form>
     </div>
-    <form asp-action="Create" method="post" enctype="multipart/form-data" asp-controller="Excel">
+    <form asp-action="Excel" method="post" enctype="multipart/form-data" asp-controller="SeasonsController">
         <div class="form-group">
             <input id="excelFile" type="file" />
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input type="submit" value="Upload" />
-            </div>
+            <input type="submit" value="Upload" />
         </div>
     </form>
 </div>

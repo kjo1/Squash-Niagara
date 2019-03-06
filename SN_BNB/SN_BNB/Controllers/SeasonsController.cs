@@ -26,6 +26,7 @@ namespace SN_BNB.Controllers
         [HttpPost]
         public async Task<IActionResult> Excel(IFormFile file)
         {
+            System.Diagnostics.Debug.WriteLine("TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST");
             //create a struct to hold fixture data
             FixtureStruct[] dataStructs = new FixtureStruct[2000];
 
