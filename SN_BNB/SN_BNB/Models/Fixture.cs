@@ -8,12 +8,6 @@ namespace SN_BNB.Models
 {
     public class Fixture
     {
-        //public Fixture()
-        //{
-        //    this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
-        //    this.Matches = new HashSet<Match>();
-        //    this.TeamScores = new HashSet<TeamScore>();
-        //}
         public int ID { get; set; }
         [Required]
         [Display(Name ="Date/Time")]
@@ -37,7 +31,6 @@ namespace SN_BNB.Models
         public virtual Location Location { get; set; }
         public virtual Season Season { get; set; }
 
-        //public virtual ICollection<Fixture_has_Team> Fixture_has_Teams { get; set; }
         public  ICollection<Match> Matches { get; set; }
         public  ICollection<TeamScore> TeamScores { get; set; }
         public ICollection<Fixture_has_Team> Fixture_Has_Teams { get; set; }

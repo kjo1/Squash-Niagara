@@ -62,12 +62,12 @@
             </div>
         </form>
     </div>
-    <form asp-action="Excel" method="post" enctype="multipart/form-data" asp-controller="SeasonsController">
-        <div class="form-group">
-            <input id="excelFile" type="file" />
-            <input type="submit" value="Upload" />
-        </div>
-    </form>
+
+    @*<form asp-action="Excel" method="post" enctype="multipart/form-data">
+        <input asp-for="ExcelFile" />
+        <input type="file" name="ExcelFile" />
+        <input type="submit" value="Upload" />
+    </form>*@
 </div>
 
 

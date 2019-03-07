@@ -47,10 +47,6 @@ namespace SN_BNB.Models
         public string Email { get; set; }
 
 
-        //[MinLength(10)]
-        //[MaxLength(10)]
-        //public bigint Phone { get; set; }
-
         [Required(ErrorMessage = "Phone number is required.")]
         [RegularExpression("^\\d{10}$", ErrorMessage = "Please enter a valid 10-digit phone number (no spaces).")]
         [DataType(DataType.PhoneNumber)]

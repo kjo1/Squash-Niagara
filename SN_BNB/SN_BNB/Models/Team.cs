@@ -8,11 +8,6 @@ namespace SN_BNB.Models
 {
     public class Team
     {
-        //public Team()
-        //{
-        //    this.Players = new HashSet<Player>();
-        //    this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
-        //}
         public int ID { get; set; }
         [Required]
         [Display(Name = "Team Name")]

@@ -23,10 +23,17 @@ namespace SN_BNB.Controllers
             _context = context;
         }
 
+        // GET: Seasons/ExcelUpload
+        public IActionResult ExcelUpload()
+        {
+            return View(new Season());
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Excel(IFormFile file)
+        public async Task<IActionResult> ExcelUpload(Season season)
         {
             System.Diagnostics.Debug.WriteLine("TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST");
+            IFormFile file = season.ExcelFile;
             //create a struct to hold fixture data
             FixtureStruct[] dataStructs = new FixtureStruct[2000];
 

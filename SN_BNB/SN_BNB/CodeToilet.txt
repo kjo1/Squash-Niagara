@@ -1,0 +1,57 @@
+﻿Fixture.cs
+        //public Fixture()
+        //{
+        //    this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
+        //    this.Matches = new HashSet<Match>();
+        //    this.TeamScores = new HashSet<TeamScore>();
+        //}
+
+		//public virtual ICollection<Fixture_has_Team> Fixture_has_Teams { get; set; }
+
+Player.cs
+        //[MinLength(10)]
+        //[MaxLength(10)]
+        //public bigint Phone { get; set; }
+
+
+Team.cs
+        //public Team()
+        //{
+        //    this.Players = new HashSet<Player>();
+        //    this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
+        //}
+
+SNSeedData.cs
+		//if (!context.Teams.Any())
+		//{
+		//    context.Teams.AddRange(
+		//    new Team
+		//    {
+		//        TeamName = "White Oaks 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+
+		//    },
+		//    new Team
+		//    {
+		//        TeamName = "Ridley 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+		//    },
+		//    new Team
+		//    {
+		//        TeamName = "BAC 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+
+		//    },
+		//    new Team
+		//    {
+		//        TeamName = "Brock 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+		//    }
+		//    );
+		//    context.SaveChanges();
+		//}
+
