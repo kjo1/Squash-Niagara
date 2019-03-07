@@ -33,17 +33,18 @@ namespace SN_BNB.Controllers
         public async Task<IActionResult> ExcelUpload(Season season)
         {
             System.Diagnostics.Debug.WriteLine("TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST");
-            IFormFile file = season.ExcelFile;
+
             //create a struct to hold fixture data
             FixtureStruct[] dataStructs = new FixtureStruct[2000];
 
             //receive excel file
+            Byte[] file = season.ExcelFile;
             ExcelPackage excelPackage;
             try
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await file.CopyToAsync(memoryStream);
+                    await memoryStream.WriteAsync(file, 0, file.Length);
                     excelPackage = new ExcelPackage(memoryStream);
                 }
                 ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
@@ -68,11 +69,13 @@ namespace SN_BNB.Controllers
                 //find location id, hometeam id, and awayteam id
                 //make a new season
                 _context.Add(new Season());
+
                 //update fixture table
                 _context.SaveChanges();
 
             }
-           catch { }
+            //let the user know that the file was not parsed properly
+            catch { }
 
             return RedirectToAction(nameof(Index));
         }

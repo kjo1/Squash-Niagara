@@ -26,7 +26,7 @@ namespace SN_BNB.Models
         public DateTime SeasonEnd { get; set; }
 
         [NotMappedAttribute]
-        public IFormFile ExcelFile { get; set; }
+        public Byte[] ExcelFile { get; set; }
         public ICollection<Fixture> Fixtures { get; set; }
         public ICollection<Season_has_Team> Teams { get; set; }
     }
