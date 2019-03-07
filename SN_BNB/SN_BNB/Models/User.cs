@@ -9,17 +9,12 @@ namespace SN_BNB.Models
 {
     public class User
     {
-        public User()
-        {
-            this.ApprovedBys = new HashSet<ApprovedBy>();
-        }
         public int ID { get; set; }
         [Required]
         [Display(Name="User Role")]
         public string UserRole { get; set; }
 
         [NotMappedAttribute]
-        public Byte[] ExcelFile { get; set; }
-        public ICollection<ApprovedBy> ApprovedBys { get; set; }
+        public Byte[] ExcelFile { get; set; } 
     }
 }

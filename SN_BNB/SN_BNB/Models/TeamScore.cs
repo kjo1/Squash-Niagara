@@ -8,10 +8,6 @@ namespace SN_BNB.Models
 {
     public class TeamScore
     {
-        public TeamScore()
-        {
-            this.ApprovedBys = new HashSet<ApprovedBy>();
-        }
         public int ID { get; set; }
         [Required]
         [Display(Name="Fixture Score")]
@@ -22,7 +18,5 @@ namespace SN_BNB.Models
 
         public virtual Team Team { get; set; }
         public virtual Fixture Fixture { get; set; }
-
-        public ICollection<ApprovedBy> ApprovedBys { get; set; }
     }
 }

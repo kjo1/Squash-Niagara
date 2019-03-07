@@ -8,11 +8,6 @@ namespace SN_BNB.Models
 {
     public class Player
     {
-        public Player()
-        {
-            this.MatchScores = new HashSet<MatchScore>();
-        }
-
         public int ID { get; set; }
 
         [Display(Name ="Player")]
@@ -61,8 +56,6 @@ namespace SN_BNB.Models
         public int TeamID { get; set; }
 
         public virtual Team Team { get; set; }
-
-        public ICollection<MatchScore> MatchScores { get; set; }
 
     }
 }

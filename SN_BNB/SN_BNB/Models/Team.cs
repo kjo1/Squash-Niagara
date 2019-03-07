@@ -29,8 +29,5 @@ namespace SN_BNB.Models
         
         [Display(Name="Seasons")]
         public ICollection<Season_has_Team> Season_has_Teams { get; set; }
-
-        [Display(Name = "Fixtures")]
-        public ICollection<Fixture_has_Team> Fixture_has_Teams { get; set; }
     }
 }

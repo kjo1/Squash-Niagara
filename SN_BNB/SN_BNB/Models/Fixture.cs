@@ -8,10 +8,15 @@ namespace SN_BNB.Models
 {
     public class Fixture
     {
+        public Fixture()
+        {
+            this.Matches = new HashSet<Match>();
+            this.TeamScores = new HashSet<TeamScore>();
+        }
         public int ID { get; set; }
         [Required]
         [Display(Name ="Date/Time")]
-        public DateTime Datetime { get; set; }
+        public DateTime FixtureDatetime { get; set; }
         [Required]
         [Display(Name = "Home Team Score")]
         public int HomeScore { get; set; }
@@ -20,19 +25,19 @@ namespace SN_BNB.Models
         public int AwayScore { get; set; }
 
         [Display(Name="Home Team")]
-        public int HomeTeamID { get; set; }
+        public int idHomeTeam { get; set; }
         [Display(Name = "Away Team")]
-        public int AwayTeamID { get; set; }
+        public int idAwayTeam { get; set; }
         [Display(Name = "Season")]
-        public int SeasonID { get; set; }
-        [Display(Name = "Location")]
-        public int LocationID { get; set; }
+        public int Season_idSeason { get; set; }
+       
+        public string FixtureLocationCity { get; set; }
 
-        public virtual Location Location { get; set; }
+        public string FixtureLocationAddress { get; set; }
+
         public virtual Season Season { get; set; }
 
         public  ICollection<Match> Matches { get; set; }
         public  ICollection<TeamScore> TeamScores { get; set; }
-        public ICollection<Fixture_has_Team> Fixture_Has_Teams { get; set; }
     }
 }
