@@ -1,0 +1,80 @@
+﻿@model SN_BNB.Models.Season
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Season</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Season_Title" class="control-label"></label>
+                <input asp-for="Season_Title" class="form-control" />
+                <span asp-validation-for="Season_Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeasonStart" class="control-label"></label>
+                <input asp-for="SeasonStart" class="form-control" />
+                <span asp-validation-for="SeasonStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeasonEnd" class="control-label"></label>
+                <input asp-for="SeasonEnd" class="form-control" />
+                <span asp-validation-for="SeasonEnd" class="text-danger"></span>
+            </div>
+
+            <div class="" form-group">
+                <label class="control-label">Teams Assigned</label>
+                <div class="col-md-offset-1">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                List<SN_BNB.ViewModels.AssignedTeamVM> Teams = ViewBag.Teams;
+                                foreach (var team in Teams)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedTeams"
+                                               value="@team.TeamID"
+                                               @(Html.Raw(team.Assigned ? "checked=\"checked\"" : "")) />
+                                        @team.TeamName @:&nbsp;&nbsp;
+                                    @:</td>
+                                }
+                            }
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+
+    @*<form asp-action="Excel" method="post" enctype="multipart/form-data">
+        <input asp-for="ExcelFile" />
+        <input type="file" name="ExcelFile" />
+        <input type="submit" value="Upload" />
+    </form>*@
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

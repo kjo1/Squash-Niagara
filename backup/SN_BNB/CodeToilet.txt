@@ -1,0 +1,125 @@
+﻿Fixture.cs
+        //public Fixture()
+        //{
+        //    this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
+        //    this.Matches = new HashSet<Match>();
+        //    this.TeamScores = new HashSet<TeamScore>();
+        //}
+
+		//public virtual ICollection<Fixture_has_Team> Fixture_has_Teams { get; set; }
+
+Player.cs
+        //[MinLength(10)]
+        //[MaxLength(10)]
+        //public bigint Phone { get; set; }
+
+
+Team.cs
+        //public Team()
+        //{
+        //    this.Players = new HashSet<Player>();
+        //    this.Fixture_has_Teams = new HashSet<Fixture_has_Team>();
+        //}
+
+SNSeedData.cs
+		//if (!context.Teams.Any())
+		//{
+		//    context.Teams.AddRange(
+		//    new Team
+		//    {
+		//        TeamName = "White Oaks 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+
+		//    },
+		//    new Team
+		//    {
+		//        TeamName = "Ridley 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+		//    },
+		//    new Team
+		//    {
+		//        TeamName = "BAC 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+
+		//    },
+		//    new Team
+		//    {
+		//        TeamName = "Brock 1",
+		//        TeamPoints = 0,
+		//        TeamCreatedOn = DateTime.Today
+		//    }
+		//    );
+		//    context.SaveChanges();
+		//}
+
+
+UserRolesController.cs
+		//[HttpPost]
+        //public async Task<IActionResult> InsertFromExcel(IFormFile theExcel)
+        //{
+        //    ExcelPackage excel;
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        await theExcel.CopyToAsync(memoryStream);
+        //        excel = new ExcelPackage(memoryStream);
+        //    }
+        //    var workSheet = excel.Workbook.Worksheets[0];
+        //    var start = workSheet.Dimension.Start;
+        //    var end = workSheet.Dimension.End;
+        //    for (int row = start.Row; row <= end.Row; row++)
+        //    {
+        //        // Row by row...
+        //        IdentityUser a = new IdentityUser();
+        //        {
+        //            a.Email = workSheet.Cells[row, 1].Text;
+        //            a.PhoneNumber = workSheet.Cells[row, 1].Text;
+        //        };
+        //        _context.Users.Add(a);
+        //    };
+        //    _context.SaveChanges();
+		//
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+SeasonsController.cs
+		//public async Task<IActionResult> CreateFixtures(IFormFile excelDoc)
+        //{
+        //    //create a struct to hold fixture data
+        //    FixtureStruct[] dataStructs = new FixtureStruct[2000];
+
+        //    //receive excel file
+        //    ExcelPackage excelPackage;
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        await excelDoc.CopyToAsync(memoryStream);
+        //        excelPackage = new ExcelPackage(memoryStream);
+        //    }
+        //    ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+
+        //    //parse the file and update struct
+        //    int row = 1;
+        //    while (true)
+        //    {
+
+        //        if (worksheet.Cells[row, 1].Value.ToString() == "") break;
+        //        FixtureStruct tempStruct = new FixtureStruct();
+
+        //        tempStruct.FixtureDateTime = worksheet.Cells[row, 1].Value.ToString();
+        //        tempStruct.Location = worksheet.Cells[row, 2].Value.ToString();
+        //        tempStruct.HomeTeam = worksheet.Cells[row, 3].Value.ToString();
+        //        tempStruct.AwayTeam = worksheet.Cells[row, 4].Value.ToString();
+
+        //        row += 1;
+        //        dataStructs.Append(tempStruct);
+        //    }
+        //    //find location id, hometeam id, and awayteam id
+        //    //make a new season
+        //    _context.Add(new Season());
+        //    //update fixture table
+        //    _context.SaveChanges();
+
+        //    return RedirectToAction(nameof(Index));
+        //}
