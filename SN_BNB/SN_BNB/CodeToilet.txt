@@ -55,3 +55,71 @@ SNSeedData.cs
 		//    context.SaveChanges();
 		//}
 
+
+UserRolesController.cs
+		//[HttpPost]
+        //public async Task<IActionResult> InsertFromExcel(IFormFile theExcel)
+        //{
+        //    ExcelPackage excel;
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        await theExcel.CopyToAsync(memoryStream);
+        //        excel = new ExcelPackage(memoryStream);
+        //    }
+        //    var workSheet = excel.Workbook.Worksheets[0];
+        //    var start = workSheet.Dimension.Start;
+        //    var end = workSheet.Dimension.End;
+        //    for (int row = start.Row; row <= end.Row; row++)
+        //    {
+        //        // Row by row...
+        //        IdentityUser a = new IdentityUser();
+        //        {
+        //            a.Email = workSheet.Cells[row, 1].Text;
+        //            a.PhoneNumber = workSheet.Cells[row, 1].Text;
+        //        };
+        //        _context.Users.Add(a);
+        //    };
+        //    _context.SaveChanges();
+		//
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+SeasonsController.cs
+		//public async Task<IActionResult> CreateFixtures(IFormFile excelDoc)
+        //{
+        //    //create a struct to hold fixture data
+        //    FixtureStruct[] dataStructs = new FixtureStruct[2000];
+
+        //    //receive excel file
+        //    ExcelPackage excelPackage;
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        await excelDoc.CopyToAsync(memoryStream);
+        //        excelPackage = new ExcelPackage(memoryStream);
+        //    }
+        //    ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+
+        //    //parse the file and update struct
+        //    int row = 1;
+        //    while (true)
+        //    {
+
+        //        if (worksheet.Cells[row, 1].Value.ToString() == "") break;
+        //        FixtureStruct tempStruct = new FixtureStruct();
+
+        //        tempStruct.FixtureDateTime = worksheet.Cells[row, 1].Value.ToString();
+        //        tempStruct.Location = worksheet.Cells[row, 2].Value.ToString();
+        //        tempStruct.HomeTeam = worksheet.Cells[row, 3].Value.ToString();
+        //        tempStruct.AwayTeam = worksheet.Cells[row, 4].Value.ToString();
+
+        //        row += 1;
+        //        dataStructs.Append(tempStruct);
+        //    }
+        //    //find location id, hometeam id, and awayteam id
+        //    //make a new season
+        //    _context.Add(new Season());
+        //    //update fixture table
+        //    _context.SaveChanges();
+
+        //    return RedirectToAction(nameof(Index));
+        //}

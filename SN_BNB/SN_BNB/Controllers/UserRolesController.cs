@@ -102,29 +102,56 @@ namespace SN_BNB.Controllers
             return View(user);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> InsertFromExcel(IFormFile theExcel)
+        public struct UserStruct
         {
-            ExcelPackage excel;
-            using (var memoryStream = new MemoryStream())
+            public string UserName;
+            public string UserEmail;
+            public string UserPassword;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ExcelUpload(User user)
+        {
+            //create a struct to hold user data
+            UserStruct[] dataStructs = new UserStruct[2000];
+
+            //receive excel file
+            Byte[] file = user.ExcelFile;
+            ExcelPackage excelPackage;
+            try
             {
-                await theExcel.CopyToAsync(memoryStream);
-                excel = new ExcelPackage(memoryStream);
-            }
-            var workSheet = excel.Workbook.Worksheets[0];
-            var start = workSheet.Dimension.Start;
-            var end = workSheet.Dimension.End;
-            for (int row = start.Row; row <= end.Row; row++)
-            {
-                // Row by row...
-                IdentityUser a = new IdentityUser();
+                using (var memoryStream = new MemoryStream())
                 {
-                    a.Email = workSheet.Cells[row, 1].Text;
-                    a.PhoneNumber = workSheet.Cells[row, 1].Text;
-                };
-                _context.Users.Add(a);
-            };
-            _context.SaveChanges();
+                    await memoryStream.WriteAsync(file, 0, file.Length);
+                    excelPackage = new ExcelPackage(memoryStream);
+                }
+                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+
+                //parse the file and update struct
+                int row = 1;
+                while (true)
+                {
+
+                    if (worksheet.Cells[row, 1].Value.ToString() == "") break;
+                    UserStruct tempStruct = new UserStruct
+                    {
+                        UserName = worksheet.Cells[row, 1].Value.ToString(),
+                        UserEmail = worksheet.Cells[row, 2].Value.ToString(),
+                        UserPassword = worksheet.Cells[row, 3].Value.ToString(),
+                    };
+
+                    row += 1;
+                    dataStructs.Append(tempStruct);
+                }
+                //make a new user
+                _context.Add(new User());
+
+                //update user table
+                _context.SaveChanges();
+
+            }
+            //let the user know that the file was not parsed properly
+            catch { }
 
             return RedirectToAction(nameof(Index));
         }
