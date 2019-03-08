@@ -26,7 +26,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Assets\Files\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Views\Fixtures\" />
   </ItemGroup>
 
