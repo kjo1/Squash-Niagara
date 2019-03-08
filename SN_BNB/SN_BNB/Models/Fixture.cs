@@ -16,7 +16,7 @@ namespace SN_BNB.Models
         public int ID { get; set; }
         [Required]
         [Display(Name ="Date/Time")]
-        public DateTime FixtureDatetime { get; set; }
+        public DateTime FixtureDateTime { get; set; }
         [Required]
         [Display(Name = "Home Team Score")]
         public int HomeScore { get; set; }
