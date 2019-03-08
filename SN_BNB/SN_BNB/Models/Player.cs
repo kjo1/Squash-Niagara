@@ -55,9 +55,10 @@ namespace SN_BNB.Models
         [Display(Name = "Win(s)")]
         public int Win { get; set; }
 
-        [Display(Name = "Loss(es)")]
+        [Display(Name = "Loss(es) ")]
         public int Loss { get; set; }
 
+        [Required(ErrorMessage = "You must select a Primary Team")]
         [Display(Name ="Team")]
         public int TeamID { get; set; }
 

@@ -9,14 +9,18 @@ namespace SN_BNB.Models
     public class TeamScore
     {
         public int ID { get; set; }
-        [Required]
-        [Display(Name="Fixture Score")]
+
+        [Display(Name = "Fixture Score")]
         public string FixtureScore { get; set; }
 
-        public int TeamID { get; set; }
-        public int FixtureID { get; set; }
+        [Display(Name = "Approved")]
+        public int TeamScoreApprovedBy { get; set; }
 
+
+        public int TeamID { get; set; }
         public virtual Team Team { get; set; }
+
+        public int FixtureID { get; set; }
         public virtual Fixture Fixture { get; set; }
     }
 }
