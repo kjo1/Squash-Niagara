@@ -8,7 +8,9 @@ namespace SN_BNB.Models
 {
 	public class News
 	{
-		[Required]
+        public int ID { get; set; }
+
+        [Required]
 		public string Title { get; set; }
 
 		[Required]

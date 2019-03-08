@@ -68,5 +68,7 @@ namespace SN_BNB.Data
 				.HasKey(t => new { t.TeamID, t.SeasonID });
 		}
 
+		public DbSet<SN_BNB.Models.News> News { get; set; }
+
 	}
 }
