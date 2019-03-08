@@ -21,11 +21,11 @@ namespace SN_BNB.Models
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
-        [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
+        [StringLength(45, ErrorMessage = "First name cannot be more than 45 characters long.")]
         public string FirstName { get; set; }
 
         [Display(Name = "Middle Name")]
-        [StringLength(50, ErrorMessage = "Middle name cannot be more than 50 characters long.")]
+        [StringLength(45, ErrorMessage = "Middle name cannot be more than 45 characters long.")]
         public string MiddleName { get; set; }
 
         [Display(Name = "Last Name")]
@@ -48,9 +48,15 @@ namespace SN_BNB.Models
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = false)]
         public Int64 Phone { get; set; }
 
-
+        [Required(ErrorMessage = "Position is required.(1 to 4)")]
         [Range(1,4)]
         public int Position { get; set; }
+
+        [Display(Name = "Win(s)")]
+        public int Win { get; set; }
+
+        [Display(Name = "Loss(es)")]
+        public int Loss { get; set; }
 
         [Display(Name ="Team")]
         public int TeamID { get; set; }
