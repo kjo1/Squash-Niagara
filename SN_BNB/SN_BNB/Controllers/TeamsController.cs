@@ -118,6 +118,32 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(t => t.DivisionID);
                 }
             }
+            else if (sortField == "Win(s)")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamWins);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamWins);
+                }
+            }
+            else if (sortField == "Loss(es)")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamLosses);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamLosses);
+                }
+            }
 
             //Set sort for next time
             ViewData["sortField"] = sortField;
