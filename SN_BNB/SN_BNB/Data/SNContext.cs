@@ -16,12 +16,9 @@ namespace SN_BNB.Data
 
         public DbSet<Division> Divisions { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<ApprovedBy> Approved { get; set; }
         public DbSet<Fixture> Fixtures { get; set; }
         public DbSet<Season_has_Team> SeasonTeams { get; set; }
-        public DbSet<Location> Locations { get; set; }
         public DbSet<Match> Matches { get; set; }
-        public DbSet<MatchScore> MatchScores { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<TeamScore> TeamScores { get; set; }
@@ -47,7 +44,7 @@ namespace SN_BNB.Data
             modelBuilder.Entity<Season>()
                 .HasMany<Fixture>(d => d.Fixtures)
                 .WithOne(t => t.Season)
-                .HasForeignKey(t => t.SeasonID)
+                .HasForeignKey(t => t.Season_idSeason)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Season_has_Team>()
@@ -56,11 +53,6 @@ namespace SN_BNB.Data
                 .HasForeignKey(t => t.TeamID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Fixture_has_Team>()
-                .HasOne(t => t.Team)
-                .WithMany(st => st.Fixture_has_Teams)
-                .HasForeignKey(t => t.TeamID)
-                .OnDelete(DeleteBehavior.Restrict);
 
             // Unique Fields
             modelBuilder.Entity<Division>()
@@ -74,11 +66,6 @@ namespace SN_BNB.Data
             // Insection Table Key Declarations
             modelBuilder.Entity<Season_has_Team>()
                 .HasKey(t => new { t.TeamID, t.SeasonID });
-
-            modelBuilder.Entity<Fixture_has_Team>()
-                .HasKey(t => new { t.TeamID, t.FixtureID });
-
-
         }
 
     }
