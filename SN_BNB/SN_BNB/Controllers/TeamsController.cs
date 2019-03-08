@@ -20,7 +20,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Teams
-        public async Task<IActionResult> Index(string searchString, int? divisionID)
+        public async Task<IActionResult> Index(string searchString, int? divisionID, string sortDirection, string sortField, string actionButton)
         {
             PopulateDropDownLists();
             var teams = from t in _context.Teams
@@ -38,7 +38,91 @@ namespace SN_BNB.Controllers
             {
                 teams = teams.Where(t => t.DivisionID == divisionID);
             }
-               
+
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
+            {
+                if (actionButton != "Filter")//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+
+            if (sortField == "Created On")//Sorting by Date Time
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                   teams = teams
+                        .OrderBy(t => t.TeamCreatedOn);
+                        //.ThenBy(t => t.TeamName);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamCreatedOn);
+                    //.ThenByDescending(t => t.TeamName);
+                }
+            }
+            else if (sortField == "Team Name")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamName);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamName);
+                }
+            }
+            else if (sortField == "Team Points")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamPoints);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamPoints);
+                }
+            }
+            else if (sortField == "Team Name")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.TeamName);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.TeamName);
+                }
+            }
+            else if (sortField == "Division")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teams = teams
+                        .OrderBy(t => t.DivisionID);
+                }
+                else
+                {
+                    teams = teams
+                        .OrderByDescending(t => t.DivisionID);
+                }
+            }
+
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
 
             return View(await teams.ToListAsync());
 
