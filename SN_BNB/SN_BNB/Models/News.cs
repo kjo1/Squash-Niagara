@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SN_BNB.Models
 {
-    public class News
-    {
-        [Required]
-        public string Title { get; set; }
+	public class News
+	{
+		[Required]
+		public string Title { get; set; }
 
-        [Required]
-        public string Content { get; set; }
-    }
+		[Required]
+		public string Content { get; set; }
+	}
 }
