@@ -20,10 +20,29 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Teams
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, int? divisionID)
         {
-            var sNContext = _context.Teams.Include(t => t.Division);
-            return View(await sNContext.ToListAsync());
+            PopulateDropDownLists();
+            var teams = from t in _context.Teams
+                        .Include(t => t.Division)
+                        .Include(t => t.Players)
+                        .Include(t => t.Season_has_Teams)
+                        .ThenInclude( t => t.Season)                     
+                        select t;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                teams = teams.Where(t => t.TeamName.ToUpper().Contains(searchString.ToUpper()));
+            }
+            if (divisionID.HasValue)
+            {
+                teams = teams.Where(t => t.DivisionID == divisionID);
+            }
+               
+
+            return View(await teams.ToListAsync());
+
+           
         }
 
         // GET: Teams/Details/5
@@ -156,5 +175,13 @@ namespace SN_BNB.Controllers
         {
             return _context.Teams.Any(e => e.ID == id);
         }
+
+        private void PopulateDropDownLists(Team team = null)
+        {
+            var dQuery = from d in _context.Divisions
+                         select d;
+            ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName", team?.DivisionID);
+        }
+       
     }
 }
