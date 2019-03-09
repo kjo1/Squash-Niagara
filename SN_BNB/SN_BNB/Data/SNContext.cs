@@ -63,9 +63,12 @@ namespace SN_BNB.Data
 				.HasIndex(d => d.TeamName)
 				.IsUnique();
 
-			// Insection Table Key Declarations
+			// Intersection Table Key Declarations
 			modelBuilder.Entity<Season_has_Team>()
 				.HasKey(t => new { t.TeamID, t.SeasonID });
+
+            modelBuilder.Entity<TeamScore>()
+                .HasKey(t => new { t.TeamID, t.FixtureID });
 		}
 
 		public DbSet<SN_BNB.Models.News> News { get; set; }
