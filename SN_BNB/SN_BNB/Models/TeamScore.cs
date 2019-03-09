@@ -15,8 +15,7 @@ namespace SN_BNB.Models
         public string FixtureScore { get; set; }
 
         [Display(Name = "Approved")]
-        public int TeamScoreApprovedBy { get; set; }
-
+        public bool TeamScoreApprovedBy { get; set; }
 
         public int TeamID { get; set; }
         public virtual Team Team { get; set; }
