@@ -66,7 +66,7 @@ namespace SN_BNB.Data
                 .HasForeignKey(pt => pt.MatchID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<TeamScore>()
+            modelBuilder.Entity<TeamScore>() 
                 .HasOne(ts => ts.Fixture)
                 .WithMany(f => f.TeamScores)
                 .HasForeignKey(ts => ts.FixtureID)
