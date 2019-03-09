@@ -15,5 +15,8 @@ namespace SN_BNB.Models
 
 		[Required]
 		public string Content { get; set; }
-	}
+
+        [Required]
+        public DateTime Date { get; set; }
+    }
 }

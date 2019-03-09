@@ -23,9 +23,10 @@ namespace SN_BNB.Models
 
         [Display(Name = "Fixture")]
         public int FixtureID { get; set; }
-        [Display(Name = "Player")]
+        [Display(Name = "Players")]
         public int PlayerID { get; set; }
         
+
 
         public Fixture Fixture { get; set; }
         public Player Player { get; set; }
