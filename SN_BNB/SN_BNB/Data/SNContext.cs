@@ -58,10 +58,6 @@ namespace SN_BNB.Data
                 .HasIndex(p => p.Email)
                 .IsUnique();
 
-            //Many to Many Intersection
-            modelBuilder.Entity<player_team>()
-            .HasKey(t => new { t.MatchID, t.PlayerID });
-
             //Add this so you don't get Cascade Delete
             modelBuilder.Entity<player_team>()
                 .HasOne(pt => pt.Match)
@@ -89,6 +85,10 @@ namespace SN_BNB.Data
 
             modelBuilder.Entity<TeamScore>()
                 .HasKey(t => new { t.TeamID, t.FixtureID });
+
+            //Many to Many Intersection
+            modelBuilder.Entity<player_team>()
+                .HasKey(t => new { t.MatchID, t.PlayerID });
         }
 
         public DbSet<SN_BNB.Models.News> News { get; set; }
