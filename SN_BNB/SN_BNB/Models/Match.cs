@@ -12,7 +12,6 @@ namespace SN_BNB.Models
 
         [Required(ErrorMessage ="You must enter a score for player 1")]
         public int Player1Score { get; set; }
-
         [Required(ErrorMessage ="You must enter a score for player 2")]
         public int Player2Score { get; set; }
         [Required(ErrorMessage ="You must enter a match position")]
@@ -24,8 +23,6 @@ namespace SN_BNB.Models
 
         [Display(Name = "Fixture")]
         public int FixtureID { get; set; }
-        //[Display(Name = "Player 1")]
-        //public int PlayerID { get; set; }
         [Display(Name = "Player")]
         public int PlayerID { get; set; }
         
