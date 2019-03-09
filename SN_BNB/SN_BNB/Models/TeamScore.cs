@@ -9,10 +9,6 @@ namespace SN_BNB.Models
     public class TeamScore
     {
 
-        //public TeamScore()
-        //{
-        //    this.Matches = new HashSet<Match>();
-        //}
         public int ID { get; set; }
 
         [Display(Name = "Fixture Score")]
@@ -28,6 +24,5 @@ namespace SN_BNB.Models
         public int FixtureID { get; set; }
         public virtual Fixture Fixture { get; set; }
 
-        //public virtual ICollection<Match> Matches { get; set; }
     }
 }
