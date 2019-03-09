@@ -74,11 +74,12 @@ namespace SN_BNB.Controllers
                     row += 1;
                     dataStructs.Append(tempStruct);
                 }
-                //find location id, hometeam id, and awayteam id
+                //find hometeam id and awayteam id
+                //make new fixtures using the struct
                 //make a new season
                 _context.Add(new Season());
 
-                //update fixture table
+                //update tables
                 _context.SaveChanges();
 
             }

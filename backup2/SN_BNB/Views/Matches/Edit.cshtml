@@ -1,0 +1,59 @@
+﻿@model SN_BNB.Models.Match
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Match</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Player1Score" class="control-label"></label>
+                <input asp-for="Player1Score" class="form-control" />
+                <span asp-validation-for="Player1Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player2Score" class="control-label"></label>
+                <input asp-for="Player2Score" class="form-control" />
+                <span asp-validation-for="Player2Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatchPosition" class="control-label"></label>
+                <input asp-for="MatchPosition" class="form-control" />
+                <span asp-validation-for="MatchPosition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatchDateTime" class="control-label"></label>
+                <input asp-for="MatchDateTime" class="form-control" />
+                <span asp-validation-for="MatchDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FixtureID" class="control-label"></label>
+                <select asp-for="FixtureID" class="form-control" asp-items="ViewBag.FixtureID"></select>
+                <span asp-validation-for="FixtureID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlayerID" class="control-label"></label>
+                <select asp-for="PlayerID" class="form-control" asp-items="ViewBag.PlayerID"></select>
+                <span asp-validation-for="PlayerID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
