@@ -20,10 +20,151 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString)
         {
-            var sNContext = _context.Players.Include(p => p.Team);
-            return View(await sNContext.ToListAsync());
+            //var sNContext = _context.Players.Include(p => p.Team);
+            PopulateDropDownLists();
+
+            var players = from p in _context.Players
+                            .Include(p => p.Team)
+                            .Include(p => p.player_Teams)
+                            .ThenInclude(p => p.Match)
+                            select p;
+
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    players = players.Where(p => p.ToUpper().Contains(searchString.ToUpper()));
+            //}
+            //if (divisionID.HasValue)
+            //{
+            //    teams = teams.Where(t => t.DivisionID == divisionID);
+            //}
+
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
+            {
+                if (actionButton != "Filter")//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+
+            if (sortField == "Team")//Sorting by Date Time
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                         .OrderBy(p => p.Team);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Team);
+                    //.ThenByDescending(t => t.TeamName);
+                }
+            }
+            else if (sortField == "Player")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.FullName);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.FullName);
+                }
+            }
+            else if (sortField == "Gender")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Gender);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Gender);
+                }
+            }
+            else if (sortField == "Email")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Email);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Email);
+                }
+            }
+            else if (sortField == "Phone")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Phone);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Phone);
+                }
+            }
+            else if (sortField == "Position")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Position);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Position);
+                }
+            }
+            else if (sortField == "Win(s)")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Win);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Win);
+                }
+            }
+            else if (sortField == "Lose(es)")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Loss);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Loss);
+                }
+            }
+
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
+
+            return View(await players.ToListAsync());
         }
 
         // GET: Players/Details/5
@@ -155,6 +296,13 @@ namespace SN_BNB.Controllers
         private bool PlayerExists(int id)
         {
             return _context.Players.Any(e => e.ID == id);
+        }
+
+        private void PopulateDropDownLists(Player player = null)
+        {
+            var dQuery = from t in _context.Teams
+                         select t;
+            ViewData["TeamID"] = new SelectList(dQuery, "ID", "TeamName", player?.TeamID);
         }
     }
 }

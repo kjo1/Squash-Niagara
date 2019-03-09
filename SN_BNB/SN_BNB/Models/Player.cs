@@ -64,7 +64,7 @@ namespace SN_BNB.Models
 
         public virtual Team Team { get; set; }
 
-        public ICollection<Match> Matches { get; set; }
+        public ICollection<player_team> player_Teams { get; set; }
 
     }
 }
