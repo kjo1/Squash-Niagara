@@ -23,6 +23,8 @@ namespace SN_BNB.Data
         public DbSet<Season> Seasons { get; set; }
         public DbSet<TeamScore> TeamScores { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,25 +55,23 @@ namespace SN_BNB.Data
                 .HasForeignKey(t => t.TeamID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Add a unique index to the Email Address
-            modelBuilder.Entity<Player>()
-                .HasIndex(p => p.Email)
-                .IsUnique();
-            
-
-            //Add this so you don't get Cascade Delete
-            modelBuilder.Entity<player_team>()
+            modelBuilder.Entity<AssignedMatchPlayer>()
                 .HasOne(pt => pt.Match)
-                .WithMany(t => t.player_team)
+                .WithMany(t => t.AssignedMatchPlayers)
                 .HasForeignKey(pt => pt.MatchID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<TeamScore>() 
+            modelBuilder.Entity<TeamScore>()
                 .HasOne(ts => ts.Fixture)
                 .WithMany(f => f.TeamScores)
                 .HasForeignKey(ts => ts.FixtureID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            //Add a unique index to the Email Address
+            modelBuilder.Entity<Player>()
+                .HasIndex(p => p.Email)
+                .IsUnique();
+            
             // Unique Fields
             modelBuilder.Entity<Division>()
                 .HasIndex(d => d.DivisionName)
@@ -93,11 +93,11 @@ namespace SN_BNB.Data
             modelBuilder.Entity<TeamScore>()
                 .HasKey(t => new { t.TeamID, t.FixtureID });
 
-            modelBuilder.Entity<player_team>()
+            modelBuilder.Entity<AssignedMatchPlayer>()
             .HasKey(t => new { t.MatchID, t.PlayerID });
         }
 
-        public DbSet<SN_BNB.Models.News> News { get; set; }
+        
 
     }
 }

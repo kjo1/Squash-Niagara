@@ -9,6 +9,10 @@ namespace SN_BNB.Models
     public class Player
     {
         public int ID { get; set; }
+        public Player()
+        {
+            AssignedMatchPlayers = new HashSet<AssignedMatchPlayer>();
+        }
 
         [Display(Name ="Player")]
         public string FullName
@@ -64,7 +68,7 @@ namespace SN_BNB.Models
 
         public virtual Team Team { get; set; }
 
-        public ICollection<player_team> player_Teams { get; set; }
+        public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
 
     }
 }

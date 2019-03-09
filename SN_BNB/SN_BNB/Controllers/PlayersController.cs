@@ -27,9 +27,9 @@ namespace SN_BNB.Controllers
 
             var players = from p in _context.Players
                             .Include(p => p.Team)
-                            .Include(p => p.player_Teams)
+                            .Include(p => p.AssignedMatchPlayers)
                             .ThenInclude(p => p.Match)
-                            select p;
+                          select p;
 
 
             if (!String.IsNullOrEmpty(searchString))

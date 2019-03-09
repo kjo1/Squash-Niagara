@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using SN_BNB.Data;
 using SN_BNB.Models;
+using SN_BNB.ViewModels;
 
 namespace SN_BNB.Controllers
 {
@@ -22,8 +24,11 @@ namespace SN_BNB.Controllers
         // GET: Matches
         public async Task<IActionResult> Index()
         {
-            var sNContext = _context.Matches.Include(m => m.Fixture).Include(m => m.Player);
-            return View(await sNContext.ToListAsync());
+            var matches = from d in _context.Matches
+                          .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)
+                          select d;
+            //var sNContext = _context.Matches.Include(m => m.Fixture).Include(m => m.Player);
+            return View(await matches.ToListAsync());
         }
 
         // GET: Matches/Details/5
@@ -51,6 +56,8 @@ namespace SN_BNB.Controllers
         {
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID");
             ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email");
+            Match match = new Match();
+            PopulateAssignedPlayerData(match);
             return View();
         }
 
@@ -59,16 +66,26 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Player1Score,Player2Score,MatchPosition,MatchDateTime,FixtureID,PlayerID")] Match match)
+        public async Task<IActionResult> Create([Bind("ID,Player1Score,Player2Score,MatchPosition,MatchDateTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(match);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                UpdateMatchPlayers(selectedOptions, match);
+                if (ModelState.IsValid)
+                {
+                    _context.Add(match);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
+                ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+
             }
-            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            PopulateAssignedPlayerData(match);
             return View(match);
         }
 
@@ -80,13 +97,18 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var match = await _context.Matches.FindAsync(id);
+            var match = await _context.Matches
+                .Include(m => m.AssignedMatchPlayers).ThenInclude(m => m.Player)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(d => d.ID == id);
+
             if (match == null)
             {
                 return NotFound();
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
             ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            PopulateAssignedPlayerData(match);
             return View(match);
         }
 
@@ -95,12 +117,18 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Player1Score,Player2Score,MatchPosition,MatchDateTime,FixtureID,PlayerID")] Match match)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Player1Score,Player2Score,MatchPosition,MatchDateTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
         {
+            var matchToUpdate = await _context.Matches
+                .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)
+                .SingleOrDefaultAsync(d => d.ID == id);
+
             if (id != match.ID)
             {
                 return NotFound();
             }
+
+            UpdateMatchPlayers(selectedOptions, matchToUpdate);
 
             if (ModelState.IsValid)
             {
@@ -108,6 +136,10 @@ namespace SN_BNB.Controllers
                 {
                     _context.Update(match);
                     await _context.SaveChangesAsync();
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,6 +156,7 @@ namespace SN_BNB.Controllers
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
             ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            PopulateAssignedPlayerData(matchToUpdate);
             return View(match);
         }
 
@@ -156,6 +189,69 @@ namespace SN_BNB.Controllers
             _context.Matches.Remove(match);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        private void PopulateAssignedPlayerData(Match match)
+        {
+            var allPlayers = _context.Players;
+            var matPlayers = new HashSet<int>(match.AssignedMatchPlayers.Select(b => b.PlayerID));
+            var selected = new List<PlayerMatchVM>();
+            var available = new List<PlayerMatchVM>();
+            foreach (var p in allPlayers)
+            {
+                if (matPlayers.Contains(p.ID))
+                {
+                    selected.Add(new PlayerMatchVM
+                    {
+                        PlayerID = p.ID,
+                        Name = p.FullName
+                    });
+                }
+                else
+                {
+                    available.Add(new PlayerMatchVM
+                    {
+                        PlayerID = p.ID,
+                        Name = p.FullName
+                    });
+                }
+            }
+            ViewData["selOpts"] = new MultiSelectList(selected.OrderBy(s => s.Name), "PlayerID", "Name");
+            ViewData["availOpts"] = new MultiSelectList(available.OrderBy(s => s.Name), "PlayerID", "Name");
+        }
+
+        private void UpdateMatchPlayers(string[] selectedOptions, Match matchToUpdate)
+        {
+            if(selectedOptions == null)
+            {
+                matchToUpdate.AssignedMatchPlayers = new List<AssignedMatchPlayer>();
+                return;
+            }
+
+            var selectedOptionsHS = new HashSet<string>(selectedOptions);
+            var matplayers = new HashSet<int>(matchToUpdate.AssignedMatchPlayers.Select(b => b.MatchID));
+            foreach (var p in _context.Players)
+            {
+                if (selectedOptionsHS.Contains(p.ID.ToString()))
+                {
+                    if (!matplayers.Contains(p.ID))
+                    {
+                        matchToUpdate.AssignedMatchPlayers.Add(new AssignedMatchPlayer
+                        {
+                            PlayerID = p.ID,
+                            MatchID = matchToUpdate.ID
+                        });
+                    }
+                }
+                else
+                {
+                    if (matplayers.Contains(p.ID))
+                    {
+                        AssignedMatchPlayer playerToRemove = matchToUpdate.AssignedMatchPlayers.SingleOrDefault<AssignedMatchPlayer>();
+                            _context.Remove(playerToRemove);
+                    }
+                }
+            }
         }
 
         private bool MatchExists(int id)

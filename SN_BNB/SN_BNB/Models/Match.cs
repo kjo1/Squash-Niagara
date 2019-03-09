@@ -9,7 +9,10 @@ namespace SN_BNB.Models
     public class Match : IValidatableObject
     {
         public int ID { get; set; }
-
+        public Match()
+        {
+            AssignedMatchPlayers = new HashSet<AssignedMatchPlayer>();
+        }
         [Required(ErrorMessage ="You must enter a score for player 1")]
         public int Player1Score { get; set; }
         [Required(ErrorMessage ="You must enter a score for player 2")]
@@ -29,10 +32,11 @@ namespace SN_BNB.Models
 
 
         public Fixture Fixture { get; set; }
+        [Display(Name = "Players")]
         public Player Player { get; set; }
         //public Player Player2 { get; set; }
 
-        public ICollection<player_team> player_team { get; set; }
+        public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
 
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
