@@ -21,9 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.SeasonEnd)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Teams)
-            </th>
+            </th>*@
         </tr>
     </thead>
     <tbody>
@@ -38,9 +38,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SeasonEnd)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayNameFor(model => model.Teams)                
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
