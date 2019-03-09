@@ -53,11 +53,21 @@ namespace SN_BNB.Data
                 .HasForeignKey(t => t.TeamID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Player>()
-            //    .HasMany<Match>(p => p.Matches)
-            //    .WithOne(m => m.)
-            //    .HasForeignKey(m => m.PlayerID)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            //Add a unique index to the Email Address
+            modelBuilder.Entity<Player>()
+                .HasIndex(p => p.Email)
+                .IsUnique();
+
+            //Many to Many Intersection
+            modelBuilder.Entity<player_team>()
+            .HasKey(t => new { t.MatchID, t.PlayerID });
+
+            //Add this so you don't get Cascade Delete
+            modelBuilder.Entity<player_team>()
+                .HasOne(pt => pt.Match)
+                .WithMany(t => t.player_team)
+                .HasForeignKey(pt => pt.MatchID)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Unique Fields
             modelBuilder.Entity<Division>()
@@ -66,6 +76,11 @@ namespace SN_BNB.Data
 
             modelBuilder.Entity<Team>()
                 .HasIndex(d => d.TeamName)
+                .IsUnique();
+
+            //Add a unique index to the Email Address
+            modelBuilder.Entity<Player>()
+                .HasIndex(p => p.Email)
                 .IsUnique();
 
             // Insection Table Key Declarations
@@ -77,3 +92,9 @@ namespace SN_BNB.Data
 
     }
 }
+
+//modelBuilder.Entity<Player>()
+//    .HasMany<Match>(p => p.Matches)
+//    .WithOne(m => m.)
+//    .HasForeignKey(m => m.PlayerID)
+//    .OnDelete(DeleteBehavior.Restrict);

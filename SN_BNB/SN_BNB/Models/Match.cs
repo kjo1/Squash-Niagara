@@ -24,15 +24,18 @@ namespace SN_BNB.Models
 
         [Display(Name = "Fixture")]
         public int FixtureID { get; set; }
-        [Display(Name = "Player 1")]
-        public int Player1ID { get; set; }
-        [Display(Name = "Player 2")]
-        public int Player2ID { get; set; }
+        //[Display(Name = "Player 1")]
+        //public int PlayerID { get; set; }
+        [Display(Name = "Player")]
+        public int PlayerID { get; set; }
         
 
         public Fixture Fixture { get; set; }
-        public Player Player1 { get; set; }
-        public Player Player2 { get; set; }
+        public Player Player { get; set; }
+        //public Player Player2 { get; set; }
+
+        public ICollection<player_team> player_team { get; set; }
+
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

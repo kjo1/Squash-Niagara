@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SN_BNB.Data.SNMigrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,18 +26,18 @@ namespace SN_BNB.Data.SNMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Locations",
+                name: "News",
                 schema: "SN",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    City = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: false)
+                    Title = table.Column<string>(nullable: false),
+                    Content = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Locations", x => x.ID);
+                    table.PrimaryKey("PK_News", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,6 +47,7 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Season_Title = table.Column<string>(nullable: false),
                     SeasonStart = table.Column<DateTime>(nullable: false),
                     SeasonEnd = table.Column<DateTime>(nullable: false)
                 },
@@ -79,6 +80,8 @@ namespace SN_BNB.Data.SNMigrations
                     TeamName = table.Column<string>(nullable: false),
                     TeamPoints = table.Column<int>(nullable: false),
                     TeamCreatedOn = table.Column<DateTime>(nullable: true),
+                    TeamWins = table.Column<int>(nullable: false),
+                    TeamLosses = table.Column<int>(nullable: false),
                     DivisionID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -100,27 +103,21 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Datetime = table.Column<DateTime>(nullable: false),
+                    FixtureDateTime = table.Column<DateTime>(nullable: false),
                     HomeScore = table.Column<int>(nullable: false),
                     AwayScore = table.Column<int>(nullable: false),
-                    HomeTeamID = table.Column<int>(nullable: false),
-                    AwayTeamID = table.Column<int>(nullable: false),
-                    SeasonID = table.Column<int>(nullable: false),
-                    LocationID = table.Column<int>(nullable: false)
+                    idHomeTeam = table.Column<int>(nullable: false),
+                    idAwayTeam = table.Column<int>(nullable: false),
+                    Season_idSeason = table.Column<int>(nullable: false),
+                    FixtureLocationCity = table.Column<string>(nullable: true),
+                    FixtureLocationAddress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fixtures", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Fixtures_Locations_LocationID",
-                        column: x => x.LocationID,
-                        principalSchema: "SN",
-                        principalTable: "Locations",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Fixtures_Seasons_SeasonID",
-                        column: x => x.SeasonID,
+                        name: "FK_Fixtures_Seasons_Season_idSeason",
+                        column: x => x.Season_idSeason,
                         principalSchema: "SN",
                         principalTable: "Seasons",
                         principalColumn: "ID",
@@ -134,13 +131,15 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(nullable: false),
-                    MiddleName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 45, nullable: false),
+                    MiddleName = table.Column<string>(maxLength: 45, nullable: true),
+                    LastName = table.Column<string>(maxLength: 100, nullable: false),
                     Gender = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    Phone = table.Column<int>(nullable: false),
-                    Position = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(maxLength: 255, nullable: false),
+                    Phone = table.Column<long>(nullable: false),
+                    Position = table.Column<int>(nullable: false),
+                    Win = table.Column<int>(nullable: false),
+                    Loss = table.Column<int>(nullable: false),
                     TeamID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -156,54 +155,30 @@ namespace SN_BNB.Data.SNMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FixtureTeams",
+                name: "SeasonTeams",
                 schema: "SN",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FixtureID = table.Column<int>(nullable: false),
-                    TeamID = table.Column<int>(nullable: false)
+                    TeamID = table.Column<int>(nullable: false),
+                    SeasonID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FixtureTeams", x => x.ID);
+                    table.PrimaryKey("PK_SeasonTeams", x => new { x.TeamID, x.SeasonID });
                     table.ForeignKey(
-                        name: "FK_FixtureTeams_Fixtures_FixtureID",
-                        column: x => x.FixtureID,
+                        name: "FK_SeasonTeams_Seasons_SeasonID",
+                        column: x => x.SeasonID,
                         principalSchema: "SN",
-                        principalTable: "Fixtures",
+                        principalTable: "Seasons",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FixtureTeams_Teams_TeamID",
+                        name: "FK_SeasonTeams_Teams_TeamID",
                         column: x => x.TeamID,
                         principalSchema: "SN",
                         principalTable: "Teams",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Matches",
-                schema: "SN",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Datetime = table.Column<DateTime>(nullable: false),
-                    FixtureID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Matches", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Matches_Fixtures_FixtureID",
-                        column: x => x.FixtureID,
-                        principalSchema: "SN",
-                        principalTable: "Fixtures",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,7 +188,8 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FixtureScore = table.Column<string>(nullable: false),
+                    FixtureScore = table.Column<string>(nullable: true),
+                    TeamScoreApprovedBy = table.Column<int>(nullable: false),
                     TeamID = table.Column<int>(nullable: false),
                     FixtureID = table.Column<int>(nullable: false)
                 },
@@ -237,68 +213,72 @@ namespace SN_BNB.Data.SNMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MatchScores",
+                name: "Matches",
                 schema: "SN",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MatchScoresPoints = table.Column<int>(nullable: false),
-                    PlayerID = table.Column<int>(nullable: false)
+                    Player1Score = table.Column<int>(nullable: false),
+                    Player2Score = table.Column<int>(nullable: false),
+                    MatchPosition = table.Column<int>(nullable: false),
+                    MatchDateTime = table.Column<DateTime>(nullable: false),
+                    FixtureID = table.Column<int>(nullable: false),
+                    PlayerID = table.Column<int>(nullable: false),
+                    TeamScoreID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MatchScores", x => x.ID);
+                    table.PrimaryKey("PK_Matches", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_MatchScores_Players_PlayerID",
+                        name: "FK_Matches_Fixtures_FixtureID",
+                        column: x => x.FixtureID,
+                        principalSchema: "SN",
+                        principalTable: "Fixtures",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Matches_Players_PlayerID",
+                        column: x => x.PlayerID,
+                        principalSchema: "SN",
+                        principalTable: "Players",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Matches_TeamScores_TeamScoreID",
+                        column: x => x.TeamScoreID,
+                        principalSchema: "SN",
+                        principalTable: "TeamScores",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "player_team",
+                schema: "SN",
+                columns: table => new
+                {
+                    PlayerID = table.Column<int>(nullable: false),
+                    MatchID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_player_team", x => new { x.MatchID, x.PlayerID });
+                    table.ForeignKey(
+                        name: "FK_player_team_Matches_MatchID",
+                        column: x => x.MatchID,
+                        principalSchema: "SN",
+                        principalTable: "Matches",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_player_team_Players_PlayerID",
                         column: x => x.PlayerID,
                         principalSchema: "SN",
                         principalTable: "Players",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Approved",
-                schema: "SN",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TeamScoresID = table.Column<int>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
-                    TeamScoreID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Approved", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Approved_TeamScores_TeamScoreID",
-                        column: x => x.TeamScoreID,
-                        principalSchema: "SN",
-                        principalTable: "TeamScores",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Approved_Users_UserID",
-                        column: x => x.UserID,
-                        principalSchema: "SN",
-                        principalTable: "Users",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Approved_TeamScoreID",
-                schema: "SN",
-                table: "Approved",
-                column: "TeamScoreID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Approved_UserID",
-                schema: "SN",
-                table: "Approved",
-                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Divisions_DivisionName",
@@ -308,29 +288,10 @@ namespace SN_BNB.Data.SNMigrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fixtures_LocationID",
+                name: "IX_Fixtures_Season_idSeason",
                 schema: "SN",
                 table: "Fixtures",
-                column: "LocationID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Fixtures_SeasonID",
-                schema: "SN",
-                table: "Fixtures",
-                column: "SeasonID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FixtureTeams_FixtureID",
-                schema: "SN",
-                table: "FixtureTeams",
-                column: "FixtureID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FixtureTeams_TeamID",
-                schema: "SN",
-                table: "FixtureTeams",
-                column: "TeamID");
+                column: "Season_idSeason");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Matches_FixtureID",
@@ -339,16 +300,41 @@ namespace SN_BNB.Data.SNMigrations
                 column: "FixtureID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MatchScores_PlayerID",
+                name: "IX_Matches_PlayerID",
                 schema: "SN",
-                table: "MatchScores",
+                table: "Matches",
                 column: "PlayerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Matches_TeamScoreID",
+                schema: "SN",
+                table: "Matches",
+                column: "TeamScoreID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_player_team_PlayerID",
+                schema: "SN",
+                table: "player_team",
+                column: "PlayerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Players_Email",
+                schema: "SN",
+                table: "Players",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamID",
                 schema: "SN",
                 table: "Players",
                 column: "TeamID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SeasonTeams_SeasonID",
+                schema: "SN",
+                table: "SeasonTeams",
+                column: "SeasonID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teams_DivisionID",
@@ -379,23 +365,15 @@ namespace SN_BNB.Data.SNMigrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Approved",
+                name: "News",
                 schema: "SN");
 
             migrationBuilder.DropTable(
-                name: "FixtureTeams",
+                name: "player_team",
                 schema: "SN");
 
             migrationBuilder.DropTable(
-                name: "Matches",
-                schema: "SN");
-
-            migrationBuilder.DropTable(
-                name: "MatchScores",
-                schema: "SN");
-
-            migrationBuilder.DropTable(
-                name: "TeamScores",
+                name: "SeasonTeams",
                 schema: "SN");
 
             migrationBuilder.DropTable(
@@ -403,7 +381,15 @@ namespace SN_BNB.Data.SNMigrations
                 schema: "SN");
 
             migrationBuilder.DropTable(
+                name: "Matches",
+                schema: "SN");
+
+            migrationBuilder.DropTable(
                 name: "Players",
+                schema: "SN");
+
+            migrationBuilder.DropTable(
+                name: "TeamScores",
                 schema: "SN");
 
             migrationBuilder.DropTable(
@@ -412,10 +398,6 @@ namespace SN_BNB.Data.SNMigrations
 
             migrationBuilder.DropTable(
                 name: "Teams",
-                schema: "SN");
-
-            migrationBuilder.DropTable(
-                name: "Locations",
                 schema: "SN");
 
             migrationBuilder.DropTable(

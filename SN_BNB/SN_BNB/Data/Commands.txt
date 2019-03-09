@@ -1,5 +1,7 @@
 ﻿add-migration -context SNContext -output SNMigrations
 
+Add-Migration -context SNContext -o Data\SNMigrations
+
 update-database -context SNContext
 
 update-database -context ApplicationDbContext

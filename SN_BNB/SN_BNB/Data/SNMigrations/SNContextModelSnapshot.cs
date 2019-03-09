@@ -16,7 +16,7 @@ namespace SN_BNB.Data.SNMigrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -78,13 +78,11 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("MatchPosition");
 
-                    b.Property<int>("Player1ID");
-
                     b.Property<int>("Player1Score");
 
-                    b.Property<int>("Player2ID");
-
                     b.Property<int>("Player2Score");
+
+                    b.Property<int>("PlayerID");
 
                     b.Property<int?>("TeamScoreID");
 
@@ -92,9 +90,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.HasIndex("FixtureID");
 
-                    b.HasIndex("Player1ID");
-
-                    b.HasIndex("Player2ID");
+                    b.HasIndex("PlayerID");
 
                     b.HasIndex("TeamScoreID");
 
@@ -154,9 +150,25 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("TeamID");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("SN_BNB.Models.player_team", b =>
+                {
+                    b.Property<int>("MatchID");
+
+                    b.Property<int>("PlayerID");
+
+                    b.HasKey("MatchID", "PlayerID");
+
+                    b.HasIndex("PlayerID");
+
+                    b.ToTable("player_team");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Season", b =>
@@ -271,14 +283,9 @@ namespace SN_BNB.Data.SNMigrations
                         .HasForeignKey("FixtureID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SN_BNB.Models.Player", "Player1")
-                        .WithMany()
-                        .HasForeignKey("Player1ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SN_BNB.Models.Player", "Player2")
-                        .WithMany()
-                        .HasForeignKey("Player2ID")
+                    b.HasOne("SN_BNB.Models.Player", "Player")
+                        .WithMany("Matches")
+                        .HasForeignKey("PlayerID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SN_BNB.Models.TeamScore")
@@ -292,6 +299,19 @@ namespace SN_BNB.Data.SNMigrations
                         .WithMany("Players")
                         .HasForeignKey("TeamID")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SN_BNB.Models.player_team", b =>
+                {
+                    b.HasOne("SN_BNB.Models.Match", "Match")
+                        .WithMany("player_team")
+                        .HasForeignKey("MatchID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SN_BNB.Models.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Season_has_Team", b =>

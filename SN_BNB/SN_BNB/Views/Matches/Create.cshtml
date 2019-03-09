@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Create";
 }
-<br />
+
 <h2>Create</h2>
 
 <h4>Match</h4>
@@ -13,6 +13,21 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Player1Score" class="control-label"></label>
+                <input asp-for="Player1Score" class="form-control" />
+                <span asp-validation-for="Player1Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player2Score" class="control-label"></label>
+                <input asp-for="Player2Score" class="form-control" />
+                <span asp-validation-for="Player2Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatchPosition" class="control-label"></label>
+                <input asp-for="MatchPosition" class="form-control" />
+                <span asp-validation-for="MatchPosition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="MatchDateTime" class="control-label"></label>
                 <input asp-for="MatchDateTime" class="form-control" />
                 <span asp-validation-for="MatchDateTime" class="text-danger"></span>
@@ -20,6 +35,10 @@
             <div class="form-group">
                 <label asp-for="FixtureID" class="control-label"></label>
                 <select asp-for="FixtureID" class ="form-control" asp-items="ViewBag.FixtureID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlayerID" class="control-label"></label>
+                <select asp-for="PlayerID" class ="form-control" asp-items="ViewBag.PlayerID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

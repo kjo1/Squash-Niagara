@@ -10,8 +10,8 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190303040236_Season_Fixture-Team")]
-    partial class Season_FixtureTeam
+    [Migration("20190309033702_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,27 +21,6 @@ namespace SN_BNB.Data.SNMigrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("SN_BNB.Models.ApprovedBy", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("TeamScoreID");
-
-                    b.Property<int>("TeamScoresID");
-
-                    b.Property<int>("UserID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("TeamScoreID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Approved");
-                });
 
             modelBuilder.Entity("SN_BNB.Models.Division", b =>
                 {
@@ -68,56 +47,25 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<int>("AwayTeamID");
+                    b.Property<DateTime>("FixtureDateTime");
 
-                    b.Property<DateTime>("Datetime");
+                    b.Property<string>("FixtureLocationAddress");
+
+                    b.Property<string>("FixtureLocationCity");
 
                     b.Property<int>("HomeScore");
 
-                    b.Property<int>("HomeTeamID");
+                    b.Property<int>("Season_idSeason");
 
-                    b.Property<int>("LocationID");
+                    b.Property<int>("idAwayTeam");
 
-                    b.Property<int>("SeasonID");
+                    b.Property<int>("idHomeTeam");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("LocationID")
-                        .IsUnique();
-
-                    b.HasIndex("SeasonID");
+                    b.HasIndex("Season_idSeason");
 
                     b.ToTable("Fixtures");
-                });
-
-            modelBuilder.Entity("SN_BNB.Models.Fixture_has_Team", b =>
-                {
-                    b.Property<int>("TeamID");
-
-                    b.Property<int>("FixtureID");
-
-                    b.HasKey("TeamID", "FixtureID");
-
-                    b.HasIndex("FixtureID");
-
-                    b.ToTable("Fixture_has_Team");
-                });
-
-            modelBuilder.Entity("SN_BNB.Models.Location", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired();
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Match", b =>
@@ -126,32 +74,46 @@ namespace SN_BNB.Data.SNMigrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Datetime");
-
                     b.Property<int>("FixtureID");
+
+                    b.Property<DateTime>("MatchDateTime");
+
+                    b.Property<int>("MatchPosition");
+
+                    b.Property<int>("Player1Score");
+
+                    b.Property<int>("Player2Score");
+
+                    b.Property<int>("PlayerID");
+
+                    b.Property<int?>("TeamScoreID");
 
                     b.HasKey("ID");
 
                     b.HasIndex("FixtureID");
 
+                    b.HasIndex("PlayerID");
+
+                    b.HasIndex("TeamScoreID");
+
                     b.ToTable("Matches");
                 });
 
-            modelBuilder.Entity("SN_BNB.Models.MatchScore", b =>
+            modelBuilder.Entity("SN_BNB.Models.News", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MatchScoresPoints");
+                    b.Property<string>("Content")
+                        .IsRequired();
 
-                    b.Property<int>("PlayerID");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
-                    b.HasIndex("PlayerID");
-
-                    b.ToTable("MatchScores");
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Player", b =>
@@ -161,32 +123,54 @@ namespace SN_BNB.Data.SNMigrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(255);
 
                     b.Property<string>("FirstName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(45);
 
                     b.Property<string>("Gender")
                         .IsRequired();
 
                     b.Property<string>("LastName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<int>("Loss");
 
                     b.Property<string>("MiddleName")
-                        .IsRequired();
+                        .HasMaxLength(45);
 
-                    b.Property<int>("Phone")
-                        .HasMaxLength(10);
+                    b.Property<long>("Phone");
 
                     b.Property<int>("Position");
 
                     b.Property<int>("TeamID");
 
+                    b.Property<int>("Win");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("TeamID");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("SN_BNB.Models.player_team", b =>
+                {
+                    b.Property<int>("MatchID");
+
+                    b.Property<int>("PlayerID");
+
+                    b.HasKey("MatchID", "PlayerID");
+
+                    b.HasIndex("PlayerID");
+
+                    b.ToTable("player_team");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Season", b =>
@@ -198,6 +182,9 @@ namespace SN_BNB.Data.SNMigrations
                     b.Property<DateTime>("SeasonEnd");
 
                     b.Property<DateTime>("SeasonStart");
+
+                    b.Property<string>("Season_Title")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -227,10 +214,14 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<DateTime?>("TeamCreatedOn");
 
+                    b.Property<int>("TeamLosses");
+
                     b.Property<string>("TeamName")
                         .IsRequired();
 
                     b.Property<int>("TeamPoints");
+
+                    b.Property<int>("TeamWins");
 
                     b.HasKey("ID");
 
@@ -250,10 +241,11 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("FixtureID");
 
-                    b.Property<string>("FixtureScore")
-                        .IsRequired();
+                    b.Property<string>("FixtureScore");
 
                     b.Property<int>("TeamID");
+
+                    b.Property<int>("TeamScoreApprovedBy");
 
                     b.HasKey("ID");
 
@@ -278,41 +270,11 @@ namespace SN_BNB.Data.SNMigrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SN_BNB.Models.ApprovedBy", b =>
-                {
-                    b.HasOne("SN_BNB.Models.TeamScore", "TeamScore")
-                        .WithMany("ApprovedBys")
-                        .HasForeignKey("TeamScoreID");
-
-                    b.HasOne("SN_BNB.Models.User", "User")
-                        .WithMany("ApprovedBys")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("SN_BNB.Models.Fixture", b =>
                 {
-                    b.HasOne("SN_BNB.Models.Location", "Location")
-                        .WithOne("Fixture")
-                        .HasForeignKey("SN_BNB.Models.Fixture", "LocationID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("SN_BNB.Models.Season", "Season")
                         .WithMany("Fixtures")
-                        .HasForeignKey("SeasonID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SN_BNB.Models.Fixture_has_Team", b =>
-                {
-                    b.HasOne("SN_BNB.Models.Fixture", "Fixture")
-                        .WithMany()
-                        .HasForeignKey("FixtureID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SN_BNB.Models.Team", "Team")
-                        .WithMany("Fixture_has_Teams")
-                        .HasForeignKey("TeamID")
+                        .HasForeignKey("Season_idSeason")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -322,14 +284,15 @@ namespace SN_BNB.Data.SNMigrations
                         .WithMany("Matches")
                         .HasForeignKey("FixtureID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
 
-            modelBuilder.Entity("SN_BNB.Models.MatchScore", b =>
-                {
                     b.HasOne("SN_BNB.Models.Player", "Player")
-                        .WithMany("MatchScores")
+                        .WithMany("Matches")
                         .HasForeignKey("PlayerID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SN_BNB.Models.TeamScore")
+                        .WithMany("Matches")
+                        .HasForeignKey("TeamScoreID");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Player", b =>
@@ -338,6 +301,19 @@ namespace SN_BNB.Data.SNMigrations
                         .WithMany("Players")
                         .HasForeignKey("TeamID")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SN_BNB.Models.player_team", b =>
+                {
+                    b.HasOne("SN_BNB.Models.Match", "Match")
+                        .WithMany("player_team")
+                        .HasForeignKey("MatchID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SN_BNB.Models.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Season_has_Team", b =>

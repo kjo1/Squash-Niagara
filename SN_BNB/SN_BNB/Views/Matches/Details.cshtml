@@ -3,13 +3,31 @@
 @{
     ViewData["Title"] = "Details";
 }
-<br />
+
 <h2>Details</h2>
 
 <div>
     <h4>Match</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Player1Score)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player1Score)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player2Score)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player2Score)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MatchPosition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MatchPosition)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.MatchDateTime)
         </dt>
@@ -21,6 +39,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Fixture.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.Email)
         </dd>
     </dl>
 </div>
