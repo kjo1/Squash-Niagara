@@ -20,7 +20,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID)
         {
             //var sNContext = _context.Players.Include(p => p.Team);
             PopulateDropDownLists();
@@ -32,14 +32,15 @@ namespace SN_BNB.Controllers
                             select p;
 
 
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    players = players.Where(p => p.ToUpper().Contains(searchString.ToUpper()));
-            //}
-            //if (divisionID.HasValue)
-            //{
-            //    teams = teams.Where(t => t.DivisionID == divisionID);
-            //}
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                players = players.Where(p => p.LastName.ToUpper().Contains(searchString.ToUpper())
+                                       || p.FirstName.ToUpper().Contains(searchString.ToUpper()));
+            }
+            if (TeamID.HasValue)
+            {
+                players = players.Where(t => t.TeamID == TeamID);
+            }
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
@@ -298,11 +299,23 @@ namespace SN_BNB.Controllers
             return _context.Players.Any(e => e.ID == id);
         }
 
-        private void PopulateDropDownLists(Player player = null)
+        private SelectList TeamSelectList(int? id)
         {
             var dQuery = from t in _context.Teams
+                         orderby t.TeamName
                          select t;
-            ViewData["TeamID"] = new SelectList(dQuery, "ID", "TeamName", player?.TeamID);
+            return new SelectList(dQuery, "ID", "TeamName", id);
+        }
+
+        private void PopulateDropDownLists(Player player = null)
+        {
+            ViewData["TeamID"] = TeamSelectList(player?.TeamID);
+        }
+
+        [HttpGet]
+        public JsonResult GetTeams(int? id)
+        {
+            return Json(TeamSelectList(id));
         }
     }
 }
