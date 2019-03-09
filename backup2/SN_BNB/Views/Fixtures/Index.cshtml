@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SN_BNB.Models.Fixture>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h2>Fixtures</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwayScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idHomeTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idAwayTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Season)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureLocationCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureLocationAddress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FixtureDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idHomeTeam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idAwayTeam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Season.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FixtureLocationCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FixtureLocationAddress)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

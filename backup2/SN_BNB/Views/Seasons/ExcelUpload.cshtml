@@ -1,0 +1,28 @@
+﻿@model SN_BNB.Models.Season
+
+@{
+    ViewData["Title"] = "ExcelUpload";
+}
+
+<h2>ExcelUpload</h2>
+
+<h4>Season</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ExcelUpload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" asp-for="ExcelFile" name="ExcelFile" />
+                <input type="submit" value="Upload File" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
