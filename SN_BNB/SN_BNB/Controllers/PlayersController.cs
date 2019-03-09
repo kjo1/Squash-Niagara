@@ -158,6 +158,17 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(p => p.Loss);
                 }
             }
+            else //Sorting by Win - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players.OrderBy(p => p.Win);
+                }
+                else
+                {
+                    players = players.OrderByDescending(p => p.Win);
+                }
+            }
 
             //Set sort for next time
             ViewData["sortField"] = sortField;

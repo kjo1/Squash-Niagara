@@ -20,10 +20,76 @@ namespace SN_BNB.Controllers
         }
 
         // GET: TeamScores
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString)
         {
-            var sNContext = _context.TeamScores.Include(t => t.Fixture).Include(t => t.Team);
-            return View(await sNContext.ToListAsync());
+            PopulateDropDownLists();
+
+            var teamScores = from ts in _context.TeamScores
+                .Include(ts => ts.Team)
+                .Include(ts => ts.Fixture)
+                .ThenInclude(ts => ts.Season)
+                .Include(ts => ts.Fixture)
+                .ThenInclude(ts => ts.Matches)
+                .Include(ts => ts.Team)
+                .ThenInclude(ts => ts.Division)
+                .Include(ts => ts.Team)
+                .ThenInclude(ts => ts.Players)
+                             select ts;
+
+
+            if (sortField == "Team")//Sorting by Date Time
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teamScores = teamScores
+                         .OrderBy(ts => ts.Team.TeamName);
+                }
+                else
+                {
+                    teamScores = teamScores.OrderByDescending(ts => ts.Team.TeamName);
+                    //.ThenByDescending(t => t.TeamName);
+                }
+            }
+            else if (sortField == "Fixture")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teamScores = teamScores.OrderBy(ts => ts.Fixture);
+                }
+                else
+                {
+                    teamScores = teamScores.OrderByDescending(ts => ts.Fixture);
+                }
+            }
+            else if (sortField == "Fixture Score")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teamScores = teamScores.OrderBy(ts => ts.FixtureScore);
+                }
+                else
+                {
+                    teamScores = teamScores.OrderByDescending(ts => ts.FixtureScore);
+                }
+            }
+            else //Sorting by Fixture - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    teamScores = teamScores.OrderBy(ts => ts.Fixture);
+                }
+                else
+                {
+                    teamScores = teamScores.OrderByDescending(ts => ts.Fixture);
+                }
+            }
+
+
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
+            return View(await teamScores.ToListAsync());
         }
 
         // GET: TeamScores/Details/5
@@ -161,6 +227,13 @@ namespace SN_BNB.Controllers
         private bool TeamScoreExists(int id)
         {
             return _context.TeamScores.Any(e => e.ID == id);
+        }
+        private void PopulateDropDownLists(TeamScore teamScore = null)
+        {
+            var dQuery = from ts in _context.SeasonTeams
+                         select ts;
+            ViewData["TeamID"] = new SelectList(dQuery, "ID", "TeamName", teamScore?.TeamID);
+            ViewData["FxitureID"] = new SelectList(dQuery, "ID", "Season", teamScore?.FixtureID);
         }
     }
 }
