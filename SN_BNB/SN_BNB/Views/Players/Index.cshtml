@@ -9,81 +9,74 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MiddleName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Position)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Win)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Loss)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Team)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MiddleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Win)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Loss)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Team.TeamName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+<input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+<form asp-action="Index">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="submit" name="actionButton" value="Player" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Email" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Phone" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Position" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Win)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loss)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</form>
