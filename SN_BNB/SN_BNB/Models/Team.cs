@@ -12,6 +12,7 @@ namespace SN_BNB.Models
         {
             Players = new HashSet<Player>();
             Season_has_Teams = new HashSet<Season_has_Team>();
+            TeamScores = new HashSet<TeamScore>();
 
         }
 
@@ -35,11 +36,14 @@ namespace SN_BNB.Models
         public int TeamLosses { get; set; }
 
         [Display(Name="Division")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must select the principal instrument the musician plays.")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select division of the team.")]
         public int DivisionID { get; set; }
         public virtual Division Division { get; set; }
 
         public ICollection<Player> Players { get; set; }
+    
+        [Display(Name ="Team Score")]
+        public ICollection<TeamScore> TeamScores { get; set; }
         
         [Display(Name="Seasons")]
         public ICollection<Season_has_Team> Season_has_Teams { get; set; }
