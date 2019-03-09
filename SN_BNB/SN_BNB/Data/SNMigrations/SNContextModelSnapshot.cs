@@ -16,7 +16,7 @@ namespace SN_BNB.Data.SNMigrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -241,7 +241,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("ID");
 
-                    b.Property<int>("TeamScoreApprovedBy");
+                    b.Property<bool>("TeamScoreApprovedBy");
 
                     b.HasKey("TeamID", "FixtureID");
 
@@ -280,7 +280,7 @@ namespace SN_BNB.Data.SNMigrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SN_BNB.Models.Player", "Player")
-                        .WithMany("Matches")
+                        .WithMany()
                         .HasForeignKey("PlayerID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -301,7 +301,7 @@ namespace SN_BNB.Data.SNMigrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SN_BNB.Models.Player", "Player")
-                        .WithMany()
+                        .WithMany("player_Teams")
                         .HasForeignKey("PlayerID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

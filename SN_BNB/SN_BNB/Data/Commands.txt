@@ -1,4 +1,4 @@
-﻿add-migration -context SNContext -output SNMigrations
+﻿add-migration -context SNContext -output Data\SNMigrations
 
 Add-Migration -context SNContext -o Data\SNMigrations
 
