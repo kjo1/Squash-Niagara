@@ -66,6 +66,12 @@ namespace SN_BNB.Data
                 .HasForeignKey(pt => pt.MatchID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<TeamScore>()
+                .HasOne(ts => ts.Fixture)
+                .WithMany(f => f.TeamScores)
+                .HasForeignKey(ts => ts.FixtureID)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // Unique Fields
             modelBuilder.Entity<Division>()
                 .HasIndex(d => d.DivisionName)
