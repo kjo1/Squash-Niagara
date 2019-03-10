@@ -104,7 +104,6 @@ namespace SN_BNB.Controllers
 
         public struct UserStruct
         {
-            public string UserName;
             public string UserEmail;
             public string UserPassword;
             public string UserRole;
@@ -134,10 +133,9 @@ namespace SN_BNB.Controllers
                 {
                     UserStruct tempStruct = new UserStruct
                     {
-                        UserName = worksheet.Cells[row, 1].Text,
-                        UserEmail = worksheet.Cells[row, 2].Text,
-                        UserRole = worksheet.Cells[row, 3].Text,
-                        UserPassword = worksheet.Cells[row, 4].Text,
+                        UserEmail = worksheet.Cells[row, 1].Text,
+                        UserRole = worksheet.Cells[row, 2].Text,
+                        UserPassword = worksheet.Cells[row, 3].Text,
                     };
                     dataStructs.Add(tempStruct);
                 }
@@ -146,15 +144,15 @@ namespace SN_BNB.Controllers
                 {
                     IdentityUser tempUser = new IdentityUser();
                     tempUser.Email = userStruct.UserEmail;
-                    tempUser.UserName = userStruct.UserName;
-                    tempUser.PasswordHash = userStruct.UserPassword;
-                    _context.Users.Add(tempUser);
-
+                    tempUser.UserName = userStruct.UserEmail;
+                    IdentityResult result = _userManager.CreateAsync(tempUser, userStruct.UserPassword).Result;
+                    if (result.Succeeded && userStruct.UserRole.Length>0)
+                    {
+                        _userManager.AddToRoleAsync(tempUser, userStruct.UserRole).Wait();
+                    }
                     //update tables
                     _context.SaveChanges();
                 }
-                //make a new user
-                _context.Add(new User());
 
                 //update user table
                 _context.SaveChanges();
