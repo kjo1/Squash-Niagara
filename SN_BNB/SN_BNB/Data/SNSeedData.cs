@@ -16,6 +16,7 @@ namespace SN_BNB.Data
             using (var context = new SNContext(
                 serviceProvider.GetRequiredService<DbContextOptions<SNContext>>()))
             {
+                System.Diagnostics.Debug.WriteLine("SEEDING THE DATABASE...");
                 if (!context.Divisions.Any())
                 {
                     context.Divisions.AddRange(

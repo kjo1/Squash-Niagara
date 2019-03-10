@@ -12,6 +12,7 @@ namespace SN_BNB.Data
         public static async Task SeedAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
             //Create Roles
+
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             string[] roleNames = { "Admin", "Captain" };
             IdentityResult roleResult;
