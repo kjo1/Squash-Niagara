@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SN_BNB.Data.SNMigrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -110,12 +110,28 @@ namespace SN_BNB.Data.SNMigrations
                     idHomeTeam = table.Column<int>(nullable: false),
                     idAwayTeam = table.Column<int>(nullable: false),
                     Season_idSeason = table.Column<int>(nullable: false),
-                    FixtureLocationCity = table.Column<string>(nullable: true),
-                    FixtureLocationAddress = table.Column<string>(nullable: true)
+                    FixtureLocationCity = table.Column<string>(nullable: false),
+                    FixtureLocationAddress = table.Column<string>(nullable: false),
+                    HomeTeamID = table.Column<int>(nullable: true),
+                    AwayTeamID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fixtures", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Fixtures_Teams_AwayTeamID",
+                        column: x => x.AwayTeamID,
+                        principalSchema: "SN",
+                        principalTable: "Teams",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Fixtures_Teams_HomeTeamID",
+                        column: x => x.HomeTeamID,
+                        principalSchema: "SN",
+                        principalTable: "Teams",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Fixtures_Seasons_Season_idSeason",
                         column: x => x.Season_idSeason,
@@ -284,6 +300,18 @@ namespace SN_BNB.Data.SNMigrations
                 table: "Divisions",
                 column: "DivisionName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fixtures_AwayTeamID",
+                schema: "SN",
+                table: "Fixtures",
+                column: "AwayTeamID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fixtures_HomeTeamID",
+                schema: "SN",
+                table: "Fixtures",
+                column: "HomeTeamID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fixtures_Season_idSeason",

@@ -10,15 +10,15 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190310040130_Initial")]
-    partial class Initial
+    [Migration("20190310065253_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -60,13 +60,19 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
+                    b.Property<int?>("AwayTeamID");
+
                     b.Property<DateTime>("FixtureDateTime");
 
-                    b.Property<string>("FixtureLocationAddress");
+                    b.Property<string>("FixtureLocationAddress")
+                        .IsRequired();
 
-                    b.Property<string>("FixtureLocationCity");
+                    b.Property<string>("FixtureLocationCity")
+                        .IsRequired();
 
                     b.Property<int>("HomeScore");
+
+                    b.Property<int?>("HomeTeamID");
 
                     b.Property<int>("Season_idSeason");
 
@@ -75,6 +81,10 @@ namespace SN_BNB.Data.SNMigrations
                     b.Property<int>("idHomeTeam");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AwayTeamID");
+
+                    b.HasIndex("HomeTeamID");
 
                     b.HasIndex("Season_idSeason");
 
@@ -281,6 +291,14 @@ namespace SN_BNB.Data.SNMigrations
 
             modelBuilder.Entity("SN_BNB.Models.Fixture", b =>
                 {
+                    b.HasOne("SN_BNB.Models.Team", "AwayTeam")
+                        .WithMany()
+                        .HasForeignKey("AwayTeamID");
+
+                    b.HasOne("SN_BNB.Models.Team", "HomeTeam")
+                        .WithMany()
+                        .HasForeignKey("HomeTeamID");
+
                     b.HasOne("SN_BNB.Models.Season", "Season")
                         .WithMany("Fixtures")
                         .HasForeignKey("Season_idSeason")

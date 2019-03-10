@@ -40,6 +40,8 @@ namespace SN_BNB.Models
         public string FixtureLocationAddress { get; set; }
 
         public virtual Season Season { get; set; }
+        public virtual Team HomeTeam { get; set; }
+        public virtual Team AwayTeam { get; set; }
 
         public  ICollection<Match> Matches { get; set; }
         public  ICollection<TeamScore> TeamScores { get; set; }

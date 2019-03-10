@@ -20,10 +20,143 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Fixtures
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton)
         {
-            var sNContext = _context.Fixtures.Include(f => f.Season);
-            return View(await sNContext.ToListAsync());
+            var sNContext = _context;
+            var fixtures = from f in _context.Fixtures
+                           .Include(f=>f.HomeTeam)
+                           .Include(f=>f.AwayTeam)
+                           .Include(f=>f.Season)
+                           .Include(f=>f.TeamScores)
+                           .Include(f=>f.Matches)
+                           select f;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                fixtures = fixtures.Where(t => t.HomeTeam.TeamName.ToUpper().Contains(searchString.ToUpper()));
+            }
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
+            {
+                if (actionButton != "Filter")//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+
+            if (sortField == "Time")//Sorting by Date Time
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                         .OrderBy(f => f.FixtureDateTime);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.FixtureDateTime);
+                }
+            }
+            else if (sortField == "Home Score")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.HomeScore);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.HomeScore);
+                }
+            }
+            else if (sortField == "Away Score")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.AwayScore);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.AwayScore);
+                }
+            }
+            else if (sortField == "Home Team")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.HomeTeam.TeamName);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.HomeTeam.TeamName);
+                }
+            }
+            else if (sortField == "Away Team")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.AwayTeam.TeamName);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.AwayTeam.TeamName);
+                }
+            }
+            else if (sortField == "Season")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.Season.Season_Title);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.Season.Season_Title);
+                }
+            }
+            else if (sortField == "City")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.FixtureLocationCity);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.FixtureLocationCity);
+                }
+            }
+            else if (sortField == "Address")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures
+                        .OrderBy(f => f.FixtureLocationAddress);
+                }
+                else
+                {
+                    fixtures = fixtures
+                        .OrderByDescending(f => f.FixtureLocationAddress);
+                }
+            }
+
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
+
+            return View(await fixtures.ToListAsync());
         }
 
         // GET: Fixtures/Details/5
