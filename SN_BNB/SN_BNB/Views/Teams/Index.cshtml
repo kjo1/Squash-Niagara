@@ -5,9 +5,12 @@
 }
 <br />
 <h2>Teams</h2>
-<p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
         <a asp-action="Create">Create New</a>
     </p>
+}
 <form asp-action="Index">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,62 +43,60 @@
     <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
     <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead class="thead-light">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    <input type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Created On" class="btn btn-link" />
+                </th>  @*disabled="disabled"*@
+                <th>
+                    <input type="submit" name="actionButton" value="Division" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-                        <input type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
-                    </th>
-                    <th>
-                        <input type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
-                    </th>
-                    <th>
-                        <input type="submit" name="actionButton" value="Created On" class="btn btn-link" />
-                    </th>  @*disabled="disabled"*@
-                    <th>
-                        <input type="submit" name="actionButton" value="Division" class="btn btn-link" />
-                    </th>
-                    <th>
-                        <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
-                    </th>
-                    <th>
-                        <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.TeamName) </a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TeamPoints)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TeamCreatedOn)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Division.DivisionName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TeamWins)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TeamLosses)
-                        </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.TeamName) </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamPoints)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamCreatedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Division.DivisionName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamWins)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamLosses)
+                    </td>
 
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                            |
-                            <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        </div>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                        |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </form>

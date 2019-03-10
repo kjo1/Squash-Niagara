@@ -3,14 +3,15 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<br />
 <h2>Create</h2>
 
 <h4>Match</h4>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Player1Score" class="control-label"></label>
@@ -36,38 +37,35 @@
                 <label asp-for="FixtureID" class="control-label"></label>
                 <select asp-for="FixtureID" class="form-control" asp-items="ViewBag.FixtureID"></select>
             </div>
-            <div class="col-md-6">
-                <div class="form-group col-md-6">
-                    @*<label asp-for="PlayerID" class="control-label"></label>
-                        <select asp-for="PlayerID" class="form-control" asp-items="ViewBag.PlayerID"></select>
-                        <span asp-validation-for="PlayerID" class="text-danger"></span>*@
-                    <label class="control-label"> Players</label> <button type="button" id="btnRight" class="btn-danger btn-sm">
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                    </button>
-                    @Html.ListBox("selectedOptions", (MultiSelectList)ViewBag.selOpts, new { @size = 10, @class = "form-control" })
-                </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group col-md-6">
+                <label class="control-label"> Players Selected</label> <button type="button" id="btnRight" class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                </button>
+                @Html.ListBox("selectedOptions", (MultiSelectList)ViewBag.selOpts, new { @size = 10, @class = "form-control" })
 
-                <div class="form-group col-md-6">
-                    @*<label asp-for="PlayerID" class="control-label"></label>
-                        <select asp-for="PlayerID" class="form-control" asp-items="ViewBag.PlayerID"></select>
-                        <span asp-validation-for="PlayerID" class="text-danger"></span>*@
-                    <label class="control-label"></label> <button type="button" id="btnLeft" class="btn-success btn-sm">
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                    </button>
-                    @Html.ListBox("availOptions", (MultiSelectList)ViewBag.availOpts, new { @size = 10, @class = "form-control" })
+            </div>
 
-                </div>
-                @*<div class="form-group">
-                        <label asp-for="PlayerID" class="control-label"></label>
-                        <select asp-for="PlayerID" class ="form-control" asp-items="ViewBag.PlayerID"></select>
-                    </div>*@
+            <div class="form-group col-md-6">
+                <label class="control-label"> Choose Players</label> <button type="button" id="btnLeft" class="btn btn-success btn-sm">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                </button>
+                @Html.ListBox("availOptions", (MultiSelectList)ViewBag.availOpts, new { @size = 10, @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" /><br />
-                    <a asp-action="Index">Back to List</a>
+                    <input type="submit" id="btnSubmit" value="Save" class="btn btn-primary" />
                 </div>
-           </div>
-        </form>
+            </div>
+        </div>
     </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
