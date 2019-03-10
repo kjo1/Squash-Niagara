@@ -33,9 +33,9 @@ namespace SN_BNB
                     var context = services.GetRequiredService<SNContext>();
                     context.Database.Migrate();
                     var identityContext = services.GetRequiredService<ApplicationDbContext>();
-                    //ApplicationSeedData.SeedAsync(identityContext, services).Wait();
+                    ApplicationSeedData.SeedAsync(identityContext, services).Wait();
 
-                    //identityContext.Database.Migrate();
+                    identityContext.Database.Migrate();
                     SNSeedData.Initialize(services);
                     context.Database.Migrate();
                 }
@@ -43,7 +43,7 @@ namespace SN_BNB
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
-                    //System.Diagnostics.Debug.WriteLine(ex.ToString());
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
                 }
             }
             host.Run();
