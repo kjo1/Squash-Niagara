@@ -22,12 +22,83 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Matches
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchPlayer, string sortDirection, string sortField, string actionButton)
         {
             var matches = from d in _context.Matches
                           .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)
                           select d;
             //var sNContext = _context.Matches.Include(m => m.Fixture).Include(m => m.Player);
+            if (!string.IsNullOrEmpty(SearchPlayer))
+            {
+                matches = matches.Where(m => m.Player.FullName.Contains(SearchPlayer));
+            }
+
+            if (!String.IsNullOrEmpty(actionButton))
+            {
+                if (actionButton != "Filter")
+                {
+                    if (actionButton == sortField)
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;
+                }
+            }
+            if(sortField == "Players")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches
+                        .OrderBy(m => m.Player);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.Player);
+                }
+            }
+            else if (sortField == "Position")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches
+                        .OrderBy(m => m.MatchPosition);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.MatchPosition);
+                }
+            }
+            else if (sortField == "Date & Time")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches
+                        .OrderBy(m => m.MatchDateTime);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.MatchDateTime);
+                }
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches
+                        .OrderBy(m => m.Player);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.Player);
+                }
+            }
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
             return View(await matches.ToListAsync());
         }
 
