@@ -24,7 +24,6 @@ namespace SN_BNB.Data
         public DbSet<TeamScore> TeamScores { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<News> News { get; set; }
-        public DbSet<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -95,10 +94,7 @@ namespace SN_BNB.Data
 
             modelBuilder.Entity<AssignedMatchPlayer>()
             .HasKey(t => new { t.MatchID, t.PlayerID });
-        }
-
-        
-
+        }     
     }
 }
 
