@@ -4,39 +4,133 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+@*<h2>Details</h2>*@
+<br /><br /><br />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<body>
+    <div class="container">
+        <div class="row">
 
-<div>
-    <h4>Team</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TeamName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamPoints)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TeamPoints)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamCreatedOn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TeamCreatedOn)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Division)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Division.DivisionName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
+                        <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle"><br />
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
+                <div class="row profile-right-section-row">
+                    <div class="col-md-12 profile-header">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
+                                <h1>@Html.DisplayFor(model => model.TeamName)</h1>
+                                <p>Team Bio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
+                <div class="row profile-right-section-row">
+                    <div class="col-md-12 profile-header">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="align-content:center">
+        <br />
+            <h4>Team Info</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.TeamName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TeamName)
+                </dd>
+                <dt>
+                   Players:
+                </dt>
+                <dd>
+                    @foreach (Player player in Model.Players)
+                    {
+                        <ul>
+                            <li>
+                                @player
+                            </li>
+                        </ul>
+                    }
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TeamPoints)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TeamPoints)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TeamCreatedOn)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TeamCreatedOn)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Division)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Division.DivisionName)
+                </dd>
+            </dl>
+        </div><br />
+              <div>
+                  @if (User.IsInRole("Captian"))
+                  {
+                      <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
+}
+                  <a asp-action="Index">Back to List</a>
+              </div>
+    </div>                                                     
+</body>
+
+@*<div>
+        <h4>Team</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TeamName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TeamName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TeamPoints)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TeamPoints)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TeamCreatedOn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TeamCreatedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Division)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Division.DivisionName)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
