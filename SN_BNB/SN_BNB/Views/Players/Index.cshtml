@@ -36,73 +36,74 @@
     </nav>
     <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
     <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-light">
 
-    <table class="table">
-        <thead class="thead-light">
+                <tr>
+                    <th>
+                        <input type="submit" name="actionButton" value="Player" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Email" class="btn btn-link" disabled="disabled" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Phone" class="btn btn-link" disabled="disabled" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Positon" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Team.TeamName)
+                        </td>
 
-            <tr>
-                <th>
-                    <input type="submit" name="actionButton" value="Player" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Email" class="btn btn-link" disabled="disabled" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Phone" class="btn btn-link" disabled="disabled" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Positon" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Team.TeamName)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Position)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Win)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Loss)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Position)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Win)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Loss)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
 </form>
