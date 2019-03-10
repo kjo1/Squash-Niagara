@@ -20,7 +20,7 @@ namespace SN_BNB.Data.SNMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayers", b =>
+            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayer", b =>
                 {
                     b.Property<int>("MatchID");
 
@@ -30,7 +30,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.HasIndex("PlayerID");
 
-                    b.ToTable("AssignedMatchPlayers");
+                    b.ToTable("AssignedMatchPlayer");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Division", b =>
@@ -264,15 +264,15 @@ namespace SN_BNB.Data.SNMigrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayers", b =>
+            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayer", b =>
                 {
                     b.HasOne("SN_BNB.Models.Match", "Match")
-                        .WithMany("player_matches")
+                        .WithMany("AssignedMatchPlayers")
                         .HasForeignKey("MatchID")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SN_BNB.Models.Player", "Player")
-                        .WithMany("player_matches")
+                        .WithMany("AssignedMatchPlayers")
                         .HasForeignKey("PlayerID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

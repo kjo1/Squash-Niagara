@@ -54,7 +54,7 @@ namespace SN_BNB.Controllers
                 }
             }
 
-            if (sortField == "Team")//Sorting by Date Time
+            if (sortField == "Team")//Sorting by Team
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {

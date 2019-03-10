@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SN_BNB.Data.SNMigrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -246,7 +246,7 @@ namespace SN_BNB.Data.SNMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "player_team",
+                name: "AssignedMatchPlayer",
                 schema: "SN",
                 columns: table => new
                 {
@@ -255,22 +255,28 @@ namespace SN_BNB.Data.SNMigrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_player_team", x => new { x.MatchID, x.PlayerID });
+                    table.PrimaryKey("PK_AssignedMatchPlayer", x => new { x.MatchID, x.PlayerID });
                     table.ForeignKey(
-                        name: "FK_player_team_Matches_MatchID",
+                        name: "FK_AssignedMatchPlayer_Matches_MatchID",
                         column: x => x.MatchID,
                         principalSchema: "SN",
                         principalTable: "Matches",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_player_team_Players_PlayerID",
+                        name: "FK_AssignedMatchPlayer_Players_PlayerID",
                         column: x => x.PlayerID,
                         principalSchema: "SN",
                         principalTable: "Players",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AssignedMatchPlayer_PlayerID",
+                schema: "SN",
+                table: "AssignedMatchPlayer",
+                column: "PlayerID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Divisions_DivisionName",
@@ -295,12 +301,6 @@ namespace SN_BNB.Data.SNMigrations
                 name: "IX_Matches_PlayerID",
                 schema: "SN",
                 table: "Matches",
-                column: "PlayerID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_player_team_PlayerID",
-                schema: "SN",
-                table: "player_team",
                 column: "PlayerID");
 
             migrationBuilder.CreateIndex(
@@ -345,11 +345,11 @@ namespace SN_BNB.Data.SNMigrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "News",
+                name: "AssignedMatchPlayer",
                 schema: "SN");
 
             migrationBuilder.DropTable(
-                name: "player_team",
+                name: "News",
                 schema: "SN");
 
             migrationBuilder.DropTable(

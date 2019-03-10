@@ -9,10 +9,6 @@ namespace SN_BNB.Models
     public class Player
     {
         public int ID { get; set; }
-        public Player()
-        {
-            AssignedMatchPlayers = new HashSet<AssignedMatchPlayer>();
-        }
 
         [Display(Name ="Player")]
         public string FullName

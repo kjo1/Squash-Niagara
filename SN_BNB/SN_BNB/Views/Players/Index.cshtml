@@ -6,14 +6,11 @@
 <br />
 <h2>Players</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
 <form asp-action="Index">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,15 +39,13 @@
 
     <table class="table">
         <thead class="thead-light">
+
             <tr>
                 <th>
-                    <input type="submit" name="actionButton" value="First Name" class="btn btn-link" />
+                    <input type="submit" name="actionButton" value="Player" class="btn btn-link" />
                 </th>
                 <th>
-                    <input type="submit" name="actionButton" value="Middle Name" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Last Name" class="btn btn-link" />
+                    <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
                 </th>
                 <th>
                     <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
@@ -70,53 +65,44 @@
                 <th>
                     <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
                 </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
-                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MiddleName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Position)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Win)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Loss)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Team.TeamName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team.TeamName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Win)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loss)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
-    </form>
+</form>

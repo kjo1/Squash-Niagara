@@ -10,17 +10,30 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190309182600_initial")]
-    partial class initial
+    [Migration("20190310040130_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayer", b =>
+                {
+                    b.Property<int>("MatchID");
+
+                    b.Property<int>("PlayerID");
+
+                    b.HasKey("MatchID", "PlayerID");
+
+                    b.HasIndex("PlayerID");
+
+                    b.ToTable("AssignedMatchPlayer");
+                });
 
             modelBuilder.Entity("SN_BNB.Models.Division", b =>
                 {
@@ -160,19 +173,6 @@ namespace SN_BNB.Data.SNMigrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("SN_BNB.Models.player_team", b =>
-                {
-                    b.Property<int>("MatchID");
-
-                    b.Property<int>("PlayerID");
-
-                    b.HasKey("MatchID", "PlayerID");
-
-                    b.HasIndex("PlayerID");
-
-                    b.ToTable("player_team");
-                });
-
             modelBuilder.Entity("SN_BNB.Models.Season", b =>
                 {
                     b.Property<int>("ID")
@@ -266,6 +266,19 @@ namespace SN_BNB.Data.SNMigrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayer", b =>
+                {
+                    b.HasOne("SN_BNB.Models.Match", "Match")
+                        .WithMany("AssignedMatchPlayers")
+                        .HasForeignKey("MatchID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SN_BNB.Models.Player", "Player")
+                        .WithMany("AssignedMatchPlayers")
+                        .HasForeignKey("PlayerID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("SN_BNB.Models.Fixture", b =>
                 {
                     b.HasOne("SN_BNB.Models.Season", "Season")
@@ -293,19 +306,6 @@ namespace SN_BNB.Data.SNMigrations
                         .WithMany("Players")
                         .HasForeignKey("TeamID")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SN_BNB.Models.player_team", b =>
-                {
-                    b.HasOne("SN_BNB.Models.Match", "Match")
-                        .WithMany("player_team")
-                        .HasForeignKey("MatchID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SN_BNB.Models.Player", "Player")
-                        .WithMany("player_Teams")
-                        .HasForeignKey("PlayerID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Season_has_Team", b =>
