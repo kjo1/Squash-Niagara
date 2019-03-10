@@ -107,41 +107,51 @@ namespace SN_BNB.Controllers
             public string UserName;
             public string UserEmail;
             public string UserPassword;
+            public string UserRole;
         }
 
         [HttpPost]
-        public async Task<IActionResult> ExcelUpload(User user)
+        public async Task<IActionResult> ExcelUpload(IFormFile file)
         {
             //create a struct to hold user data
-            UserStruct[] dataStructs = new UserStruct[2000];
+            List<UserStruct> dataStructs = new List<UserStruct>();
 
             //receive excel file
-            Byte[] file = user.ExcelFile;
             ExcelPackage excelPackage;
             try
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await memoryStream.WriteAsync(file, 0, file.Length);
+                    await file.CopyToAsync(memoryStream);
                     excelPackage = new ExcelPackage(memoryStream);
                 }
-                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+                var worksheet = excelPackage.Workbook.Worksheets[0];
 
                 //parse the file and update struct
-                int row = 1;
-                while (true)
+                var start = worksheet.Dimension.Start;
+                var end = worksheet.Dimension.End;
+                for (int row = start.Row; row <= end.Row; row++)
                 {
-
-                    if (worksheet.Cells[row, 1].Value.ToString() == "") break;
                     UserStruct tempStruct = new UserStruct
                     {
-                        UserName = worksheet.Cells[row, 1].Value.ToString(),
-                        UserEmail = worksheet.Cells[row, 2].Value.ToString(),
-                        UserPassword = worksheet.Cells[row, 3].Value.ToString(),
+                        UserName = worksheet.Cells[row, 1].Text,
+                        UserEmail = worksheet.Cells[row, 2].Text,
+                        UserRole = worksheet.Cells[row, 3].Text,
+                        UserPassword = worksheet.Cells[row, 4].Text,
                     };
+                    dataStructs.Add(tempStruct);
+                }
+                //make new fixtures using the struct
+                foreach (UserStruct userStruct in dataStructs)
+                {
+                    IdentityUser tempUser = new IdentityUser();
+                    tempUser.Email = userStruct.UserEmail;
+                    tempUser.UserName = userStruct.UserName;
+                    tempUser.PasswordHash = userStruct.UserPassword;
+                    _context.Users.Add(tempUser);
 
-                    row += 1;
-                    dataStructs.Append(tempStruct);
+                    //update tables
+                    _context.SaveChanges();
                 }
                 //make a new user
                 _context.Add(new User());
