@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using SN_BNB.Data;
 using SN_BNB.Models;
+using System.Web;
 
 namespace SN_BNB.Controllers
 {
@@ -23,11 +25,11 @@ namespace SN_BNB.Controllers
 
         public struct FixtureStruct
         {
-            public string FixtureDateTime;
+            public DateTime FixtureDateTime;
             public string LocationCity;
             public string LocationAddress;
-            public string HomeTeam;     //need to find team id for sql statement
-            public string AwayTeam;
+            public Team HomeTeam;     //need to find team id for sql statement
+            public Team AwayTeam;
         }
 
         // GET: Seasons/ExcelUpload
@@ -37,56 +39,81 @@ namespace SN_BNB.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ExcelUpload(Season season)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExcelUpload(IFormFile file)
         {
-            System.Diagnostics.Debug.WriteLine("TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST");
+            //get all of the Teams so we can search through them
+            var teams = from t in _context.Teams select t;
 
             //create a struct to hold fixture data
-            FixtureStruct[] dataStructs = new FixtureStruct[2000];
+            List<FixtureStruct> dataStructs = new List<FixtureStruct>();
 
             //receive excel file
-            Byte[] file = season.ExcelFile;
             ExcelPackage excelPackage;
             try
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await memoryStream.WriteAsync(file, 0, file.Length);
+                    await file.CopyToAsync(memoryStream);
                     excelPackage = new ExcelPackage(memoryStream);
                 }
-                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+                var worksheet = excelPackage.Workbook.Worksheets[0];
 
                 //parse the file and update struct
-                int row = 1;
-                while (true)
-                {
-
-                    if (worksheet.Cells[row, 1].Value.ToString() == "") break;
+                var start = worksheet.Dimension.Start;
+                var end = worksheet.Dimension.End;
+                for (int row = start.Row; row<=end.Row; row++)
+                { 
                     FixtureStruct tempStruct = new FixtureStruct
                     {
-                        FixtureDateTime = worksheet.Cells[row, 1].Value.ToString(),
-                        LocationCity = worksheet.Cells[row, 2].Value.ToString(),
-                        LocationAddress = worksheet.Cells[row, 3].Value.ToString(),
-                        HomeTeam = worksheet.Cells[row, 4].Value.ToString(),
-                        AwayTeam = worksheet.Cells[row, 5].Value.ToString()
+                        FixtureDateTime = Convert.ToDateTime(worksheet.Cells[row, 1].Text),
+                        LocationCity = worksheet.Cells[row, 2].Text,
+                        LocationAddress = worksheet.Cells[row, 3].Text,
+                        //Get Team object by executing a WHERE with TeamName
+                        HomeTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 4].Text).First(),
+                        AwayTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 5].Text).First()
                     };
-
-                    row += 1;
-                    dataStructs.Append(tempStruct);
+                    dataStructs.Add(tempStruct);
                 }
-                //find hometeam id and awayteam id
-                //make new fixtures using the struct
+
                 //make a new season
-                _context.Add(new Season());
+                Season newSeason = new Season();
+                newSeason.SeasonStart = DateTime.Now;
+                newSeason.Season_Title = "New Season";
+                await _context.AddAsync(newSeason);
+                await _context.SaveChangesAsync();
+
+
+
+                //make new fixtures using the struct
+                foreach (FixtureStruct fixtureStruct in dataStructs)
+                {
+                    Fixture tempFixture = new Fixture();
+                    tempFixture.FixtureDateTime = Convert.ToDateTime(fixtureStruct.FixtureDateTime);
+                    tempFixture.FixtureLocationCity = fixtureStruct.LocationCity;
+                    tempFixture.FixtureLocationAddress = fixtureStruct.LocationAddress;
+                    tempFixture.HomeScore = 0;
+                    tempFixture.AwayScore = 0;
+                    tempFixture.idHomeTeam = _context.Teams.Find(fixtureStruct.HomeTeam.ID).ID;
+                    tempFixture.idAwayTeam = _context.Teams.Find(fixtureStruct.AwayTeam.ID).ID;
+                    tempFixture.Season_idSeason = _context.Seasons.Find(newSeason.ID).ID;
+                    _context.Fixtures.Add(tempFixture);
+
+                    //update tables
+                    _context.SaveChanges();
+                }
 
                 //update tables
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
             }
-            //let the user know that the file was not parsed properly
-            catch { }
 
-            return RedirectToAction(nameof(Index));
+            //let the user know that the file was not parsed properly
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+                return RedirectToAction(nameof(Index));
         }
 
         // GET: Seasons
