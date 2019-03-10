@@ -17,7 +17,7 @@ namespace SN_BNB.Models
         }
 
         public int ID { get; set; }
-        [Required(ErrorMessage ="Please Select a Team")]
+        [Required(ErrorMessage ="Please Select an unique team name")]
         [Display(Name = "Team Name")]
         public string TeamName { get; set; }
 
@@ -25,6 +25,7 @@ namespace SN_BNB.Models
         [Display(Name = "Team Points")]
         public int TeamPoints { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name="Team Created")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? TeamCreatedOn { get; set; }
