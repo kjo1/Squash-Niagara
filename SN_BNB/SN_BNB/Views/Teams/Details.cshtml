@@ -61,7 +61,14 @@
                    Players:
                 </dt>
                 <dd>
-                    @*@Html.DisplayNameFor(model => model.Players)*@
+                    @foreach (Player player in Model.Players)
+                    {
+                        <ul>
+                            <li>
+                                @player
+                            </li>
+                        </ul>
+                    }
                 </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.TeamPoints)
@@ -88,7 +95,6 @@
                   {
                       <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
 }
-
                   <a asp-action="Index">Back to List</a>
               </div>
     </div>                                                     
