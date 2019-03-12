@@ -66,7 +66,7 @@ namespace SN_BNB.Controllers
                 { 
                     FixtureStruct tempStruct = new FixtureStruct
                     {
-                        FixtureDateTime = Convert.ToDateTime(worksheet.Cells[row, 1].Text),
+                        FixtureDateTime = DateTime.Parse(worksheet.Cells[row, 1].Text),
                         LocationCity = worksheet.Cells[row, 2].Text,
                         LocationAddress = worksheet.Cells[row, 3].Text,
                         //Get Team object by executing a WHERE with TeamName
