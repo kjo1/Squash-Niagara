@@ -33,10 +33,10 @@ namespace SN_BNB
                 {
                     var context = services.GetRequiredService<SNContext>();
                     context.Database.Migrate();
-                    //var identityContext = services.GetRequiredService<ApplicationDbContext>();
-                    //ApplicationSeedData.SeedAsync(identityContext, services).Wait();
+                    var identityContext = services.GetRequiredService<ApplicationDbContext>();
+                    ApplicationSeedData.SeedAsync(identityContext, services).Wait();
 
-                    //identityContext.Database.Migrate();
+                    identityContext.Database.Migrate();
                     SNSeedData.Initialize(services);
 
                     context.Database.Migrate();
