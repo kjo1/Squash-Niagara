@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SN_BNB.Data;
+using SN_BNB.Models;
 
 namespace SN_BNB
 {
@@ -32,15 +33,17 @@ namespace SN_BNB
                 {
                     var context = services.GetRequiredService<SNContext>();
                     context.Database.Migrate();
-                    var identityContext = services.GetRequiredService<ApplicationDbContext>();
-                    ApplicationSeedData.SeedAsync(identityContext, services).Wait();
+                    //var identityContext = services.GetRequiredService<ApplicationDbContext>();
+                    //ApplicationSeedData.SeedAsync(identityContext, services).Wait();
 
-                    identityContext.Database.Migrate();
+                    //identityContext.Database.Migrate();
                     SNSeedData.Initialize(services);
+
                     context.Database.Migrate();
                 }
                 catch (Exception ex)
                 {
+                    throw (ex);
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
