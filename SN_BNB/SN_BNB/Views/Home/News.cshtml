@@ -5,7 +5,6 @@
 
 <br />
 <content>
-
     <div class="container">
         <h2>News</h2>
         <hr class="my-3">
@@ -65,3 +64,52 @@
         </div>
     </div>
 </content>
+
+
+@model IEnumerable<SN_BNB.Models.News>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="container">
+    <h2>News</h2>
+    <hr class="my-3">
+    <div class="row">
+        <div class="col-3">
+            <!sidebar>
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </h5>
+                                    <h6 class="card-subtitle text-muted">
+                                        @Html.DisplayFor(modelItem => item.Date)
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-9">
+                <div class="jumbotron">
+                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                </div>
+                <p>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </p>
+            </div>
+        }
+    </div>
+</div>
