@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SN_BNB.Data;
 using SN_BNB.Models;
 
 namespace SN_BNB.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class NewsController : ControllerBase
+    public class NewsController : Controller
     {
         private readonly SNContext _context;
 
@@ -21,101 +19,130 @@ namespace SN_BNB.Controllers
             _context = context;
         }
 
-        // GET: api/News
-        [HttpGet]
-        public IEnumerable<News> GetNews()
+        // GET: News
+        public async Task<IActionResult> Index()
         {
-            return _context.News;
+            return View(await _context.News.ToListAsync());
         }
 
-        // GET: api/News/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetNews([FromRoute] int id)
+        // GET: News/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            var news = await _context.News.FindAsync(id);
-
+            var news = await _context.News
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (news == null)
             {
                 return NotFound();
             }
 
-            return Ok(news);
+            return View(news);
         }
 
-        // PUT: api/News/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutNews([FromRoute] int id, [FromBody] News news)
+        // GET: News/Create
+        public IActionResult Create()
         {
-            if (!ModelState.IsValid)
+            return View();
+        }
+
+        // POST: News/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,Title,Content,Date")] News news)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                _context.Add(news);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(news);
+        }
+
+        // GET: News/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
             }
 
+            var news = await _context.News.FindAsync(id);
+            if (news == null)
+            {
+                return NotFound();
+            }
+            return View(news);
+        }
+
+        // POST: News/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Content,Date")] News news)
+        {
             if (id != news.ID)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(news).State = EntityState.Modified;
-
-            try
+            if (ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!NewsExists(id))
+                try
                 {
-                    return NotFound();
+                    _context.Update(news);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!NewsExists(news.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
-
-            return NoContent();
+            return View(news);
         }
 
-        // POST: api/News
-        [HttpPost]
-        public async Task<IActionResult> PostNews([FromBody] News news)
+        // GET: News/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
 
-            _context.News.Add(news);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetNews", new { id = news.ID }, news);
-        }
-
-        // DELETE: api/News/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNews([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var news = await _context.News.FindAsync(id);
+            var news = await _context.News
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (news == null)
             {
                 return NotFound();
             }
 
+            return View(news);
+        }
+
+        // POST: News/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var news = await _context.News.FindAsync(id);
             _context.News.Remove(news);
             await _context.SaveChangesAsync();
-
-            return Ok(news);
+            return RedirectToAction(nameof(Index));
         }
 
         private bool NewsExists(int id)

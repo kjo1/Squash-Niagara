@@ -77,6 +77,18 @@ namespace SN_BNB.Data
                 );
                     context.SaveChanges();
                 }
+                if (!context.News.Any())
+                {
+                    context.News.Add(
+                     new News
+                     {
+                         Title = "Ridley 2 - the Champion",
+                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel eros donec ac odio. Tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum. Ut placerat orci nulla pellentesque dignissim enim sit amet. Massa eget egestas purus viverra accumsan in nisl nisi scelerisque. Tempor orci dapibus ultrices in iaculis nunc. In pellentesque massa placerat duis ultricies lacus sed turpis tincidunt. Pellentesque sit amet porttitor eget dolor. Non consectetur a erat nam at. Ut enim blandit volutpat maecenas. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Pellentesque habitant morbi tristique senectus et netus et malesuada. Ac turpis egestas integer eget. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum.ra.Diam et.Amet nisl purus in molli.Cursus vitae congue mauris rhoncus aenean.Sit amet purus gravida quis blandit turpis cursus.Malesuada proin libero nunc consequat interdum varius sit.Egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam.Vulputate ut pharetra sit amet.Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique.At consectetur lorem donec massa sapien faucibus et molestie.Nulla malesuada pellentesque elit eget.Id leo in vitae turpis.Massa placerat duis ultricies lacus.",
+                         Date = DateTime.Now
+                     }
+                );
+                    context.SaveChanges();
+                }
                 if (!context.Players.Any())
                 {
                     context.Players.AddRange(

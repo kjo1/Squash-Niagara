@@ -32,8 +32,8 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(maxLength: 50, nullable: false),
-                    Content = table.Column<string>(maxLength: 500, nullable: false),
+                    Title = table.Column<string>(maxLength: 100, nullable: false),
+                    Content = table.Column<string>(maxLength: 5000, nullable: false),
                     Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

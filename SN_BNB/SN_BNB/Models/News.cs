@@ -11,11 +11,11 @@ namespace SN_BNB.Models
         public int ID { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
 		public string Title { get; set; }
 
 		[Required]
-        [MaxLength(500)]
+        [MaxLength(5000)]
 		public string Content { get; set; }
 
         [Required]

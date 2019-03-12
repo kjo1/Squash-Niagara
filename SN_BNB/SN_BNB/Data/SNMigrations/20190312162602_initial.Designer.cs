@@ -10,15 +10,15 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190310195624_excel")]
-    partial class excel
+    [Migration("20190312162602_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -126,13 +126,13 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasMaxLength(500);
+                        .HasMaxLength(5000);
 
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(100);
 
                     b.HasKey("ID");
 
