@@ -111,6 +111,7 @@ namespace SN_BNB.Controllers
             //let the user know that the file was not parsed properly
             catch (Exception ex)
             {
+                throw (ex);
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
                 return RedirectToAction(nameof(Index));
