@@ -13,6 +13,7 @@
         <form asp-action="ExcelUpload" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="file" asp-for="ExcelFile" name="file" />
+                <label hidden name="dateErrorlbl" class="control-label">One or more of the fields with date/time were invalid. Use a field like dd/mm/yyyy hh:mm AM or dd/mm/yyyy hh:mm PM.</label>
                 <input type="submit" value="Upload File" class="btn btn-default" />
             </div>
         </form>

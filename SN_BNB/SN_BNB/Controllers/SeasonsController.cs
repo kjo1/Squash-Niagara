@@ -62,11 +62,17 @@ namespace SN_BNB.Controllers
                 //parse the file and update struct
                 var start = worksheet.Dimension.Start;
                 var end = worksheet.Dimension.End;
+
+                DateTime matchDate;
                 for (int row = start.Row; row<=end.Row; row++)
-                { 
+                {
+                    if(!DateTime.TryParseExact(worksheet.Cells[row, 1].Text, "dd/mm/yyyy hh:mm tt", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out matchDate))
+                    {
+                        //show the user an error
+                    }
                     FixtureStruct tempStruct = new FixtureStruct
                     {
-                        FixtureDateTime = DateTime.Parse(worksheet.Cells[row, 1].Text),
+                        FixtureDateTime = matchDate,
                         LocationCity = worksheet.Cells[row, 2].Text,
                         LocationAddress = worksheet.Cells[row, 3].Text,
                         //Get Team object by executing a WHERE with TeamName
