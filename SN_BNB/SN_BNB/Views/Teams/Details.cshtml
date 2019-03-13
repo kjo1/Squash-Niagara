@@ -61,14 +61,15 @@
                    Players:
                 </dt>
                 <dd>
+                    <ul>
                     @foreach (Player player in Model.Players)
                     {
-                        <ul>
-                            <li>
-                                @player.FullName
-                            </li>
-                        </ul>
+                        <li>
+                            @player.FullName
+                        </li>
+
                     }
+                    </ul>
                 </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.TeamPoints)
