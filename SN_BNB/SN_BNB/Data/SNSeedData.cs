@@ -77,8 +77,6 @@ namespace SN_BNB.Data
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 4,
                         TeamBio = "This is Team Brock 1"
-
-
                     }
                 );
                     context.SaveChanges();
@@ -97,9 +95,7 @@ namespace SN_BNB.Data
                 }
                 if (!context.Players.Any())
                 {
-                    List<Player> playerList = new List<Player>();
-
-                    playerList.Add(
+                    context.Players.AddRange(
                         new Player
                         {
                             FirstName = "Matt",
@@ -109,9 +105,7 @@ namespace SN_BNB.Data
                             Phone = 8880000800,
                             Position = 1,
                             TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID
-                        }
-                        );
-                    playerList.Add(
+                        },
                         new Player
                         {
                             FirstName = "Dave",
@@ -121,9 +115,7 @@ namespace SN_BNB.Data
                             Phone = 8880008000,
                             Position = 2,
                             TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID
-                        }
-                        );
-                    playerList.Add(
+                        },
                         new Player
                         {
                             FirstName = "Rachael",
@@ -133,9 +125,7 @@ namespace SN_BNB.Data
                             Phone = 9055551202,
                             Position = 3,
                             TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID
-                        }
-                        );
-                    playerList.Add(
+                        },
                         new Player
                         {
                             FirstName = "Jakub",
@@ -147,19 +137,6 @@ namespace SN_BNB.Data
                             TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID
                         }
                         );
-
-
-
-                    foreach (Player player in playerList)
-                    {
-                        context.Players.Add(player);
-                    }
-                    context.SaveChanges();
-                    context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").Players.Add(playerList[0]);
-                    context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").Players.Add(playerList[1]);
-                    context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").Players.Add(playerList[2]);
-                    context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").Players.Add(playerList[3]);
-                    context.SaveChanges();
                 }
                 if (!context.Seasons.Any())
                 {
