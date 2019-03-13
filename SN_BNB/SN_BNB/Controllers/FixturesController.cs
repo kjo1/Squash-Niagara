@@ -182,6 +182,8 @@ namespace SN_BNB.Controllers
         public IActionResult Create()
         {
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title");
+            ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
+            ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             return View();
         }
 
@@ -199,6 +201,8 @@ namespace SN_BNB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
+            ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
+            ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             return View(fixture);
         }
 
@@ -216,6 +220,8 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
+            ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
+            ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             return View(fixture);
         }
 
@@ -252,6 +258,8 @@ namespace SN_BNB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
+            ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
+            ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             return View(fixture);
         }
 
@@ -289,5 +297,12 @@ namespace SN_BNB.Controllers
         {
             return _context.Fixtures.Any(e => e.ID == id);
         }
+        //private void PopulateDropDownLists(Fixture fixture = null)
+        //{
+        //    var dQuery = from d in _context.Teams
+        //                 select d;
+        //    ViewData["TeamsID"] = new SelectList(dQuery, "ID", "TeamName", fixture?.idHomeTeam);
+        //    ViewData["TeamsID"] = new SelectList(dQuery, "ID", "TeamName", fixture?.idAwayTeam);
+        //}
     }
 }
