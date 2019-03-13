@@ -43,7 +43,7 @@ namespace SN_BNB
                 }
                 catch (Exception ex)
                 {
-                    throw (ex);
+                    //throw (ex);
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
