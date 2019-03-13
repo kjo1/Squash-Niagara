@@ -48,7 +48,9 @@ namespace SN_BNB.Data
                          TeamName = "White Oaks 1",
                          TeamPoints = 0,
                          TeamCreatedOn = DateTime.Today,
-                         DivisionID = 1
+                         DivisionID = 1,
+                         TeamBio = "This is Team White Oaks 1"
+                         
 
                      },
                     new Team
@@ -56,14 +58,16 @@ namespace SN_BNB.Data
                         TeamName = "Ridley 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 2
+                        DivisionID = 2,
+                        TeamBio = "This is Team Ridley 1"
                     },
                     new Team
                     {
                         TeamName = "BAC 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 3
+                        DivisionID = 3,
+                        TeamBio = "This is Team BAC 1"
 
                     },
                     new Team
@@ -71,7 +75,9 @@ namespace SN_BNB.Data
                         TeamName = "Brock 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 4
+                        DivisionID = 4,
+                        TeamBio = "This is Team Brock 1"
+
 
                     }
                 );
@@ -149,6 +155,7 @@ namespace SN_BNB.Data
                      );
                     context.SaveChanges();
                 }
+
             }
         }
     }

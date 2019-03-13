@@ -36,6 +36,9 @@ namespace SN_BNB.Models
         [Display(Name = "Loss(es)")]
         public int TeamLosses { get; set; }
 
+        [Display(Name = "Bio")]
+        public string TeamBio { get; set; }
+
         [Display(Name="Division")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select division of the team.")]
         public int DivisionID { get; set; }
@@ -47,6 +50,8 @@ namespace SN_BNB.Models
         public ICollection<TeamScore> TeamScores { get; set; }
         
         [Display(Name="Seasons")]
-        public ICollection<Season_has_Team> Season_has_Teams { get; set; }
+        public ICollection<Season_has_Team> Season_has_Teams { get; set; }      
     }
+
+    
 }

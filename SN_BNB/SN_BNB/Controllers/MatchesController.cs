@@ -125,8 +125,9 @@ namespace SN_BNB.Controllers
         // GET: Matches/Create
         public IActionResult Create()
         {
-            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID");
+            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "Title");
             ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email");
+
             Match match = new Match();
             PopulateAssignedPlayerData(match);
             return View();

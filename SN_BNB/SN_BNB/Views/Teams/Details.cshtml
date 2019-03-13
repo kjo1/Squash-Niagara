@@ -28,8 +28,8 @@
                     <div class="col-md-12 profile-header">
                         <div class="row">
                             <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
-                                <h1>@Html.DisplayFor(model => model.TeamName)</h1>
-                                <p>Team Bio</p>
+                                <h1>@Html.DisplayFor(model => model.TeamName)</h1>                             
+                                <p>@Html.DisplayFor(model => model.TeamBio)</p>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     {
                         <ul>
                             <li>
-                                @player
+                                @player.FullName
                             </li>
                         </ul>
                     }
