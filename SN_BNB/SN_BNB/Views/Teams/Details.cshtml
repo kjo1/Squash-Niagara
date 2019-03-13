@@ -11,11 +11,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <body>
-    @Model.Players.First().FirstName
-    @foreach (Player player in Model.Players)
-    {
-        @player.FirstName
-    }
     <div class="container">
         <div class="row">
 
@@ -65,9 +60,8 @@
                     Players:
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.Players)
                     <ul>
-                        @foreach (Player player in Model.Players)
+                        @foreach (Player player in ViewBag.Players)
                         {
                             <li>
                                 @player.FullName
