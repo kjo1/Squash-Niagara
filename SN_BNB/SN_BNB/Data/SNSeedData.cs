@@ -91,50 +91,68 @@ namespace SN_BNB.Data
                 }
                 if (!context.Players.Any())
                 {
-                    context.Players.AddRange(
-                     new Player
-                     {
-                         FirstName = "Matt",
-                         LastName = "Bowie",
-                         Gender = "M",
-                         Email = "Matt_Bowie@outlook.com",
-                         Phone = 8880000800,
-                         Position = 1,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID
-                     },
+                    List<Player> playerList = new List<Player>();
 
-                     new Player
-                     {
-                         FirstName = "Dave",
-                         LastName = "Forgeron",
-                         Gender = "M",
-                         Email = "Dave_Forgeron@outlook.com",
-                         Phone = 8880008000,
-                         Position = 2,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID
-                     },
-                     new Player
-                     {
-                         FirstName = "Rachael",
-                         LastName = "Forgeron",
-                         Gender = "F",
-                         Email = "Rachael_Forgeron@outlook.com",
-                         Phone = 9055551202,
-                         Position = 3,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID
-                     },
-                     new Player
-                     {
-                         FirstName = "Jakub",
-                         LastName = "Lipinski",
-                         Gender = "M",
-                         Email = "Jakub_Lipinski@outlook.com",
-                         Phone = 8880088000,
-                         Position = 3,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID
-                     }
+                    playerList.Add(
+                        new Player
+                        {
+                            FirstName = "Matt",
+                            LastName = "Bowie",
+                            Gender = "M",
+                            Email = "Matt_Bowie@outlook.com",
+                            Phone = 8880000800,
+                            Position = 1,
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID
+                        }
+                        );
+                    playerList.Add(
+                        new Player
+                        {
+                            FirstName = "Dave",
+                            LastName = "Forgeron",
+                            Gender = "M",
+                            Email = "Dave_Forgeron@outlook.com",
+                            Phone = 8880008000,
+                            Position = 2,
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID
+                        }
+                        );
+                    playerList.Add(
+                        new Player
+                        {
+                            FirstName = "Rachael",
+                            LastName = "Forgeron",
+                            Gender = "F",
+                            Email = "Rachael_Forgeron@outlook.com",
+                            Phone = 9055551202,
+                            Position = 3,
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID
+                        }
+                        );
+                    playerList.Add(
+                        new Player
+                        {
+                            FirstName = "Jakub",
+                            LastName = "Lipinski",
+                            Gender = "M",
+                            Email = "Jakub_Lipinski@outlook.com",
+                            Phone = 8880088000,
+                            Position = 3,
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID
+                        }
+                        );
 
-                );
+
+
+                    foreach (Player player in playerList)
+                    {
+                        context.Players.Add(player);
+                    }
+                    context.SaveChanges();
+                    context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").Players.Add(playerList[0]);
+                    context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").Players.Add(playerList[1]);
+                    context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").Players.Add(playerList[2]);
+                    context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").Players.Add(playerList[3]);
                     context.SaveChanges();
                 }
                 if (!context.Seasons.Any())
