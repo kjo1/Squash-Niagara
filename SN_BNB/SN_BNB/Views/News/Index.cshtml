@@ -21,7 +21,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        @Html.DisplayFor(modelItem => item.Title)
+                                        <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Title) </a>
                                     </h5>
                                     <h6 class="card-subtitle text-muted">
                                         @Html.DisplayFor(modelItem => item.Date)

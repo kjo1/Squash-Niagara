@@ -54,8 +54,9 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Content,Date")] News news)
+        public async Task<IActionResult> Create([Bind("ID,Title,Content")] News news)
         {
+            news.Date = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(news);

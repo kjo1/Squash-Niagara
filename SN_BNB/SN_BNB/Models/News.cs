@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SN_BNB.Models
 {
-	public class News : IValidatableObject
+	public class News
 	{
         public int ID { get; set; }
 
@@ -18,15 +18,6 @@ namespace SN_BNB.Models
         [MaxLength(5000)]
 		public string Content { get; set; }
 
-        [Required]
         public DateTime Date { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Date > DateTime.Today)
-            {
-                yield return new ValidationResult("Date of post cannot be in the past");
-            }
-        }
     }
 }
