@@ -77,8 +77,24 @@ namespace SN_BNB.Data
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 4,
                         TeamBio = "This is Team Brock 1"
-                    }
-                );
+                    },
+					new Team
+					{
+						TeamName = "Team 1",
+						TeamPoints = 22,
+						TeamCreatedOn = DateTime.Today,
+						DivisionID = 3,
+						TeamBio = "This is Team 1"
+					},
+					new Team
+					{
+						TeamName = "Team 2",
+						TeamPoints = 13,
+						TeamCreatedOn = DateTime.Today,
+						DivisionID = 2,
+						TeamBio = "This is Team 2"
+					}
+				);
                     context.SaveChanges();
                 }
                 if (!context.News.Any())
