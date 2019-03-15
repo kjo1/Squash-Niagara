@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using SN_BNB.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace SN_BNB
 {
@@ -40,6 +41,7 @@ namespace SN_BNB
 
             //services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultUI()
@@ -55,11 +57,13 @@ namespace SN_BNB
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 1;
             });
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<SNContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SNContext")));
+
+            //To give access to IHttpContextAccessor for Audit Data with IAuditable
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

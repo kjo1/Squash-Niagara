@@ -21,10 +21,6 @@ namespace SN_BNB
             //CreateWebHostBuilder(args).Build().Run();
             var host = CreateWebHostBuilder(args).Build();
 
-            //Seed Data
-
-
-
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -33,22 +29,18 @@ namespace SN_BNB
                 {
                     var context = services.GetRequiredService<SNContext>();
                     context.Database.Migrate();
-                    var identityContext = services.GetRequiredService<ApplicationDbContext>();
-                    ApplicationSeedData.SeedAsync(identityContext, services).Wait();
-
-                    identityContext.Database.Migrate();
                     SNSeedData.Initialize(services);
-
-                    context.Database.Migrate();
+                    var identityContext = services.GetRequiredService<ApplicationDbContext>();
+                    identityContext.Database.Migrate();//Added to migrate when run
+                    ApplicationSeedData.SeedAsync(identityContext, services).Wait();
                 }
                 catch (Exception ex)
                 {
-                    //throw (ex);
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
                 }
             }
+
             host.Run();
         }
 
@@ -57,3 +49,4 @@ namespace SN_BNB
                 .UseStartup<Startup>();
     }
 }
+

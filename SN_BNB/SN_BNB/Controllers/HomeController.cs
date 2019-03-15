@@ -12,13 +12,26 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Threading;
 using System.IO;
+using SN_BNB.Data;
 
 namespace SN_BNB.Controllers
 {
     public class HomeController : Controller
     {
+        SNContext _context;
+
+        public HomeController(SNContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            //ViewData["Player"] = _context.Players
+            //    .Include(m => m.Teams)
+            //    .ThenInclude(m => )
+            //    .Include(m => m.P)
+            //    .FirstOrDefaultAsync(m => m.Email == User.Identity.Name);
             return View();
         }
 

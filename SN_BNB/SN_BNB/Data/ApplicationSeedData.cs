@@ -18,10 +18,10 @@ namespace SN_BNB.Data
             IdentityResult roleResult;
             foreach (var roleName in roleNames)
             {
-                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                var roleExist = RoleManager.RoleExistsAsync(roleName).Result;
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                    roleResult = RoleManager.CreateAsync(new IdentityRole(roleName)).Result;
                 }
             }
             //Create Users
