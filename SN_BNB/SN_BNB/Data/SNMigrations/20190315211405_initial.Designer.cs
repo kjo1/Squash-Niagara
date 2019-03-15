@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190315205152_initial")]
+    [Migration("20190315211405_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,12 +63,6 @@ namespace SN_BNB.Data.SNMigrations
                     b.Property<int?>("AwayTeamID");
 
                     b.Property<DateTime>("FixtureDateTime");
-
-                    b.Property<string>("FixtureLocationAddress")
-                        .IsRequired();
-
-                    b.Property<string>("FixtureLocationCity")
-                        .IsRequired();
 
                     b.Property<int>("HomeScore");
 

@@ -123,32 +123,6 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(f => f.Season.Season_Title);
                 }
             }
-            else if (sortField == "City")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    fixtures = fixtures
-                        .OrderBy(f => f.FixtureLocationCity);
-                }
-                else
-                {
-                    fixtures = fixtures
-                        .OrderByDescending(f => f.FixtureLocationCity);
-                }
-            }
-            else if (sortField == "Address")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    fixtures = fixtures
-                        .OrderBy(f => f.FixtureLocationAddress);
-                }
-                else
-                {
-                    fixtures = fixtures
-                        .OrderByDescending(f => f.FixtureLocationAddress);
-                }
-            }
 
             //Set sort for next time
             ViewData["sortField"] = sortField;
@@ -191,14 +165,30 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FixtureDateTime,HomeScore,AwayScore,idHomeTeam,idAwayTeam,Season_idSeason,FixtureLocationCity,FixtureLocationAddress")] Fixture fixture)
+        public async Task<IActionResult> Create([Bind("ID,FixtureDateTime,HomeScore,AwayScore,idHomeTeam,idAwayTeam,Season_idSeason")] Fixture fixture)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(fixture);
                 await _context.SaveChangesAsync();
+                try
+                {
+                    //update Team.TeamPoints
+                    Team HomeTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idHomeTeam);
+                    Team AwayTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idAwayTeam);
+                    HomeTeam.TeamPoints += fixture.HomeScore;
+                    AwayTeam.TeamPoints += fixture.AwayScore;
+                    _context.Update(HomeTeam);
+                    _context.Update(AwayTeam);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
             ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
@@ -229,7 +219,7 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FixtureDateTime,HomeScore,AwayScore,idHomeTeam,idAwayTeam,Season_idSeason,FixtureLocationCity,FixtureLocationAddress")] Fixture fixture)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,FixtureDateTime,HomeScore,AwayScore,idHomeTeam,idAwayTeam,Season_idSeason")] Fixture fixture)
         {
             if (id != fixture.ID)
             {

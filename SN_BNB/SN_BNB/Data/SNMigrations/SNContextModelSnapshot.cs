@@ -62,12 +62,6 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<DateTime>("FixtureDateTime");
 
-                    b.Property<string>("FixtureLocationAddress")
-                        .IsRequired();
-
-                    b.Property<string>("FixtureLocationCity")
-                        .IsRequired();
-
                     b.Property<int>("HomeScore");
 
                     b.Property<int?>("HomeTeamID");

@@ -95,8 +95,6 @@ namespace SN_BNB.Controllers
                 {
                     Fixture tempFixture = new Fixture();
                     tempFixture.FixtureDateTime = Convert.ToDateTime(fixtureStruct.FixtureDateTime);
-                    tempFixture.FixtureLocationCity = fixtureStruct.LocationCity;
-                    tempFixture.FixtureLocationAddress = fixtureStruct.LocationAddress;
                     tempFixture.HomeScore = 0;
                     tempFixture.AwayScore = 0;
                     tempFixture.idHomeTeam = _context.Teams.Find(fixtureStruct.HomeTeam.ID).ID;

@@ -111,8 +111,6 @@ namespace SN_BNB.Data.SNMigrations
                     idHomeTeam = table.Column<int>(nullable: false),
                     idAwayTeam = table.Column<int>(nullable: false),
                     Season_idSeason = table.Column<int>(nullable: false),
-                    FixtureLocationCity = table.Column<string>(nullable: false),
-                    FixtureLocationAddress = table.Column<string>(nullable: false),
                     HomeTeamID = table.Column<int>(nullable: true),
                     AwayTeamID = table.Column<int>(nullable: true)
                 },
