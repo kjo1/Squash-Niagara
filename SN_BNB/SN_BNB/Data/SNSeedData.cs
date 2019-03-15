@@ -196,7 +196,8 @@ namespace SN_BNB.Data
                             Email = "Matt_Bowie@outlook.com",
                             Phone = 8880000800,
                             Position = 1,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                            PlayerWantsInfoHidden = false
                         },
                         new Player
                         {
@@ -206,7 +207,8 @@ namespace SN_BNB.Data
                             Email = "Dave_Forgeron@outlook.com",
                             Phone = 8880008000,
                             Position = 2,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
+                            PlayerWantsInfoHidden = false
                         },
                         new Player
                         {
@@ -216,7 +218,8 @@ namespace SN_BNB.Data
                             Email = "Rachael_Forgeron@outlook.com",
                             Phone = 9055551202,
                             Position = 3,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                            PlayerWantsInfoHidden = true
                         },
                         new Player
                         {
@@ -226,7 +229,8 @@ namespace SN_BNB.Data
                             Email = "Jakub_Lipinski@outlook.com",
                             Phone = 8880088000,
                             Position = 3,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
+                            PlayerWantsInfoHidden = true
                         },
                         new Player
                         {
@@ -236,7 +240,8 @@ namespace SN_BNB.Data
                             Email = "byuki@outlook.com",
                             Phone = 9056254141,
                             Position = 2,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
+                            PlayerWantsInfoHidden = true
                         },
                      new Player
                      {
@@ -246,7 +251,8 @@ namespace SN_BNB.Data
                          Email = "sstone@gmail.com",
                          Phone = 9053295625,
                          Position = 4,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
+                         PlayerWantsInfoHidden = true
                      },
                      new Player
                      {
@@ -256,7 +262,8 @@ namespace SN_BNB.Data
                          Email = "cshirona@outlook.com",
                          Phone = 9055551257,
                          Position = 3,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
+                         PlayerWantsInfoHidden = false
                      },
                      new Player
                      {
@@ -266,7 +273,8 @@ namespace SN_BNB.Data
                          Email = "mharuka@outlook.com",
                          Phone = 9055559892,
                          Position = 2,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 1").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 1").ID,
+                         PlayerWantsInfoHidden = false
                      },
                      new Player
                      {
@@ -276,7 +284,8 @@ namespace SN_BNB.Data
                          Email = "vhargreeves@outlook.com",
                          Phone = 9052251202,
                          Position = 1,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 2").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 2").ID,
+                         PlayerWantsInfoHidden = true
                      },
                      new Player
                      {
@@ -286,7 +295,8 @@ namespace SN_BNB.Data
                          Email = "greatalex@outlook.com",
                          Phone = 9053211202,
                          Position = 4,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         PlayerWantsInfoHidden = false
                      },
                      new Player
                      {
@@ -296,7 +306,8 @@ namespace SN_BNB.Data
                          Email = "aprice@outlook.com",
                          Phone = 2892344321,
                          Position = 4,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 2").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 2").ID,
+                         PlayerWantsInfoHidden = false
                      },
                      new Player
                      {
@@ -306,7 +317,8 @@ namespace SN_BNB.Data
                          Email = "mlang@outlook.com",
                          Phone = 2890988907,
                          Position = 3,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
+                         PlayerWantsInfoHidden = true
                      },
                      new Player
                      {
@@ -316,7 +328,8 @@ namespace SN_BNB.Data
                          Email = "nriver@outlook.com",
                          Phone = 2896549874,
                          Position = 2,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 3").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 3").ID,
+                         PlayerWantsInfoHidden = true
                      },
                      new Player
                      {
@@ -326,7 +339,8 @@ namespace SN_BNB.Data
                          Email = "spaschall@outlook.com",
                          Phone = 2899518475,
                          Position = 1,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
+                         PlayerWantsInfoHidden = false
                      },
                      new Player
                      {
@@ -336,7 +350,8 @@ namespace SN_BNB.Data
                          Email = "djenness@outlook.com",
                          Phone = 2896231592,
                          Position = 2,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         PlayerWantsInfoHidden = false
                      }
                         );
                 }

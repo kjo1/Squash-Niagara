@@ -10,15 +10,15 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190312233633_refresh")]
-    partial class refresh
+    [Migration("20190315205152_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -167,6 +167,8 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<long>("Phone");
 
+                    b.Property<bool>("PlayerWantsInfoHidden");
+
                     b.Property<int>("Position");
 
                     b.Property<int>("TeamID");
@@ -222,6 +224,8 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("DivisionID");
 
+                    b.Property<string>("TeamBio");
+
                     b.Property<DateTime?>("TeamCreatedOn");
 
                     b.Property<int>("TeamLosses");
@@ -241,25 +245,6 @@ namespace SN_BNB.Data.SNMigrations
                         .IsUnique();
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("SN_BNB.Models.TeamScore", b =>
-                {
-                    b.Property<int>("TeamID");
-
-                    b.Property<int>("FixtureID");
-
-                    b.Property<string>("FixtureScore");
-
-                    b.Property<int>("ID");
-
-                    b.Property<bool>("TeamScoreApprovedBy");
-
-                    b.HasKey("TeamID", "FixtureID");
-
-                    b.HasIndex("FixtureID");
-
-                    b.ToTable("TeamScores");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.User", b =>
@@ -345,19 +330,6 @@ namespace SN_BNB.Data.SNMigrations
                         .WithMany("Teams")
                         .HasForeignKey("DivisionID")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SN_BNB.Models.TeamScore", b =>
-                {
-                    b.HasOne("SN_BNB.Models.Fixture", "Fixture")
-                        .WithMany("TeamScores")
-                        .HasForeignKey("FixtureID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SN_BNB.Models.Team", "Team")
-                        .WithMany("TeamScores")
-                        .HasForeignKey("TeamID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

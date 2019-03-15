@@ -21,7 +21,6 @@ namespace SN_BNB.Data
         public DbSet<Match> Matches { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Season> Seasons { get; set; }
-        public DbSet<TeamScore> TeamScores { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<News> News { get; set; }
 
@@ -60,12 +59,6 @@ namespace SN_BNB.Data
                 .HasForeignKey(pt => pt.MatchID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<TeamScore>()
-                .HasOne(ts => ts.Fixture)
-                .WithMany(f => f.TeamScores)
-                .HasForeignKey(ts => ts.FixtureID)
-                .OnDelete(DeleteBehavior.Restrict);
-
             //Add a unique index to the Email Address
             modelBuilder.Entity<Player>()
                 .HasIndex(p => p.Email)
@@ -88,9 +81,6 @@ namespace SN_BNB.Data
             // Insection Table Key Declarations
             modelBuilder.Entity<Season_has_Team>()
                 .HasKey(t => new { t.TeamID, t.SeasonID });
-
-            modelBuilder.Entity<TeamScore>()
-                .HasKey(t => new { t.TeamID, t.FixtureID });
 
             modelBuilder.Entity<AssignedMatchPlayer>()
             .HasKey(t => new { t.MatchID, t.PlayerID });

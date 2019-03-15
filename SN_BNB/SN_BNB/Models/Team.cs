@@ -12,8 +12,6 @@ namespace SN_BNB.Models
         {
             Players = new HashSet<Player>();
             Season_has_Teams = new HashSet<Season_has_Team>();
-            TeamScores = new HashSet<TeamScore>();
-
         }
 
         public int ID { get; set; }
@@ -45,9 +43,6 @@ namespace SN_BNB.Models
         public virtual Division Division { get; set; }
 
         public ICollection<Player> Players { get; set; }
-    
-        [Display(Name ="Team Score")]
-        public ICollection<TeamScore> TeamScores { get; set; }
         
         [Display(Name="Seasons")]
         public ICollection<Season_has_Team> Season_has_Teams { get; set; }      

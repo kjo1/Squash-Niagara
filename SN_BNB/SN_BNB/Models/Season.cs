@@ -21,7 +21,7 @@ namespace SN_BNB.Models
         [Required]
         [Display(Name = "Season Start Date")]
         public DateTime SeasonStart { get; set; }
-        [Required]
+
         [Display(Name = "Season End Date")]
         public DateTime SeasonEnd { get; set; }
 

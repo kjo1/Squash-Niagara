@@ -40,7 +40,7 @@ namespace SN_BNB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExcelUpload(IFormFile file)
+        public async Task<IActionResult> ExcelUpload([Bind("ID,Season_Title")] Season season, IFormFile file)
         {
             //get all of the Teams so we can search through them
             var teams = from t in _context.Teams select t;
@@ -83,10 +83,9 @@ namespace SN_BNB.Controllers
                 }
 
                 //make a new season
-                Season newSeason = new Season();
-                newSeason.SeasonStart = DateTime.Now;
-                newSeason.Season_Title = "New Season";
-                await _context.AddAsync(newSeason);
+                season.SeasonStart = DateTime.Now;
+
+                await _context.AddAsync(season);
                 await _context.SaveChangesAsync();
 
 
@@ -102,7 +101,7 @@ namespace SN_BNB.Controllers
                     tempFixture.AwayScore = 0;
                     tempFixture.idHomeTeam = _context.Teams.Find(fixtureStruct.HomeTeam.ID).ID;
                     tempFixture.idAwayTeam = _context.Teams.Find(fixtureStruct.AwayTeam.ID).ID;
-                    tempFixture.Season_idSeason = _context.Seasons.Find(newSeason.ID).ID;
+                    tempFixture.Season_idSeason = _context.Seasons.Find(season.ID).ID;
                     _context.Fixtures.Add(tempFixture);
 
                     //update tables

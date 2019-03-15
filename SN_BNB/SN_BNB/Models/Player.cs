@@ -62,6 +62,10 @@ namespace SN_BNB.Models
         [Display(Name ="Team")]
         public int TeamID { get; set; }
 
+        [Required(ErrorMessage = "You must select if you want to hide your phone number from other players.")]
+        [Display(Name = "Hide your phone number from other players?")]
+        public bool PlayerWantsInfoHidden { get; set; }
+
         public virtual Team Team { get; set; }
 
         public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }

@@ -11,7 +11,6 @@ namespace SN_BNB.Models
         public Fixture()
         {
             this.Matches = new HashSet<Match>();
-            this.TeamScores = new HashSet<TeamScore>();
         }
         public int ID { get; set; }
         [Required]
@@ -44,6 +43,5 @@ namespace SN_BNB.Models
         public virtual Team AwayTeam { get; set; }
 
         public  ICollection<Match> Matches { get; set; }
-        public  ICollection<TeamScore> TeamScores { get; set; }
     }
 }

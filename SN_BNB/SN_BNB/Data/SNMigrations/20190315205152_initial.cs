@@ -83,6 +83,7 @@ namespace SN_BNB.Data.SNMigrations
                     TeamCreatedOn = table.Column<DateTime>(nullable: true),
                     TeamWins = table.Column<int>(nullable: false),
                     TeamLosses = table.Column<int>(nullable: false),
+                    TeamBio = table.Column<string>(nullable: true),
                     DivisionID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -157,7 +158,8 @@ namespace SN_BNB.Data.SNMigrations
                     Position = table.Column<int>(nullable: false),
                     Win = table.Column<int>(nullable: false),
                     Loss = table.Column<int>(nullable: false),
-                    TeamID = table.Column<int>(nullable: false)
+                    TeamID = table.Column<int>(nullable: false),
+                    PlayerWantsInfoHidden = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,36 +198,6 @@ namespace SN_BNB.Data.SNMigrations
                         principalTable: "Teams",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TeamScores",
-                schema: "SN",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false),
-                    FixtureScore = table.Column<string>(nullable: true),
-                    TeamScoreApprovedBy = table.Column<bool>(nullable: false),
-                    TeamID = table.Column<int>(nullable: false),
-                    FixtureID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TeamScores", x => new { x.TeamID, x.FixtureID });
-                    table.ForeignKey(
-                        name: "FK_TeamScores_Fixtures_FixtureID",
-                        column: x => x.FixtureID,
-                        principalSchema: "SN",
-                        principalTable: "Fixtures",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TeamScores_Teams_TeamID",
-                        column: x => x.TeamID,
-                        principalSchema: "SN",
-                        principalTable: "Teams",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -362,12 +334,6 @@ namespace SN_BNB.Data.SNMigrations
                 table: "Teams",
                 column: "TeamName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeamScores_FixtureID",
-                schema: "SN",
-                table: "TeamScores",
-                column: "FixtureID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -382,10 +348,6 @@ namespace SN_BNB.Data.SNMigrations
 
             migrationBuilder.DropTable(
                 name: "SeasonTeams",
-                schema: "SN");
-
-            migrationBuilder.DropTable(
-                name: "TeamScores",
                 schema: "SN");
 
             migrationBuilder.DropTable(
