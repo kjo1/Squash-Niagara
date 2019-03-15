@@ -80,7 +80,7 @@ namespace SN_BNB.Data
                     },
                     new Team
                     {
-                        TeamName = "Team 1",
+                        TeamName = "BAC 2",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 2
@@ -88,7 +88,7 @@ namespace SN_BNB.Data
                     },
                     new Team
                     {
-                        TeamName = "Team 2",
+                        TeamName = "CAB 2",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 2
@@ -96,7 +96,7 @@ namespace SN_BNB.Data
                     },
                     new Team
                     {
-                        TeamName = "Team 3",
+                        TeamName = "CAB 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3
@@ -104,7 +104,7 @@ namespace SN_BNB.Data
                     },
                     new Team
                     {
-                        TeamName = "Team 4",
+                        TeamName = "Brick 1",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 1
@@ -112,10 +112,50 @@ namespace SN_BNB.Data
                     },
                     new Team
                     {
-                        TeamName = "Team 5",
+                        TeamName = "Brick 2",
                         TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3
+
+                    },
+                    new Team
+                    {
+                        TeamName = "Brock 2",
+                        TeamPoints = 0,
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 4
+
+                    },
+                    new Team
+                    {
+                        TeamName = "Ridley 2",
+                        TeamPoints = 0,
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 3
+
+                    },
+                    new Team
+                    {
+                        TeamName = "White Oaks 2",
+                        TeamPoints = 0,
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 2
+
+                    },
+                    new Team
+                    {
+                        TeamName = "Brock 3",
+                        TeamPoints = 0,
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 1
+
+                    },
+                    new Team
+                    {
+                        TeamName = "Ridley 3",
+                        TeamPoints = 0,
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 2
 
                     }
                 );
@@ -196,7 +236,7 @@ namespace SN_BNB.Data
                             Email = "byuki@outlook.com",
                             Phone = 9056254141,
                             Position = 2,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Team 1").ID
+                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID
                         },
                      new Player
                      {
@@ -206,7 +246,7 @@ namespace SN_BNB.Data
                          Email = "sstone@gmail.com",
                          Phone = 9053295625,
                          Position = 4,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Team 2").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID
                      },
                      new Player
                      {
@@ -216,7 +256,7 @@ namespace SN_BNB.Data
                          Email = "cshirona@outlook.com",
                          Phone = 9055551257,
                          Position = 3,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Team 3").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID
                      },
                      new Player
                      {
@@ -226,7 +266,7 @@ namespace SN_BNB.Data
                          Email = "mharuka@outlook.com",
                          Phone = 9055559892,
                          Position = 2,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Team 4").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 1").ID
                      },
                      new Player
                      {
@@ -236,7 +276,7 @@ namespace SN_BNB.Data
                          Email = "vhargreeves@outlook.com",
                          Phone = 9052251202,
                          Position = 1,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Team 5").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 2").ID
                      },
                      new Player
                      {
@@ -246,7 +286,57 @@ namespace SN_BNB.Data
                          Email = "greatalex@outlook.com",
                          Phone = 9053211202,
                          Position = 4,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Team 1").ID
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID
+                     },
+                     new Player
+                     {
+                         FirstName = "Archie",
+                         LastName = "Price",
+                         Gender = "M",
+                         Email = "aprice@outlook.com",
+                         Phone = 2892344321,
+                         Position = 4,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 2").ID
+                     },
+                     new Player
+                     {
+                         FirstName = "Maxie",
+                         LastName = "Lang",
+                         Gender = "M",
+                         Email = "mlang@outlook.com",
+                         Phone = 2890988907,
+                         Position = 3,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID
+                     },
+                     new Player
+                     {
+                         FirstName = "Nate",
+                         LastName = "River",
+                         Gender = "M",
+                         Email = "nriver@outlook.com",
+                         Phone = 2896549874,
+                         Position = 2,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 3").ID
+                     },
+                     new Player
+                     {
+                         FirstName = "Serena",
+                         LastName = "Paschall",
+                         Gender = "F",
+                         Email = "spaschall@outlook.com",
+                         Phone = 2899518475,
+                         Position = 1,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID
+                     },
+                     new Player
+                     {
+                         FirstName = "Dawn",
+                         LastName = "Jenness",
+                         Gender = "F",
+                         Email = "djenness@outlook.com",
+                         Phone = 2896231592,
+                         Position = 2,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID
                      }
                         );
                 }
@@ -256,6 +346,24 @@ namespace SN_BNB.Data
                      new Season
                      {
                          Season_Title = "First",
+                         SeasonStart = DateTime.Today,
+                         SeasonEnd = DateTime.Today
+                     },
+                     new Season
+                     {
+                         Season_Title = "Second",
+                         SeasonStart = DateTime.Today,
+                         SeasonEnd = DateTime.Today
+                     },
+                     new Season
+                     {
+                         Season_Title = "Third",
+                         SeasonStart = DateTime.Today,
+                         SeasonEnd = DateTime.Today
+                     },
+                     new Season
+                     {
+                         Season_Title = "Fourth",
                          SeasonStart = DateTime.Today,
                          SeasonEnd = DateTime.Today
                      }
