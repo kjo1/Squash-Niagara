@@ -70,17 +70,17 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(m => m.MatchPosition);
                 }
             }
-            else if (sortField == "Date & Time")
+            else if (sortField == "Time")
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     matches = matches
-                        .OrderBy(m => m.MatchDateTime);
+                        .OrderBy(m => m.MatchTime);
                 }
                 else
                 {
                     matches = matches
-                        .OrderByDescending(m => m.MatchDateTime);
+                        .OrderByDescending(m => m.MatchTime);
                 }
             }
             else
@@ -138,7 +138,7 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Player1Score,Player2Score,MatchPosition,MatchDateTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
+        public async Task<IActionResult> Create([Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Player1Score,Player2Score,MatchPosition,MatchDateTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
         {
             var matchToUpdate = await _context.Matches
                 .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)

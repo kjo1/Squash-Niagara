@@ -27,7 +27,8 @@ namespace SN_BNB.Controllers
                            .Include(f=>f.HomeTeam)
                            .Include(f=>f.AwayTeam)
                            .Include(f=>f.Season)
-                           .Include(f=>f.Matches)
+                           .Include(f => f.Matches)
+                           .Include(f => f.Location)
                            select f;
             if (!String.IsNullOrEmpty(searchString))
             {

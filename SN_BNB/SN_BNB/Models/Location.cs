@@ -15,7 +15,5 @@ namespace SN_BNB.Models
         public string LocationStreet { get; set; }
         [Required]
         public int LocationBuildingNumber { get; set; }
-
-        public Fixture Fixture { get; set; }
     }
 }

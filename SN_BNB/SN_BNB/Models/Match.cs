@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SN_BNB.Models
 {
-    public class Match : IValidatableObject
+    public class Match
     {
         public int ID { get; set; }
         public Match()
@@ -21,7 +21,7 @@ namespace SN_BNB.Models
         [Range(1, 4)]
         public int MatchPosition { get; set; }
         [Required(ErrorMessage ="Please enter a date and time for this match")]
-        public DateTime MatchDateTime { get; set; }
+        public TimeSpan MatchTime { get; set; }
 
 
         [Display(Name = "Fixture")]
@@ -37,14 +37,5 @@ namespace SN_BNB.Models
         //public Player Player2 { get; set; }
 
         public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
-
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if(MatchDateTime < DateTime.Today)
-            {
-                yield return new ValidationResult("Date of match cannot be in the past");
-            }
-        }
     }
 }

@@ -26,6 +26,22 @@ namespace SN_BNB.Data.SNMigrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Location",
+                schema: "SN",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    LocationCity = table.Column<string>(nullable: false),
+                    LocationStreet = table.Column<string>(nullable: false),
+                    LocationBuildingNumber = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Location", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "News",
                 schema: "SN",
                 columns: table => new
@@ -111,6 +127,8 @@ namespace SN_BNB.Data.SNMigrations
                     idHomeTeam = table.Column<int>(nullable: false),
                     idAwayTeam = table.Column<int>(nullable: false),
                     Season_idSeason = table.Column<int>(nullable: false),
+                    location_locationId = table.Column<int>(nullable: false),
+                    LocationID = table.Column<int>(nullable: true),
                     HomeTeamID = table.Column<int>(nullable: true),
                     AwayTeamID = table.Column<int>(nullable: true)
                 },
@@ -129,6 +147,13 @@ namespace SN_BNB.Data.SNMigrations
                         column: x => x.HomeTeamID,
                         principalSchema: "SN",
                         principalTable: "Teams",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Fixtures_Location_LocationID",
+                        column: x => x.LocationID,
+                        principalSchema: "SN",
+                        principalTable: "Location",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -208,7 +233,7 @@ namespace SN_BNB.Data.SNMigrations
                     Player1Score = table.Column<int>(nullable: false),
                     Player2Score = table.Column<int>(nullable: false),
                     MatchPosition = table.Column<int>(nullable: false),
-                    MatchDateTime = table.Column<DateTime>(nullable: false),
+                    MatchTime = table.Column<TimeSpan>(nullable: false),
                     FixtureID = table.Column<int>(nullable: false),
                     PlayerID = table.Column<int>(nullable: false)
                 },
@@ -282,6 +307,12 @@ namespace SN_BNB.Data.SNMigrations
                 schema: "SN",
                 table: "Fixtures",
                 column: "HomeTeamID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fixtures_LocationID",
+                schema: "SN",
+                table: "Fixtures",
+                column: "LocationID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Fixtures_Season_idSeason",
@@ -362,6 +393,10 @@ namespace SN_BNB.Data.SNMigrations
 
             migrationBuilder.DropTable(
                 name: "Players",
+                schema: "SN");
+
+            migrationBuilder.DropTable(
+                name: "Location",
                 schema: "SN");
 
             migrationBuilder.DropTable(

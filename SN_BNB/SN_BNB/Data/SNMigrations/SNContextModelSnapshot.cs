@@ -66,11 +66,15 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int?>("HomeTeamID");
 
+                    b.Property<int?>("LocationID");
+
                     b.Property<int>("Season_idSeason");
 
                     b.Property<int>("idAwayTeam");
 
                     b.Property<int>("idHomeTeam");
+
+                    b.Property<int>("location_locationId");
 
                     b.HasKey("ID");
 
@@ -78,9 +82,30 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.HasIndex("HomeTeamID");
 
+                    b.HasIndex("LocationID");
+
                     b.HasIndex("Season_idSeason");
 
                     b.ToTable("Fixtures");
+                });
+
+            modelBuilder.Entity("SN_BNB.Models.Location", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LocationBuildingNumber");
+
+                    b.Property<string>("LocationCity")
+                        .IsRequired();
+
+                    b.Property<string>("LocationStreet")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Match", b =>
@@ -91,9 +116,9 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("FixtureID");
 
-                    b.Property<DateTime>("MatchDateTime");
-
                     b.Property<int>("MatchPosition");
+
+                    b.Property<TimeSpan>("MatchTime");
 
                     b.Property<int>("Player1Score");
 
@@ -275,6 +300,10 @@ namespace SN_BNB.Data.SNMigrations
                     b.HasOne("SN_BNB.Models.Team", "HomeTeam")
                         .WithMany()
                         .HasForeignKey("HomeTeamID");
+
+                    b.HasOne("SN_BNB.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationID");
 
                     b.HasOne("SN_BNB.Models.Season", "Season")
                         .WithMany("Fixtures")

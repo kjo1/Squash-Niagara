@@ -30,6 +30,10 @@ namespace SN_BNB.Models
         [Display(Name = "Season")]
         public int Season_idSeason { get; set; }
 
+        [Required]
+        public int location_locationId { get; set; }
+
+        public virtual Location Location { get; set; }
         public virtual Season Season { get; set; }
         public virtual Team HomeTeam { get; set; }
         public virtual Team AwayTeam { get; set; }
