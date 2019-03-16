@@ -86,10 +86,24 @@
                         @Html.DisplayFor(modelItem => item.Gender)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Email)
+                        @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+                        {
+                            <p>Hidden by request of player</p>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Email)
+                        }
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
+                        @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+                        {
+                            <p>Hidden by request of player</p>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Position)
