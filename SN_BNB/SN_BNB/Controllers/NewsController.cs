@@ -20,11 +20,11 @@ namespace SN_BNB.Controllers
             DateTime Now = DateTime.Now;
             foreach (News news in _context.News)
             {
-                if (Now.Date == news.Date.Date)
+                if ((Now - news.Date).Days == 0)
                 {
-                    if (Now.Hour == news.Date.Hour)
+                    if ((Now - news.Date).Hours == 0)
                     {
-                        if (Now.ToString("yyyy-MM-dd") == news.Date.ToString("yyyy-MM-dd"))
+                        if ((Now - news.Date).Minutes == 0)
                         {
                             news.TimeSince = ((Now - news.Date).Seconds.ToString() + " seconds ago");
                         }
