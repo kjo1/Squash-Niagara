@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190316001144_initial")]
+    [Migration("20190316001436_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,6 +100,9 @@ namespace SN_BNB.Data.SNMigrations
                     b.Property<int>("LocationBuildingNumber");
 
                     b.Property<string>("LocationCity")
+                        .IsRequired();
+
+                    b.Property<string>("LocationName")
                         .IsRequired();
 
                     b.Property<string>("LocationStreet")

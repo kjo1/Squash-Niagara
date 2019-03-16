@@ -100,6 +100,9 @@ namespace SN_BNB.Data.SNMigrations
                     b.Property<string>("LocationCity")
                         .IsRequired();
 
+                    b.Property<string>("LocationName")
+                        .IsRequired();
+
                     b.Property<string>("LocationStreet")
                         .IsRequired();
 

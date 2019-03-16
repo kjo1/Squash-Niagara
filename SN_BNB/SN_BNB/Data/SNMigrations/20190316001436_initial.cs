@@ -32,6 +32,7 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    LocationName = table.Column<string>(nullable: false),
                     LocationCity = table.Column<string>(nullable: false),
                     LocationStreet = table.Column<string>(nullable: false),
                     LocationBuildingNumber = table.Column<int>(nullable: false)
