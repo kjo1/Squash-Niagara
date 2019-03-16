@@ -17,6 +17,24 @@ namespace SN_BNB.Controllers
         public NewsController(SNContext context)
         {
             _context = context;
+            DateTime Now = DateTime.Now;
+            foreach (News news in _context.News)
+            {
+                if (Now.Date == news.Date.Date)
+                {
+                    if (Now.Hour == news.Date.Hour)
+                    {
+                        if (Now.ToString("yyyy-MM-dd") == news.Date.ToString("yyyy-MM-dd"))
+                        {
+                            news.TimeSince = ((Now - news.Date).Seconds.ToString() + " seconds ago");
+                        }
+                        else { news.TimeSince = ((Now - news.Date).Minutes.ToString() + " minutes ago"); }
+                    }
+                    else { news.TimeSince = ((Now - news.Date).Hours.ToString() + " hours ago"); }
+                }
+                else { news.TimeSince = ((Now - news.Date).Days.ToString() + " days ago"); }
+            }
+            _context.SaveChangesAsync();
         }
 
         // GET: News
