@@ -1,4 +1,4 @@
-* {
+/** {
     box-sizing: border-box;
 }
 
@@ -8,9 +8,9 @@ ul {
 
 body {
     font-family: Verdana, sans-serif;
-}
+}*/
 
-.rightnav {
+/*.rightnav {
     display: inline-flex;
     margin: 0;
     padding: 0;
@@ -27,7 +27,7 @@ body {
 
 .dropdown-item {
     font-size: 11px;
-}
+}*/
 
 .card-header {
     font-size: 1.2em;
@@ -39,11 +39,11 @@ body {
 }
 
 .btn {
-    background-color: #5E54A0;
-    border-color: #5E54A0;
+    background-color: #383361;
+    border-color: #383361;
 }
 
     .btn:hover {
-        background-color: #383361;
-        border-color: #383361;
+        background-color: #5E54A0;
+        border-color: #5E54A0;
     }

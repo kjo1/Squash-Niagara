@@ -36,8 +36,8 @@
                     </li>
                 </ul>
                 @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control" })
-                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control" })
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name"})
+                <button id="btnSearch"class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
         </nav>
 
@@ -45,7 +45,7 @@
             <table class="table table-light table-hover table-striped">
                 <caption>Position 1/2 of Teams</caption>
                 <thead class="thead-light">
-                    <tr id="btnTitle">
+                    <tr id="playCol">
                         <th scope="col">#</th>
                         <th>
                             <input type="submit" name="actionButton" value="Player" class="btn btn-link" />
