@@ -34,7 +34,7 @@
 /* unvisited link */
 a:link {
     color: #383361;
-    font-size:18px;
+    /*font-size:18px;*/
 }
 
 /* visited link */
