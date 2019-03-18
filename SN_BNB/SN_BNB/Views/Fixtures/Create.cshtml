@@ -28,16 +28,22 @@
                 <span asp-validation-for="AwayScore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="idHomeTeam" class="control-label"></label>
-                <select asp-for="idHomeTeam" class="form-control" asp-items="ViewBag.idHomeTeam"></select>
+                <label asp-for="idHomeTeam" class="control-label" ></label>
+                <select asp-for="idHomeTeam" class="form-control" asp-items="ViewBag.idHomeTeam">
+                    <option>Select a Home Team</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="idAwayTeam" class="control-label"></label>
-                <select asp-for="idAwayTeam" class="form-control" asp-items="ViewBag.idAwayTeam"></select>
+                <select asp-for="idAwayTeam" class="form-control" asp-items="ViewBag.idAwayTeam">
+                    <option>Select an Away Team</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Season_idSeason" class="control-label"></label>
-                <select asp-for="Season_idSeason" class="form-control" asp-items="ViewBag.Season_idSeason"></select>
+                <select asp-for="Season_idSeason" class="form-control" asp-items="ViewBag.Season_idSeason">
+                    <option>Select a Season</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

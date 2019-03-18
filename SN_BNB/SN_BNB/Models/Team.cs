@@ -43,7 +43,9 @@ namespace SN_BNB.Models
         public virtual Division Division { get; set; }
 
         public ICollection<Player> Players { get; set; }
-        
+        public ICollection<Fixture> HomeFixtures { get; set; }
+        public ICollection<Fixture> AwayFixtures { get; set; }
+
         [Display(Name="Seasons")]
         public ICollection<Season_has_Team> Season_has_Teams { get; set; }      
     }
