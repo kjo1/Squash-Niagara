@@ -27,11 +27,6 @@ namespace SN_BNB.Controllers
 
         public IActionResult Index()
         {
-            //ViewData["Player"] = _context.Players
-            //    .Include(m => m.Teams)
-            //    .ThenInclude(m => )
-            //    .Include(m => m.P)
-            //    .FirstOrDefaultAsync(m => m.Email == User.Identity.Name);
             return View();
         }
 

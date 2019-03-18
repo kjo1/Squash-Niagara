@@ -27,7 +27,6 @@ namespace SN_BNB.Controllers
             var matches = from d in _context.Matches
                           .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)
                           select d;
-            //var sNContext = _context.Matches.Include(m => m.Fixture).Include(m => m.Player);
             if (!string.IsNullOrEmpty(SearchPlayer))
             {
                 matches = matches.Where(m => m.Player.FullName.Contains(SearchPlayer));

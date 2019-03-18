@@ -57,13 +57,11 @@ namespace SN_BNB.Controllers
                 {
                    teams = teams
                         .OrderBy(t => t.TeamCreatedOn);
-                        //.ThenBy(t => t.TeamName);
                 }
                 else
                 {
                     teams = teams
                         .OrderByDescending(t => t.TeamCreatedOn);
-                    //.ThenByDescending(t => t.TeamName);
                 }
             }
             else if (sortField == "Team Name")

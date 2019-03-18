@@ -24,7 +24,7 @@ namespace SN_BNB.Controllers
         public UserRolesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
-            _userManager = userManager;// serviceProvider.GetRequiredService<UserManager<IdentityRole>>();
+            _userManager = userManager;
         }
         // GET: User
         public async Task<IActionResult> Index()

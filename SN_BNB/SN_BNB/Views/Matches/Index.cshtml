@@ -37,12 +37,6 @@
     <table class="table">
         <thead>
             <tr>
-                @*<th>
-                        <input type="submit" name="actionButton" value="Player1" class="btn btn-link" />
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Player2Score)
-                    </th>*@
                 <th>
                     <input type="submit" name="actionButton" value="Players" class="btn btn-link" />
                 </th>
@@ -62,12 +56,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Player1Score)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Player2Score)
-                        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.MatchPosition)
                     </td>

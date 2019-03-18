@@ -287,12 +287,5 @@ namespace SN_BNB.Controllers
         {
             return _context.Fixtures.Any(e => e.ID == id);
         }
-        //private void PopulateDropDownLists(Fixture fixture = null)
-        //{
-        //    var dQuery = from d in _context.Teams
-        //                 select d;
-        //    ViewData["TeamsID"] = new SelectList(dQuery, "ID", "TeamName", fixture?.idHomeTeam);
-        //    ViewData["TeamsID"] = new SelectList(dQuery, "ID", "TeamName", fixture?.idAwayTeam);
-        //}
     }
 }

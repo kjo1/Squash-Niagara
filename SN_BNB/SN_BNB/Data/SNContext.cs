@@ -87,9 +87,3 @@ namespace SN_BNB.Data
         }     
     }
 }
-
-//modelBuilder.Entity<Player>()
-//    .HasMany<Match>(p => p.Matches)
-//    .WithOne(m => m.)
-//    .HasForeignKey(m => m.PlayerID)
-//    .OnDelete(DeleteBehavior.Restrict);

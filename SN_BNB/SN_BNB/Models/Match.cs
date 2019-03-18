@@ -34,7 +34,6 @@ namespace SN_BNB.Models
         public Fixture Fixture { get; set; }
         [Display(Name = "Players")]
         public Player Player { get; set; }
-        //public Player Player2 { get; set; }
 
         public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
     }

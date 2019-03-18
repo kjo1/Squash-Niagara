@@ -22,7 +22,6 @@ namespace SN_BNB.Controllers
         // GET: Players
         public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID)
         {
-            //var sNContext = _context.Players.Include(p => p.Team);
             PopulateDropDownLists();
 
             var players = from p in _context.Players
@@ -65,7 +64,6 @@ namespace SN_BNB.Controllers
                 {
                     players = players
                         .OrderByDescending(p => p.Team);
-                    //.ThenByDescending(t => t.TeamName);
                 }
             }
             else if (sortField == "Player")
