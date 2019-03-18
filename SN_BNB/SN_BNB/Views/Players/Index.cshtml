@@ -7,15 +7,15 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        <a asp-action="Create">Create New</a>
+    <p >
+        <a asp-action="Create" style="font-weight:600; font-size:25px; color:purple;">Create New</a>
     </p>
 }
 <form asp-action="Index">
     <div class="container">
         <h3>Players</h3>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,8 +36,8 @@
                     </li>
                 </ul>
                 @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control" })
-                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name"})
-                <button id="btnSearch"class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name" })
+                <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
         </nav>
 
@@ -54,17 +54,17 @@
                             <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
                         </th>
                         @*<th>
-                            <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
-                        </th>*@
+                                <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
+                            </th>*@
                         @*<th>
-                            <input type="submit" name="actionButton" value="Email" class="btn btn-link" disabled="disabled" />
-                        </th>*@
+                                <input type="submit" name="actionButton" value="Email" class="btn btn-link" disabled="disabled" />
+                            </th>*@
                         @*<th>
-                            <input type="submit" name="actionButton" value="Phone" class="btn btn-link" disabled="disabled" />
-                        </th>*@
+                                <input type="submit" name="actionButton" value="Phone" class="btn btn-link" disabled="disabled" />
+                            </th>*@
                         @*<th>
-                            <input type="submit" name="actionButton" value="Positon" class="btn btn-link" />
-                        </th>*@
+                                <input type="submit" name="actionButton" value="Positon" class="btn btn-link" />
+                            </th>*@
                         <th>
                             <input type="submit" name="actionButton" value="Played" class="btn btn-link" />
                         </th>
@@ -102,31 +102,31 @@
                             </td>
 
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.Gender)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>*@
                             @*<td>
-                                @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
-                                {
-                                    <p>Hidden by request of player</p>
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(modelItem => item.Email)
-                                }
-                            </td>*@
+                                    @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+                                    {
+                                        <p>Hidden by request of player</p>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    }
+                                </td>*@
                             @*<td>
-                                @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
-                                {
-                                    <p>Hidden by request of player</p>
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(modelItem => item.Phone)
-                                }
-                            </td>*@
+                                    @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+                                    {
+                                        <p>Hidden by request of player</p>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Phone)
+                                    }
+                                </td>*@
                             @*<td>
-                                @Html.DisplayFor(modelItem => item.Position)
-                            </td>*@
+                                    @Html.DisplayFor(modelItem => item.Position)
+                                </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Played)
                             </td>
@@ -145,9 +145,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Points)
                             </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                                <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                            <td id="imgSize">
+                                <a asp-action="Edit" asp-route-id="@item.ID">
+                                    <img src="~/images/edit.png" style="width:28px; height:28px" />
+                                </a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">
+                                    <img src="~/images/Archive.png" style="width:28px; height:28px" />
+                                </a>
                             </td>
                         </tr>
                     }
