@@ -33,10 +33,10 @@
                 @Html.DisplayFor(modelItem => item.Season_Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SeasonStart)
+                @item.SeasonStart.ToString("MM/dd/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SeasonEnd)
+                @item.SeasonEnd.ToString("MM/dd/yyyy")
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
