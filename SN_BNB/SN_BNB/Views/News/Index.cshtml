@@ -10,12 +10,13 @@
         <a asp-action="Create">Create New</a>
     </p>
 }
-<div class="container">
-    <h2>News</h2>
-    <hr class="my-3">
-    <div class="row">
-        <div class="col-3">
-            <!sidebar>
+    <div class="container">
+        <br>
+        <h2>News</h2>
+        <hr class="my-3">
+        <div class="row">
+            <div class="col-3">
+                <!sidebar>
                 @foreach (var item in Model)
                 {
                     <div class="row">
@@ -33,21 +34,21 @@
                         </div>
                     </div>
                 }
-        </div>
-        <div class="col-9">
-            @foreach (var item in Model)
-            {
-                <div class="jumbotron">
-                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-                    <br /><br />
-                    <h6 class="card-subtitle text-muted">
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </h6>
-                </div>
-                <p>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </p>
-            }
-        </div>
+            </div>
+            <div class="col-9">
+                @foreach (var item in Model)
+                {
+                    <div class="jumbotron">
+                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                        <br /><br />
+                        <h6 class="card-subtitle text-muted">
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </h6>
+                    </div>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </p>
+                }
+            </div>
         </div>
     </div>
