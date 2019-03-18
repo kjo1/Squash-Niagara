@@ -115,21 +115,27 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("FixtureID");
 
-                    b.Property<int>("MatchPosition");
+                    b.Property<int>("MatchPositionPlayer1");
+
+                    b.Property<int>("MatchPositionPlayer2");
 
                     b.Property<TimeSpan>("MatchTime");
 
+                    b.Property<int>("Player1ID");
+
                     b.Property<int>("Player1Score");
 
-                    b.Property<int>("Player2Score");
+                    b.Property<int>("Player2ID");
 
-                    b.Property<int>("PlayerID");
+                    b.Property<int>("Player2Score");
 
                     b.HasKey("ID");
 
                     b.HasIndex("FixtureID");
 
-                    b.HasIndex("PlayerID");
+                    b.HasIndex("Player1ID");
+
+                    b.HasIndex("Player2ID");
 
                     b.ToTable("Matches");
                 });
@@ -326,9 +332,14 @@ namespace SN_BNB.Data.SNMigrations
                         .HasForeignKey("FixtureID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SN_BNB.Models.Player", "Player")
+                    b.HasOne("SN_BNB.Models.Player", "Player1")
                         .WithMany()
-                        .HasForeignKey("PlayerID")
+                        .HasForeignKey("Player1ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SN_BNB.Models.Player", "Player2")
+                        .WithMany()
+                        .HasForeignKey("Player2ID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

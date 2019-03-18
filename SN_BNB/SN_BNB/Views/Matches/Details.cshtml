@@ -23,10 +23,16 @@
             @Html.DisplayFor(model => model.Player2Score)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.MatchPosition)
+            @Html.DisplayNameFor(model => model.MatchPositionPlayer1)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.MatchPositionPlayer2)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.MatchPosition)
+            @Html.DisplayFor(model => model.MatchPositionPlayer1)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.MatchPositionPlayer2)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.MatchTime)
@@ -41,10 +47,16 @@
             @Html.DisplayFor(model => model.Fixture.ID)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Player)
+            @Html.DisplayNameFor(model => model.Player1)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Player.Email)
+            @Html.DisplayFor(model => model.Player1.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player2.Email)
         </dd>
     </dl>
 </div>

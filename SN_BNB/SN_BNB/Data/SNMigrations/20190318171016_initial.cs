@@ -129,27 +129,11 @@ namespace SN_BNB.Data.SNMigrations
                     idAwayTeam = table.Column<int>(nullable: false),
                     Season_idSeason = table.Column<int>(nullable: false),
                     location_locationId = table.Column<int>(nullable: false),
-                    LocationID = table.Column<int>(nullable: true),
-                    HomeTeamID = table.Column<int>(nullable: true),
-                    AwayTeamID = table.Column<int>(nullable: true)
+                    LocationID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fixtures", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Fixtures_Teams_AwayTeamID",
-                        column: x => x.AwayTeamID,
-                        principalSchema: "SN",
-                        principalTable: "Teams",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Fixtures_Teams_HomeTeamID",
-                        column: x => x.HomeTeamID,
-                        principalSchema: "SN",
-                        principalTable: "Teams",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Fixtures_Location_LocationID",
                         column: x => x.LocationID,
@@ -164,6 +148,20 @@ namespace SN_BNB.Data.SNMigrations
                         principalTable: "Seasons",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Fixtures_Teams_idAwayTeam",
+                        column: x => x.idAwayTeam,
+                        principalSchema: "SN",
+                        principalTable: "Teams",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Fixtures_Teams_idHomeTeam",
+                        column: x => x.idHomeTeam,
+                        principalSchema: "SN",
+                        principalTable: "Teams",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,12 +174,16 @@ namespace SN_BNB.Data.SNMigrations
                     FirstName = table.Column<string>(maxLength: 45, nullable: false),
                     MiddleName = table.Column<string>(maxLength: 45, nullable: true),
                     LastName = table.Column<string>(maxLength: 100, nullable: false),
-                    Gender = table.Column<string>(nullable: false),
+                    Gender = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 255, nullable: false),
                     Phone = table.Column<long>(nullable: false),
                     Position = table.Column<int>(nullable: false),
+                    Played = table.Column<int>(nullable: false),
                     Win = table.Column<int>(nullable: false),
                     Loss = table.Column<int>(nullable: false),
+                    For = table.Column<int>(nullable: false),
+                    Against = table.Column<int>(nullable: false),
+                    Points = table.Column<int>(nullable: false),
                     TeamID = table.Column<int>(nullable: false),
                     PlayerWantsInfoHidden = table.Column<bool>(nullable: false)
                 },
@@ -233,10 +235,12 @@ namespace SN_BNB.Data.SNMigrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Player1Score = table.Column<int>(nullable: false),
                     Player2Score = table.Column<int>(nullable: false),
-                    MatchPosition = table.Column<int>(nullable: false),
+                    MatchPositionPlayer1 = table.Column<int>(nullable: false),
+                    MatchPositionPlayer2 = table.Column<int>(nullable: false),
                     MatchTime = table.Column<TimeSpan>(nullable: false),
                     FixtureID = table.Column<int>(nullable: false),
-                    PlayerID = table.Column<int>(nullable: false)
+                    Player1ID = table.Column<int>(nullable: false),
+                    Player2ID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -249,8 +253,15 @@ namespace SN_BNB.Data.SNMigrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Matches_Players_PlayerID",
-                        column: x => x.PlayerID,
+                        name: "FK_Matches_Players_Player1ID",
+                        column: x => x.Player1ID,
+                        principalSchema: "SN",
+                        principalTable: "Players",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Matches_Players_Player2ID",
+                        column: x => x.Player2ID,
                         principalSchema: "SN",
                         principalTable: "Players",
                         principalColumn: "ID",
@@ -298,18 +309,6 @@ namespace SN_BNB.Data.SNMigrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fixtures_AwayTeamID",
-                schema: "SN",
-                table: "Fixtures",
-                column: "AwayTeamID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Fixtures_HomeTeamID",
-                schema: "SN",
-                table: "Fixtures",
-                column: "HomeTeamID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Fixtures_LocationID",
                 schema: "SN",
                 table: "Fixtures",
@@ -322,16 +321,34 @@ namespace SN_BNB.Data.SNMigrations
                 column: "Season_idSeason");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Fixtures_idAwayTeam",
+                schema: "SN",
+                table: "Fixtures",
+                column: "idAwayTeam");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fixtures_idHomeTeam",
+                schema: "SN",
+                table: "Fixtures",
+                column: "idHomeTeam");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Matches_FixtureID",
                 schema: "SN",
                 table: "Matches",
                 column: "FixtureID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matches_PlayerID",
+                name: "IX_Matches_Player1ID",
                 schema: "SN",
                 table: "Matches",
-                column: "PlayerID");
+                column: "Player1ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Matches_Player2ID",
+                schema: "SN",
+                table: "Matches",
+                column: "Player2ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_Email",

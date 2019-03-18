@@ -29,7 +29,7 @@ namespace SN_BNB.Controllers
                           select d;
             if (!string.IsNullOrEmpty(SearchPlayer))
             {
-                matches = matches.Where(m => m.Player.FullName.Contains(SearchPlayer));
+                matches = matches.Where(m => m.Player1.FullName.Contains(SearchPlayer));
             }
 
             if (!String.IsNullOrEmpty(actionButton))
@@ -48,12 +48,12 @@ namespace SN_BNB.Controllers
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     matches = matches
-                        .OrderBy(m => m.Player);
+                        .OrderBy(m => m.Player1);
                 }
                 else
                 {
                     matches = matches
-                        .OrderByDescending(m => m.Player);
+                        .OrderByDescending(m => m.Player1);
                 }
             }
             else if (sortField == "Position")
@@ -61,12 +61,12 @@ namespace SN_BNB.Controllers
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     matches = matches
-                        .OrderBy(m => m.MatchPosition);
+                        .OrderBy(m => m.MatchPositionPlayer1);
                 }
                 else
                 {
                     matches = matches
-                        .OrderByDescending(m => m.MatchPosition);
+                        .OrderByDescending(m => m.MatchPositionPlayer1);
                 }
             }
             else if (sortField == "Time")
@@ -87,12 +87,12 @@ namespace SN_BNB.Controllers
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     matches = matches
-                        .OrderBy(m => m.Player);
+                        .OrderBy(m => m.Player1);
                 }
                 else
                 {
                     matches = matches
-                        .OrderByDescending(m => m.Player);
+                        .OrderByDescending(m => m.Player1);
                 }
             }
             ViewData["sortField"] = sortField;
@@ -111,7 +111,8 @@ namespace SN_BNB.Controllers
 
             var match = await _context.Matches
                 .Include(m => m.Fixture)
-                .Include(m => m.Player)
+                .Include(m => m.Player1)
+                .Include(m => m.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (match == null)
             {
@@ -149,7 +150,8 @@ namespace SN_BNB.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-                ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+                ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
+                ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email", match.Player2ID);
 
             }
             catch (Exception)
@@ -178,7 +180,8 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
+            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email", match.Player2ID);
             PopulateAssignedPlayerData(match);
             return View(match);
         }
@@ -226,7 +229,8 @@ namespace SN_BNB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
+            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email", match.Player2ID);
             PopulateAssignedPlayerData(matchToUpdate);
             return View(match);
         }
@@ -241,7 +245,8 @@ namespace SN_BNB.Controllers
 
             var match = await _context.Matches
                 .Include(m => m.Fixture)
-                .Include(m => m.Player)
+                .Include(m => m.Player1)
+                .Include(m => m.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (match == null)
             {
