@@ -68,7 +68,5 @@ namespace SN_BNB.Data
                 //Not in any role
             }
         }
-
-
     }
 }

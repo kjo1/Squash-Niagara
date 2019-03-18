@@ -97,5 +97,7 @@ namespace SN_BNB.Data
             modelBuilder.Entity<AssignedMatchPlayer>()
             .HasKey(t => new { t.MatchID, t.PlayerID });
         }
+
+        public DbSet<SN_BNB.Models.Location> Location { get; set; }
     }
 }

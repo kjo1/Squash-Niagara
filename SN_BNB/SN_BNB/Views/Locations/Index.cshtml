@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SN_BNB.Models.Location>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationStreet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationBuildingNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationBuildingNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
