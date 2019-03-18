@@ -34,7 +34,7 @@ body {
     color: #5E54A0;
 }
 
-.btn {
+.btnSearch {
     color: gray;
     border-color: #383361;
 }
@@ -48,6 +48,10 @@ body {
     color: #ffffff;
     background-color: #161617;
     border-color: #494F57;
+}
+
+.btnTitle {
+
 }
 
 /*.table-hover:matches(:hover){
@@ -87,6 +91,10 @@ max-width:100%;
 
 footer {
     text-align: right;
+}
+
+.form-control {
+width:200px;
 }
 
 

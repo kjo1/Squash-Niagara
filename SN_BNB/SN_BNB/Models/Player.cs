@@ -34,7 +34,6 @@ namespace SN_BNB.Models
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters long.")]
         public string LastName { get; set; }
 
-        [Required]
         public string Gender { get; set; }
 
         [Required(ErrorMessage = "Email Address is required.")]
@@ -53,11 +52,19 @@ namespace SN_BNB.Models
         [Range(1,4)]
         public int Position { get; set; }
 
-        [Display(Name = "Win(s)")]
+        public int Played { get; set; }
+
+        [Display(Name = "Won")]
         public int Win { get; set; }
 
-        [Display(Name = "Loss(es) ")]
+        [Display(Name = "Lost ")]
         public int Loss { get; set; }
+
+        public int For { get; set; }
+  
+        public int Against { get; set; }
+
+        public int Points { get; set; }
 
         [Required(ErrorMessage = "You must select a Primary Team")]
         [Display(Name ="Team")]

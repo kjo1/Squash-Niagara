@@ -3,123 +3,157 @@
 @{
     ViewData["Title"] = "Index";
 }
-<br />
-<h2>Players</h2>
+<link href="~/css/team.css" rel="stylesheet" />
+
 @if (User.IsInRole("Admin"))
 {
     <p>
-            <a asp-action="Create">Create New</a>
-        </p>
+        <a asp-action="Create">Create New</a>
+    </p>
 }
-
 <form asp-action="Index">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="container">
+        <h3>Players</h3>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <div class="form-group">
-                        <label>Search By Player Name</label>
-                        @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class="form-group">
-                        <label>Select a Team:</label>
-                        @Html.DropDownList("TeamID", null, "All Teams", htmlAttributes: new { @class = "form-control" })
-                    </div>
-                </li>
-            </ul>
-            <button class="btn btn-outline-success" type="submit">Search</button>
-            <button class="btn btn-outline-secondary" type="submit">Clear</button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            2018-2019 Men's Divisions
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
+                            @*<div class="dropdown-divider"></div>*@
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
+                            <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
+                        </div>
+                    </li>
+                </ul>
+                @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control" })
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control" })
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </nav>
+
+        <div class="table-responsive-sm">
+            <table class="table table-light table-hover table-striped">
+                <caption>Position 1/2 of Teams</caption>
+                <thead class="thead-light">
+                    <tr id="btnTitle">
+                        <th scope="col">#</th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Player" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
+                        </th>
+                        @*<th>
+                            <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
+                        </th>*@
+                        @*<th>
+                            <input type="submit" name="actionButton" value="Email" class="btn btn-link" disabled="disabled" />
+                        </th>*@
+                        @*<th>
+                            <input type="submit" name="actionButton" value="Phone" class="btn btn-link" disabled="disabled" />
+                        </th>*@
+                        @*<th>
+                            <input type="submit" name="actionButton" value="Positon" class="btn btn-link" />
+                        </th>*@
+                        <th>
+                            <input type="submit" name="actionButton" value="Played" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Won" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Lost" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="For" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Againt" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <span data-toggle="tooltip" title="6= 3:0//  5 = 3:1//  4 = 3:2//  3 = 2:3//  2 = 1:3//  1 = 0:3">
+                                <input type="submit" name="actionButton" value="Point" class="btn btn-link" />
+                            </span>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row"></th>
+
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Team.TeamName)
+                            </td>
+
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>*@
+                            @*<td>
+                                @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+                                {
+                                    <p>Hidden by request of player</p>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                }
+                            </td>*@
+                            @*<td>
+                                @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+                                {
+                                    <p>Hidden by request of player</p>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                }
+                            </td>*@
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Position)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Played)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Win)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Loss)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.For)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Against)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Points)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
         </div>
-    </nav>
-    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
-    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
-
-    <table class="table">
-        <thead class="thead-light">
-
-            <tr>
-                <th>
-                    <input type="submit" name="actionButton" value="Player" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Email" class="btn btn-link" disabled="disabled" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Phone" class="btn btn-link" disabled="disabled" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Positon" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Team.TeamName)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
-                        {
-                            <p>Hidden by request of player</p>
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.Email)
-                        }
-                    </td>
-                    <td>
-                        @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
-                        {
-                            <p>Hidden by request of player</p>
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.Phone)
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Position)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Win)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Loss)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    </div>
 </form>
