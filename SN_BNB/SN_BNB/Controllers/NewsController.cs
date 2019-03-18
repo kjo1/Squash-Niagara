@@ -17,6 +17,8 @@ namespace SN_BNB.Controllers
         public NewsController(SNContext context)
         {
             _context = context;
+
+            //for the sidebar, rather than displaying the date, display the time since it was posted
             DateTime Now = DateTime.Now;
             foreach (News news in _context.News)
             {

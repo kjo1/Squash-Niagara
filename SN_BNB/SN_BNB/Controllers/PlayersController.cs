@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using SN_BNB.Data;
 using SN_BNB.Models;
 
@@ -17,6 +20,85 @@ namespace SN_BNB.Controllers
         public PlayersController(SNContext context)
         {
             _context = context;
+        }
+
+        public struct PlayerStruct
+        {
+            public string FirstName;
+            public string MiddleName;
+            public string LastName;
+            public string Email;
+            public int Phone;
+            public string Gender;
+            public int Wins;
+            public int Losses;
+            public int position;
+            public Team Team; //need to find using a search
+        }
+
+        // GET: Seasons/ExcelUpload
+        public IActionResult ExcelUpload()
+        {
+            return View(new Season());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExcelUpload([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Win,Loss,TeamID")] Player player, IFormFile file)
+        {
+            //get all of the Teams so we can search through them
+            var teams = from t in _context.Teams select t;
+
+            //create a struct to hold player data
+            List<PlayerStruct> dataStructs = new List<PlayerStruct>();
+
+            //receive excel file
+            ExcelPackage excelPackage;
+            try
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(memoryStream);
+                    excelPackage = new ExcelPackage(memoryStream);
+                }
+                var worksheet = excelPackage.Workbook.Worksheets[0];
+
+                //parse the file and update struct
+                var start = worksheet.Dimension.Start;
+                var end = worksheet.Dimension.End;
+
+                for (int row = start.Row; row <= end.Row; row++)
+                {
+                    PlayerStruct tempStruct = new PlayerStruct
+                    {
+                        //Get Team object by executing a WHERE with TeamName
+                        Team = teams.Where(t => t.TeamName == worksheet.Cells[row, 5].Text).First()
+                    };
+                    dataStructs.Add(tempStruct);
+                }
+
+                //make new players using the struct
+                foreach (PlayerStruct playerStruct in dataStructs)
+                {
+                    Player tempPlayer = new Player();
+                    _context.Players.Add(tempPlayer);
+
+                    //update tables
+                    _context.SaveChanges();
+                }
+
+                //update tables
+                await _context.SaveChangesAsync();
+
+            }
+
+            //let the user know that the file was not parsed properly
+            catch (Exception ex)
+            {
+                throw (ex);
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Players
