@@ -3,92 +3,103 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/css/team.css" rel="stylesheet" />
 <br />
-<h2>Fixtures</h2>
+
 @if (User.IsInRole("Admin"))
 {
     <p>
         <a asp-action="Create">Create New</a>
     </p>
 }
+
 <form asp-action="Index">
+    <div class="container">
+        <h2>Fixtures</h2>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            2018-2019 Men's Divisions
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
+                            @*<div class="dropdown-divider"></div>*@
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
+                            <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
+                        </div>
+                    </li>
+                </ul>
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team" })
+                <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </nav>
 
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <div class="form-group">
-                        <label>Search By Team</label>
-                        @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                </li>
-            </ul>
-            <button class="btn btn-outline-success" type="submit">Search</button>
-            <button class="btn btn-outline-secondary" type="submit">Clear</button>
+        <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+        <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+        <div class="table-responsive-sm">
+            <table class="table table-light table-hover table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            <input type="submit" name="actionButton" value="Time" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Home Score" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Away Score" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Home Team" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Away Team" class="btn btn-link" />
+                        </th>
+                        <th>
+                            <input type="submit" name="actionButton" value="Season" class="btn btn-link" />
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FixtureDateTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HomeScore)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AwayScore)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Season.Season_Title)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
         </div>
-
-    </nav>
-    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
-    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
-                <th>
-                    <input type="submit" name="actionButton" value="Time" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Home Score" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Away Score" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Home Team" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Away Team" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Season" class="btn btn-link" />
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FixtureDateTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HomeScore)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AwayScore)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Season.Season_Title)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </form>
