@@ -155,9 +155,7 @@ namespace SN_BNB.Controllers
         // GET: Fixtures/Create
         public IActionResult Create()
         {
-            ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title");
-            ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
-            ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
+            PopulateDropDownLists();
             return View();
         }
 
@@ -204,14 +202,17 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var fixture = await _context.Fixtures.FindAsync(id);
+            var fixture = await _context.Fixtures
+                .Include(f => f.Season)
+                .Include(f => f.HomeTeam)
+                .Include(f => f.AwayTeam)
+                .FirstOrDefaultAsync(f => f.ID == id);
             if (fixture == null)
             {
                 return NotFound();
             }
-            ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
-            ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
-            ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
+            PopulateDropDownLists(fixture);
+
             return View(fixture);
         }
 
@@ -287,5 +288,19 @@ namespace SN_BNB.Controllers
         {
             return _context.Fixtures.Any(e => e.ID == id);
         }
+        private void PopulateDropDownLists(Fixture fixture = null)
+        {
+            var aQuery = from f in _context.Seasons
+                         orderby f.SeasonStart
+                         select f;
+            ViewData["Season_idSeason"] = new SelectList(aQuery, "ID", "Season_Title", fixture?.Season_idSeason);
+
+            var tQuery = from f in _context.Teams
+                         orderby f.TeamName
+                         select f;
+            ViewData["idHomeTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idHomeTeam);
+            ViewData["idAwayTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idAwayTeam);
+        }
+        
     }
 }

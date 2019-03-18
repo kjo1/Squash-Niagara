@@ -16,18 +16,25 @@ namespace SN_BNB.Models
         [Required]
         [Display(Name ="Date/Time")]
         public DateTime FixtureDateTime { get; set; }
+
         [Required]
         [Display(Name = "Home Team Score")]
         public int HomeScore { get; set; }
+
         [Required]
         [Display(Name = "Away Team Score")]
         public int AwayScore { get; set; }
 
         [Display(Name="Home Team")]
+        [Range(1, int.MaxValue)]
         public int idHomeTeam { get; set; }
+
         [Display(Name = "Away Team")]
+        [Range(1, int.MaxValue)]
         public int idAwayTeam { get; set; }
+
         [Display(Name = "Season")]
+        [Range(1, int.MaxValue)]
         public int Season_idSeason { get; set; }
 
         [Required]

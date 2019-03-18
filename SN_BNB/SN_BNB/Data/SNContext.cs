@@ -53,6 +53,18 @@ namespace SN_BNB.Data
                 .HasForeignKey(t => t.TeamID)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Fixture>()
+                .HasOne(f => f.AwayTeam)
+                .WithMany(t => t.AwayFixtures)
+                .HasForeignKey(f => f.idAwayTeam)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Fixture>()
+                .HasOne(f => f.HomeTeam)
+                .WithMany(t => t.HomeFixtures)
+                .HasForeignKey(f => f.idHomeTeam)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<AssignedMatchPlayer>()
                 .HasOne(pt => pt.Match)
                 .WithMany(t => t.AssignedMatchPlayers)
@@ -63,7 +75,7 @@ namespace SN_BNB.Data
             modelBuilder.Entity<Player>()
                 .HasIndex(p => p.Email)
                 .IsUnique();
-            
+
             // Unique Fields
             modelBuilder.Entity<Division>()
                 .HasIndex(d => d.DivisionName)
@@ -84,6 +96,6 @@ namespace SN_BNB.Data
 
             modelBuilder.Entity<AssignedMatchPlayer>()
             .HasKey(t => new { t.MatchID, t.PlayerID });
-        }     
+        }
     }
 }
