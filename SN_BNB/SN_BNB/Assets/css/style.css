@@ -43,7 +43,8 @@ body {
     border-color: #5E54A0;
 }
 
-    .btn:hover {
+.btn:hover {
         background-color: #383361;
         border-color: #383361;
-    }
+        opacity: 0.6
+}
