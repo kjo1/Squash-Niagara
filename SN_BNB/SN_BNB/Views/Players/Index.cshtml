@@ -53,18 +53,6 @@
                         <th>
                             <input type="submit" name="actionButton" value="Team" class="btn btn-link" />
                         </th>
-                        @*<th>
-                                <input type="submit" name="actionButton" value="Gender" class="btn btn-link" />
-                            </th>*@
-                        @*<th>
-                                <input type="submit" name="actionButton" value="Email" class="btn btn-link" disabled="disabled" />
-                            </th>*@
-                        @*<th>
-                                <input type="submit" name="actionButton" value="Phone" class="btn btn-link" disabled="disabled" />
-                            </th>*@
-                        @*<th>
-                                <input type="submit" name="actionButton" value="Positon" class="btn btn-link" />
-                            </th>*@
                         <th>
                             <input type="submit" name="actionButton" value="Played" class="btn btn-link" />
                         </th>
@@ -100,33 +88,6 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Team.TeamName)
                             </td>
-
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Gender)
-                                </td>*@
-                            @*<td>
-                                    @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
-                                    {
-                                        <p>Hidden by request of player</p>
-                                    }
-                                    else
-                                    {
-                                        @Html.DisplayFor(modelItem => item.Email)
-                                    }
-                                </td>*@
-                            @*<td>
-                                    @if (item.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
-                                    {
-                                        <p>Hidden by request of player</p>
-                                    }
-                                    else
-                                    {
-                                        @Html.DisplayFor(modelItem => item.Phone)
-                                    }
-                                </td>*@
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Position)
-                                </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Played)
                             </td>

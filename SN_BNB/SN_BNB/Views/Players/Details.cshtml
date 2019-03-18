@@ -37,15 +37,25 @@
         <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+        @if (Model.PlayerWantsInfoHidden && !User.IsInRole("Admin, Captain"))
+        {
+            <dd>Hidden by request of player</dd>
+        }
+        else
+        {
+            <dd>@Html.DisplayFor(modelItem => Model.Email)</dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Phone)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
+        @if (Model.PlayerWantsInfoHidden && !User.IsInRole("Admin, Captain"))
+        {
+            <dd>Hidden by request of player</dd>
+        }
+        else
+        {
+            <dd>@Html.DisplayFor(modelItem => Model.Phone)</dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Position)
         </dt>
