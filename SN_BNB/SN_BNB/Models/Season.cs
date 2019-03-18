@@ -20,9 +20,11 @@ namespace SN_BNB.Models
         public string Season_Title { get; set; }
         [Required]
         [Display(Name = "Season Start Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime SeasonStart { get; set; }
 
         [Display(Name = "Season End Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime SeasonEnd { get; set; }
 
         [NotMappedAttribute]

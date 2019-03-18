@@ -15,6 +15,7 @@ namespace SN_BNB.Models
         public int ID { get; set; }
         [Required]
         [Display(Name ="Date/Time")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FixtureDateTime { get; set; }
 
         [Required]
