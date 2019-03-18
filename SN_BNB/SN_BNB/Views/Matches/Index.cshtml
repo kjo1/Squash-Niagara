@@ -55,31 +55,25 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MatchPositionPlayer1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MatchPositionPlayer2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MatchTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fixture.ID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Player1.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Player2.FullName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatchPosition)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatchTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fixture.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Player.FullName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

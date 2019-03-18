@@ -3,20 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SN_BNB.Data;
 
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    partial class SNContextModelSnapshot : ModelSnapshot
+    [Migration("20190318155408_refresh")]
+    partial class refresh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -58,9 +60,13 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
+                    b.Property<int?>("AwayTeamID");
+
                     b.Property<DateTime>("FixtureDateTime");
 
                     b.Property<int>("HomeScore");
+
+                    b.Property<int?>("HomeTeamID");
 
                     b.Property<int?>("LocationID");
 
@@ -74,13 +80,13 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("AwayTeamID");
+
+                    b.HasIndex("HomeTeamID");
+
                     b.HasIndex("LocationID");
 
                     b.HasIndex("Season_idSeason");
-
-                    b.HasIndex("idAwayTeam");
-
-                    b.HasIndex("idHomeTeam");
 
                     b.ToTable("Fixtures");
                 });
@@ -299,6 +305,14 @@ namespace SN_BNB.Data.SNMigrations
 
             modelBuilder.Entity("SN_BNB.Models.Fixture", b =>
                 {
+                    b.HasOne("SN_BNB.Models.Team", "AwayTeam")
+                        .WithMany()
+                        .HasForeignKey("AwayTeamID");
+
+                    b.HasOne("SN_BNB.Models.Team", "HomeTeam")
+                        .WithMany()
+                        .HasForeignKey("HomeTeamID");
+
                     b.HasOne("SN_BNB.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationID");
@@ -306,16 +320,6 @@ namespace SN_BNB.Data.SNMigrations
                     b.HasOne("SN_BNB.Models.Season", "Season")
                         .WithMany("Fixtures")
                         .HasForeignKey("Season_idSeason")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SN_BNB.Models.Team", "AwayTeam")
-                        .WithMany("AwayFixtures")
-                        .HasForeignKey("idAwayTeam")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SN_BNB.Models.Team", "HomeTeam")
-                        .WithMany("HomeFixtures")
-                        .HasForeignKey("idHomeTeam")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
