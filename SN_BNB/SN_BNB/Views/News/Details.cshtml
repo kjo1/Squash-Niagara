@@ -10,8 +10,10 @@
     <hr />
     <div class="container">
         <h3>@Html.DisplayFor(model => model.Title)</h3><br />
-        <img src="~/images/article-placeholder.jpg" />
+        <div class="container-fluid">
+        <img src="~/images/article-placeholder.jpg" /><br /><br />
         <p>@Html.DisplayFor(model => model.Content)</p><br />
+        </div>
         <p><i>@Html.DisplayFor(model => model.Date)</i></p>
     </div>
     @*<dl class="dl-horizontal">
