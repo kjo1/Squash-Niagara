@@ -24,7 +24,6 @@ namespace SN_BNB.Data
                      {
                          DivisionName = "2018-2019 Men's Division 1/2"
                      },
-
                      new Division
                      {
                          DivisionName = "2018-2019 Men's Division 3"

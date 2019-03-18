@@ -1,9 +1,20 @@
+
 .nav-item:hover {
-    background-color: #5E54A0;
-    border-color: #5E54A0;
+    /*background-color: #5E54A0;
+    border-color: #5E54A0;*/
+    opacity: 0.6;
+    transition: 0.3s;
+}
+@media only screen and (max-width: 991px) {
+    .nav-item:hover {
+        background-color: #5E54A0;
+        border-color: #5E54A0;
+        /*opacity: 0.6;*/
+        transition: 0.5s;
+    }
 }
 
 
 .nav-item {
-    font-weight:600;
+    font-weight:500;
 }
