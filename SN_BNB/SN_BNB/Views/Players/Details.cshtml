@@ -37,7 +37,7 @@
         <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        @if (Model.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+        @if (Model.PlayerWantsInfoHidden && !(User.IsInRole("Admin") || User.IsInRole("Captain")))
         {
             <dd>Hidden by request of player</dd>
         }
@@ -48,7 +48,7 @@
         <dt>
             @Html.DisplayNameFor(model => model.Phone)
         </dt>
-        @if (Model.PlayerWantsInfoHidden && User.IsInRole("Admin, Captain"))
+        @if (Model.PlayerWantsInfoHidden && !(User.IsInRole("Admin") || User.IsInRole("Captain")))
         {
             <dd>Hidden by request of player</dd>
         }
