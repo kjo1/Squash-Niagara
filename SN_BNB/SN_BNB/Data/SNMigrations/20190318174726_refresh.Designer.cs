@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190318155408_refresh")]
+    [Migration("20190318174726_refresh")]
     partial class refresh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,13 +60,9 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<int?>("AwayTeamID");
-
                     b.Property<DateTime>("FixtureDateTime");
 
                     b.Property<int>("HomeScore");
-
-                    b.Property<int?>("HomeTeamID");
 
                     b.Property<int?>("LocationID");
 
@@ -80,13 +76,13 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AwayTeamID");
-
-                    b.HasIndex("HomeTeamID");
-
                     b.HasIndex("LocationID");
 
                     b.HasIndex("Season_idSeason");
+
+                    b.HasIndex("idAwayTeam");
+
+                    b.HasIndex("idHomeTeam");
 
                     b.ToTable("Fixtures");
                 });
@@ -305,14 +301,6 @@ namespace SN_BNB.Data.SNMigrations
 
             modelBuilder.Entity("SN_BNB.Models.Fixture", b =>
                 {
-                    b.HasOne("SN_BNB.Models.Team", "AwayTeam")
-                        .WithMany()
-                        .HasForeignKey("AwayTeamID");
-
-                    b.HasOne("SN_BNB.Models.Team", "HomeTeam")
-                        .WithMany()
-                        .HasForeignKey("HomeTeamID");
-
                     b.HasOne("SN_BNB.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationID");
@@ -320,6 +308,16 @@ namespace SN_BNB.Data.SNMigrations
                     b.HasOne("SN_BNB.Models.Season", "Season")
                         .WithMany("Fixtures")
                         .HasForeignKey("Season_idSeason")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SN_BNB.Models.Team", "AwayTeam")
+                        .WithMany("AwayFixtures")
+                        .HasForeignKey("idAwayTeam")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SN_BNB.Models.Team", "HomeTeam")
+                        .WithMany("HomeFixtures")
+                        .HasForeignKey("idHomeTeam")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

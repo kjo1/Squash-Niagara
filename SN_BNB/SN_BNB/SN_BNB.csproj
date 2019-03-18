@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\article-placeholder.jpg" />
     <None Include="wwwroot\ScoreSheet.pdf" />
   </ItemGroup>
 
