@@ -1,0 +1,54 @@
+﻿@model SN_BNB.Models.Fixture
+
+@{
+    ViewData["Title"] = "Details";
+}
+<br />
+<h2>Details</h2>
+
+<div>
+    <h4>Fixture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FixtureDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FixtureDateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeScore)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HomeScore)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AwayScore)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AwayScore)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.idHomeTeam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idHomeTeam)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.idAwayTeam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idAwayTeam)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Season)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Season.ID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

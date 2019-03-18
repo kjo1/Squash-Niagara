@@ -1,0 +1,102 @@
+﻿@model IEnumerable<SN_BNB.Models.Team>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h2>Teams</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<form asp-action="Index">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <div class="form-group">
+                        <label>Search By Team Name</label>
+                        @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="form-group">
+                        <label>Select a Division:</label>
+                        @Html.DropDownList("DivisionID", null, "All Divisions", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-secondary" type="submit">Clear</button>
+        </div>
+    </nav>
+    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    <input type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Created On" class="btn btn-link" />
+                </th>  @*disabled="disabled"*@
+                <th>
+                    <input type="submit" name="actionButton" value="Division" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.TeamName) </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamPoints)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamCreatedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Division.DivisionName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamWins)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamLosses)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                        |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

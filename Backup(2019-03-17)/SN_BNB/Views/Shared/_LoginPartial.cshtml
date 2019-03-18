@@ -1,0 +1,28 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">       
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" style="color: white; padding-right:30px;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
+            </li="nav-item">
+            <li class="nav-item">
+                <button type="submit" class="btn btn-link navbar-btn navbar-link" style="color: white; padding-right:20px;">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="Assets/css/style.css">
+
+    <ul class="nav navbar-nav navbar-right">
+        @*<li class="nav-item"><a class="nav-link" style="color: white; padding-right:30px;" asp-area="Identity" asp-page="/Account/Register">Register</a></li>*@
+        <li class="nav-item"><a class="nav-link" style="color: white; padding-right:20px;" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+}
