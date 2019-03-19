@@ -17,6 +17,7 @@ namespace SN_BNB.Controllers
     public class SeasonsController : Controller
     {
         private readonly SNContext _context;
+        public static List<Fixture> newFixtureList;    //contains all the new fixtures added so they can be shown to the user
 
         public SeasonsController(SNContext context)
         {
@@ -51,7 +52,7 @@ namespace SN_BNB.Controllers
             //receive excel file
             ExcelPackage excelPackage;
 
-            List<Fixture> newFixtureList = new List<Fixture>();    //contains all the new fixtures added so they can be shown to the user
+            newFixtureList = new List<Fixture>();    //contains all the new fixtures added so they can be shown to the user
 
             try
             {
@@ -69,7 +70,8 @@ namespace SN_BNB.Controllers
                 DateTime matchDate;
                 for (int row = start.Row; row<=end.Row; row++)
                 {
-                    if(!DateTime.TryParseExact(worksheet.Cells[row, 1].Text, "dd/mm/yyyy hh:mm tt", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out matchDate))
+                    //convert to a DateTime
+                    if(!DateTime.TryParseExact(worksheet.Cells[row, 1].Text, "dd/mm/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out matchDate))
                     {
                         //show the user an error
                     }
@@ -78,6 +80,7 @@ namespace SN_BNB.Controllers
                         FixtureDateTime = matchDate,
                         LocationCity = worksheet.Cells[row, 2].Text,
                         LocationAddress = worksheet.Cells[row, 3].Text,
+
                         //Get Team object by executing a WHERE with TeamName
                         HomeTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 4].Text).First(),
                         AwayTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 5].Text).First()
@@ -95,7 +98,7 @@ namespace SN_BNB.Controllers
                 foreach (FixtureStruct fixtureStruct in dataStructs)
                 {
                     Fixture tempFixture = new Fixture();
-                    tempFixture.FixtureDateTime = Convert.ToDateTime(fixtureStruct.FixtureDateTime);
+                    tempFixture.FixtureDateTime = fixtureStruct.FixtureDateTime;
                     tempFixture.HomeScore = 0;
                     tempFixture.AwayScore = 0;
                     tempFixture.idHomeTeam = _context.Teams.Find(fixtureStruct.HomeTeam.ID).ID;
@@ -119,15 +122,13 @@ namespace SN_BNB.Controllers
             }
 
             //pass the list of new fixtures to the ExcelConfirm() method
-            return RedirectToAction("ExcelConfirm", new { fixtures = newFixtureList });
+            return RedirectToAction("ExcelConfirm");
         }
 
         // GET: Seasons/ExcelConfirm
-        public IActionResult ExcelConfirm(List<Fixture> fixtures)
+        public IActionResult ExcelConfirm()
         {
-            //receive the new fixtures
-            ViewBag.NewFixtureList = new List<Fixture>(fixtures);
-            return View();
+            return View(newFixtureList);
         }
 
         // GET: Seasons

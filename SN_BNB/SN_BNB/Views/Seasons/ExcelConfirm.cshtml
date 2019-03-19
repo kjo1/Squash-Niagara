@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SN_BNB.Models.Season>
+﻿@model List<Fixture>
 @{
     ViewData["Title"] = "ExcelConfirm";
 }
@@ -41,7 +41,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (Fixture item in ViewBag.NewFixtureList) {
+@foreach (Fixture item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FixtureDateTime)
