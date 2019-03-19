@@ -65,7 +65,6 @@ namespace SN_BNB.Data
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3,
                         TeamBio = "This is Team BAC 1"
-
                     },
                     new Team
                     {
@@ -425,10 +424,9 @@ namespace SN_BNB.Data
                          FixtureDateTime = DateTime.Parse("2019-04-01"),
                          HomeScore = 0,
                          AwayScore = 0,
-                         idHomeTeam = 1,
-                         idAwayTeam = 2,
-                         Season_idSeason = 1,
-                         location_locationId = 1
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "First").ID
                      },
                      new Fixture
                      {
@@ -481,7 +479,7 @@ namespace SN_BNB.Data
                          HomeScore = 0,
                          AwayScore = 0,
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 3").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
                          Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Fourth").ID
                      },
                      new Fixture
