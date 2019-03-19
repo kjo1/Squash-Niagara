@@ -50,6 +50,9 @@ namespace SN_BNB.Controllers
 
             //receive excel file
             ExcelPackage excelPackage;
+
+            List<Fixture> newFixtureList = new List<Fixture>();    //contains all the new fixtures added so they can be shown to the user
+
             try
             {
                 using (var memoryStream = new MemoryStream())
@@ -88,8 +91,6 @@ namespace SN_BNB.Controllers
                 await _context.AddAsync(season);
                 await _context.SaveChangesAsync();
 
-
-
                 //make new fixtures using the struct
                 foreach (FixtureStruct fixtureStruct in dataStructs)
                 {
@@ -101,6 +102,7 @@ namespace SN_BNB.Controllers
                     tempFixture.idAwayTeam = _context.Teams.Find(fixtureStruct.AwayTeam.ID).ID;
                     tempFixture.Season_idSeason = _context.Seasons.Find(season.ID).ID;
                     _context.Fixtures.Add(tempFixture);
+                    newFixtureList.Add(tempFixture);
 
                     //update tables
                     _context.SaveChanges();
@@ -108,16 +110,24 @@ namespace SN_BNB.Controllers
 
                 //update tables
                 await _context.SaveChangesAsync();
-
             }
 
             //let the user know that the file was not parsed properly
             catch (Exception ex)
             {
-                throw (ex);
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
-                return RedirectToAction(nameof(Index));
+
+            //pass the list of new fixtures to the ExcelConfirm() method
+            return RedirectToAction("ExcelConfirm", new { fixtures = newFixtureList });
+        }
+
+        // GET: Seasons/ExcelConfirm
+        public IActionResult ExcelConfirm(List<Fixture> fixtures)
+        {
+            //receive the new fixtures
+            ViewBag.NewFixtureList = new List<Fixture>(fixtures);
+            return View();
         }
 
         // GET: Seasons

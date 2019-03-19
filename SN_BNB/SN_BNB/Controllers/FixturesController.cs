@@ -143,6 +143,8 @@ namespace SN_BNB.Controllers
 
             var fixture = await _context.Fixtures
                 .Include(f => f.Season)
+                .Include(f => f.AwayTeam)
+                .Include(f => f.HomeTeam)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (fixture == null)
             {

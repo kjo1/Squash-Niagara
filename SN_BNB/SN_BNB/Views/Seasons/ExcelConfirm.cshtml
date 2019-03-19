@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SN_BNB.Models.Season>
+@{
+    ViewData["Title"] = "ExcelConfirm";
+}
+
+<h2>Confirm Excel Upload</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Date
+                @*@Html.DisplayNameFor(model => model.FixtureDateTime)*@
+            </th>
+            <th>
+                Home Score
+                @*@Html.DisplayNameFor(model => model.HomeScore)*@
+            </th>
+            <th>
+                Away Score
+                @*@Html.DisplayNameFor(model => model.AwayScore)*@
+            </th>
+            <th>
+                Location
+                @*@Html.DisplayNameFor(model => model.location_locationId)*@
+            </th>
+            <th>
+                Season
+                @*@Html.DisplayNameFor(model => model.Season)*@
+            </th>
+            <th>
+                Home Team
+                @*@Html.DisplayNameFor(model => model.HomeTeam)*@
+            </th>
+            <th>
+                Away Team
+                @*@Html.DisplayNameFor(model => model.AwayTeam)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (Fixture item in ViewBag.NewFixtureList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FixtureDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location_locationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Season.Season_Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

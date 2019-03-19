@@ -29,7 +29,14 @@
     border-color: #383361;
 }
 
-
+.btn-primary {
+    background-color: #383361;
+    border-color: #383361;
+}
+    .btn-primary:hover {
+        background-color: #5E54A0;
+        border-color: #5E54A0;
+    }
 
 /* unvisited link */
 a:link {

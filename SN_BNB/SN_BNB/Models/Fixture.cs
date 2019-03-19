@@ -21,12 +21,12 @@ namespace SN_BNB.Models
         public DateTime FixtureDateTime { get; set; }
 
         [Display(Name = "Home Team Score")]
-        [Range(0, 12)]
+        [Range(0, 5, ErrorMessage = "Please put point(s) between 0 and 5")]
         public int HomeScore { get; set; }
 
        
         [Display(Name = "Away Team Score")]
-        [Range(0, 12)]
+        [Range(0, 5, ErrorMessage = "Please put point(s) between 0 and 5")]
         public int AwayScore { get; set; }
 
 

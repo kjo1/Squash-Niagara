@@ -11,14 +11,20 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Season_idSeason" class="control-label"></label>
+                <select asp-for="Season_idSeason" class="form-control" asp-items="ViewBag.Season_idSeason">
+                    <option>Select a Season</option>
+                </select>
+            </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FixtureDateTime" class="control-label"></label>
-                <input asp-for="FixtureDateTime" class="form-control"/>
+                <input asp-for="FixtureDateTime" class="form-control" />
                 <span asp-validation-for="FixtureDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="idHomeTeam" class="control-label" ></label>
+                <label asp-for="idHomeTeam" class="control-label"></label>
                 <select asp-for="idHomeTeam" class="form-control" asp-items="ViewBag.idHomeTeam">
                     <option>Select a Home Team</option>
                 </select>
@@ -29,12 +35,7 @@
                     <option>Select an Away Team</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label asp-for="Season_idSeason" class="control-label"></label>
-                <select asp-for="Season_idSeason" class="form-control" asp-items="ViewBag.Season_idSeason">
-                    <option>Select a Season</option>
-                </select>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
