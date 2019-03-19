@@ -12,10 +12,13 @@ namespace SN_BNB.Models
 
         [Required]
         public string LocationName { get; set; }
+
         [Required]
         public string LocationCity { get; set; }
+
         [Required]
         public string LocationStreet { get; set; }
+
         [Required]
         public int LocationBuildingNumber { get; set; }
     }

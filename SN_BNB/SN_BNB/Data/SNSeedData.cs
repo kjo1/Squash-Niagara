@@ -49,8 +49,6 @@ namespace SN_BNB.Data
                          TeamCreatedOn = DateTime.Today,
                          DivisionID = 1,
                          TeamBio = "This is Team White Oaks 1"
-                         
-
                      },
                     new Team
                     {
@@ -187,61 +185,61 @@ namespace SN_BNB.Data
                 if (!context.Players.Any())
                 {
                     context.Players.AddRange(
-                        new Player
-                        {
-                            FirstName = "Matt",
-                            LastName = "Bowie",
-                            Gender = "M",
-                            Email = "Matt_Bowie@outlook.com",
-                            Phone = 8880000800,
-                            Position = 1,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
-                            PlayerWantsInfoHidden = false
-                        },
-                        new Player
-                        {
-                            FirstName = "Dave",
-                            LastName = "Forgeron",
-                            Gender = "M",
-                            Email = "Dave_Forgeron@outlook.com",
-                            Phone = 8880008000,
-                            Position = 2,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
-                            PlayerWantsInfoHidden = false
-                        },
-                        new Player
-                        {
-                            FirstName = "Rachael",
-                            LastName = "Forgeron",
-                            Gender = "F",
-                            Email = "Rachael_Forgeron@outlook.com",
-                            Phone = 9055551202,
-                            Position = 3,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
-                            PlayerWantsInfoHidden = true
-                        },
-                        new Player
-                        {
-                            FirstName = "Jakub",
-                            LastName = "Lipinski",
-                            Gender = "M",
-                            Email = "Jakub_Lipinski@outlook.com",
-                            Phone = 8880088000,
-                            Position = 3,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
-                            PlayerWantsInfoHidden = true
-                        },
-                        new Player
-                        {
-                            FirstName = "Brendan",
-                            LastName = "Yuki",
-                            Gender = "M",
-                            Email = "byuki@outlook.com",
-                            Phone = 9056254141,
-                            Position = 2,
-                            TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
-                            PlayerWantsInfoHidden = true
-                        },
+                    new Player
+                    {
+                        FirstName = "Matt",
+                        LastName = "Bowie",
+                        Gender = "M",
+                        Email = "Matt_Bowie@outlook.com",
+                        Phone = 8880000800,
+                        Position = 1,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                        PlayerWantsInfoHidden = false
+                    },
+                    new Player
+                    {
+                        FirstName = "Dave",
+                        LastName = "Forgeron",
+                        Gender = "M",
+                        Email = "Dave_Forgeron@outlook.com",
+                        Phone = 8880008000,
+                        Position = 2,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
+                        PlayerWantsInfoHidden = false
+                    },
+                    new Player
+                    {
+                        FirstName = "Rachael",
+                        LastName = "Forgeron",
+                        Gender = "F",
+                        Email = "Rachael_Forgeron@outlook.com",
+                        Phone = 9055551202,
+                        Position = 3,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                        PlayerWantsInfoHidden = true
+                    },
+                    new Player
+                    {
+                        FirstName = "Jakub",
+                        LastName = "Lipinski",
+                        Gender = "M",
+                        Email = "Jakub_Lipinski@outlook.com",
+                        Phone = 8880088000,
+                        Position = 3,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
+                        PlayerWantsInfoHidden = true
+                    },
+                    new Player
+                    {
+                        FirstName = "Brendan",
+                        LastName = "Yuki",
+                        Gender = "M",
+                        Email = "byuki@outlook.com",
+                        Phone = 9056254141,
+                        Position = 2,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
+                        PlayerWantsInfoHidden = true
+                    },
                      new Player
                      {
                          FirstName = "Steven",
@@ -353,6 +351,7 @@ namespace SN_BNB.Data
                          PlayerWantsInfoHidden = false
                      }
                         );
+                    context.SaveChanges();
                 }
                 if (!context.Seasons.Any())
                 {
@@ -380,6 +379,119 @@ namespace SN_BNB.Data
                          Season_Title = "Fourth",
                          SeasonStart = DateTime.Today,
                          SeasonEnd = DateTime.Today
+                     }
+                     );
+                    context.SaveChanges();
+                }
+                if (!context.Location.Any())
+                {
+                    context.Location.AddRange(
+                     new Location
+                     {
+                         LocationName = "Niagara College",
+                         LocationCity = "Welland",
+                         LocationStreet = "Merritt",
+                         LocationBuildingNumber = 1                         
+                     },
+                     new Location
+                     {
+                         LocationName = "Brock University",
+                         LocationCity = "Thorold",
+                         LocationStreet = "St. Paul",
+                         LocationBuildingNumber = 22
+                     },
+                     new Location
+                     {
+                         LocationName = "Ridley College",
+                         LocationCity = "St. Catharines",
+                         LocationStreet = "Fourth Ave.",
+                         LocationBuildingNumber = 33
+                     },
+                     new Location
+                     {
+                         LocationName = "White Oaks",
+                         LocationCity = "Niagara On The Lake",
+                         LocationStreet = "Merritt",
+                         LocationBuildingNumber = 44
+                     }
+                     );
+                    context.SaveChanges();
+                }
+                if (!context.Fixtures.Any())
+                {
+                    context.Fixtures.AddRange(
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-01"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = 1,
+                         idAwayTeam = 2,
+                         Season_idSeason = 1,
+                         location_locationId = 1
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-05"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Second").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-08"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Third").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-21"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "First").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-16"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Second").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-18"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Fourth").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-21"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 3").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Fourth").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-04-01"),
+                         HomeScore = 0,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "First").ID
                      }
                      );
                     context.SaveChanges();

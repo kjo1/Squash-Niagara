@@ -32,19 +32,19 @@
             @Html.DisplayNameFor(model => model.idHomeTeam)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.idHomeTeam)
+            @Html.DisplayFor(model => model.HomeTeam.TeamName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.idAwayTeam)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.idAwayTeam)
+            @Html.DisplayFor(model => model.AwayTeam.TeamName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Season)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Season.ID)
+            @Html.DisplayFor(model => model.Season.Season_Title)
         </dd>
     </dl>
 </div>

@@ -13,32 +13,38 @@ namespace SN_BNB.Models
             this.Matches = new HashSet<Match>();
         }
         public int ID { get; set; }
-        [Required]
+  
         [Display(Name ="Date/Time")]
+        [Required]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FixtureDateTime { get; set; }
 
-        [Required]
         [Display(Name = "Home Team Score")]
+        [Range(0, 12)]
         public int HomeScore { get; set; }
 
-        [Required]
+       
         [Display(Name = "Away Team Score")]
+        [Range(0, 12)]
         public int AwayScore { get; set; }
 
+
         [Display(Name="Home Team")]
+        [Required(ErrorMessage = "Please select a Home Team")]
         [Range(1, int.MaxValue)]
         public int idHomeTeam { get; set; }
 
         [Display(Name = "Away Team")]
+        [Required(ErrorMessage = "Please select an Away Team")]
         [Range(1, int.MaxValue)]
         public int idAwayTeam { get; set; }
 
         [Display(Name = "Season")]
+        [Required(ErrorMessage = "Please select a Season")]
         [Range(1, int.MaxValue)]
         public int Season_idSeason { get; set; }
 
-        [Required]
         public int location_locationId { get; set; }
 
         public virtual Location Location { get; set; }

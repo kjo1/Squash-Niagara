@@ -41,7 +41,6 @@ namespace SN_BNB.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-
         [Required(ErrorMessage = "Phone number is required.")]
         [RegularExpression("^\\d{10}$", ErrorMessage = "Please enter a valid 10-digit phone number (no spaces).")]
         [DataType(DataType.PhoneNumber)]
@@ -66,7 +65,7 @@ namespace SN_BNB.Models
 
         public int Points { get; set; }
 
-        [Required(ErrorMessage = "You must select a Primary Team")]
+        [Required(ErrorMessage = "You must select a assigned Team")]
         [Display(Name ="Team")]
         public int TeamID { get; set; }
 

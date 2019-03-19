@@ -67,6 +67,28 @@ namespace SN_BNB.Data
                 IdentityResult result = userManager.CreateAsync(user, "bnb").Result;
                 //Not in any role
             }
+            if (userManager.FindByEmailAsync("Matt_Bowie@outlook.com").Result == null)
+            {
+                IdentityUser user = new IdentityUser
+                {
+                    UserName = "Matt_Bowie@outlook.com",
+                    Email = "Matt_Bowie@outlook.com"
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "bnb").Result;
+                //Not in any role
+            }
+            if (userManager.FindByEmailAsync("Dave_Forgeron@outlook.com").Result == null)
+            {
+                IdentityUser user = new IdentityUser
+                {
+                    UserName = "Dave_Forgeron@outlook.com",
+                    Email = "Dave_Forgeron@outlook.com"
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "bnb").Result;
+                //Not in any role
+            }
         }
     }
 }

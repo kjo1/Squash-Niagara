@@ -15,16 +15,16 @@ namespace SN_BNB.Models
         }
 
         public int ID { get; set; }
-        [Required(ErrorMessage ="Please Select an unique team name")]
+        [Required(ErrorMessage = "Please Select an unique team name")]
         [Display(Name = "Team Name")]
         public string TeamName { get; set; }
 
-        [Required]
         [Display(Name = "Team Points")]
+        [Range(0, 12)]
         public int TeamPoints { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name="Team Created")]
+        [Display(Name = "Team Created")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? TeamCreatedOn { get; set; }
 
@@ -37,7 +37,7 @@ namespace SN_BNB.Models
         [Display(Name = "Bio")]
         public string TeamBio { get; set; }
 
-        [Display(Name="Division")]
+        [Display(Name = "Division")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select division of the team.")]
         public int DivisionID { get; set; }
         public virtual Division Division { get; set; }
@@ -46,9 +46,9 @@ namespace SN_BNB.Models
         public ICollection<Fixture> HomeFixtures { get; set; }
         public ICollection<Fixture> AwayFixtures { get; set; }
 
-        [Display(Name="Seasons")]
-        public ICollection<Season_has_Team> Season_has_Teams { get; set; }      
+        [Display(Name = "Seasons")]
+        public ICollection<Season_has_Team> Season_has_Teams { get; set; }
     }
 
-    
+
 }
