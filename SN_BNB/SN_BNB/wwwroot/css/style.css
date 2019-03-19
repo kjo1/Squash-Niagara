@@ -29,6 +29,16 @@ body {
     font-size: 11px;
 }*/
 
+.btn-toolbar {
+    background-color: brown;
+}
+btn-toolbar {
+    background-color: brown;
+}
+.btn-toolbar {
+    background-color: brown;
+}
+
 #editor {
     overflow: scroll;
     max-height: 300px;

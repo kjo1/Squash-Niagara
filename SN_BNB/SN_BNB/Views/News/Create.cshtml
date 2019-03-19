@@ -3,12 +3,10 @@
 @{
     ViewData["Title"] = "Create";
 }
-
 <h2>Create</h2>
 
 <h4>News</h4>
 <hr />
-
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -23,7 +21,7 @@
 </div>
 <div class="container">
     <div id="alerts"></div>
-    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor" style="background-color:Menu">
         <div class="btn-group">
             <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
             <ul class="dropdown-menu"></ul>
@@ -75,7 +73,20 @@
         <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
     </div>
 
-    <div id="editor">
+    <div id="editor" style="
+            max-height: 250px;
+	        height: 250px;
+	        background-color: white;
+	        border-collapse: separate; 
+	        border: 1px solid rgb(204, 204, 204); 
+	        padding: 4px; 
+	        box-sizing: content-box; 
+	        -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+	        box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+	        border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+	        border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+	        overflow: scroll;
+	        outline: none;">
         Go ahead&hellip;
     </div>
 </div>
