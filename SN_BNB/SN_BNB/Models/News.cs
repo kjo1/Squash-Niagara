@@ -17,7 +17,7 @@ namespace SN_BNB.Models
 
 		[Required]
         [MaxLength(5000)]
-		public string Content { get; set; }
+        public string Content { get; set; }
 
         public DateTime Date { get; set; }
 

@@ -43,7 +43,7 @@
                         <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
                         <br /><br />
                         <p>
-                            @Html.DisplayFor(modelItem => item.Content)
+                            @Html.Raw(item.Content)
                         </p><br />
                         <h6 class="card-subtitle text-muted"><i>
                             @Html.DisplayFor(modelItem => item.Date)
