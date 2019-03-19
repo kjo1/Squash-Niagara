@@ -32,8 +32,11 @@ namespace SN_BNB.Controllers
                            select f;
             if (!String.IsNullOrEmpty(searchString))
             {
-                fixtures = fixtures.Where(t => t.HomeTeam.TeamName.ToUpper().Contains(searchString.ToUpper()));
+                fixtures = fixtures.Where(t => t.HomeTeam.TeamName.ToUpper().Contains(searchString.ToUpper())
+                                        || t.AwayTeam.TeamName.ToUpper().Contains(searchString.ToUpper())
+                                        || t.Season.Season_Title.ToUpper().Contains(searchString.ToUpper()));
             }
+
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
                 if (actionButton != "Filter")//Change of sort is requested
