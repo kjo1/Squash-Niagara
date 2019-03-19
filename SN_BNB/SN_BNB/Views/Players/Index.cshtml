@@ -12,6 +12,13 @@
         <a asp-action="Create" style="font-weight:600; font-size:25px; color:purple;">Create New</a>
     </p>
 }
+ <form asp-action="ExcelUpload"  style="text-align:center;" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label">Excel File:</label>
+            <input type="file" class="" name="file" />
+            <input type="submit" value="Upload Data" class="btn btn-primary" />
+        </div>
+    </form>
     <form asp-action="Index">
         <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
         <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
