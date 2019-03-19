@@ -37,7 +37,7 @@ namespace SN_BNB
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
-                }
+               }
             }
 
             host.Run();
