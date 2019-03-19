@@ -16,10 +16,25 @@ namespace SN_BNB.Controllers
     public class PlayersController : Controller
     {
         private readonly SNContext _context;
+        private Int32 _captainTeamID = int.MinValue;
+        private Int32 CaptainTeamID
+        {
+            get
+            {
+                if(_captainTeamID == int.MinValue)
+                {
+                    if (User.IsInRole("Captain"))
+                        _captainTeamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
+                    else
+                        _captainTeamID = -1;
+                }
+                return _captainTeamID;
+            }
+        }
 
         public PlayersController(SNContext context)
         {
-            _context = context;
+            _context = context;           
         }
 
         public struct PlayerStruct
@@ -294,6 +309,7 @@ namespace SN_BNB.Controllers
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
 
+            ViewBag.CaptainTeamID = CaptainTeamID;
 
             return View(await players.ToListAsync());
         }
@@ -301,6 +317,7 @@ namespace SN_BNB.Controllers
         // GET: Players/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -308,6 +325,9 @@ namespace SN_BNB.Controllers
 
             var player = await _context.Players
                 .Include(p => p.Team)
+                .Include(p => p.AssignedMatchPlayers)
+                .ThenInclude( n => n.Match)
+                .ThenInclude ( f => f.Fixture)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (player == null)
             {
@@ -320,7 +340,7 @@ namespace SN_BNB.Controllers
         // GET: Players/Create
         public IActionResult Create()
         {
-            ViewData["TeamID"] = new SelectList(_context.Teams, "ID", "TeamName");
+            PopulateDropDownLists();
             return View();
         }
 
@@ -337,7 +357,7 @@ namespace SN_BNB.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeamID"] = new SelectList(_context.Teams, "ID", "TeamName", player.TeamID);
+            PopulateDropDownLists();
             return View(player);
         }
 
@@ -350,11 +370,16 @@ namespace SN_BNB.Controllers
             }
 
             var player = await _context.Players.FindAsync(id);
+            if(User.IsInRole("Captain") && player.TeamID != CaptainTeamID)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (player == null)
             {
                 return NotFound();
             }
-            ViewData["TeamID"] = new SelectList(_context.Teams, "ID", "TeamName", player.TeamID);
+            PopulateDropDownLists(player);
             return View(player);
         }
 
@@ -431,9 +456,19 @@ namespace SN_BNB.Controllers
 
         private SelectList TeamSelectList(int? id)
         {
-            var dQuery = from t in _context.Teams
+            IOrderedQueryable<Team> dQuery;
+            if (User.IsInRole("Captain"))
+            {                
+                dQuery = from t in _context.Teams.Where(t => t.ID == CaptainTeamID)
                          orderby t.TeamName
                          select t;
+            }
+            else
+            {
+                dQuery = from t in _context.Teams
+                         orderby t.TeamName
+                         select t;
+            }
             return new SelectList(dQuery, "ID", "TeamName", id);
         }
 

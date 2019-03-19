@@ -63,6 +63,12 @@
             @Html.DisplayFor(model => model.Position)
         </dd>
         <dt>
+            Played
+        </dt>
+        <dd>
+            @Html.Raw(Model.AssignedMatchPlayers.Count(m => m.Match.Fixture.FixtureDateTime.Ticks < DateTime.Now.Ticks).ToString())
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Win)
         </dt>
         <dd>
