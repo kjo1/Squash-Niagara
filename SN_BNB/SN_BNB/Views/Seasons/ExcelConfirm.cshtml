@@ -1,9 +1,9 @@
-﻿@model IEnumerable<SN_BNB.Models.Season>
+﻿@model List<Fixture>
 @{
     ViewData["Title"] = "ExcelConfirm";
 }
 
-<h2>Confirm Excel Upload</h2>
+<h2>The following Fixtures have been added to the new Season:</h2>
 
 
 <table class="table">
@@ -11,37 +11,30 @@
         <tr>
             <th>
                 Date
-                @*@Html.DisplayNameFor(model => model.FixtureDateTime)*@
             </th>
             <th>
                 Home Score
-                @*@Html.DisplayNameFor(model => model.HomeScore)*@
             </th>
             <th>
                 Away Score
-                @*@Html.DisplayNameFor(model => model.AwayScore)*@
             </th>
             <th>
                 Location
-                @*@Html.DisplayNameFor(model => model.location_locationId)*@
             </th>
             <th>
                 Season
-                @*@Html.DisplayNameFor(model => model.Season)*@
             </th>
             <th>
                 Home Team
-                @*@Html.DisplayNameFor(model => model.HomeTeam)*@
             </th>
             <th>
                 Away Team
-                @*@Html.DisplayNameFor(model => model.AwayTeam)*@
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (Fixture item in ViewBag.NewFixtureList) {
+@foreach (Fixture item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FixtureDateTime)
@@ -68,3 +61,9 @@
 }
     </tbody>
 </table>
+
+<div class="form-group">
+    <form action="/Seasons/Index">
+        <input type="submit" value="Ok" class="btn btn-default" />
+    </form>
+</div>
