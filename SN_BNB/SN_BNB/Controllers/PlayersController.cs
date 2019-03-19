@@ -119,7 +119,7 @@ namespace SN_BNB.Controllers
         // GET: Players
         public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID)
         {
-            PopulateDropDownLists();
+            PopulateFilterList();
 
             var players = from p in _context.Players
                             .Include(p => p.Team)
@@ -475,6 +475,14 @@ namespace SN_BNB.Controllers
         private void PopulateDropDownLists(Player player = null)
         {
             ViewData["TeamID"] = TeamSelectList(player?.TeamID);
+        }
+
+        private void PopulateFilterList()
+        {
+            var dQuery = from t in _context.Teams
+                         orderby t.TeamName
+                         select t;
+            ViewData["TeamID"] = new SelectList(dQuery, "ID", "TeamName");
         }
 
         [HttpGet]
