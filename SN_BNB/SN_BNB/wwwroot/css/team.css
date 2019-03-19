@@ -39,19 +39,23 @@
     }
 
 /* unvisited link */
+#aa {
+    font-size: 18px;
+    font-weight: 700;
+}
+
 a:link {
-    color: #383361;
-    /*font-size:18px;*/
+    color: #5E54A0;
 }
 
 /* visited link */
 a:visited {
-    color: #5E54A0;
+    color: #383361;
 }
 
 /* mouse over link */
 a:hover {
-    color: blue;
+    color: #5E54A0;
 }
 
 /* selected link */
