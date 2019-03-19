@@ -7,6 +7,14 @@
 
 <h2>User Role Assignments</h2>
 
+<form asp-action="ExcelUpload" style="text-align:center;" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label class="control-label">Excel File:</label>
+        <input type="file" class="" name="file" />
+        <input type="submit" value="Upload Data" class="btn btn-primary" />
+    </div>
+</form>
+
 <table class="table">
     <tr>
         <th>
@@ -37,19 +45,6 @@
             </td>
         </tr>
     }
-
 </table>
+<br/>
 
-<form asp-action="ExcelUpload" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label class="control-label">Excel File:</label>
-        <input type="file" class="" name="file" /><br />
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="submit" value="Upload Data" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
-</form>
