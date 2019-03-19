@@ -44,7 +44,7 @@ namespace SN_BNB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExcelUpload([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Win,Loss,TeamID")] Player player, IFormFile file)
+        public async Task<IActionResult> ExcelUpload([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID")] Player player, IFormFile file)
         {
             //get all of the Teams so we can search through them
             var teams = from t in _context.Teams select t;
@@ -213,7 +213,20 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(p => p.Position);
                 }
             }
-            else if (sortField == "Win(s)")
+            else if (sortField == "Played")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Played);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Played);
+                }
+            }
+            else if (sortField == "Won")
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
@@ -226,7 +239,7 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(p => p.Win);
                 }
             }
-            else if (sortField == "Lose(es)")
+            else if (sortField == "Lost")
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
@@ -239,15 +252,41 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(p => p.Loss);
                 }
             }
-            else //Sorting by Win - the default sort order
+            else if (sortField == "For")
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    players = players.OrderBy(p => p.Win);
+                    players = players
+                        .OrderBy(p => p.For);
                 }
                 else
                 {
-                    players = players.OrderByDescending(p => p.Win);
+                    players = players
+                        .OrderByDescending(p => p.For);
+                }
+            }
+            else if (sortField == "Against")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players
+                        .OrderBy(p => p.Against);
+                }
+                else
+                {
+                    players = players
+                        .OrderByDescending(p => p.Against);
+                }
+            }
+            else //Sorting by Points - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    players = players.OrderByDescending(p => p.Points);
+                }
+                else
+                {
+                    players = players.OrderBy(p => p.Points);
                 }
             }
 
@@ -290,7 +329,7 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Win,Loss,TeamID")] Player player)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID")] Player player)
         {
             if (ModelState.IsValid)
             {
@@ -324,7 +363,7 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Win,Loss,TeamID")] Player player)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID")] Player player)
         {
             if (id != player.ID)
             {
