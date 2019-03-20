@@ -21,6 +21,7 @@
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Assets\Files\" />
     <Folder Include="Views\Fixtures\" />
+    <Folder Include="wwwroot\images\userUploads\" />
   </ItemGroup>
 
   <ItemGroup>
