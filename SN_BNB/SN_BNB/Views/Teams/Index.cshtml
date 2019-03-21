@@ -91,8 +91,11 @@
                     </td>
 
                     <td>
+                        @if (ViewBag.CaptainTeamID == -1 || item.ID == ViewBag.CaptainTeamID)
+                        {
                         <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                        |
+                        <span>|</span>
+                        }
                         <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
                     </td>
                 </tr>

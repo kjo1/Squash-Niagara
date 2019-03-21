@@ -16,8 +16,8 @@ namespace SN_BNB.Controllers
     public class PlayersController : Controller
     {
         private readonly SNContext _context;
-        private Int32 _captainTeamID = int.MinValue;
-        private Int32 CaptainTeamID
+        private int _captainTeamID = int.MinValue;
+        private int CaptainTeamID
         {
             get
             {

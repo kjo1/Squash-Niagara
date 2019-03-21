@@ -12,31 +12,52 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SN_BNB.Controllers
 {
+    
     public class TeamsController : Controller
     {
         private readonly SNContext _context;
-        private readonly ApplicationDbContext _applicationDbContext;
+        private int _captainTeamID = int.MinValue;
+        private int CaptainTeamID
+        {
+            get
+            {
+                if (_captainTeamID == int.MinValue)
+                {
+                    if (User.IsInRole("Captain"))
+                        _captainTeamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
+                    else
+                        _captainTeamID = -1;
+                }
+                return _captainTeamID;
+            }
+        }
 
-        public TeamsController(SNContext context, ApplicationDbContext applicationDbContext)
+        public TeamsController(SNContext context)
         {
             _context = context;
-            _applicationDbContext = applicationDbContext;
         }
+        //private readonly ApplicationDbContext _applicationDbContext;
 
-        /* Create a new role with name being Team.TeamName so that we can assign Users to a specific Team.
-        This is done mainly so that we can make sure that Team Captains can only edit their Team. */
-        protected async void MakeTeamRole(Team team)
-        {
-            //create the role, the title is the Team Name
-            IdentityRole teamRole = new IdentityRole(team.TeamName);
-            //check if the role exists
-            if (!_applicationDbContext.Roles.Contains(teamRole))
-            {
-                await _applicationDbContext.Roles.AddAsync(teamRole);
-            }
-            //save changes
-            await _applicationDbContext.SaveChangesAsync();
-        }
+        //public TeamsController(SNContext context, ApplicationDbContext applicationDbContext)
+        //{
+        //    _context = context;
+        //    _applicationDbContext = applicationDbContext;
+        //}
+
+        ///* Create a new role with name being Team.TeamName so that we can assign Users to a specific Team.
+        //This is done mainly so that we can make sure that Team Captains can only edit their Team. */
+        //protected async void MakeTeamRole(Team team)
+        //{
+        //    //create the role, the title is the Team Name
+        //    IdentityRole teamRole = new IdentityRole(team.TeamName);
+        //    //check if the role exists
+        //    if (!_applicationDbContext.Roles.Contains(teamRole))
+        //    {
+        //        await _applicationDbContext.Roles.AddAsync(teamRole);
+        //    }
+        //    //save changes
+        //    await _applicationDbContext.SaveChangesAsync();
+        //}
 
         // GET: Teams
         public async Task<IActionResult> Index(string searchString, int? divisionID, string sortDirection, string sortField, string actionButton)
@@ -166,7 +187,8 @@ namespace SN_BNB.Controllers
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
 
-
+            ViewBag.CaptainTeamID = CaptainTeamID;
+            
             return View(await teams.ToListAsync());
 
            
@@ -188,7 +210,7 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            ViewBag.Players = _context.Players.Where(t => t.TeamID == team.ID);     //due to trouble finding a list of players with Team.Players, this is used
+            //ViewBag.Players = _context.Players.Where(t => t.TeamID == team.ID);     //due to trouble finding a list of players with Team.Players, this is used
 
             return View(team);
         }
@@ -211,7 +233,7 @@ namespace SN_BNB.Controllers
             {
                 _context.Add(team);
                 await _context.SaveChangesAsync();
-                MakeTeamRole(team);     //add the Team Name to the User Role list
+                /*MakeTeamRole(team); */    //add the Team Name to the User Role list
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DivisionID"] = new SelectList(_context.Divisions, "ID", "DivisionName", team.DivisionID);
@@ -309,8 +331,9 @@ namespace SN_BNB.Controllers
         private void PopulateDropDownLists(Team team = null)
         {
             var dQuery = from d in _context.Divisions
+                         orderby d.DivisionName
                          select d;
-            ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName", team?.DivisionID);
+            ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
         }
         
        
