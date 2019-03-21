@@ -116,16 +116,22 @@
                                 @Html.DisplayFor(modelItem => item.Points)
                             </td>
                             <td>
-                                @*Make sure is a captain or admin*@
-                                @if (ViewBag.CaptainTeamID == -1 || item.TeamID == ViewBag.CaptainTeamID)
+                                @if (User.IsInRole("Admin") || User.IsInRole("Captain"))
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.ID">
-                                        <img src="~/images/edit.png" style="width:28px; height:28px" />
-                                    </a> <span>|</span>
+                                    @*Make sure is a captain or admin*@
+                                    @if (ViewBag.CaptainTeamID == -1 || item.TeamID == ViewBag.CaptainTeamID)
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.ID">
+                                            <img src="~/images/edit.png" style="width:28px; height:28px" />
+                                        </a> <span>|</span>
+                                    }
                                 }
-                                <a asp-action="Delete" asp-route-id="@item.ID">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Delete" asp-route-id="@item.ID">
                                     <img src="~/images/Archive.png" style="width:28px; height:28px" />
-                                </a>
+                                    </a>
+                                }
                             </td>
                         </tr>
                     }
