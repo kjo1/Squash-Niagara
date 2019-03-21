@@ -210,7 +210,7 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            //ViewBag.Players = _context.Players.Where(t => t.TeamID == team.ID);     //due to trouble finding a list of players with Team.Players, this is used
+            ViewBag.Players = _context.Players.Where(t => t.TeamID == team.ID);     //due to trouble finding a list of players with Team.Players, this is used
 
             return View(team);
         }
