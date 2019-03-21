@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -337,7 +338,9 @@ namespace SN_BNB.Controllers
             return View(player);
         }
 
+
         // GET: Players/Create
+        [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             PopulateDropDownLists();
@@ -347,6 +350,7 @@ namespace SN_BNB.Controllers
         // POST: Players/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID")] Player player)
@@ -361,7 +365,9 @@ namespace SN_BNB.Controllers
             return View(player);
         }
 
+        
         // GET: Players/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -386,6 +392,7 @@ namespace SN_BNB.Controllers
         // POST: Players/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID")] Player player)
@@ -419,6 +426,7 @@ namespace SN_BNB.Controllers
             return View(player);
         }
 
+        [Authorize(Roles ="Admin")]
         // GET: Players/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -438,6 +446,7 @@ namespace SN_BNB.Controllers
             return View(player);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Players/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
