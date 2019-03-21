@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <br />
+<link href="~/css/team.css" rel="stylesheet" />
 <h2>Teams</h2>
 @if (User.IsInRole("Admin"))
 {
@@ -29,7 +30,7 @@
                         @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control" })
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item dropdown">
                     <div class="form-group">
                         <label>Select a Division:</label>
                         @Html.DropDownList("DivisionID", null, "All Divisions", htmlAttributes: new { @class = "form-control" })
@@ -43,45 +44,34 @@
     <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
     <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
 
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
-                <th>
-                    <input type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Created On" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Division" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
-                </th>
-                <th>
-                    <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive-sm">
+        <table class="table table-light table-hover table-striped"  >
+            <thead class="thead-light">
+                <tr id="playCol">
+                    <th>
+                        <input type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Division" class="btn btn-link" />
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                 <tr>
-                    <td>
+                    <td id="aa">
                         <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.TeamName) </a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TeamPoints)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TeamCreatedOn)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Division.DivisionName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TeamWins)
@@ -89,17 +79,37 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TeamLosses)
                     </td>
-
                     <td>
-                        @if (ViewBag.CaptainTeamID == -1 || item.ID == ViewBag.CaptainTeamID)
-                        {
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
-                        <span>|</span>
-                        }
-                        <a asp-action="Delete" asp-route-id="@item.ID">Archive</a>
+                        <span data-toggle="tooltip" title="" data-original-title="Points earned by team">
+                             @Html.DisplayFor(modelItem => item.TeamPoints)
+                        </span>
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Division.DivisionName)
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Captain"))
+                        {
+                            @if (ViewBag.CaptainTeamID == -1 || item.ID == ViewBag.CaptainTeamID)
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.ID">
+                                    <img src="~/images/edit.png" style="width:28px; height:28px" />
+                                </a>
+                                <span>|</span>
+                            }
+                        }
+
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.ID">
+                                    <img src="~/images/Archive.png" style="width:28px; height:28px" />
+                                </a>
+                            }
+                        </td>
                 </tr>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+    </div>
 </form>
