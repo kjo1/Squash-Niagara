@@ -8,8 +8,8 @@
 <h3>Teams</h3>
 <div class="container">
     @if (User.IsInRole("Admin"))
-    {<p>
-            <a asp-action="Create">Create New</a>
+    {<p id="createNew">
+            <a style="color:purple;" asp-action="Create">Create New</a>
         </p>
     }
     <form asp-action="Index">
@@ -19,21 +19,22 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <div class="form-group">
-                            <label>Search By Team Name</label>
-                            @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control" })
+            <div id="division" class="collapse navbar-collapse" id="navbarSupportedContent">
+                @*<ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            2018-2019 Men's Divisions
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
+                            <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
+                            <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <div class="form-group">
-                            <label>Select a Division:</label>
-                            @Html.DropDownList("DivisionID", null, "All Divisions", htmlAttributes: new { @class = "form-control" })
-                        </div>
-                    </li>
-                </ul>
+                </ul>*@
+                @Html.DropDownList("DivisionID", null, "Select a Division", htmlAttributes: new { @class = "form-control", @style = "width:auto;" })
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team" })
                 <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
         </nav>
@@ -43,21 +44,21 @@
         <div class="table-responsive-sm">
             <table class="table table-light table-hover table-striped">
                 <thead class="thead-light">
-                    <tr id="playCol">
+                    <tr>
                         <th>
-                            <input type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Team Name" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Win(s)" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Won" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Loss(es)" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Lost" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Point" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Division" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Division" class="btn btn-link" />
                         </th>
                         <th></th>
                     </tr>

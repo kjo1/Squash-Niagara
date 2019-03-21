@@ -50,14 +50,14 @@
                         </li>*@
                         @if (User.IsInRole("Admin"))
                         {
-                            <li class="nav-item MainNav">
+                            <li  class="nav-item MainNav">
                                 <a class="nav-link" style="color: white; padding-right:30px;" aria-disabled="true"> | </a>
                             </li>
                             <li class="nav-item dropdown MainNav">
                                 <a class="nav-link dropdown-toggle" style="color: white; padding-right:30px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Admin Options
                                 </a>
-                                <div class="dropdown-menu MainNav" aria-labelledby="navbarDropdown">
+                                <div id="mainNav" class="dropdown-menu MainNav" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/Seasons/Index">Seasons</a>
                                     <a class="dropdown-item" href="/Fixtures/Index">Fixtures</a>
                                     <a class="dropdown-item" href="/Matches/Index">Matches</a>
@@ -67,7 +67,7 @@
                         }
 
                     </ul>
-                    <partial name="_LoginPartial" />
+                    <span id="login"><partial name="_LoginPartial" /></span>
                     <br>
                 </div>
             </div>

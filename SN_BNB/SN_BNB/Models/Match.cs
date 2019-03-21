@@ -26,7 +26,7 @@ namespace SN_BNB.Models
         public int MatchPosition { get; set; }
 
         [Required(ErrorMessage ="Please enter a date and time for this match")]
-        public TimeSpan MatchTime { get; set; }
+        public DateTime MatchTime { get; set; }
 
 
         [Display(Name = "Fixture")]

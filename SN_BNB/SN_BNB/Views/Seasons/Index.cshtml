@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/css/team.css" rel="stylesheet" />
 <br />
 <h2>Seasons</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p id="createNew">
+    <a style="color:purple;" asp-action="Create">Create New</a>
 </p>
 <p>
     <a asp-action="ExcelUpload">Upload Spreadsheet</a>
@@ -16,34 +17,35 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Season_Title)
+                <input id="playCol" type="submit" name="actionButton" value="Season" class="btn btn-link" />
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SeasonStart)
+                <input id="playCol" type="submit" name="actionButton" value="Start Date" class="btn btn-link" />
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SeasonEnd)
+                <input id="playCol" type="submit" name="actionButton" value="End Date" class="btn btn-link" />
             </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Season_Title)
-            </td>
-            <td>
-                @item.SeasonStart.ToString("MM/dd/yyyy")
-            </td>
-            <td>
-                @item.SeasonEnd.ToString("MM/dd/yyyy")
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Season_Title)
+                </td>
+                <td>
+                    @item.SeasonStart.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    @item.SeasonEnd.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -5,18 +5,16 @@
 }
 <link href="~/css/team.css" rel="stylesheet" />
 <br />
-
+<h3>Fixtures</h3>
 @if (User.IsInRole("Admin"))
 {
-<p>
-    <a asp-action="Create" style="font-weight:600; font-size:25px; color:purple;">Create New</a>
-</p>
+    <p id="createNew">
+        <a asp-action="Create" style="color:purple;">Create New</a>
+    </p>
 }
 
 <form asp-action="Index">
     <div class="container">
-        <h2>Fixtures</h2>
-
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,7 +34,7 @@
                         </div>
                     </li>
                 </ul>
-                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team/Season" })
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team/Season", @style = "width:250px" })
                 <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
         </nav>
@@ -48,60 +46,66 @@
                 <thead class="thead-light">
                     <tr>
                         <th>
-                            <input type="submit" name="actionButton" value="Season" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Season" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Time" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Time" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Home Team" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Home Team" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Home Score" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Home Score" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Away Team" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Away Team" class="btn btn-link" />
                         </th>
                         <th>
-                            <input type="submit" name="actionButton" value="Away Score" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Away Score" class="btn btn-link" />
                         </th>
-                        <th></th>
+                        <th style="color:lightgrey">----------------</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Season.Season_Title)
-                        </td>
-                        <td>
-                            @item.FixtureDateTime.ToString("MM/dd/yyyy")
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HomeScore)
-                        </td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Season.Season_Title)
+                            </td>
+                            <td>
+                                @item.FixtureDateTime.ToString("MM/dd/yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HomeScore)
+                            </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                            </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AwayScore)
-                        </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AwayScore)
+                            </td>
 
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                        </td>
-                    </tr>
+                            <td >
+                                    <a asp-action="Edit" asp-route-id="@item.ID">
+                                        <img src="~/images/edit.png" style="width:28px; height:28px" />
+                                    </a> |
+                                    <a asp-action="Details" asp-route-id="@item.ID">
+                                        <img src="~/images/detail.png" style="width:28px; height:28px" />
+                                    </a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ID">
+                                        <img src="~/images/Archive.png" style="width:28px; height:28px" />
+                                    </a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
-            </div>
         </div>
+    </div>
 </form>

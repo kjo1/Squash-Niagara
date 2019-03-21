@@ -1,4 +1,4 @@
-/** {
+* {
     box-sizing: border-box;
 }
 
@@ -8,7 +8,7 @@ ul {
 
 body {
     font-family: Verdana, sans-serif;
-}*/
+}
 
 /*.rightnav {
     display: inline-flex;
@@ -28,13 +28,21 @@ body {
 .dropdown-item {
     font-size: 11px;
 }*/
+#login {
+    text-decoration-style: none;
+    text-decoration: none;
+}
+
+
 
 .btn-toolbar {
     background-color: brown;
 }
+
 btn-toolbar {
     background-color: brown;
 }
+
 .btn-toolbar {
     background-color: brown;
 }
@@ -53,15 +61,32 @@ btn-toolbar {
     max-width: 1200px;
 }
 
-.btn {
+#btn, #btnSearch {
     background-color: #383361;
     border-color: #383361;
+    font-weight: 700;
+    color: white;
 }
 
-    .btn:hover {
+    #btn:hover, #btnSearch:hover {
         background-color: #5E54A0;
         border-color: #5E54A0;
     }
+
 .btn-primary {
-font-weight:600;
+    font-weight: 600;
 }
+
+#homeTeam {
+    color: green;
+}
+
+#awayTeam {
+    color: red;
+}
+
+#userID {
+    color: #5E54A0;
+}
+
+

@@ -3,8 +3,14 @@
     font-weight: 500;
 }
 
-.MainNav:hover {
-    background-color: #312d53;
+    .MainNav:hover {
+        background-color: #312d53;
+        transition: 0.5s;
+        box-shadow: 0px 0px 4px 0px #000000;
+    }
+
+#mainNav:hover {
+    background-color: #5E54A0;
     transition: 0.5s;
     box-shadow: 0px 0px 4px 0px #000000;
 }
@@ -16,6 +22,18 @@
         /*opacity: 0.6;*/
         transition: 0.5s;
     }
+
+    #mainNav:hover {
+        background-color: #5E54A0;
+        border-color: #5E54A0;
+        /*opacity: 0.6;*/
+        transition: 0.5s;
+    }
+}
+
+#login {
+    text-decoration-style: none;
+    text-decoration: none;
 }
 
 /*.nav-item:hover {
@@ -27,12 +45,19 @@
     .nav-item:hover {
         background-color: #5E54A0;
         border-color: #5E54A0;
-        /*opacity: 0.6;*/
+        opacity: 0.6;
         transition: 0.5s;
     }
 }*/
 
 
 .nav-item {
-    font-weight:500;
+    font-weight: 500;
 }
+
+#createNew {
+    font-weight: 600;
+    font-size: 25px;
+
+}
+

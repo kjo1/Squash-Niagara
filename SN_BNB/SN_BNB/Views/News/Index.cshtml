@@ -13,8 +13,8 @@
 <h2>News</h2>
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        <a asp-action="Create">Create New</a>
+    <p id="createNew">
+        <a style="color:purple" asp-action="Create">Create New</a>
     </p>
 }
 

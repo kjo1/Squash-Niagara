@@ -12,8 +12,9 @@
 }
 
 #btnSearch {
-    color: dimgray;
+    color: white;
     border-color: #383361;
+    background-color: #383361;
     border-radius: 6px;
 }
 
@@ -33,6 +34,7 @@
     background-color: #383361;
     border-color: #383361;
 }
+
     .btn-primary:hover {
         background-color: #5E54A0;
         border-color: #5E54A0;
@@ -64,10 +66,10 @@ a:active {
 }
 
 
-.card-header {
+/*.card-header {
     font-size: 1.2em;
     font-weight: bold;
-}
+}*/
 
 .table {
     width: 100%;
@@ -92,8 +94,15 @@ footer {
     width: 200px;
 }
 
-.btn-link {
+#playCol {
     color: black;
     font-size: 20px;
-    font-weight:700;
+    font-weight: 700;
+}
+
+#division {
+    position: absolute;
+    right: 0px;
+    padding: 10px;
+    padding-bottom: 60px;
 }
