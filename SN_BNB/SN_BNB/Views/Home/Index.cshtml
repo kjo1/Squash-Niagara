@@ -12,12 +12,56 @@
                 <h3>Welcome!</h3>
                 <p>This is a simple hero unit, a simple jumbotron-style component for welcoming users to the page</p>
                 <hr>
-                <p>To learn more about Squash Niagara click the button below.</p>
+                <p>To learn more about Squash Niagara click one of the buttons below.</p>
                 <p>
-                    <a class="btn btn-primary" href="/Home/About" role="button">Learn more</a>
+                    @*<a class="btn btn-primary" href="/Home/About" role="button">Learn more</a>*@
+                    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item dropdown">
+                                        <a class="btn btn-primary" style="margin-right: 5px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Rules
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="/Home/LeagueRules">League Rules</a>
+                                            <a class="dropdown-item" href="/Home/LeagueConstitution">League Constitution</a>
+                                        </div>
+                                    <li class="nav-item">
+                                        <a class="btn btn-primary" href="/Home/Documents">Documents</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
                 </p>
             </div>
         </div>
+        @*<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Rules
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/Home/LeagueRules">League Rules</a>
+                                <a class="dropdown-item" href="/Home/LeagueConstitution">League Constitution</a>
+                            </div>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Home/Documents">Documents</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
 
         <div class="container">
             <div class="row">

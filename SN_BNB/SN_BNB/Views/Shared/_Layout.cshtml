@@ -18,60 +18,61 @@
             </a>
         </div>
     </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #383361;">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home" style="color: white; padding-right:20px;">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/Schedule" style="color: white; padding-right:20px;">Schedule</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Teams" style="color: white; padding-right:20px;">Teams</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Players" style="color: white; padding-right:20px;">Players</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/Standings" style="color: white; padding-right:20px;">Standings</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/News" style="color: white; padding-right:20px;">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/About" style="color: white; padding-right:20px;">About</a>
-                    </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white; padding-right:20px;" aria-disabled="true"> | </a>
+    @*<div class="MainNav">*@
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #383361;">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item MainNav">
+                            <a class="nav-link" href="/Home" style="color: white; padding-right:20px;">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: white; padding-right:20px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin Options
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/Seasons/Index">Seasons</a>
-                                <a class="dropdown-item" href="/Fixtures/Index">Fixtures</a>
-                                <a class="dropdown-item" href="/Matches/Index">Matches</a>
-                                <a class="dropdown-item" href="/UserRoles">User Roles</a>
-                            </div>
+                        <li class="nav-item MainNav">
+                            <a class="nav-link" href="/Home/Schedule" style="color: white; padding-right:20px;">Schedule</a>
                         </li>
-                    }
+                        <li class="nav-item MainNav">
+                            <a class="nav-link" href="/Teams" style="color: white; padding-right:20px;">Teams</a>
+                        </li>
+                        <li class="nav-item MainNav">
+                            <a class="nav-link" href="/Players" style="color: white; padding-right:20px;">Players</a>
+                        </li>
+                        <li class="nav-item MainNav">
+                            <a class="nav-link" href="/Home/Standings" style="color: white; padding-right:20px;">Standings</a>
+                        </li>
 
-                </ul>
-                <partial name="_LoginPartial" />
-                <br>
+                        <li class="nav-item MainNav">
+                            <a class="nav-link" href="/News" style="color: white; padding-right:20px;">News</a>
+                        </li>
+                        <li class="nav-item MainNav">
+                            <a class="nav-link" href="/Home/About" style="color: white; padding-right:20px;">About</a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item MainNav">
+                                <a class="nav-link" style="color: white; padding-right:20px;" aria-disabled="true"> | </a>
+                            </li>
+                            <li class="nav-item dropdown MainNav">
+                                <a class="nav-link dropdown-toggle" style="color: white; padding-right:20px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin Options
+                                </a>
+                                <div class="dropdown-menu MainNav" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/Seasons/Index">Seasons</a>
+                                    <a class="dropdown-item" href="/Fixtures/Index">Fixtures</a>
+                                    <a class="dropdown-item" href="/Matches/Index">Matches</a>
+                                    <a class="dropdown-item" href="/UserRoles">User Roles</a>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                    <br>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    @*</div>*@
     <div class="container body-content">
         @RenderBody()
         <hr />

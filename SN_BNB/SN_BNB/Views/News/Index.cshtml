@@ -6,51 +6,58 @@
 
 @if (User.IsInRole("Admin"))
 {
+
+}
+
+<br>
+<h2>News</h2>
+@if (User.IsInRole("Admin"))
+{
     <p>
         <a asp-action="Create">Create New</a>
     </p>
 }
-    
-        <br>
-        <h2>News</h2>
-        <hr class="my-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-3">
-                    <!sidebar>
-                        @foreach (var item in Model)
-                        {
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Title) </a>
-                                            </h5>
-                                            <h6 class="card-subtitle text-muted">
-                                                @item.TimeSince
-                                            </h6>
-                                        </div>
-                                    </div>
+
+<hr class="my-3">
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <!sidebar>
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Title) </a>
+                                    </h5>
+                                    <h6 class="card-subtitle text-muted">
+                                        @item.TimeSince
+                                    </h6>
                                 </div>
                             </div>
-                        }
-                </div>
-                <div class="col-9">
-                    @foreach (var item in Model)
-                    {
-                    <div class="jumbotron">
-                        <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-                        <br /><br />
-                        <p>
-                            @Html.Raw(item.Content)
-                        </p><br />
-                        <h6 class="card-subtitle text-muted"><i>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </i></h6>
+                        </div>
                     </div>
-                        
-                    }
-                </div>
-            </div>
+                }
         </div>
+        <div class="col-9">
+            @foreach (var item in Model)
+            {
+                <div class="jumbotron">
+                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                    <br /><br />
+                    <p>
+                        @Html.Raw(item.Content)
+                    </p><br />
+                    <h6 class="card-subtitle text-muted">
+                        <i>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </i>
+                    </h6>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
