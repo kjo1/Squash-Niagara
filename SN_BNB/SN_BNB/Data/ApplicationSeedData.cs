@@ -76,7 +76,11 @@ namespace SN_BNB.Data
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, "bnb").Result;
-                //Not in any role
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Captain").Wait();
+                }
             }
             if (userManager.FindByEmailAsync("Dave_Forgeron@outlook.com").Result == null)
             {
@@ -87,7 +91,11 @@ namespace SN_BNB.Data
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, "bnb").Result;
-                //Not in any role
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Captain").Wait();
+                }
             }
         }
     }

@@ -211,7 +211,7 @@ namespace SN_BNB.Data
                         FirstName = "Rachael",
                         LastName = "Forgeron",
                         Gender = "F",
-                        Email = "Rachael_Forgeron@outlook.com",
+                        Email = "admin1@outlook.com",
                         Phone = 9055551202,
                         Position = 3,
                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
@@ -348,6 +348,28 @@ namespace SN_BNB.Data
                          Position = 2,
                          TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          PlayerWantsInfoHidden = false
+                     },
+                     new Player
+                     {
+                         FirstName = "Captain",
+                         LastName = "Last",
+                         Gender = "m",
+                         Email = "captain1@outlook.com",
+                         Phone = 2896237777,
+                         Position = 2,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         PlayerWantsInfoHidden = false
+                     },
+                     new Player
+                     {
+                         FirstName = "Player",
+                         LastName = "First",
+                         Gender = "m",
+                         Email = "player1@outlook.com",
+                         Phone = 2896230007,
+                         Position = 2,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                         PlayerWantsInfoHidden = false
                      }
                         );
                     context.SaveChanges();
@@ -390,7 +412,7 @@ namespace SN_BNB.Data
                          LocationName = "Niagara College",
                          LocationCity = "Welland",
                          LocationStreet = "Merritt",
-                         LocationBuildingNumber = 1                         
+                         LocationBuildingNumber = 1
                      },
                      new Location
                      {
