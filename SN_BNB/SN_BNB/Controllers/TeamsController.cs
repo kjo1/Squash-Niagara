@@ -9,6 +9,7 @@ using SN_BNB.Data;
 using SN_BNB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SN_BNB.Controllers
 {
@@ -216,6 +217,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Teams/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["DivisionID"] = new SelectList(_context.Divisions, "ID", "DivisionName");
@@ -225,6 +227,7 @@ namespace SN_BNB.Controllers
         // POST: Teams/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team)
@@ -241,6 +244,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Teams/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -249,6 +253,11 @@ namespace SN_BNB.Controllers
             }
 
             var team = await _context.Teams.FindAsync(id);
+            if(User.IsInRole("Captain") && team.ID != CaptainTeamID)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (team == null)
             {
                 return NotFound();
@@ -260,6 +269,7 @@ namespace SN_BNB.Controllers
         // POST: Teams/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team)
@@ -293,6 +303,7 @@ namespace SN_BNB.Controllers
             return View(team);
         }
 
+        [Authorize(Roles ="Admin")]
         // GET: Teams/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -313,6 +324,7 @@ namespace SN_BNB.Controllers
         }
 
         // POST: Teams/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
