@@ -10,31 +10,6 @@ body {
     font-family: Verdana, sans-serif;
 }
 
-/*.rightnav {
-    display: inline-flex;
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
-
-
-.dropdown {
-    position: absolute;
-    right: 10px;
-    font-size: 11px;
-}
-
-.dropdown-item {
-    font-size: 11px;
-}*/
-#login {
-    text-decoration-style: none;
-    text-decoration: none;
-}
-
-
-
 .btn-toolbar {
     background-color: brown;
 }
@@ -77,12 +52,20 @@ btn-toolbar {
     font-weight: 600;
 }
 
+#dateTime {
+    font-weight: 600;
+    font-size: 18px;
+}
 #homeTeam {
     color: green;
+    font-weight: 700;
+    font-size:18px;
 }
 
 #awayTeam {
     color: red;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 #userID {
