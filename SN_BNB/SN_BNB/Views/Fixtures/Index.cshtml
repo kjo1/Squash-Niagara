@@ -69,40 +69,40 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Season.Season_Title)
-                            </td>
-                            <td>
-                                @item.FixtureDateTime.ToString("MM/dd/yyyy")
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HomeScore)
-                            </td>
+                    <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color: chartreuse" : string.Empty)">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Season.Season_Title)
+                        </td>
+                        <td>
+                            @item.FixtureDateTime.ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HomeScore)
+                        </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-                            </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                        </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AwayScore)
-                            </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AwayScore)
+                        </td>
 
-                            <td >
-                                    <a asp-action="Edit" asp-route-id="@item.ID">
-                                        <img src="~/images/edit.png" style="width:28px; height:28px" />
-                                    </a> |
-                                    <a asp-action="Details" asp-route-id="@item.ID">
-                                        <img src="~/images/detail.png" style="width:28px; height:28px" />
-                                    </a> |
-                                    <a asp-action="Delete" asp-route-id="@item.ID">
-                                        <img src="~/images/Archive.png" style="width:28px; height:28px" />
-                                    </a>
-                            </td>
-                        </tr>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">
+                                <img src="~/images/edit.png" style="width:28px; height:28px" />
+                            </a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">
+                                <img src="~/images/detail.png" style="width:28px; height:28px" />
+                            </a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">
+                                <img src="~/images/Archive.png" style="width:28px; height:28px" />
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

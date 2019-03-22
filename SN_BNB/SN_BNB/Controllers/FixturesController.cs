@@ -14,6 +14,22 @@ namespace SN_BNB.Controllers
     {
         private readonly SNContext _context;
 
+        private int _TeamID = int.MinValue;
+        private int TeamID
+        {
+            get
+            {
+                if (_TeamID == int.MinValue)
+                {
+                    if (!User.IsInRole("Admin"))
+                        _TeamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
+                    else
+                        _TeamID = -1;
+                }
+                return _TeamID;
+            }
+        }
+
         public FixturesController(SNContext context)
         {
             _context = context;
@@ -131,6 +147,7 @@ namespace SN_BNB.Controllers
             //Set sort for next time
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
+            ViewBag.TeamID = TeamID;
 
             if (User.IsInRole("Admin"))
             {

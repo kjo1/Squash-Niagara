@@ -37,28 +37,6 @@ namespace SN_BNB.Controllers
         {
             _context = context;
         }
-        //private readonly ApplicationDbContext _applicationDbContext;
-
-        //public TeamsController(SNContext context, ApplicationDbContext applicationDbContext)
-        //{
-        //    _context = context;
-        //    _applicationDbContext = applicationDbContext;
-        //}
-
-        ///* Create a new role with name being Team.TeamName so that we can assign Users to a specific Team.
-        //This is done mainly so that we can make sure that Team Captains can only edit their Team. */
-        //protected async void MakeTeamRole(Team team)
-        //{
-        //    //create the role, the title is the Team Name
-        //    IdentityRole teamRole = new IdentityRole(team.TeamName);
-        //    //check if the role exists
-        //    if (!_applicationDbContext.Roles.Contains(teamRole))
-        //    {
-        //        await _applicationDbContext.Roles.AddAsync(teamRole);
-        //    }
-        //    //save changes
-        //    await _applicationDbContext.SaveChangesAsync();
-        //}
 
         // GET: Teams
         public async Task<IActionResult> Index(string searchString, int? divisionID, string sortDirection, string sortField, string actionButton)
