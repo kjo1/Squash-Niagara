@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Assets\Files\" />
-    <Folder Include="Views\Fixtures\" />
     <Folder Include="wwwroot\images\userUploads\" />
   </ItemGroup>
 
@@ -28,6 +27,12 @@
     <Reference Include="EPPlus">
       <HintPath>EPPlus.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Fixtures\Index_Schedule.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

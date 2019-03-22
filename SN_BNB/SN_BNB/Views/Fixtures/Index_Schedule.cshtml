@@ -6,13 +6,6 @@
 <link href="~/css/team.css" rel="stylesheet" />
 <br />
 <h3>Schedule</h3>
-@if (User.IsInRole("Admin"))
-{
-    <p id="createNew">
-        <a asp-action="Create" style="color:purple;">Create New</a>
-    </p>
-}
-
 <form asp-action="Index">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -55,15 +48,8 @@
                             <input id="playCol" type="submit" name="actionButton" value="Home Team" class="btn btn-link" />
                         </th>
                         <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Home Score" class="btn btn-link" />
-                        </th>
-                        <th>
                             <input id="playCol" type="submit" name="actionButton" value="Away Team" class="btn btn-link" />
                         </th>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Away Score" class="btn btn-link" />
-                        </th>
-                        <th style="color:lightgrey">----------------</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,29 +64,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HomeScore)
-                            </td>
-
+                            </td>         
                             <td>
                                 @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AwayScore)
-                            </td>
-
-                            <td >
-                                    <a asp-action="Edit" asp-route-id="@item.ID">
-                                        <img src="~/images/edit.png" style="width:28px; height:28px" />
-                                    </a> |
-                                    <a asp-action="Details" asp-route-id="@item.ID">
-                                        <img src="~/images/detail.png" style="width:28px; height:28px" />
-                                    </a> |
-                                    <a asp-action="Delete" asp-route-id="@item.ID">
-                                        <img src="~/images/Archive.png" style="width:28px; height:28px" />
-                                    </a>
                             </td>
                         </tr>
                     }

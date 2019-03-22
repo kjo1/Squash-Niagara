@@ -132,8 +132,20 @@ namespace SN_BNB.Controllers
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
 
+            if (User.IsInRole("Admin"))
+            {
+                return View("Index", await fixtures.ToListAsync());
+            }
+            else if (User.IsInRole("Captain"))
+            {
+                return View("Index", await fixtures.ToListAsync());
+            }
+            else
+            {
+                return View("Index_Schedule", await fixtures.ToListAsync());
+            }
 
-            return View(await fixtures.ToListAsync());
+            //return View(await fixtures.ToListAsync());
         }
 
         // GET: Fixtures/Details/5
