@@ -163,7 +163,7 @@ namespace SN_BNB.Data
                      new News
                      {
                          Title = "Ridley 2 - The Champion",
-                         Content = "Ridley 2 dominated the competition earning the most points out of all teams by a large margin this season! Having two players outperforming the rest in their respective positions they swept through the league with ease.",
+                         Content = "<b>Ridley 2</b> dominated the competition earning the most points out of all teams by a <i>large margin</i> this season! <h6>Having <u>two</u> players outperforming the rest in their respective positions they swept through the league with ease.</h6>",
                          Date = DateTime.Now
                      },
                      new News
