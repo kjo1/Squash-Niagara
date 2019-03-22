@@ -13,7 +13,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Title" class="control-label"></label>
-            <input asp-for="Title" class="form-control" />
+            <input asp-for="Title" class="form-control" id="Title"/>
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
@@ -71,7 +71,7 @@
                     <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
                     <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
                 </div>
-                <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+                @*<input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">*@
             </div>
 
             <div id="editor" style="
@@ -91,14 +91,7 @@
                 Go ahead&hellip;
             </div>
         </div>
-
-        <div name="Content">
-            <script type="text/javascript">$('#editor').cleanHtml();</script>
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
+        <button type="button" id="submitBtn">Create</button>
     </form>
 </div>
 
@@ -110,9 +103,31 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="~/js/jquery-3.3.1.js"></script>
 <script src="~/js/bootstrap.js"></script>
 <script src="~/js/bootstrap-wysiwyg.js"></script>
 <script type="text/javascript">
-    $('#editor').wysiwyg();
+    var $jq = jQuery.noConflict();
+    $jq('#editor').wysiwyg();
+    var editor = $jq('#editor');
+    var $button = $jq('#submitBtn');
+    $button.on('click', function () {
+        var theTitle = $jq('#Title').val();
+        var theContent = editor.cleanHtml();
+        //$jq.post("Create", { Title: theTitle, Content: theContent });
+        $jq.ajax({
+            type: "POST",
+            url: '<%= Url.Action("Create", "News") %>',
+            //url: "News/Create", // the method we are calling
+            contentType: "application/json; charset=utf-8",
+            data: { Title: theTitle, Content: theContent },
+            dataType: "json",
+            success: function (result) {
+                alert('Posted.');
+            },
+            error: function (result) {
+                alert('Due to an error, this is unable to be posted. Try again or reformat your post.');
+            }
+        });
+    })
 </script>

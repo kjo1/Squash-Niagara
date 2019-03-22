@@ -108,9 +108,9 @@
 							$(this).removeClass(options.activeToolbarClass);
 						}
 					});
-					if (options.setRealFontSize !== null) {
-						options.setRealFontSize(selectedRange);
-					}
+					//if (options.setRealFontSize !== null) {
+					//	options.setRealFontSize(selectedRange);
+					//}
 				}
 			}, 500),
 			execCommand = function (commandWithArgs, valueArg) {

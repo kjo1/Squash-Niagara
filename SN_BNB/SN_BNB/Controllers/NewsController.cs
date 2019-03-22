@@ -73,17 +73,18 @@ namespace SN_BNB.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Content")] News news)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string Title, string Content)
         {
-            news.Date = DateTime.Now;
-            if (ModelState.IsValid)
-            {
-                _context.Add(news);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(news);
+            //news.Date = DateTime.Now;
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(news);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View(news);
+            return Redirect("/ergerwgergwerg");
         }
 
         // GET: News/Edit/5
