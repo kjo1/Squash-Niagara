@@ -86,6 +86,20 @@
                 <dd>
                     @Html.DisplayFor(model => model.Division.DivisionName)
                 </dd>
+                <dt>
+                    Schedule
+                </dt>
+                <dd>
+                    @foreach (SN_BNB.ViewModels.TeamScheduleVM f in ViewBag.Fixtures)
+                    {
+                    <li>
+                        <span id="dateTime">@f.Date</span>
+                        <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
+                        <span style="font-weight:600; font-size:16px">vs</span>
+                        <span id="awayTeam">@(f.AwayTeamName ?? Model.TeamName)</span>
+                    </li>
+                    }
+                </dd>
             </dl>
         </div><br />
         <div>
