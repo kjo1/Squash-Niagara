@@ -44,64 +44,76 @@
                 </div>
             </div>
         </div>
-        <div style="align-content:center">
-            <br />
-            <h4>Team Info</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.TeamName)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.TeamName)
-                </dd>
-                <dt>
-                    Players:
-                </dt>
-                <dd>
-                    <ul>
-                        @foreach (Player player in ViewBag.Players)
-                        {
-                            <li>
-                                @player.FullName
-                            </li>
-                        }
-                    </ul>
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.TeamPoints)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.TeamPoints)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.TeamCreatedOn)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.TeamCreatedOn)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Division)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Division.DivisionName)
-                </dd>
-                <dt>
-                    Schedule
-                </dt>
-                <dd>
-                    @foreach (SN_BNB.ViewModels.TeamScheduleVM f in ViewBag.Fixtures)
-                    {
-                    <li>
-                        <span id="dateTime">@f.Date</span>
-                        <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
-                        <span style="font-weight:600; font-size:16px">vs</span>
-                        <span id="awayTeam">@(f.AwayTeamName ?? Model.TeamName)</span>
-                    </li>
-                    }
-                </dd>
-            </dl>
-        </div><br />
+        <div class="row">
+            @*row*@
+            <div class="col-6">
+                <div style="align-content:center">
+                    <br />
+                    <h4>Team Info</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TeamName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TeamName)
+                        </dd>
+                        <dt>
+                            Players:
+                        </dt>
+                        <dd>
+                            <ul>
+                                @foreach (Player player in ViewBag.Players)
+                                {
+                                    <li>
+                                        @player.FullName
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TeamPoints)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TeamPoints)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TeamCreatedOn)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TeamCreatedOn)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Division)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Division.DivisionName)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="col-6">
+                <div>
+                    <br />
+                    <h4>Schedule</h4>
+                    <hr />>
+                        <ul>
+                            @foreach (SN_BNB.ViewModels.TeamScheduleVM f in ViewBag.Fixtures)
+                            {
+
+                                <li>
+                                    <span id="dateTime">@f.Date</span>
+                                    <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
+                                    <span style="font-weight:600; font-size:16px">vs</span>
+                                    <span id="awayTeam">@(f.AwayTeamName ?? Model.TeamName)</span>
+                                </li>
+                            }
+                        </ul>
+                </div>
+            </div>
+        </div> @*row*@
+
+        <br />
         <div>
             @if (User.IsInRole("Captain"))
             {
