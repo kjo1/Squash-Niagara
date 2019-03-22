@@ -118,12 +118,13 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID, int? DivisionID)
         {
             PopulateFilterList();
 
             var players = from p in _context.Players
                             .Include(p => p.Team)
+                            //.ThenInclude( t => t.DivisionID)
                             .Include(p => p.AssignedMatchPlayers)
                             .ThenInclude(p => p.Match)
                           select p;
@@ -137,6 +138,10 @@ namespace SN_BNB.Controllers
             if (TeamID.HasValue)
             {
                 players = players.Where(t => t.TeamID == TeamID);
+            }
+            if (DivisionID.HasValue)
+            {
+                players = players.Where(t => t.Team.DivisionID == DivisionID);
             }
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
@@ -491,8 +496,16 @@ namespace SN_BNB.Controllers
             var dQuery = from t in _context.Teams
                          orderby t.TeamName
                          select t;
+            var dQueryD = from d in _context.Divisions
+                          orderby d.DivisionName
+                          select d;
+
+            ViewData["DivisionID"] = new SelectList(dQueryD, "ID", "DivisionName");
+
             ViewData["TeamID"] = new SelectList(dQuery, "ID", "TeamName");
         }
+
+
 
         [HttpGet]
         public JsonResult GetTeams(int? id)

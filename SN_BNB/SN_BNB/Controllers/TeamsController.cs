@@ -10,6 +10,7 @@ using SN_BNB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
+using SN_BNB.ViewModels;
 
 namespace SN_BNB.Controllers
 {
@@ -183,12 +184,18 @@ namespace SN_BNB.Controllers
 
             var team = await _context.Teams
                 .Include(t => t.Division)
+                .Include(t => t.HomeFixtures)
+                .ThenInclude(t => t.AwayTeam)
+                .Include(t => t.AwayFixtures)
+                .ThenInclude(t => t.HomeTeam)
                 .FirstOrDefaultAsync(m => m.ID == id);
+
             if (team == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Fixtures = team.AwayFixtures.Union(team.HomeFixtures).Where(f => DateTime.Now.AddDays(30).CompareTo(f.FixtureDateTime) > 0).Select(t => new TeamScheduleVM(t));
             ViewBag.Players = _context.Players.Where(t => t.TeamID == team.ID);     //due to trouble finding a list of players with Team.Players, this is used
 
             return View(team);
