@@ -77,18 +77,45 @@
                             @item.FixtureDateTime.ToString("MM/dd/yyyy")
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+                            @if (item.HomeScore >= item.AwayScore)
+                            {
+                                <b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b>
+                            }
+                            else {
+                                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+                            }
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.HomeScore)
+                            @if (item.HomeScore >= item.AwayScore)
+                            {
+                                <b>@Html.DisplayFor(modelItem => item.HomeScore)</b>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.HomeScore)
+                            }
                         </td>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                            @if (item.AwayScore >= item.HomeScore)
+                            {
+                                <b>@Html.DisplayFor(modelItem => item.AwayTeam.TeamName)</b>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                            }
                         </td>
 
                         <td>
-                            @Html.DisplayFor(modelItem => item.AwayScore)
+                            @if (item.AwayScore >= item.HomeScore)
+                            {
+                                <b>@Html.DisplayFor(modelItem => item.AwayScore)</b>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.AwayScore)
+                            }
                         </td>
 
                         <td>

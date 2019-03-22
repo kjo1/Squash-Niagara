@@ -74,17 +74,24 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string Title, string Content)
+        public ActionResult Create(string Title, string Content)
         {
-            //news.Date = DateTime.Now;
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(news);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(news);
-            return Redirect("/ergerwgergwerg");
+            try
+            {
+                //news.Date = DateTime.Now;
+                //if (ModelState.IsValid)
+                //{
+                //    _context.Add(news);
+                //    await _context.SaveChangesAsync();
+                //    return RedirectToAction(nameof(Index));
+                //}
+                //return View(news);
+                return Redirect("/ergerwgergwerg");
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: News/Edit/5

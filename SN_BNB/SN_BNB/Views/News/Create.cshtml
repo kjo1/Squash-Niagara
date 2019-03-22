@@ -14,7 +14,7 @@
         <div class="form-group">
             <label asp-for="Title" class="control-label"></label>
             <input asp-for="Title" class="form-control" id="Title"/>
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <span asp-validation-for="Title" class="text-danger" id="TitleWarning"></span>
         </div>
 
 
@@ -111,23 +111,25 @@
     $jq('#editor').wysiwyg();
     var editor = $jq('#editor');
     var $button = $jq('#submitBtn');
+
     $button.on('click', function () {
-        var theTitle = $jq('#Title').val();
-        var theContent = editor.cleanHtml();
-        //$jq.post("Create", { Title: theTitle, Content: theContent });
-        $jq.ajax({
-            type: "POST",
-            url: '<%= Url.Action("Create", "News") %>',
-            //url: "News/Create", // the method we are calling
-            contentType: "application/json; charset=utf-8",
-            data: { Title: theTitle, Content: theContent },
-            dataType: "json",
-            success: function (result) {
-                alert('Posted.');
-            },
-            error: function (result) {
-                alert('Due to an error, this is unable to be posted. Try again or reformat your post.');
-            }
-        });
-    })
+        var theTitle = $jq('#Title').text();
+        var theContent = $editor.cleanHtml();
+
+        $jq.post("Create", { Title: theTitle, Content: theContent });
+        //$jq.ajax({
+        //    type: "POST",
+        //    url: "Create",
+        //    //url: '<%= Url.Action("Create", "News") %>',
+        //    contentType: "application/json; charset=utf-8",
+        //    data: { Title: theTitle, Content: theContent },
+        //    dataType: "json",
+        //    success: function (result) {
+        //        alert('Posted to the news feed.');
+        //    },
+        //    error: function (result) {
+        //        alert('Due to an error, this is unable to be posted. Try again or reformat your post.');
+        //    }
+        //});
+})
 </script>
