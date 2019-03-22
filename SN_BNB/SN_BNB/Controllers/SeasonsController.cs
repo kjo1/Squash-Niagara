@@ -193,6 +193,22 @@ namespace SN_BNB.Controllers
             return View(season);
         }
 
+        // GET: Seasons/EditExcel/5
+        public async Task<IActionResult> EditExcel(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var season = await _context.Seasons.FindAsync(id);
+            if (season == null)
+            {
+                return NotFound();
+            }
+            return View(season);
+        }
+
         // POST: Seasons/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -224,6 +240,40 @@ namespace SN_BNB.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            return View(season);
+        }
+        // POST: Seasons/EditExcel/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditExcel(int id, [Bind("ID,Season_Title,SeasonStart,SeasonEnd")] Season season)
+        {
+            if (id != season.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(season);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SeasonExists(season.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return Redirect("ExcelConfirm");
             }
             return View(season);
         }

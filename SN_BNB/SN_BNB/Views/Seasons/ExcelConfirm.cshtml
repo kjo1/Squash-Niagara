@@ -57,6 +57,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
             </td>
+            <td>
+                <a asp-action="EditExcel" asp-route-id="@item.ID">
+                    <img src="~/images/edit.png" style="width:28px; height:28px" />
+                </a>
+            </td>
         </tr>
 }
     </tbody>
