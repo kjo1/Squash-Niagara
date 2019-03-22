@@ -77,7 +77,7 @@
                             @item.FixtureDateTime.ToString("MM/dd/yyyy")
                         </td>
                         <td>
-                            @if (item.HomeScore >= item.AwayScore)
+                            @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
                                 <b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b>
                             }
@@ -86,7 +86,7 @@
                             }
                         </td>
                         <td>
-                            @if (item.HomeScore >= item.AwayScore)
+                            @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
                                 <b>@Html.DisplayFor(modelItem => item.HomeScore)</b>
                             }
@@ -97,7 +97,7 @@
                         </td>
 
                         <td>
-                            @if (item.AwayScore >= item.HomeScore)
+                            @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
                                 <b>@Html.DisplayFor(modelItem => item.AwayTeam.TeamName)</b>
                             }
@@ -108,7 +108,7 @@
                         </td>
 
                         <td>
-                            @if (item.AwayScore >= item.HomeScore)
+                            @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
                                 <b>@Html.DisplayFor(modelItem => item.AwayScore)</b>
                             }
