@@ -4,468 +4,208 @@
 }
 <br />
 <h2>Standings</h2>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<p>
+    Players must play at least 50% of their team's fixtures at a given position in order to qualify.<br /><br />
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        2018-2019 Men's Divisions
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
-                        <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
-                        <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
-                        <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
-                    </div>
-                </li>
-            </ul>
+    * For positions to be Confirmed the first and second place players must have faced each other at least once.
+</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width:300px; margin-bottom:10px;">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" style="width:auto">
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    2018-2019 Men's Divisions
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
+                    <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
+                    <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
+                    <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="row">
+    <div class="col">
+        <div class="card" style="max-width: 16rem;">
+            <div class="card-header">
+                Position 1
+            </div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <th style="  padding-bottom: 15px;">Player</th>
+                        <th style="padding-left: 50px;">%</th>
+                    </tr>
+
+                    <tr>
+                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Huck, Murray</a></td>
+                        <td style="padding-left: 50px;">71</td>
+                    </tr>
+
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Lipinski, Jakub</a></td>
+                        <td style="padding-left: 50px;">67</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Forgeron, Rachael</a></td>
+                        <td style="padding-left: 50px;">63</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Savarie, Chris</a></td>
+                        <td style="padding-left: 50px;">57</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Crouch, Spencer</a></td>
+                        <td style="padding-left: 50px;">53</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Hajek, Matt</a></td>
+                        <td style="padding-left: 50px;">44</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Holland, Greg</a></td>
+                        <td style="padding-left: 50px;">26</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Sharron, David</a></td>
+                        <td style="padding-left: 50px;">20</td>
+                    </tr>
+                </table>
+                <hr />
+                <p class="card-text" style="color: darkred"><i>Not Confirmed</i></p>
+            </div>
         </div>
-    </nav>
-
-    @*!!!!!! Place holder tables to be replaced for working ones !!!!!!*@
-    <h4>Position 1</h4>
-    <div class="table-responsive-sm">
-        <table class="table table-light table-hover table-striped">
-
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Player</th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches Played">Played</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches won">Won</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches lost">Lost</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Won">For</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Lost">Against</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="6= 3:0//  5 = 3:1//  4 = 3:2//  3 = 2:3//  2 = 1:3//  1 = 0:3">Points</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Average of points per match">Average</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Bowie, Matt</td>
-                    <td>14</td>
-                    <td>9</td>
-                    <td>5</td>
-                    <td>33</td>
-                    <td>19</td>
-                    <td>61</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Forgeron, Dave</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Forgeron, Rachael</td>
-                    <td>13</td>
-                    <td>10</td>
-                    <td>3</td>
-                    <td>32</td>
-                    <td>16</td>
-                    <td>58</td>
-                    <td>4.5</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Lipinski, Jakub</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Christie, Adam</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>Hajek, Matt</td>
-                    <td>13</td>
-                    <td>8</td>
-                    <td>5</td>
-                    <td>29</td>
-                    <td>20</td>
-                    <td>53</td>
-                    <td>4.1</td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td>Scott, Angus</td>
-                    <td>12</td>
-                    <td>10</td>
-                    <td>2</td>
-                    <td>31</td>
-                    <td>18</td>
-                    <td>51</td>
-                    <td>4.3</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td>Savarie, Chris</td>
-                    <td>13</td>
-                    <td>9</td>
-                    <td>4</td>
-                    <td>28</td>
-                    <td>20</td>
-                    <td>51</td>
-                    <td>3.9</td>
-                </tr>
-            </tbody>
-        </table>
-    </div><br />
-
-    <h4>Position 2</h4>
-    <div class="table-responsive-sm">
-        <table class="table table-light table-hover table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Player</th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches Played">Played</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches won">Won</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches lost">Lost</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Won">For</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Lost">Against</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="6= 3:0//  5 = 3:1//  4 = 3:2//  3 = 2:3//  2 = 1:3//  1 = 0:3">Points</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Average of points per match">Average</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Bowie, Matt</td>
-                    <td>14</td>
-                    <td>9</td>
-                    <td>5</td>
-                    <td>33</td>
-                    <td>19</td>
-                    <td>61</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Forgeron, Dave</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Forgeron, Rachael</td>
-                    <td>13</td>
-                    <td>10</td>
-                    <td>3</td>
-                    <td>32</td>
-                    <td>16</td>
-                    <td>58</td>
-                    <td>4.5</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Lipinski, Jakub</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Christie, Adam</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>Hajek, Matt</td>
-                    <td>13</td>
-                    <td>8</td>
-                    <td>5</td>
-                    <td>29</td>
-                    <td>20</td>
-                    <td>53</td>
-                    <td>4.1</td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td>Scott, Angus</td>
-                    <td>12</td>
-                    <td>10</td>
-                    <td>2</td>
-                    <td>31</td>
-                    <td>18</td>
-                    <td>51</td>
-                    <td>4.3</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td>Savarie, Chris</td>
-                    <td>13</td>
-                    <td>9</td>
-                    <td>4</td>
-                    <td>28</td>
-                    <td>20</td>
-                    <td>51</td>
-                    <td>3.9</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
+    <div class="col">
+        <div class="card" style="max-width: 18rem;">
+            <div class="card-header">
+                Position 2
+            </div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <th style="  padding-bottom: 15px; ">Player</th>
+                        <th style="padding-left: 50px;">%</th>
+                    </tr>
 
-    <h4>Position 3</h4>
-    <div class="table-responsive-sm">
-        <table class="table table-light table-hover table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Player</th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches Played">Played</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches won">Won</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches lost">Lost</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Won">For</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Lost">Against</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="6= 3:0//  5 = 3:1//  4 = 3:2//  3 = 2:3//  2 = 1:3//  1 = 0:3">Points</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Average of points per match">Average</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Bowie, Matt</td>
-                    <td>14</td>
-                    <td>9</td>
-                    <td>5</td>
-                    <td>33</td>
-                    <td>19</td>
-                    <td>61</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Forgeron, Dave</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Forgeron, Rachael</td>
-                    <td>13</td>
-                    <td>10</td>
-                    <td>3</td>
-                    <td>32</td>
-                    <td>16</td>
-                    <td>58</td>
-                    <td>4.5</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Lipinski, Jakub</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Christie, Adam</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>Hajek, Matt</td>
-                    <td>13</td>
-                    <td>8</td>
-                    <td>5</td>
-                    <td>29</td>
-                    <td>20</td>
-                    <td>53</td>
-                    <td>4.1</td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td>Scott, Angus</td>
-                    <td>12</td>
-                    <td>10</td>
-                    <td>2</td>
-                    <td>31</td>
-                    <td>18</td>
-                    <td>51</td>
-                    <td>4.3</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td>Savarie, Chris</td>
-                    <td>13</td>
-                    <td>9</td>
-                    <td>4</td>
-                    <td>28</td>
-                    <td>20</td>
-                    <td>51</td>
-                    <td>3.9</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    <tr>
+                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Forgeron, Dave</a></td>
+                        <td style="padding-left: 50px;">67</td>
+                    </tr>
 
-    <h4>Position 4</h4>
-    <div class="table-responsive-sm">
-        <table class="table table-light table-hover table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Player</th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches Played">Played</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches won">Won</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Matches lost">Lost</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Won">For</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Number of Games Lost">Against</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="6= 3:0//  5 = 3:1//  4 = 3:2//  3 = 2:3//  2 = 1:3//  1 = 0:3">Points</span></th>
-                    <th scope="col"><span data-toggle="tooltip" title="Average of points per match">Average</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Bowie, Matt</td>
-                    <td>14</td>
-                    <td>9</td>
-                    <td>5</td>
-                    <td>33</td>
-                    <td>19</td>
-                    <td>61</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Forgeron, Dave</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Forgeron, Rachael</td>
-                    <td>13</td>
-                    <td>10</td>
-                    <td>3</td>
-                    <td>32</td>
-                    <td>16</td>
-                    <td>58</td>
-                    <td>4.5</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Lipinski, Jakub</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Christie, Adam</td>
-                    <td>14</td>
-                    <td>10</td>
-                    <td>4</td>
-                    <td>35</td>
-                    <td>22</td>
-                    <td>59</td>
-                    <td>4.4</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>Hajek, Matt</td>
-                    <td>13</td>
-                    <td>8</td>
-                    <td>5</td>
-                    <td>29</td>
-                    <td>20</td>
-                    <td>53</td>
-                    <td>4.1</td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td>Scott, Angus</td>
-                    <td>12</td>
-                    <td>10</td>
-                    <td>2</td>
-                    <td>31</td>
-                    <td>18</td>
-                    <td>51</td>
-                    <td>4.3</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td>Savarie, Chris</td>
-                    <td>13</td>
-                    <td>9</td>
-                    <td>4</td>
-                    <td>28</td>
-                    <td>20</td>
-                    <td>51</td>
-                    <td>3.9</td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Corey, Jeff</a></td>
+                        <td style="padding-left: 50px;">52</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Stones, Doug</a></td>
+                        <td style="padding-left: 50px;">48</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Colcott, Craig</a></td>
+                        <td style="padding-left: 50px;">46</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Seet, Kok-Wah</a></td>
+                        <td style="padding-left: 50px;">42</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Gadula, Curtis</a></td>
+                        <td style="padding-left: 50px;">40</td>
+                    </tr>
+                </table>
+                <hr />
+                <p class="card-text" style="color: limegreen"><i>Confirmed</i></p>
+            </div>
+        </div>
     </div>
-    <footer>
-        <small>Copyright &copy; 2019 Bits N' Bytes. All rights reserved.</small>
-    </footer>
+    <div class="col">
+        <div class="card" style="max-width: 18rem;">
+            <div class="card-header">
+                Position 3
+            </div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <th style="  padding-bottom: 15px; ">Player</th>
+                        <th style="padding-left: 50px;">%</th>
+                    </tr>
+
+                    <tr>
+                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Vanderzalm, Brett</a></td>
+                        <td style="padding-left: 50px;">100</td>
+                    </tr>
+
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Rapley, Dave</a></td>
+                        <td style="padding-left: 50px;">67</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Shaw, Hamish</a></td>
+                        <td style="padding-left: 50px;">63</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Muir, Jeff</a></td>
+                        <td style="padding-left: 50px;">40</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Kelm, George</a></td>
+                        <td style="padding-left: 50px;">0</td>
+                    </tr>
+                </table>
+                <hr />
+                <p class="card-text" style="color: darkred"><i>Not Confirmed</i></p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="max-width: 18rem;">
+            <div class="card-header">
+                Position 4
+            </div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <th style="  padding-bottom: 15px; ">Player</th>
+                        <th style="padding-left: 50px;">%</th>
+                    </tr>
+
+                    <tr>
+                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Scott, Angus</a></td>
+                        <td style="padding-left: 50px;">65</td>
+                    </tr>
+
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Cappelletti, Joey</a></td>
+                        <td style="padding-left: 50px;">63</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Roussel, Chris</a></td>
+                        <td style="padding-left: 50px;">62</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Lewis, Scott</a></td>
+                        <td style="padding-left: 50px;">57</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Purnell, Mike</a></td>
+                        <td style="padding-left: 50px;">37</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Devalk, Robert</a></td>
+                        <td style="padding-left: 50px;">35</td>
+                    </tr>
+                    <tr>
+                        <td style="  padding-bottom: 15px;"><a href="#">Hogg, Chris</a></td>
+                        <td style="padding-left: 50px;">25</td>
+                    </tr>
+                </table>
+                <hr />
+                <p class="card-text" style="color: darkred"><i>Not Confirmed</i></p>
+            </div>
+        </div>
+    </div>
 </div>
-
