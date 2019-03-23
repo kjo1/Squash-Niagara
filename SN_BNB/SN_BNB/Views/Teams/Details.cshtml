@@ -11,97 +11,77 @@
 <!------ Include the above in your HEAD tag ---------->
 <body>
     <div class="container">
-        <div class="row">
-
-            <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="media">
+            <div class="media-left">
+                <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle"><br />
+            </div>
+            <div class="media-body">
+                <h3 class="media-heading">@Html.DisplayFor(model => model.TeamName)</h3>
+                <h4 class="media-heading">@Html.DisplayFor(model => model.TeamBio) </h4>
+                <hr />
                 <div class="row">
-                    <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-                        <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle"><br />
+                    <div class="col-1">
+
                     </div>
+                    <div class="col-5">
+                        <dl>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Division)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Division.DivisionName)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TeamPoints)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.TeamPoints)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-6">
+                        <dl>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TeamCreatedOn)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.TeamCreatedOn)
+                            </dd>
+                        </dl>
+                    </div>
+
+
                 </div>
             </div>
 
-            <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
-                <div class="row profile-right-section-row">
-                    <div class="col-md-12 profile-header">
-                        <div class="row">
-                            <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
-                                <h1>@Html.DisplayFor(model => model.TeamName)</h1>
-                                <p>@Html.DisplayFor(model => model.TeamBio)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
-                <div class="row profile-right-section-row">
-                    <div class="col-md-12 profile-header">
-                        <div class="row">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
         <div class="row">
             @*row*@
             <div class="col-6">
-                <div style="align-content:center">
-                    <br />
-                    <h4>Team Info</h4>
-                    <hr />
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.TeamName)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.TeamName)
-                        </dd>
-                        <dt>
-                            Players:
-                        </dt>
-                        <dd>
-                            <ul>
-                                @foreach (Player player in ViewBag.Players)
-                                {
-                                    <li>
-                                        @player.FullName
-                                    </li>
-                                }
-                            </ul>
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.TeamPoints)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.TeamPoints)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.TeamCreatedOn)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.TeamCreatedOn)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Division)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Division.DivisionName)
-                        </dd>
-                    </dl>
-                </div>
+                <br />
+                <h4>Players</h4>
+                <hr />
+                <ul>
+                    @foreach (Player player in ViewBag.Players)
+                    {
+                        <li class="list-group">
+                            @player.FullName
+                        </li>
+                    }
+                </ul>
             </div>
             <div class="col-6">
                 <div>
                     <br />
                     <h4>Schedule</h4>
-                    <hr />>
-                        <ul>
+                    <hr />
+                        <ul style="list-style: none">
                             @foreach (SN_BNB.ViewModels.TeamScheduleVM f in ViewBag.Fixtures)
                             {
 
-                                <li>
+                                <li >
                                     <span id="dateTime">@f.Date</span>
                                     <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
                                     <span style="font-weight:600; font-size:16px">vs</span>
