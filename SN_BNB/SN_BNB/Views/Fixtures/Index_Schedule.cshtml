@@ -55,7 +55,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color: #rgba(109, 97, 190, 0.75);" : string.Empty)">
                             <td>
                                 @Html.DisplayFor(modelItem => item.Season.Season_Title)
                             </td>
@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-                            </td>         
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
                             </td>

@@ -21,7 +21,7 @@ namespace SN_BNB.Controllers
             {
                 if (_TeamID == int.MinValue)
                 {
-                    if (!User.IsInRole("Admin"))
+                    if (User.Identity.IsAuthenticated)
                         _TeamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
                     else
                         _TeamID = -1;
