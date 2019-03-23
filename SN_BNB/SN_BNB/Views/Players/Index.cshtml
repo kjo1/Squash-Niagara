@@ -110,14 +110,14 @@
                                     @if (ViewBag.CaptainTeamID == -1 || item.TeamID == ViewBag.CaptainTeamID)
                                     {
                                         <a asp-action="Edit" asp-route-id="@item.ID">
-                                            <img src="~/images/edit.png" style="width:28px; height:28px" />
+                                            <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit"/>
                                         </a> <span>|</span>
                                     }
                                 }
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <a asp-action="Delete" asp-route-id="@item.ID">
-                                        <img src="~/images/Archive.png" style="width:28px; height:28px" />
+                                        <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive"/>
                                     </a>
                                 }
                             </td>

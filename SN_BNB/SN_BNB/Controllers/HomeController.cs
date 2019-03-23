@@ -39,7 +39,6 @@ namespace SN_BNB.Controllers
                                                     .Include(f => f.HomeTeam)
                                                     .Where(f => (f.idHomeTeam == teamID || f.idAwayTeam == teamID)
                                                     && DateTime.Today.AddDays(30).CompareTo(f.FixtureDateTime) > 0).OrderBy(f => f.FixtureDateTime);
-
                     ViewBag.fixture = fixture;
                 }
                 catch
@@ -58,9 +57,7 @@ namespace SN_BNB.Controllers
                 }
                 catch
                 { ViewBag.fixtureLast = new List<Fixture>(); }
-            }
-            if (User.Identity.IsAuthenticated)
-            {
+
                 try
                 {
                     int teamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;

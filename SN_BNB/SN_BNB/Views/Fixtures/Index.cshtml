@@ -120,13 +120,14 @@
 
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.ID">
-                                <img src="~/images/edit.png" style="width:28px; height:28px" />
+                                <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit"/>
+                                <span ></span>
                             </a> |
                             <a asp-action="Details" asp-route-id="@item.ID">
-                                <img src="~/images/detail.png" style="width:28px; height:28px" />
+                                <img src="~/images/detail.png" style="width:28px; height:28px" data-toggle="tooltip" title="Details" />
                             </a> |
                             <a asp-action="Delete" asp-route-id="@item.ID">
-                                <img src="~/images/Archive.png" style="width:28px; height:28px" />
+                                <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive"/>
                             </a>
                         </td>
                     </tr>
