@@ -1,0 +1,16 @@
+
+#btnLogin {
+    color: white;
+    border-color: #383361;
+    background-color: #383361;
+    border-radius: 6px;
+    margin-left:5px;
+    font-size:18px;
+    font-weight:600;
+}
+
+    #btnLogin:hover {
+        background-color: #5E54A0;
+        border-color: #5E54A0;
+        color: white;
+    }

@@ -38,12 +38,26 @@ namespace SN_BNB.Controllers
                     var fixture = _context.Fixtures.Include(f => f.AwayTeam)
                                                     .Include(f => f.HomeTeam)
                                                     .Where(f => (f.idHomeTeam == teamID || f.idAwayTeam == teamID)
-                                                    && DateTime.Now.AddDays(30).CompareTo(f.FixtureDateTime) > 0).OrderBy(f => f.FixtureDateTime);
+                                                    && DateTime.Today.AddDays(30).CompareTo(f.FixtureDateTime) > 0).OrderBy(f => f.FixtureDateTime);
 
                     ViewBag.fixture = fixture;
                 }
                 catch
                 { ViewBag.fixture = new List<Fixture>(); }
+
+                try
+                {
+                    int teamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
+
+                    var fixtureLast = _context.Fixtures.Include(f => f.AwayTeam)
+                                                    .Include(f => f.HomeTeam)
+                                                    .Where(f => (f.idHomeTeam == teamID || f.idAwayTeam == teamID)
+                                                    && DateTime.Now.AddDays(-14).CompareTo(f.FixtureDateTime) > 0).OrderBy(f => f.FixtureDateTime);
+
+                    ViewBag.fixtureLast = fixtureLast;
+                }
+                catch
+                { ViewBag.fixtureLast = new List<Fixture>(); }
             }
             if (User.Identity.IsAuthenticated)
             {

@@ -11,7 +11,7 @@
     <p id="createNew">
         <a style="color:purple;" asp-action="Create">Create New</a>
     </p>
-    <form asp-action="ExcelUpload" style="text-align:center;" method="post" enctype="multipart/form-data">
+    <form asp-action="ExcelUpload" style="text-align:center; margin-bottom:60px" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="control-label">Excel File:</label>
             <input type="file" class="" name="file" />
@@ -21,22 +21,21 @@
 }
 
 <form asp-action="Index">
-    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
-    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div id="division">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control" })
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control" })
-                @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control" })
-                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name" })
-                <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name" })
+                    <button id="btnSearch" class="btn btn-outline-success my-3 my-sm-0" type="submit">Search</button>
+                </div>
             </div>
         </nav>
+        <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+        <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+
         <div class="table-responsive-sm">
             <table class="table table-light table-hover table-striped">
                 @*<caption>Position 1/2 of Teams</caption>*@

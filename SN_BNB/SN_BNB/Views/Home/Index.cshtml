@@ -17,13 +17,8 @@
                 <hr>
                 <p>To learn more about Squash Niagara click one of the buttons below.</p>
                 <p>
-                    @*<a class="btn btn-primary" href="/Home/About" role="button">Learn more</a>*@
                     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
                         <div class="container-fluid">
-                            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>*@
-                            @*<div class="collapse navbar-collapse" id="navbarSupportedContent">*@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item dropdown">
                                     <a id="btn" class="btn btn-primary" style="margin: 0px 5px 5px 0px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,28 +38,6 @@
                 </p>
             </div>
         </div>
-        @*<nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Rules
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/Home/LeagueRules">League Rules</a>
-                                    <a class="dropdown-item" href="/Home/LeagueConstitution">League Constitution</a>
-                                </div>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="/Home/Documents">Documents</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>*@
         @if (User.Identity.IsAuthenticated)
         {
             <div class="container">
@@ -72,8 +45,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <span id="userID">@UserManager.GetUserName(User)</span>'s Upcoming Fixture
-
+                            <span id="userID">@UserManager.GetUserName(User) @*This will be replace with first name if possible or be removed if we can't make it working*@</span>'s Upcoming Fixture
                         </div>
                         <div class="card-body">
                             <ul>
@@ -87,35 +59,35 @@
                                     </li>
                                 }
                             </ul>
-
-                            <a id="btn" href="/Fixtures/Index" class="btn btn-primary" style="font-weight:700;">All Matches</a>
                         </div>
+                        <span style="text-align:center;"> <a id="btn" href="/Fixtures/Index" class="btn btn-primary" style="font-weight:700;">All Matches</a></span>
+
+
                     </div>
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                @*@foreach (Match m in ViewBag.match)
+                                <span id="userID">@UserManager.GetUserName(User) @*This will be replace with first name if possible or be removed if we can't make it working*@</span>'s Last Fixture
+                            </div>
+                            <ul>
+                                @foreach (Fixture f in ViewBag.fixtureLast)
                                 {
-                                    <span id="userID">@m.Player.FullName</span><p>'s Last Fixture</p>
-
-                                    <ul>
-                                        <li>
-                                            <br /><div>@m.MatchTime.ToLongDateString()</div>
-                                            <span id="homeTeam">@m.Player.FullName</span>
-                                                vs
-                                                <span id="awayTeam">@f.AwayTeam.TeamName</span>
-                                        </li>
-
-                                    </ul>
-                                }*@
-                            </div>
-
-                            <div class="card-body">                               
-                            </div>
+                                    <li>
+                                        <span id="dateTime">@f.FixtureDateTime.ToLongDateString()</span>
+                                        <span id="homeTeam">@f.HomeTeam.TeamName</span>
+                                        <span style="font-weight:600; font-size:16px">vs</span>
+                                        <span id="awayTeam">@f.AwayTeam.TeamName</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="card-body">
                         </div>
                     </div>
-                </div><br>
+                </div>
             </div>
+            <br>
+
         }
 
         <h5 style="padding: 10px; font-weight:700;">Position Leaders</h5>
