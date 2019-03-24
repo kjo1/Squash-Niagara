@@ -17,6 +17,7 @@ namespace SN_BNB.Controllers
     public class PlayersController : Controller
     {
         private readonly SNContext _context;
+        public static List<Player> newPlayerList;    //contains all the new players added so they can be shown to the user
         private int _captainTeamID = int.MinValue;
         private int CaptainTeamID
         {
@@ -70,6 +71,8 @@ namespace SN_BNB.Controllers
 
             //receive excel file
             ExcelPackage excelPackage;
+
+            newPlayerList = new List<Player>();    //contains all the new players added so they can be shown to the user
             try
             {
                 using (var memoryStream = new MemoryStream())
@@ -97,6 +100,7 @@ namespace SN_BNB.Controllers
                 foreach (PlayerStruct playerStruct in dataStructs)
                 {
                     Player tempPlayer = new Player();
+                    newPlayerList.Add(tempPlayer);
                     _context.Players.Add(tempPlayer);
 
                     //update tables
@@ -111,10 +115,16 @@ namespace SN_BNB.Controllers
             //let the user know that the file was not parsed properly
             catch (Exception ex)
             {
-                throw (ex);
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
-            return RedirectToAction(nameof(Index));
+            //pass the list of new players to the ExcelConfirm() method
+            return RedirectToAction("ExcelConfirm");
+        }
+
+        // GET: Players/ExcelConfirm
+        public IActionResult ExcelConfirm()
+        {
+            return View(newPlayerList);
         }
 
         // GET: Players

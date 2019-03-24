@@ -113,22 +113,26 @@
     var $button = $jq('#submitBtn');
 
     $button.on('click', function () {
-        var theTitle = $jq('#Title').text();
+        var theTitle = $jq('#Title').val();
         var theContent = $editor.cleanHtml();
         var theData = { Title: theTitle, Content: theContent };
+        if (theTitle == null || theContent == null)
+        {
+
+        }
+
 
         $jq.ajax({
             type: "POST",
-            url: '<%= Url.Action("Create", "News") %>',
-            contentType: "application/json; charset=utf-8",
+            url: 'Create',
             data: theData,
-            dataType: 'html',
-            success: function (result) {
+            success: function () {
                 alert('Posted to the news feed.');
             },
-            error: function (result) {
-                alert('Due to an error, this is unable to be posted. Try again or reformat your post. ' + result);
+            error: function () {
+                alert('Due to an error, this is unable to be posted. Try again or reformat your post.');
             }
-        });
-})
+        }
+        );
+    });
 </script>

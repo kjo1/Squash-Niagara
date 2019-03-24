@@ -1,4 +1,0 @@
-﻿Calendar Sources 
-https://codepen.io/afontcu/pen/bapBxv
-https://freefrontend.com/css-calendars/
-

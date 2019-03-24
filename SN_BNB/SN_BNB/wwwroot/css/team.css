@@ -107,3 +107,12 @@ footer {
     padding: 10px;
     padding-bottom: 60px;
 }
+
+a.btnEdit {
+    background-image: url('../images/edit.png');
+    background: url('../images/edit.png') no-repeat top left;
+    display: block;
+    width: 150px;
+    height: 150px;
+    text-indent: -9999px;
+}

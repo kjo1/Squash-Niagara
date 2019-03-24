@@ -15,24 +15,8 @@
     <form asp-action="Index">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div id="division" class="collapse navbar-collapse" id="navbarSupportedContent">
-                @*<ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            2018-2019 Men's Divisions
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
-                            <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
-                            <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
-                            <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
-                        </div>
-                    </li>
-                </ul>*@
                 @Html.DropDownList("DivisionID", null, "Select a Division", htmlAttributes: new { @class = "form-control", @style = "width:auto;" })
                 @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team" })
                 <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -90,7 +74,7 @@
                                     @if (ViewBag.CaptainTeamID == -1 || item.ID == ViewBag.CaptainTeamID)
                                     {
                                         <a asp-action="Edit" asp-route-id="@item.ID">
-                                            <img src="~/images/edit.png" style="width:28px; height:28px" />
+                                            <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
                                         </a>
                                         <span>|</span>
                                     }
@@ -98,7 +82,7 @@
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <a asp-action="Delete" asp-route-id="@item.ID">
-                                        <img src="~/images/Archive.png" style="width:28px; height:28px" />
+                                        <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive"/>
                                     </a>
                                 }
                             </td>

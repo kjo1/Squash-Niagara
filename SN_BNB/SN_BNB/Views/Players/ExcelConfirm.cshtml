@@ -109,9 +109,9 @@
                 @Html.DisplayFor(modelItem => item.Team.TeamName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="EditExcel" asp-route-id="@item.ID">
+                    <img src="~/images/edit.png" style="width:28px; height:28px" />
+                </a>
             </td>
         </tr>
 }

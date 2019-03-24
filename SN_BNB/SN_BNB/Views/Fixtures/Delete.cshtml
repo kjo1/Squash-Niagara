@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<link href="~/css/button.css" rel="stylesheet" />
 <br />
 <h2>Delete</h2>
 
@@ -48,7 +49,7 @@
             @Html.DisplayFor(model => model.Season.Season_Title)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
