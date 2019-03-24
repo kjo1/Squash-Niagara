@@ -78,19 +78,24 @@ namespace SN_BNB.Controllers
         {
             try
             {
-                //news.Date = DateTime.Now;
-                //if (ModelState.IsValid)
-                //{
-                //    _context.Add(news);
-                //    await _context.SaveChangesAsync();
-                //    return RedirectToAction(nameof(Index));
-                //}
-                //return View(news);
-                return Redirect("/ergerwgergwerg");
+                News news = new News
+                {
+                    Date = DateTime.Now
+                };
+                news.Title = Title;
+                news.Content = Content;
+
+                if (ModelState.IsValid)
+                {
+                    _context.Add(news);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(news);
             }
-            catch(Exception ex)
+            catch
             {
-                throw ex;
+                return View();
             }
         }
 
