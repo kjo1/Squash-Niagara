@@ -55,20 +55,34 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color: #rgba(109, 97, 190, 0.75);" : string.Empty)">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Season.Season_Title)
-                            </td>
-                            <td>
-                                @item.FixtureDateTime.ToString("MM/dd/yyyy")
-                            </td>
-                            <td>
+                    <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color: #rgba(109, 97, 190, 0.75);" : string.Empty)">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Season.Season_Title)
+                        </td>
+                        <td>
+                            @item.FixtureDateTime.ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
+                            {
+                                <b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b>
+                            }
+                            else
+                            {
                                 @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-                            </td>
-                            <td>
+                            }
+                        </td>
+                        <td>
+                            @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
+                            {
+                                <b>@Html.DisplayFor(modelItem => item.AwayTeam.TeamName)</b>
+                            }
+                            else
+                            {
                                 @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-                            </td>
-                        </tr>
+                            }
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

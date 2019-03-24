@@ -368,7 +368,7 @@ namespace SN_BNB.Data
                          Email = "player1@outlook.com",
                          Phone = 2896230007,
                          Position = 2,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          PlayerWantsInfoHidden = false
                      }
                         );
