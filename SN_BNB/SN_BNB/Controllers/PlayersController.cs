@@ -372,7 +372,7 @@ namespace SN_BNB.Controllers
 
         
         // GET: Players/Edit/5
-        [Authorize]
+        [Authorize(Roles ="Admin, Captain")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
