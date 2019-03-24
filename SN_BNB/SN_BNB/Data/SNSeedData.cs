@@ -503,7 +503,17 @@ namespace SN_BNB.Data
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "First").ID
+                     }, 
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-03-21"),
+                         HomeScore = 5,
+                         AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "First").ID
                      },
+
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-06"),
@@ -533,9 +543,18 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-01"),
+                         FixtureDateTime = DateTime.Parse("2019-04-04"),
                          HomeScore = 0,
                          AwayScore = 0,
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "First").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.Parse("2019-03-18"),
+                         HomeScore = 4,
+                         AwayScore = 2,
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "First").ID
