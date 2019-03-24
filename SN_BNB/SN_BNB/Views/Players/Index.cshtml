@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div id="division">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control", @style="width:290px" })
 
                     @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control" })
                     @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name" })
