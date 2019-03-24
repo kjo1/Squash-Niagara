@@ -71,6 +71,8 @@ namespace SN_BNB.Controllers
 
             //receive excel file
             ExcelPackage excelPackage;
+
+            newPlayerList = new List<Player>();    //contains all the new players added so they can be shown to the user
             try
             {
                 using (var memoryStream = new MemoryStream())
@@ -98,6 +100,7 @@ namespace SN_BNB.Controllers
                 foreach (PlayerStruct playerStruct in dataStructs)
                 {
                     Player tempPlayer = new Player();
+                    newPlayerList.Add(tempPlayer);
                     _context.Players.Add(tempPlayer);
 
                     //update tables
