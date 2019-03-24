@@ -7,7 +7,7 @@ ul {
 }
 
 body {
-    /*font-family: Verdana, sans-serif;*/
+    font-family: Verdana, sans-serif;
 }
 
 .btn-toolbar {
@@ -56,10 +56,11 @@ btn-toolbar {
     font-weight: 600;
     font-size: 18px;
 }
+
 #homeTeam {
     color: green;
     font-weight: 700;
-    font-size:18px;
+    font-size: 18px;
 }
 
 #awayTeam {
@@ -72,3 +73,8 @@ btn-toolbar {
     color: #5E54A0;
 }
 
+#fixScore {
+    color:blue;
+    font-weight: 700;
+    font-size: 18px;
+}
