@@ -116,6 +116,11 @@
         var theTitle = $jq('#Title').val();
         var theContent = $editor.cleanHtml();
         var theData = { Title: theTitle, Content: theContent };
+        if (theTitle == null || theContent == null)
+        {
+
+        }
+
 
         $jq.ajax({
             type: "POST",
