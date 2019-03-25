@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SN_BNB.Models
 {
-    public class Fixture
+    public class Fixture : IValidatableObject
     {
         public Fixture()
         {
@@ -43,6 +43,9 @@ namespace SN_BNB.Models
         [Range(1, int.MaxValue)]
         public int idAwayTeam { get; set; }
 
+        [Display(Name = "Bonus Point")]
+        public float BonusPoint { get; set; }
+
         [Display(Name = "Season")]
         [Required(ErrorMessage = "Please select a Season")]
         [Range(1, int.MaxValue)]
@@ -56,5 +59,16 @@ namespace SN_BNB.Models
         public virtual Team AwayTeam { get; set; }
 
         public  ICollection<Match> Matches { get; set; }
+
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var results = new List<ValidationResult>();
+            if (this.BonusPoint != 0 || this.BonusPoint != 0.5 || this.BonusPoint != -1.0 || this.BonusPoint != 1.0)
+            {
+                results.Add(new ValidationResult("Invalid entry for Bonus Point"));
+            }
+            return results;
+        }
     }
 }
