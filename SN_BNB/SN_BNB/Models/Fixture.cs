@@ -44,7 +44,7 @@ namespace SN_BNB.Models
         public int idAwayTeam { get; set; }
 
         [Display(Name = "Bonus Point")]
-        public float BonusPoint { get; set; }
+        public double BonusPoint { get; set; }
 
         [Display(Name = "Season")]
         [Required(ErrorMessage = "Please select a Season")]
@@ -64,7 +64,7 @@ namespace SN_BNB.Models
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = new List<ValidationResult>();
-            if (this.BonusPoint != 0 || this.BonusPoint != 0.5 || this.BonusPoint != -1.0 || this.BonusPoint != 1.0)
+            if (this.BonusPoint != 0.0 || this.BonusPoint != 0.5 || this.BonusPoint != -1.0 || this.BonusPoint != 1.0)
             {
                 results.Add(new ValidationResult("Invalid entry for Bonus Point"));
             }
