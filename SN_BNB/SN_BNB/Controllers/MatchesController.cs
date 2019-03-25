@@ -182,7 +182,7 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.AssignedMatchPlayerID);
             //PopulateDropDownLists();
             PopulateAssignedPlayerData(match);
             return View(match);
@@ -231,7 +231,7 @@ namespace SN_BNB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.AssignedMatchPlayerID);
             PopulateAssignedPlayerData(matchToUpdate);
             //PopulateDropDownLists();
             return View(match);
