@@ -89,11 +89,35 @@
                         <td>
                             @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                <b>@Html.DisplayFor(modelItem => item.HomeScore)</b>
+                                @if (item.BonusPoint == "home")
+                                {
+                                    <b>@(item.HomeScore + 1)</b>
+                                }
+                                else if (item.BonusPoint == "split")
+                                {
+
+                                    <b>@(Convert.ToDouble(item.HomeScore) + 0.5)</b>
+                                }
+                                else
+                                {
+                                    <b>@Html.DisplayFor(modelItem => item.HomeScore)</b>
+                                }
                             }
                             else
                             {
-                                @Html.DisplayFor(modelItem => item.HomeScore)
+                                @if (item.BonusPoint == "home")
+                                {
+                                    @(item.HomeScore + 1)
+                                }
+                                else if (item.BonusPoint == "split")
+                                {
+
+                                    @(Convert.ToDouble(item.HomeScore) + 0.5)
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.HomeScore)
+                                }
                             }
                         </td>
 
@@ -111,11 +135,35 @@
                         <td>
                             @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                <b>@Html.DisplayFor(modelItem => item.AwayScore)</b>
+                                @if (item.BonusPoint == "away")
+                                {
+                                    <b>@(item.AwayScore + 1)</b>
+                                }
+                                else if (item.BonusPoint == "split")
+                                {
+
+                                    <b>@(Convert.ToDouble(item.AwayScore) + 0.5)</b>
+                                }
+                                else
+                                {
+                                    <b>@Html.DisplayFor(modelItem => item.AwayScore)</b>
+                                }
                             }
                             else
                             {
-                                @Html.DisplayFor(modelItem => item.AwayScore)
+                                @if (item.BonusPoint == "away")
+                                {
+                                    @(item.AwayScore + 1)
+                                }
+                                else if (item.BonusPoint == "split")
+                                {
+
+                                    @(Convert.ToDouble(item.AwayScore) + 0.5)
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.AwayScore)
+                                }
                             }
                         </td>
                         @if (User.IsInRole("Admin"))

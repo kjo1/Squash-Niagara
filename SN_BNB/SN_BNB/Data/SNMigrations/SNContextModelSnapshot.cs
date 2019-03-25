@@ -58,7 +58,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<float>("BonusPoint");
+                    b.Property<string>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 
@@ -68,8 +68,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("Season_idSeason");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Title");
 
                     b.Property<int>("idAwayTeam");
 
