@@ -69,31 +69,36 @@
                 <br />
                 <h4>Players</h4>
                 <hr />
-                <ul>
-                    @foreach (Player player in ViewBag.Players)
-                    {
-                        <li class="list-group">
-                            @player.FullName
-                        </li>
-                    }
-                </ul>
+                <table class="table table-bordered table-hover">
+                    
+                        @foreach (Player player in ViewBag.Players)
+                        {
+                    <tr>
+                        <td><a href="/Players/Details/@player.ID">@player.FullName</a></td>
+                    </tr>
+                        }
+                    
+                </table>
+
             </div>
             <div class="col-6">
                 <div>
                     <br />
                     <h4>Schedule</h4>
                     <hr />
-                    <ul style="list-style: none">
+                    <table class="table table-bordered table-hover">
                         @foreach (SN_BNB.ViewModels.TeamScheduleVM f in ViewBag.Fixtures)
                         {
-                            <li>
-                                <span id="dateTime">@f.Date</span>
-                                <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
-                                <span style="font-weight:600; font-size:16px">vs</span>
-                                <span id="awayTeam">@(f.AwayTeamName ?? Model.TeamName)</span>
-                            </li>
+                            <tr>
+                                <td>
+                                    <span id="dateTime">@f.Date</span></td>
+                                   <td> <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
+                                    <span style="font-weight:600; font-size:16px">vs</span>
+                                    <span id="awayTeam">@(f.AwayTeamName ?? Model.TeamName)</span>
+                                </td>
+                            </tr>
                         }
-                    </ul>
+                    </table>
                 </div>
             </div>
         </div> @*row*@
@@ -102,7 +107,7 @@
         <div>
             @if (User.IsInRole("Captain"))
             {
-                @if (ViewBag.CaptainTeamID == -1 ||  Model.ID == ViewBag.CaptainTeamID)
+                @if (ViewBag.CaptainTeamID == -1 || Model.ID == ViewBag.CaptainTeamID)
                 {
                     <a asp-action="Edit" asp-route-id="@Model.ID"> Edit</a>
                 }
