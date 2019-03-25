@@ -26,11 +26,19 @@ namespace SN_BNB.Controllers
 
         public struct FixtureStruct
         {
-            public DateTime FixtureDateTime;
+            public DateTime FixtureDate;
             public string LocationCity;
             public string LocationAddress;
             public Team HomeTeam;     //need to find team id for sql statement
             public Team AwayTeam;
+        }
+
+        public struct MatchStruct
+        {
+            public TimeSpan MatchTime;
+            public int Player1Score;
+            public int Player2Score;
+            public AssignedMatchPlayer MatchAssignedMatchPlayer;
         }
 
         // GET: Seasons/ExcelUpload
@@ -77,7 +85,7 @@ namespace SN_BNB.Controllers
                     }
                     FixtureStruct tempStruct = new FixtureStruct
                     {
-                        FixtureDateTime = matchDate,
+                        FixtureDate = matchDate,
                         LocationCity = worksheet.Cells[row, 2].Text,
                         LocationAddress = worksheet.Cells[row, 3].Text,
 
@@ -98,7 +106,7 @@ namespace SN_BNB.Controllers
                 foreach (FixtureStruct fixtureStruct in dataStructs)
                 {
                     Fixture tempFixture = new Fixture();
-                    tempFixture.FixtureDateTime = fixtureStruct.FixtureDateTime;
+                    tempFixture.FixtureDateTime = fixtureStruct.FixtureDate;
                     tempFixture.HomeScore = 0;
                     tempFixture.AwayScore = 0;
                     tempFixture.idHomeTeam = _context.Teams.Find(fixtureStruct.HomeTeam.ID).ID;
