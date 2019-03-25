@@ -89,11 +89,11 @@
                         <td>
                             @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                @if (item.BonusPoint == "home")
+                                @if (item.BonusPoint == 3)
                                 {
                                     <b>@(item.HomeScore + 1)</b>
                                 }
-                                else if (item.BonusPoint == "split")
+                                else if (item.BonusPoint == 2)
                                 {
 
                                     <b>@(Convert.ToDouble(item.HomeScore) + 0.5)</b>
@@ -105,11 +105,11 @@
                             }
                             else
                             {
-                                @if (item.BonusPoint == "home")
+                                @if (item.BonusPoint == 3)
                                 {
                                     @(item.HomeScore + 1)
                                 }
-                                else if (item.BonusPoint == "split")
+                                else if (item.BonusPoint == 2)
                                 {
 
                                     @(Convert.ToDouble(item.HomeScore) + 0.5)
@@ -135,11 +135,11 @@
                         <td>
                             @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                @if (item.BonusPoint == "away")
+                                @if (item.BonusPoint == 1)
                                 {
                                     <b>@(item.AwayScore + 1)</b>
                                 }
-                                else if (item.BonusPoint == "split")
+                                else if (item.BonusPoint == 2)
                                 {
 
                                     <b>@(Convert.ToDouble(item.AwayScore) + 0.5)</b>
@@ -151,11 +151,11 @@
                             }
                             else
                             {
-                                @if (item.BonusPoint == "away")
+                                @if (item.BonusPoint == 1)
                                 {
                                     @(item.AwayScore + 1)
                                 }
-                                else if (item.BonusPoint == "split")
+                                else if (item.BonusPoint == 2)
                                 {
 
                                     @(Convert.ToDouble(item.AwayScore) + 0.5)

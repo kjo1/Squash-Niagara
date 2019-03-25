@@ -128,7 +128,7 @@ namespace SN_BNB.Data.SNMigrations
                     AwayScore = table.Column<int>(nullable: false),
                     idHomeTeam = table.Column<int>(nullable: false),
                     idAwayTeam = table.Column<int>(nullable: false),
-                    BonusPoint = table.Column<string>(nullable: true),
+                    BonusPoint = table.Column<int>(nullable: false),
                     Season_idSeason = table.Column<int>(nullable: false),
                     location_locationId = table.Column<int>(nullable: false),
                     LocationID = table.Column<int>(nullable: true)

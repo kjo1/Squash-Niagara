@@ -44,7 +44,7 @@ namespace SN_BNB.Models
         public int idAwayTeam { get; set; }
 
         [Display(Name = "Bonus Point")]
-        public string BonusPoint { get; set; }
+        public int BonusPoint { get; set; }
 
         [Display(Name = "Season")]
         [Required(ErrorMessage = "Please select a Season")]
@@ -66,13 +66,13 @@ namespace SN_BNB.Models
             var results = new List<ValidationResult>();
             switch (this.BonusPoint)
             {
-                case "home":    //award 1 point to home team
+                case 3:         //award 1 point to home team
                     break;
-                case "away":    //award 1 point to away team
+                case 1:        //award 1 point to away team
                     break;
-                case "split":   //each team is awarded 0.5 points
+                case 2:         //each team is awarded 0.5 points
                     break;
-                case null:      //the bonus point is not yet assigned
+                case 0:      //the bonus point is not yet assigned
                     break;
                 default:
                     results.Add(new ValidationResult("Invalid entry for Bonus Point"));

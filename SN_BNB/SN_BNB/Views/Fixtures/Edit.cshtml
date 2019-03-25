@@ -44,8 +44,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="BonusPoint" class="control-label"></label>
-                <input asp-for="BonusPoint" class="form-control" />
-                <span asp-validation-for="BonusPoint" class="text-danger"></span>
+                <div class="d-flex justify-content-center my-4">
+                    <span class="font-weight-bold purple-text mr-2 mt-1">Away</span>
+                    <input asp-for="BonusPoint" type="range" min="1" max="3" step="1" class="form-control" />
+                    <span asp-validation-for="BonusPoint" class="text-danger"></span>
+                    <span class="font-weight-bold purple-text ml-2 mt-1">Home</span>
+               </div>
             </div>
 
             <div class="form-group">

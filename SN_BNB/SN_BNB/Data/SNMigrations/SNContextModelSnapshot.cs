@@ -58,7 +58,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<string>("BonusPoint");
+                    b.Property<int>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 
