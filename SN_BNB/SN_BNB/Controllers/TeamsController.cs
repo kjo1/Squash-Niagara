@@ -47,7 +47,9 @@ namespace SN_BNB.Controllers
                         .Include(t => t.Division)
                         .Include(t => t.Players)
                         .Include(t => t.Season_has_Teams)
-                        .ThenInclude( t => t.Season)                     
+                        .ThenInclude( t => t.Season)
+                        .Include(t=> t.HomeFixtures)
+                        .Include(t=> t.AwayFixtures)
                         select t;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -189,7 +191,7 @@ namespace SN_BNB.Controllers
                 .Include(t => t.AwayFixtures)
                 .ThenInclude(t => t.HomeTeam)
                 .FirstOrDefaultAsync(m => m.ID == id);
-
+            
             if (team == null)
             {
                 return NotFound();
