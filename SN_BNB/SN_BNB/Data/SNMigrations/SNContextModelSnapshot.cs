@@ -124,7 +124,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("MatchPosition");
 
-                    b.Property<DateTime>("MatchTime");
+                    b.Property<TimeSpan>("MatchTime");
 
                     b.Property<int>("Player1Score");
 

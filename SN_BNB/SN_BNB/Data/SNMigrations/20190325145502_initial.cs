@@ -238,7 +238,7 @@ namespace SN_BNB.Data.SNMigrations
                     Player1Score = table.Column<int>(nullable: false),
                     Player2Score = table.Column<int>(nullable: false),
                     MatchPosition = table.Column<int>(nullable: false),
-                    MatchTime = table.Column<DateTime>(nullable: false),
+                    MatchTime = table.Column<TimeSpan>(nullable: false),
                     FixtureID = table.Column<int>(nullable: false),
                     AssignedMatchPlayerID = table.Column<int>(nullable: false),
                     PlayerID = table.Column<int>(nullable: true)

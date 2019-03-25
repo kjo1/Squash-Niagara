@@ -30,7 +30,7 @@ namespace SN_BNB.Models
         [Required]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh:mm}", ApplyFormatInEditMode = true)]
-        public DateTime MatchTime { get; set; }
+        public TimeSpan MatchTime { get; set; }
 
 
         [Display(Name = "Fixture")]

@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190325140651_initial")]
+    [Migration("20190325145502_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,7 +126,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("MatchPosition");
 
-                    b.Property<DateTime>("MatchTime");
+                    b.Property<TimeSpan>("MatchTime");
 
                     b.Property<int>("Player1Score");
 
