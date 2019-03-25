@@ -12,30 +12,9 @@
         <div class="container">
 
             <div class="jumbotron">
-                <h3>Welcome!</h3>
-                <p>This is a simple hero unit, a simple jumbotron-style component for welcoming users to the page</p>
+                <h3>News</h3>
                 <hr>
-                <p>To learn more about Squash Niagara click one of the buttons below.</p>
-                <p>
-                    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-                        <div class="container-fluid">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item dropdown">
-                                    <a id="btn" class="btn btn-primary" style="margin: 0px 5px 5px 0px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Rules
-                                    </a>
-                                    <div id="mainNav" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/Home/LeagueRules">League Rules</a>
-                                        <a class="dropdown-item" href="/Home/LeagueConstitution">League Constitution</a>
-                                    </div>
-                                <li class="nav-item">
-                                    <a id="btn" class="btn btn-primary" href="/Home/Documents">Documents</a>
-                                </li>
-                            </ul>
-                            @*</div>*@
-                        </div>
-                    </nav>
-                </p>
+                <p>Game in Ridley College has been cancelled for Tuesday 26th! Keep tuned for updates.</p>
             </div>
         </div>
         @if (User.Identity.IsAuthenticated)
@@ -143,6 +122,26 @@
                 </div>
             </div>
         </div>
+        <hr />
+        <p>To learn more about Squash Niagara click one of the buttons below.</p>
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <div class="container-fluid">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a id="btn" class="btn btn-primary" style="margin: 0px 5px 5px 0px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Rules
+                        </a>
+                        <div id="mainNav" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Home/LeagueRules">League Rules</a>
+                            <a class="dropdown-item" href="/Home/LeagueConstitution">League Constitution</a>
+                        </div>
+                    <li class="nav-item">
+                        <a id="btn" class="btn btn-primary" href="/Home/Documents">Documents</a>
+                    </li>
+                </ul>
+                @*</div>*@
+            </div>
+        </nav>
         <br>
         <br>
 
