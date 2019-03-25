@@ -42,7 +42,10 @@ namespace SN_BNB.Controllers
         // GET: News
         public async Task<IActionResult> Index()
         {
-            return View(await _context.News.ToListAsync());
+            var news = from n in _context.News
+                       select n;
+            news = news.OrderByDescending(n => n.Date);     //order by most recent
+            return View(await news.ToListAsync());
         }
 
         // GET: News/Details/5
