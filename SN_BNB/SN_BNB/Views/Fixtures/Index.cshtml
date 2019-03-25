@@ -89,14 +89,14 @@
                         <td>
                             @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                @if (item.BonusPoint == 1.0)
+                                @if (item.BonusPoint == "home")
                                 {
-                                    <b>@Html.DisplayFor(modelItem => item.HomeScore + 1)</b>
+                                    <b>@(item.HomeScore + 1)</b>
                                 }
-                                else if (item.BonusPoint == 0.5)
+                                else if (item.BonusPoint == "split")
                                 {
 
-                                    <b>@Html.DisplayFor(modelItem => item.HomeScore + 0.5)</b>
+                                    <b>@(Convert.ToDouble(item.HomeScore) + 0.5)</b>
                                 }
                                 else
                                 {
@@ -105,14 +105,14 @@
                             }
                             else
                             {
-                                @if (item.BonusPoint == 1.0)
+                                @if (item.BonusPoint == "home")
                                 {
-                                    @Html.DisplayFor(modelItem => item.HomeScore + 1)
+                                    @(item.HomeScore + 1)
                                 }
-                                else if (item.BonusPoint == 0.5)
+                                else if (item.BonusPoint == "split")
                                 {
 
-                                    @Html.DisplayFor(modelItem => item.HomeScore + 0.5)
+                                    @(Convert.ToDouble(item.HomeScore) + 0.5)
                                 }
                                 else
                                 {
@@ -135,14 +135,14 @@
                         <td>
                             @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                @if (item.BonusPoint == -1.0)
+                                @if (item.BonusPoint == "away")
                                 {
-                                    <b>@Html.DisplayFor(modelItem => item.HomeScore + 1)</b>
+                                    <b>@(item.AwayScore + 1)</b>
                                 }
-                                else if (item.BonusPoint == 0.5)
+                                else if (item.BonusPoint == "split")
                                 {
 
-                                    <b>@Html.DisplayFor(modelItem => item.AwayScore + 0.5)</b>
+                                    <b>@(Convert.ToDouble(item.AwayScore) + 0.5)</b>
                                 }
                                 else
                                 {
@@ -151,14 +151,14 @@
                             }
                             else
                             {
-                                @if (item.BonusPoint == -1.0)
+                                @if (item.BonusPoint == "away")
                                 {
-                                    @Html.DisplayFor(modelItem => item.AwayScore + 1)
+                                    @(item.AwayScore + 1)
                                 }
-                                else if (item.BonusPoint == 0.5)
+                                else if (item.BonusPoint == "split")
                                 {
 
-                                    @Html.DisplayFor(modelItem => item.AwayScore + 0.5)
+                                    @(Convert.ToDouble(item.AwayScore) + 0.5)
                                 }
                                 else
                                 {

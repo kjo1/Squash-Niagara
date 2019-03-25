@@ -122,13 +122,13 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
                     FixtureDateTime = table.Column<DateTime>(nullable: false),
                     HomeScore = table.Column<int>(nullable: false),
                     AwayScore = table.Column<int>(nullable: false),
                     idHomeTeam = table.Column<int>(nullable: false),
                     idAwayTeam = table.Column<int>(nullable: false),
-                    BonusPoint = table.Column<double>(nullable: false),
+                    BonusPoint = table.Column<string>(nullable: true),
                     Season_idSeason = table.Column<int>(nullable: false),
                     location_locationId = table.Column<int>(nullable: false),
                     LocationID = table.Column<int>(nullable: true)

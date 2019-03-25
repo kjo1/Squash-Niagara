@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190325151939_initial")]
+    [Migration("20190325154336_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,7 +60,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<double>("BonusPoint");
+                    b.Property<string>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 
@@ -70,8 +70,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("Season_idSeason");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Title");
 
                     b.Property<int>("idAwayTeam");
 

@@ -185,7 +185,7 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FixtureDateTime,HomeScore,AwayScore,idHomeTeam,idAwayTeam,BonusPoint,Season_idSeason")] Fixture fixture)
+        public async Task<IActionResult> Create([Bind("ID,FixtureDateTime,HomeScore,AwayScore,idHomeTeam,idAwayTeam,Season_idSeason,BonusPoint")] Fixture fixture)
         {
             if (ModelState.IsValid)
             {
