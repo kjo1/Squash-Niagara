@@ -443,6 +443,7 @@ namespace SN_BNB.Data
                     context.Fixtures.AddRange(
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-01"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -452,6 +453,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley1",
                          FixtureDateTime = DateTime.Parse("2019-04-05"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -461,6 +463,7 @@ namespace SN_BNB.Data
                      },
                     new Fixture
                     {
+                        Title = "Brock1 vs Ridley1",
                         FixtureDateTime = DateTime.Parse("2019-03-22"),
                         HomeScore = 2,
                         AwayScore = 5,
@@ -470,6 +473,7 @@ namespace SN_BNB.Data
                     },
                     new Fixture
                     {
+                        Title = "Brock1 vs White Oaks 1",
                         FixtureDateTime = DateTime.Parse("2019-03-31"),
                         HomeScore = 0,
                         AwayScore = 0,
@@ -479,6 +483,7 @@ namespace SN_BNB.Data
                     },
                      new Fixture
                      {
+                         Title = "Brock1 vs BAC1",
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -488,6 +493,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock2 vs BAC1",
                          FixtureDateTime = DateTime.Parse("2019-04-08"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -497,6 +503,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock3 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -506,6 +513,7 @@ namespace SN_BNB.Data
                      }, 
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-03-21"),
                          HomeScore = 5,
                          AwayScore = 0,
@@ -516,6 +524,7 @@ namespace SN_BNB.Data
 
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-06"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -525,6 +534,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-08"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -534,6 +544,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -543,6 +554,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-04"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -552,6 +564,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-03-18"),
                          HomeScore = 4,
                          AwayScore = 2,
@@ -561,6 +574,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-01"),
                          HomeScore = 0,
                          AwayScore = 0,
@@ -570,6 +584,7 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
+                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-03-20"),
                          HomeScore = 3,
                          AwayScore = 2,
