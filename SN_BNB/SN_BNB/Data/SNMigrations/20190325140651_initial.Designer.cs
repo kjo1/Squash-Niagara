@@ -10,15 +10,15 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190325015622_fixturetitle")]
-    partial class fixturetitle
+    [Migration("20190325140651_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -59,6 +59,8 @@ namespace SN_BNB.Data.SNMigrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AwayScore");
+
+                    b.Property<float>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 
@@ -118,6 +120,8 @@ namespace SN_BNB.Data.SNMigrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AssignedMatchPlayerID");
+
                     b.Property<int>("FixtureID");
 
                     b.Property<int>("MatchPosition");
@@ -128,7 +132,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("Player2Score");
 
-                    b.Property<int>("PlayerID");
+                    b.Property<int?>("PlayerID");
 
                     b.HasKey("ID");
 
@@ -333,8 +337,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.HasOne("SN_BNB.Models.Player", "Player")
                         .WithMany()
-                        .HasForeignKey("PlayerID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PlayerID");
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Player", b =>
