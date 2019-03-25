@@ -199,7 +199,7 @@ namespace SN_BNB.Controllers
 
             ViewBag.Fixtures = team.AwayFixtures.Union(team.HomeFixtures).Where(f => DateTime.Now.AddDays(30).CompareTo(f.FixtureDateTime) > 0).OrderBy(f => f.FixtureDateTime).Select(t => new TeamScheduleVM(t));
             ViewBag.Players = _context.Players.Where(t => t.TeamID == team.ID);     //due to trouble finding a list of players with Team.Players, this is used
-
+            ViewBag.CaptainTeamID = CaptainTeamID;
             return View(team);
         }
 
