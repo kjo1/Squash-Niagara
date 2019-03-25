@@ -30,9 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Fixtures\Index_Schedule.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="Views\Players\EditExcel.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

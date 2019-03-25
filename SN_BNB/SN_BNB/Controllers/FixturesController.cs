@@ -40,9 +40,9 @@ namespace SN_BNB.Controllers
         {
             var sNContext = _context;
             var fixtures = from f in _context.Fixtures
-                           .Include(f=>f.HomeTeam)
-                           .Include(f=>f.AwayTeam)
-                           .Include(f=>f.Season)
+                           .Include(f => f.HomeTeam)
+                           .Include(f => f.AwayTeam)
+                           .Include(f => f.Season)
                            .Include(f => f.Matches)
                            .Include(f => f.Location)
                            select f;
@@ -149,20 +149,7 @@ namespace SN_BNB.Controllers
             ViewData["sortDirection"] = sortDirection;
             ViewBag.TeamID = TeamID;
 
-            if (User.IsInRole("Admin"))
-            {
-                return View("Index", await fixtures.ToListAsync());
-            }
-            else if (User.IsInRole("Captain"))
-            {
-                return View("Index", await fixtures.ToListAsync());
-            }
-            else
-            {
-                return View("Index_Schedule", await fixtures.ToListAsync());
-            }
-
-            //return View(await fixtures.ToListAsync());
+            return View(await fixtures.ToListAsync());
         }
 
         // GET: Fixtures/Details/5
@@ -335,6 +322,6 @@ namespace SN_BNB.Controllers
             ViewData["idHomeTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idHomeTeam);
             ViewData["idAwayTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idAwayTeam);
         }
-        
+
     }
 }

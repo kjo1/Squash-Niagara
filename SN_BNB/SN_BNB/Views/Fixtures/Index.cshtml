@@ -63,13 +63,13 @@
                         <th>
                             <input id="playCol" type="submit" name="actionButton" value="Score" class="btn btn-link" />
                         </th>
-                        <th style="color:lightgrey">----------------</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color:  rgba(109, 97, 190, 0.75);" : string.Empty)">
+                    <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color:  rgba(109, 97, 190, 0.25);" : string.Empty)">
                         <td>
                             @Html.DisplayFor(modelItem => item.Season.Season_Title)
                         </td>
@@ -81,7 +81,8 @@
                             {
                                 <b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b>
                             }
-                            else {
+                            else
+                            {
                                 @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
                             }
                         </td>
@@ -117,20 +118,22 @@
                                 @Html.DisplayFor(modelItem => item.AwayScore)
                             }
                         </td>
-
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ID">
-                                <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit"/>
-                                <span ></span>
-                            </a> |
-                            <a asp-action="Details" asp-route-id="@item.ID">
-                                <img src="~/images/detail.png" style="width:28px; height:28px" data-toggle="tooltip" title="Details" />
-                            </a> |
-                            <a asp-action="Delete" asp-route-id="@item.ID">
-                                <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive"/>
-                            </a>
-                        </td>
-                    </tr>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID">
+                                    <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
+                                    <span></span>
+                                </a> |
+                                <a asp-action="Details" asp-route-id="@item.ID">
+                                    <img src="~/images/detail.png" style="width:28px; height:28px" data-toggle="tooltip" title="Details" />
+                                </a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">
+                                    <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive" />
+                                </a>
+                            </td>
+                        }
+                        </tr>
                     }
                 </tbody>
             </table>

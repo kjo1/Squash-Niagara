@@ -26,10 +26,10 @@ namespace SN_BNB.Models
         [Display(Name = "Position")]
         public int MatchPosition { get; set; }
 
-        [Display(Name = "Date/Time")]
+        [Display(Name = "Time")]
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime MatchTime { get; set; }
 
 
