@@ -13,7 +13,10 @@ namespace SN_BNB.Models
             this.Matches = new HashSet<Match>();
         }
         public int ID { get; set; }
-  
+
+        [Required]
+        public string Title { get; set; }
+
         [Display(Name ="Date/Time")]
         [Required]
         [DataType(DataType.Date)]

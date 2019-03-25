@@ -23,9 +23,13 @@ namespace SN_BNB.Models
 
         [Required(ErrorMessage ="You must enter a match position")]
         [Range(1, 4)]
+        [Display(Name = "Position")]
         public int MatchPosition { get; set; }
 
-        [Required(ErrorMessage ="Please enter a date and time for this match")]
+        [Display(Name = "Date/Time")]
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime MatchTime { get; set; }
 
 
@@ -34,12 +38,12 @@ namespace SN_BNB.Models
 
         [Display(Name = "Players")]
         public int PlayerID { get; set; }
-        
 
 
         public Fixture Fixture { get; set; }
-        [Display(Name = "Players")]
 
+
+        [Display(Name = "Players")]
         public Player Player { get; set; }
 
         public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }

@@ -24,6 +24,7 @@ namespace SN_BNB.Controllers
         // GET: Matches
         public async Task<IActionResult> Index(string SearchPlayer, string sortDirection, string sortField, string actionButton)
         {
+            //PopulateDropDownLists();
             var matches = from d in _context.Matches
                           .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)
                           select d;
@@ -126,10 +127,10 @@ namespace SN_BNB.Controllers
         {
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "Title");
             ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email");
-
             Match match = new Match();
+            //PopulateDropDownLists();
             PopulateAssignedPlayerData(match);
-            return View();
+            return View(match);
         }
 
         // POST: Matches/Create
@@ -148,14 +149,17 @@ namespace SN_BNB.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-                ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+                //ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
+                //ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
 
             }
             catch (Exception)
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
+            //PopulateDropDownLists();
+            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "Title");
+            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email");
             PopulateAssignedPlayerData(match);
             return View(match);
         }
@@ -179,6 +183,7 @@ namespace SN_BNB.Controllers
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
             ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+            //PopulateDropDownLists();
             PopulateAssignedPlayerData(match);
             return View(match);
         }
@@ -228,6 +233,7 @@ namespace SN_BNB.Controllers
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
             ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
             PopulateAssignedPlayerData(matchToUpdate);
+            //PopulateDropDownLists();
             return View(match);
         }
 
@@ -324,6 +330,12 @@ namespace SN_BNB.Controllers
                 }
             }
         }
+
+        //private void PopulateDropDownLists(Match match = null)
+        //{
+        //    ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
+        //    ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
+        //}
 
         private bool MatchExists(int id)
         {
