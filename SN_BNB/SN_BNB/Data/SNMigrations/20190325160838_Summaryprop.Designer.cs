@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SN_BNB.Data;
 
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    partial class SNContextModelSnapshot : ModelSnapshot
+    [Migration("20190325160838_Summaryprop")]
+    partial class Summaryprop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +60,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<int>("BonusPoint");
+                    b.Property<float>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 
@@ -68,7 +70,8 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("Season_idSeason");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<int>("idAwayTeam");
 

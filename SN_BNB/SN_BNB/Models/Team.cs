@@ -29,10 +29,28 @@ namespace SN_BNB.Models
         public DateTime? TeamCreatedOn { get; set; }
 
         [Display(Name = "Win(s)")]
-        public int TeamWins { get; set; }
+        public int TeamWins
+        {
+            get
+            {
+                return  (HomeFixtures?
+                    .Count(f => f.HomeScore > f.AwayScore) ?? 0) + 
+                    (AwayFixtures?
+                    .Count(f => f.AwayScore > f.HomeScore)?? 0);
+            }
+        }
 
         [Display(Name = "Loss(es)")]
-        public int TeamLosses { get; set; }
+        public int TeamLosses
+        {
+            get
+            {
+                return (HomeFixtures?
+                    .Count(f => f.HomeScore < f.AwayScore) ?? 0) +
+                    (AwayFixtures?
+                    .Count(f => f.AwayScore < f.HomeScore) ?? 0);
+            } 
+        }
 
         [Display(Name = "Bio")]
         public string TeamBio { get; set; }
@@ -45,6 +63,15 @@ namespace SN_BNB.Models
         public ICollection<Player> Players { get; set; }
         public ICollection<Fixture> HomeFixtures { get; set; }
         public ICollection<Fixture> AwayFixtures { get; set; }
+
+        public decimal WinPercent
+        {
+            get
+            {
+                int matches = HomeFixtures.Count + AwayFixtures.Count;
+                return (decimal)TeamWins / (decimal)matches;
+            }
+        }
 
         [Display(Name = "Seasons")]
         public ICollection<Season_has_Team> Season_has_Teams { get; set; }
