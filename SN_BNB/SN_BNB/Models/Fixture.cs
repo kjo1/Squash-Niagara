@@ -66,13 +66,13 @@ namespace SN_BNB.Models
             var results = new List<ValidationResult>();
             switch (this.BonusPoint)
             {
-                case "home":
+                case "home":    //award 1 point to home team
                     break;
-                case "away":
+                case "away":    //award 1 point to away team
                     break;
-                case "split":
+                case "split":   //each team is awarded 0.5 points
                     break;
-                case null:
+                case null:      //the bonus point is not yet assigned
                     break;
                 default:
                     results.Add(new ValidationResult("Invalid entry for Bonus Point"));
