@@ -37,7 +37,7 @@ namespace SN_BNB.Models
         public int FixtureID { get; set; }
 
         [Display(Name = "Players")]
-        public int PlayerID { get; set; }
+        public int AssignedMatchPlayerID { get; set; }
 
 
         public Fixture Fixture { get; set; }
