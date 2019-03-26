@@ -79,11 +79,11 @@
                         <td>
                             @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                <b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b>
+                                <a href="/Teams/Details/@item.HomeTeam.ID"><b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b></a>
                             }
                             else
                             {
-                                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+                                <a href="/Teams/Details/@item.HomeTeam.ID">@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</a>
                             }
                         </td>
                         <td>
@@ -124,13 +124,17 @@
                         <td>
                             @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                             {
-                                <b>@Html.DisplayFor(modelItem => item.AwayTeam.TeamName)</b>
+                                <a href="/Teams/Details/@item.AwayTeam.ID">
+                                    <b>@Html.DisplayFor(modelItem => item.AwayTeam.TeamName)</b>
+                                </a>
                             }
                             else
                             {
-                                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                                <a href="/Teams/Details/@item.AwayTeam.ID">
+                                    @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                                </a>
                             }
-                        </td>
+                            </td>
 
                         <td>
                             @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
