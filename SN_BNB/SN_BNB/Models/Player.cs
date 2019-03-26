@@ -41,6 +41,10 @@ namespace SN_BNB.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Display(Name = "Order of Strength")]
+        [Range(1,4)]
+        public decimal OrderOfStrength { get; set; }
+
         [Required(ErrorMessage = "Phone number is required.")]
         [RegularExpression("^\\d{10}$", ErrorMessage = "Please enter a valid 10-digit phone number (no spaces).")]
         [DataType(DataType.PhoneNumber)]

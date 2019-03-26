@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190326174948_initial")]
+    [Migration("20190326182631_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,6 +191,8 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<string>("MiddleName")
                         .HasMaxLength(45);
+
+                    b.Property<decimal>("OrderOfStrength");
 
                     b.Property<long>("Phone");
 

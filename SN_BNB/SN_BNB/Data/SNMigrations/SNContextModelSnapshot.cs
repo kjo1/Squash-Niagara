@@ -190,6 +190,8 @@ namespace SN_BNB.Data.SNMigrations
                     b.Property<string>("MiddleName")
                         .HasMaxLength(45);
 
+                    b.Property<decimal>("OrderOfStrength");
+
                     b.Property<long>("Phone");
 
                     b.Property<int>("Played");

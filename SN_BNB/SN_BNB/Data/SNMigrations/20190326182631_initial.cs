@@ -176,6 +176,7 @@ namespace SN_BNB.Data.SNMigrations
                     LastName = table.Column<string>(maxLength: 100, nullable: false),
                     Gender = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 255, nullable: false),
+                    OrderOfStrength = table.Column<decimal>(nullable: false),
                     Phone = table.Column<long>(nullable: false),
                     Position = table.Column<int>(nullable: false),
                     Played = table.Column<int>(nullable: false),
