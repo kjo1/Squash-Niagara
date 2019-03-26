@@ -83,7 +83,9 @@
                                 <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Team.TeamName)
+                                <a href="/Teams/Details/@item.TeamID">
+                                    @Html.DisplayFor(modelItem => item.Team.TeamName)
+                                </a>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Played)
