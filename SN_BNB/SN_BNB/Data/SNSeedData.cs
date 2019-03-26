@@ -411,29 +411,29 @@ namespace SN_BNB.Data
                      {
                          LocationName = "Niagara College",
                          LocationCity = "Welland",
-                         LocationStreet = "Merritt",
-                         LocationBuildingNumber = 1
+                         LocationStreet = "Niagara College Boulevard",
+                         LocationBuildingNumber = 100
                      },
                      new Location
                      {
                          LocationName = "Brock University",
-                         LocationCity = "Thorold",
-                         LocationStreet = "St. Paul",
-                         LocationBuildingNumber = 22
+                         LocationCity = "St. Catharines",
+                         LocationStreet = "Sir Isaac Brock Way",
+                         LocationBuildingNumber = 1812
                      },
                      new Location
                      {
                          LocationName = "Ridley College",
                          LocationCity = "St. Catharines",
-                         LocationStreet = "Fourth Ave.",
-                         LocationBuildingNumber = 33
+                         LocationStreet = "Ridley Rd",
+                         LocationBuildingNumber = 2
                      },
                      new Location
                      {
                          LocationName = "White Oaks",
                          LocationCity = "Niagara On The Lake",
-                         LocationStreet = "Merritt",
-                         LocationBuildingNumber = 44
+                         LocationStreet = "Taylor Rd",
+                         LocationBuildingNumber = 253
                      }
                      );
                     context.SaveChanges();
