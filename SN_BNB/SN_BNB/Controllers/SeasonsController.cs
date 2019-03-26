@@ -38,6 +38,8 @@ namespace SN_BNB.Controllers
             public TimeSpan MatchTime;
             public int Player1Score;
             public int Player2Score;
+            public int MatchPosition;
+            public Fixture MatchFixture;
             public AssignedMatchPlayer MatchAssignedMatchPlayer;
         }
 
