@@ -16,7 +16,7 @@ namespace SN_BNB.Data.SNMigrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -58,7 +58,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<int>("BonusPoint");
+                    b.Property<string>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 

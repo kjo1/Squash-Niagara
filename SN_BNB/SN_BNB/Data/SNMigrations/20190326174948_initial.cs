@@ -98,8 +98,6 @@ namespace SN_BNB.Data.SNMigrations
                     TeamName = table.Column<string>(nullable: false),
                     TeamPoints = table.Column<int>(nullable: false),
                     TeamCreatedOn = table.Column<DateTime>(nullable: true),
-                    TeamWins = table.Column<int>(nullable: false),
-                    TeamLosses = table.Column<int>(nullable: false),
                     TeamBio = table.Column<string>(nullable: true),
                     DivisionID = table.Column<int>(nullable: false)
                 },
@@ -128,7 +126,7 @@ namespace SN_BNB.Data.SNMigrations
                     AwayScore = table.Column<int>(nullable: false),
                     idHomeTeam = table.Column<int>(nullable: false),
                     idAwayTeam = table.Column<int>(nullable: false),
-                    BonusPoint = table.Column<int>(nullable: false),
+                    BonusPoint = table.Column<string>(nullable: true),
                     Season_idSeason = table.Column<int>(nullable: false),
                     location_locationId = table.Column<int>(nullable: false),
                     LocationID = table.Column<int>(nullable: true)

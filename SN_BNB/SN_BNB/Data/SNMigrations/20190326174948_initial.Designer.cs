@@ -10,15 +10,15 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190325160838_Summaryprop")]
-    partial class Summaryprop
+    [Migration("20190326174948_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -60,7 +60,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("AwayScore");
 
-                    b.Property<float>("BonusPoint");
+                    b.Property<string>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 
@@ -70,8 +70,7 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("Season_idSeason");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Title");
 
                     b.Property<int>("idAwayTeam");
 
