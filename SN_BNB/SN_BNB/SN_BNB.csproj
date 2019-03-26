@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\userUploads\**" />
+    <Content Remove="wwwroot\images\userUploads\**" />
+    <EmbeddedResource Remove="wwwroot\images\userUploads\**" />
+    <None Remove="wwwroot\images\userUploads\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\article-placeholder.jpg" />
     <None Include="wwwroot\ScoreSheet.pdf" />
   </ItemGroup>
@@ -20,7 +27,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Assets\Files\" />
-    <Folder Include="wwwroot\images\userUploads\" />
   </ItemGroup>
 
   <ItemGroup>
