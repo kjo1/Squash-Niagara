@@ -34,7 +34,16 @@
                         </div>
                     </li>
                 </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                <div class="form-check form-check-inline">
+                    @Html.CheckBox("RadioChecked", false, htmlAttributes: new { @class = "form-check-input", @align = "Right" })
+                    <label class="form-check-label" for="radio">My Team Schedule</label>
+                </div>
+                }
+
                 @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team/Season", @style = "width:250px" })
+
                 <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
         </nav>
@@ -192,3 +201,10 @@
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(function () {
+    $('input[type=radio]').click(function () {
+        document.getElementById("Index").submit();
+    });
+});
+</script>
