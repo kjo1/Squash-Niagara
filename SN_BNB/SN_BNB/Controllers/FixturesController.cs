@@ -36,7 +36,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Fixtures
-        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton)
+        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton, bool RadioChecked)
         {
             var sNContext = _context;
             var fixtures = from f in _context.Fixtures
@@ -46,6 +46,11 @@ namespace SN_BNB.Controllers
                            .Include(f => f.Matches)
                            .Include(f => f.Location)
                            select f;
+            if(RadioChecked is true)
+            {
+                fixtures = fixtures.Where(f => (f.HomeTeam.ID == TeamID) || (f.AwayTeam.ID == TeamID));
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 fixtures = fixtures.Where(t => t.HomeTeam.TeamName.ToUpper().Contains(searchString.ToUpper())
