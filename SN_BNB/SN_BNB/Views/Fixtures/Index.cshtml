@@ -21,19 +21,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            2018-2019 Men's Divisions
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
-                            <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
-                            <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
-                            <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
-                        </div>
-                    </li>
-                </ul>
+                <div class="dropdown">
+                    @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control", @style = "width:290px" })
+                </div>
                 @if (User.Identity.IsAuthenticated)
                 {
                 <div class="form-check form-check-inline">

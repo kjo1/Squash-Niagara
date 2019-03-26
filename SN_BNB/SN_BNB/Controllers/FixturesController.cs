@@ -36,8 +36,9 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Fixtures
-        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton, bool RadioChecked)
+        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton, bool RadioChecked, int? DivisionID )
         {
+            PopulateDropDownLists();
             var sNContext = _context;
             var fixtures = from f in _context.Fixtures
                            .Include(f => f.HomeTeam)
@@ -46,6 +47,12 @@ namespace SN_BNB.Controllers
                            .Include(f => f.Matches)
                            .Include(f => f.Location)
                            select f;
+
+            if (DivisionID.HasValue)
+            {
+                fixtures = fixtures.Where(f => (f.AwayTeam.DivisionID == DivisionID) || (f.HomeTeam.DivisionID == DivisionID));
+            }
+
             if(RadioChecked is true)
             {
                 fixtures = fixtures.Where(f => (f.HomeTeam.ID == TeamID) || (f.AwayTeam.ID == TeamID));
@@ -324,8 +331,13 @@ namespace SN_BNB.Controllers
             var tQuery = from f in _context.Teams
                          orderby f.TeamName
                          select f;
+
+            var dQuery = from f in _context.Divisions
+                         orderby f.DivisionName
+                         select f;
             ViewData["idHomeTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idHomeTeam);
             ViewData["idAwayTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idAwayTeam);
+            ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
         }
 
     }
