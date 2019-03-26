@@ -16,36 +16,36 @@
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <label asp-for="Season" class="control-label"></label>
-                <select asp-for="Season_idSeason" class="form-control" asp-items="ViewBag.Season_idSeason"></select>
+                <select asp-for="Season_idSeason" class="form-control" id="season" asp-items="ViewBag.Season_idSeason"></select>
                 <span asp-validation-for="Season_idSeason" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FixtureDateTime" class="control-label"></label>
-                <input asp-for="FixtureDateTime" class="form-control" />
+                <input asp-for="FixtureDateTime" class="form-control" id="dateTime"/>
                 <span asp-validation-for="FixtureDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="idHomeTeam" class="control-label"></label>
-                <select asp-for="idHomeTeam" class="form-control" asp-items="ViewBag.idHomeTeam"></select>
+                <select asp-for="idHomeTeam" class="form-control" id="homeTeam" asp-items="ViewBag.idHomeTeam"></select>
             </div>
             <div class="form-group">
                 <label asp-for="HomeScore" class="control-label"></label>
-                <input asp-for="HomeScore" class="form-control" />
+                <input asp-for="HomeScore" class="form-control" id="homeScore"/>
                 <span asp-validation-for="HomeScore" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="idAwayTeam" class="control-label"></label>
-                <select asp-for="idAwayTeam" class="form-control" asp-items="ViewBag.idAwayTeam"></select>
+                <select asp-for="idAwayTeam" class="form-control" id="awayTeam" asp-items="ViewBag.idAwayTeam"></select>
             </div>
             <div class="form-group">
                 <label asp-for="AwayScore" class="control-label"></label>
-                <input asp-for="AwayScore" class="form-control" />
+                <input asp-for="AwayScore" class="form-control" id="awayScore"/>
                 <span asp-validation-for="AwayScore" class="text-danger"></span>
             </div>
             <div class="form-group" style="vertical-align:middle">
                 <div>
                     <label asp-for="BonusPoint" class="control-label"></label>
-                    <input asp-for="BonusPoint" type="text" id="slider" class="js-range-slider" name="my_range" value="" />
+                    <input asp-for="BonusPoint" type="text" class="js-range-slider" />
                     <span asp-validation-for="BonusPoint" class="text-danger"></span>
                 </div>
             </div>
@@ -69,9 +69,9 @@
 <script src="~/js/bootstrap.js"></script>
 <script src="~/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript">
-    $("#slider").ionRangeSlider({
+    var $slider = $('.js-range-slider');
+    $slider.ionRangeSlider({
         grid: true,
-
         values: ["Home", "Split", "Away"]
     });
 </script>

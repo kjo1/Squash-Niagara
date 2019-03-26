@@ -72,7 +72,7 @@ namespace SN_BNB.Models
                     break;
                 case "Split":         //each team is awarded 0.5 points
                     break;
-                case "null":      //the bonus point is not yet assigned
+                case null:      //the bonus point is not yet assigned
                     break;
                 default:
                     results.Add(new ValidationResult("Invalid entry for Bonus Point"));
