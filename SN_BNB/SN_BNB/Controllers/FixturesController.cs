@@ -256,22 +256,25 @@ namespace SN_BNB.Controllers
 
             if (ModelState.IsValid)
             {
-                //try
-                //{
-                    _context.Update(fixture);
-                    await _context.SaveChangesAsync();
-                //}
-                //catch (DbUpdateConcurrencyException)
-                //{
-                //    if (!FixtureExists(fixture.ID))
-                //    {
-                //        return NotFound();
-                //    }
-                //    else
-                //    {
-                //        throw;
-                //    }
-                //}
+                Fixture oldFixture = _context.Fixtures.AsNoTracking().Where(P => P.ID == fixture.ID).FirstOrDefault();     //get the old entry
+                await _context.SaveChangesAsync();
+                _context.Update(fixture);
+                try
+                {
+                    //update Team.TeamPoints
+                    Team HomeTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idHomeTeam);
+                    Team AwayTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idAwayTeam);
+                    HomeTeam.TeamPoints += (fixture.HomeScore - oldFixture.HomeScore);
+                    AwayTeam.TeamPoints += (fixture.AwayScore - oldFixture.AwayScore);
+                    _context.Update(HomeTeam);
+                    _context.Update(AwayTeam);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
@@ -305,6 +308,21 @@ namespace SN_BNB.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var fixture = await _context.Fixtures.FindAsync(id);
+            try
+            {
+                //update Team.TeamPoints
+                Team HomeTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idHomeTeam);
+                Team AwayTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idAwayTeam);
+                HomeTeam.TeamPoints -= fixture.HomeScore;
+                AwayTeam.TeamPoints -= fixture.AwayScore;
+                _context.Update(HomeTeam);
+                _context.Update(AwayTeam);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            await _context.SaveChangesAsync();
             _context.Fixtures.Remove(fixture);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
