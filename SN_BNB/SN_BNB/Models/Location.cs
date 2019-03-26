@@ -11,15 +11,19 @@ namespace SN_BNB.Models
         public int ID { get; set; }
 
         [Required]
+        [Display(Name = "Name")]
         public string LocationName { get; set; }
 
         [Required]
+        [Display(Name = "City")]
         public string LocationCity { get; set; }
 
         [Required]
+        [Display(Name = "Street")]
         public string LocationStreet { get; set; }
 
         [Required]
+        [Display(Name = "Building Number")]
         public int LocationBuildingNumber { get; set; }
     }
 }
