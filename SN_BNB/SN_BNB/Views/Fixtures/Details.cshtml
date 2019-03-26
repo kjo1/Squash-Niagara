@@ -44,7 +44,14 @@
             @Html.DisplayNameFor(model => model.BonusPoint)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BonusPoint)
+            @if (Model.BonusPoint == null)
+            {
+                <p>Not Yet Awarded</p>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.BonusPoint)
+            }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Season)
