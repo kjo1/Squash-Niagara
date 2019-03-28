@@ -97,16 +97,16 @@ namespace SN_BNB.Controllers
                     };
                     //loop through the Matches and update struct
                     List<MatchStruct> matchList = new List<MatchStruct>(4);
-                    for (int i = 0; i >= 4; i++)
+                    for (int i = 1; i < 4; i++)
                     {
                         MatchStruct matchStruct = new MatchStruct
                         {
                             MatchTime = TimeSpan.Parse(worksheet.Cells[row+i, 2].Text),
-                            Position = Convert.ToInt32(worksheet.Cells[row, 3].Text),
+                            Position = Convert.ToInt32(worksheet.Cells[row+i, 3].Text),
 
                             //Get Player object by executing a WHERE with TeamName
-                            Player1 = players.Where(t => t.FullName == worksheet.Cells[row, 4].Text).First(),
-                            Player2 = players.Where(t => t.FullName == worksheet.Cells[row, 5].Text).First(),
+                            Player1 = players.Where(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 4].Text).First(),
+                            Player2 = players.Where(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 5].Text).First(),
                         };
                         matchList.Add(matchStruct);
                     }
@@ -158,7 +158,9 @@ namespace SN_BNB.Controllers
             //let the user know that the file was not parsed properly
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine("##############################");
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
+                System.Diagnostics.Debug.WriteLine("##############################");
             }
 
             //pass the list of new fixtures to the ExcelConfirm() method
