@@ -44,9 +44,13 @@
             </div>
             <div class="form-group" style="vertical-align:middle">
                 <div>
-                    <label asp-for="BonusPoint" class="control-label"></label>
-                    <input asp-for="BonusPoint" type="text" class="js-range-slider" />
-                    <span asp-validation-for="BonusPoint" class="text-danger"></span>
+                    <div class="sliderInput">
+                        <label asp-for="BonusPoint" class="control-label"></label>
+                        <input asp-for="BonusPoint" type="text" class="js-range-slider" />
+                        <span asp-validation-for="BonusPoint" class="text-danger"></span>
+                    </div>
+                    <input type=checkbox id="null" name="Not Assigned">
+                    
                 </div>
             </div>
 
@@ -70,8 +74,25 @@
 <script src="~/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript">
     var $slider = $('.js-range-slider');
+    var $checkBox = $('#null');
     $slider.ionRangeSlider({
         grid: true,
         values: ["Home", "Split", "Away"]
     });
+
+    $checkBox.on('click', function () {
+        if (this.checked) {//hide the slider and set the value to null
+            $('.sliderInput').hide();
+            $slider.val(null);
+        }
+        else {//show the slider and reset it's value
+            $('.sliderInput').show();
+            var sliderInstance = $slider.data("ionRangeSlider");
+            sliderInstance.update({
+                grid: true,
+                values: ["Home", "Split", "Away"]
+            });
+        }
+    }
+    );
 </script>
