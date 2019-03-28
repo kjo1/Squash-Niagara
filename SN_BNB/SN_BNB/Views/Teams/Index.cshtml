@@ -15,10 +15,19 @@
     <form asp-action="Index">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar mr-auto">
+                    <li class="nav-item">
 
-            <div id="division" class="collapse navbar-collapse" id="navbarSupportedContent">
-                @Html.DropDownList("DivisionID", null, "Select a Division", htmlAttributes: new { @class = "form-control", @style = "width:auto;" })
-                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team" })
+                    </li>
+                </ul>
+
+                @Html.DropDownList("DivisionID", null, "Select a Division", htmlAttributes: new { @class = "form-control", @style = "width:250px; margin-right:10px", onchange = "this.form.submit();" })
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team"   })
                 <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
         </nav>
