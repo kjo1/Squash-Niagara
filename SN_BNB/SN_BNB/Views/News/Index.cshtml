@@ -44,18 +44,30 @@
         <div class="col-9">
             @foreach (var item in Model)
             {
-                <div class="jumbotron">
-                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
-                    <hr/>
-                    <p>
-                        @Html.Raw(item.Content)
-                    </p><br />
-                    <h6 class="card-subtitle text-muted">
-                        <i>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </i>
-                    </h6>
-                </div>
+            <div class="jumbotron">
+                <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                <hr />
+                <p>
+                    @Html.Raw(item.Content)
+                </p><br />
+                <h6 class="card-subtitle text-muted">
+                    <i>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </i>
+                </h6>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <p style="color:purple">
+                        <a asp-action="Edit" asp-route-id="@item.ID">
+                            Edit
+                        </a> <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.ID">
+                            Delete
+                        </a>
+                    </p>
+                }
+            </div>
 
             }
         </div>
