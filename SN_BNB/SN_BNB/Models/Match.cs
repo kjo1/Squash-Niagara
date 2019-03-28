@@ -35,10 +35,14 @@ namespace SN_BNB.Models
 
         public Fixture Fixture { get; set; }
 
+        [Display(Name="Home Player")]
         public int Player1ID { get; set; }
+
         public virtual Player Player1 { get; set; }
 
+        [Display(Name = "Away Player")]
         public int Player2ID { get; set; }
+
         public virtual Player Player2 { get; set; }
 
     }
