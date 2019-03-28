@@ -3,15 +3,26 @@
 @{
     ViewData["Title"] = "Index";
 }
-<br />
+
 <link href="~/css/team.css" rel="stylesheet" />
-<h3>Teams</h3>
-<div class="container">
-    @if (User.IsInRole("Admin"))
-    {<p id="createNew">
-            <a style="color:purple;" asp-action="Create">Create New</a>
-        </p>
-    }
+
+<div class="container bg-light">
+    <div class="row pt-3">
+        <div class="col-2">
+            <h3>Teams</h3>
+        </div>
+        <div class="col">
+            @if (User.IsInRole("Admin"))
+            {<p id="createNew">
+                    <a style="color:purple;" asp-action="Create">Create New</a>
+                </p>
+            }
+        </div>
+
+    </div>
+
+
+
     <form asp-action="Index">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
