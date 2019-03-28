@@ -20,15 +20,16 @@
             }
         </div>
         <div class="col-8">
-            <p>
-                <button class="btn btn-outline-success my-3 my-sm-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="btnSearch">
-                    Excel
-                </button>
-            </p>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    @if (User.IsInRole("Admin"))
-                    {
+            @if (User.IsInRole("Admin"))
+            {
+                <p>
+                    <button class="btn btn-outline-success my-3 my-sm-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="btnSearch">
+                        Excel
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+
                         <form asp-action="ExcelUpload" style="text-align:center; margin-bottom:60px" method="post" enctype="multipart/form-data" class="form-inline">
                             <div class="form-group">
                                 <label class="control-label">Excel File:</label>
@@ -36,10 +37,10 @@
                                 <input type="submit" value="Upload Data" class="btn btn-primary" />
                             </div>
                         </form>
-                    }
+
+                    </div>
                 </div>
-            </div>
-            
+            }
         </div>
     </div>
 
