@@ -72,109 +72,19 @@ namespace SN_BNB.Controllers
                 }
             }
 
-            if (sortField == "Created On")//Sorting by Date Time
-            {
-                //if (String.IsNullOrEmpty(sortDirection))
-                //{
-                //    teams = teams
-                //         .OrderBy(t => t.TeamCreatedOn);
-                //}
-                //else
-                //{
-                teams = teams
-                    .OrderByDescending(t => t.TeamCreatedOn);
-                //}
-            }
-            else if (sortField == "Team Name")
+            if (sortField == "Division")
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     teams = teams
-                        .OrderBy(t => t.TeamName);
+                        .OrderBy(t => t.DivisionID);
                 }
                 else
                 {
                     teams = teams
-                        .OrderByDescending(t => t.TeamName);
+                    .OrderByDescending(t => t.DivisionID);
                 }
             }
-            //else if (sortField == "Point(s)")
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        teams = teams
-            //            .OrderBy(t => t.TeamPoints);
-            //    }
-            //    else
-            //    {
-            //        teams = teams
-            //            .OrderByDescending(t => t.TeamPoints);
-            //    }
-            //}
-            else if (sortField == "Team Name")
-            {
-                //if (String.IsNullOrEmpty(sortDirection))
-                //{
-                //    teams = teams
-                //        .OrderBy(t => t.TeamName);
-                //}
-                //else
-                //{
-                teams = teams
-                    .OrderByDescending(t => t.TeamName);
-                //}
-            }
-            else if (sortField == "Division")
-            {
-                //if (String.IsNullOrEmpty(sortDirection))
-                //{
-                //    teams = teams
-                //        .OrderBy(t => t.DivisionID);
-                //}
-                //else
-                //{
-                teams = teams
-                    .OrderByDescending(t => t.DivisionID);
-                //}
-            }
-            //else if (sortField == "Won")
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        teams = teams
-            //            .OrderBy(t => t.TeamWins);
-            //    }
-            //    else
-            //    {
-            //        teams = teams
-            //            .OrderByDescending(t => t.TeamWins);
-            //    }
-            //}
-            //else if (sortField == "Lost")
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        teams = teams
-            //            .OrderBy(t => t.TeamLosses);
-            //    }
-            //    else
-            //    {
-            //        teams = teams
-            //            .OrderByDescending(t => t.TeamLosses);
-            //    }
-            //}
-            //else //Sorting by Points - the default sort order
-            //{
-            //    if (String.IsNullOrEmpty(sortDirection))
-            //    {
-            //        teams = teams.OrderByDescending(t => t.TeamPoints);
-            //    }
-            //    else
-            //    {
-            //        teams = teams.OrderBy(t => t.TeamPoints);
-            //    }
-            //}
-
 
             //Set sort for next time
             ViewData["sortField"] = sortField;
@@ -186,6 +96,10 @@ namespace SN_BNB.Controllers
             {
                 list = list.OrderByDescending(t => t.TeamPoints).ToList();
 
+            }
+            else if (sortField == null || sortField == "Team Name")
+            {
+                list = list.OrderByDescending(t => t.TeamName).ToList();
             }
             else if (sortField == null || sortField == "Won")
             {
