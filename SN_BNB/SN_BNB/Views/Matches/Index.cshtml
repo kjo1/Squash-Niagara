@@ -3,84 +3,69 @@
 @{
     ViewData["Title"] = "Index";
 }
-<link href="~/css/team.css" rel="stylesheet" />
-<br />
-<h3>Matches</h3>
 
-<p id="createNew">
-    <a asp-action="Create" style="color:purple;">Create New</a>
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
 </p>
-<form asp-action="Index">
-    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
-    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        2018-2019 Men's Divisions
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">2018-2019 Men's Division 1/2</a>
-                        <a class="dropdown-item" href="#">2018-2019 Men's Division 3</a>
-                        <a class="dropdown-item" href="#">2018-2019 Men's Division 4</a>
-                        <a class="dropdown-item" href="#">2018-2019 Women's Division</a>
-                    </div>
-                </li>
-            </ul>
-            @Html.TextBox("searchPos", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Player", @style = "width:200px;" })
-            <button id="btnSearch" class="btn btn-outline-success" type="submit" value="Filter">Search</button>
-        </div>
-    </nav>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <input id="playCol" type="submit" name="actionButton" value="Players" class="btn btn-link" />
-                </th>
-                <th>
-                    <input id="playCol" type="submit" name="actionButton" value="Position" class="btn btn-link" />
-                </th>
-                <th>
-                    <input id="playCol" type="submit" name="actionButton" value="Time" class="btn btn-link" />
-                </th>
-                <th>
-                    <input id="playCol" type="submit" value="Fixture" class="btn btn-link" disabled="disabled" />
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MatchPosition)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MatchTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fixture.ID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Player.FullName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Player1Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player2Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fixture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player2)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player1Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player2Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchPosition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fixture.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player1.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player2.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

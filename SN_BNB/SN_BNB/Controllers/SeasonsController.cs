@@ -40,7 +40,6 @@ namespace SN_BNB.Controllers
             public int Player2Score;
             public int MatchPosition;
             public Fixture MatchFixture;
-            public AssignedMatchPlayer MatchAssignedMatchPlayer;
         }
 
         // GET: Seasons/ExcelUpload

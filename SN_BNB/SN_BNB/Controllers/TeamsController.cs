@@ -14,7 +14,7 @@ using SN_BNB.ViewModels;
 
 namespace SN_BNB.Controllers
 {
-    
+
     public class TeamsController : Controller
     {
         private readonly SNContext _context;
@@ -45,11 +45,10 @@ namespace SN_BNB.Controllers
             PopulateDropDownLists();
             var teams = from t in _context.Teams
                         .Include(t => t.Division)
-                        .Include(t => t.Players)
-                        .Include(t => t.Season_has_Teams)
-                        .ThenInclude( t => t.Season)
-                        .Include(t=> t.HomeFixtures)
-                        .Include(t=> t.AwayFixtures)
+                        .Include(t => t.HomeFixtures)
+                        .ThenInclude(t => t.Matches)
+                        .Include(t => t.AwayFixtures)
+                        .ThenInclude(t => t.Matches)
                         select t;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -75,16 +74,16 @@ namespace SN_BNB.Controllers
 
             if (sortField == "Created On")//Sorting by Date Time
             {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                   teams = teams
-                        .OrderBy(t => t.TeamCreatedOn);
-                }
-                else
-                {
-                    teams = teams
-                        .OrderByDescending(t => t.TeamCreatedOn);
-                }
+                //if (String.IsNullOrEmpty(sortDirection))
+                //{
+                //    teams = teams
+                //         .OrderBy(t => t.TeamCreatedOn);
+                //}
+                //else
+                //{
+                teams = teams
+                    .OrderByDescending(t => t.TeamCreatedOn);
+                //}
             }
             else if (sortField == "Team Name")
             {
@@ -99,81 +98,108 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(t => t.TeamName);
                 }
             }
-            else if (sortField == "Team Points")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    teams = teams
-                        .OrderBy(t => t.TeamPoints);
-                }
-                else
-                {
-                    teams = teams
-                        .OrderByDescending(t => t.TeamPoints);
-                }
-            }
+            //else if (sortField == "Point(s)")
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        teams = teams
+            //            .OrderBy(t => t.TeamPoints);
+            //    }
+            //    else
+            //    {
+            //        teams = teams
+            //            .OrderByDescending(t => t.TeamPoints);
+            //    }
+            //}
             else if (sortField == "Team Name")
             {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    teams = teams
-                        .OrderBy(t => t.TeamName);
-                }
-                else
-                {
-                    teams = teams
-                        .OrderByDescending(t => t.TeamName);
-                }
+                //if (String.IsNullOrEmpty(sortDirection))
+                //{
+                //    teams = teams
+                //        .OrderBy(t => t.TeamName);
+                //}
+                //else
+                //{
+                teams = teams
+                    .OrderByDescending(t => t.TeamName);
+                //}
             }
             else if (sortField == "Division")
             {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    teams = teams
-                        .OrderBy(t => t.DivisionID);
-                }
-                else
-                {
-                    teams = teams
-                        .OrderByDescending(t => t.DivisionID);
-                }
+                //if (String.IsNullOrEmpty(sortDirection))
+                //{
+                //    teams = teams
+                //        .OrderBy(t => t.DivisionID);
+                //}
+                //else
+                //{
+                teams = teams
+                    .OrderByDescending(t => t.DivisionID);
+                //}
             }
-            else if (sortField == "Win(s)")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    teams = teams
-                        .OrderBy(t => t.TeamWins);
-                }
-                else
-                {
-                    teams = teams
-                        .OrderByDescending(t => t.TeamWins);
-                }
-            }
-            else if (sortField == "Loss(es)")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    teams = teams
-                        .OrderBy(t => t.TeamLosses);
-                }
-                else
-                {
-                    teams = teams
-                        .OrderByDescending(t => t.TeamLosses);
-                }
-            }
+            //else if (sortField == "Won")
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        teams = teams
+            //            .OrderBy(t => t.TeamWins);
+            //    }
+            //    else
+            //    {
+            //        teams = teams
+            //            .OrderByDescending(t => t.TeamWins);
+            //    }
+            //}
+            //else if (sortField == "Lost")
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        teams = teams
+            //            .OrderBy(t => t.TeamLosses);
+            //    }
+            //    else
+            //    {
+            //        teams = teams
+            //            .OrderByDescending(t => t.TeamLosses);
+            //    }
+            //}
+            //else //Sorting by Points - the default sort order
+            //{
+            //    if (String.IsNullOrEmpty(sortDirection))
+            //    {
+            //        teams = teams.OrderByDescending(t => t.TeamPoints);
+            //    }
+            //    else
+            //    {
+            //        teams = teams.OrderBy(t => t.TeamPoints);
+            //    }
+            //}
+
 
             //Set sort for next time
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
 
             ViewBag.CaptainTeamID = CaptainTeamID;
-            
-            return View(await teams.ToListAsync());
+            var list = await teams.ToListAsync();
+            if (sortField == null || sortField == "Point(s)")
+            {
+                list = list.OrderByDescending(t => t.TeamPoints).ToList();
 
-           
+            }
+            else if (sortField == null || sortField == "Won")
+            {
+                list = list.OrderByDescending(t => t.TeamWins).ToList();
+            }
+            else if (sortField == null || sortField == "Lost")
+            {
+                list = list.OrderByDescending(t => t.TeamLosses).ToList();
+            }
+            if (!String.IsNullOrEmpty(sortDirection))
+                list.Reverse();
+            return View(list);
+
+
         }
 
         // GET: Teams/Details/5
@@ -191,7 +217,7 @@ namespace SN_BNB.Controllers
                 .Include(t => t.AwayFixtures)
                 .ThenInclude(t => t.HomeTeam)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            
+
             if (team == null)
             {
                 return NotFound();
@@ -199,7 +225,7 @@ namespace SN_BNB.Controllers
 
             ViewBag.Fixtures = team.AwayFixtures.Union(team.HomeFixtures).Where(f => DateTime.Now.AddDays(30).CompareTo(f.FixtureDateTime) > 0).OrderBy(f => f.FixtureDateTime).Select(t => new TeamScheduleVM(t));
             ViewBag.Players = _context.Players.Where(t => t.TeamID == team.ID);     //due to trouble finding a list of players with Team.Players, this is used
-            ViewBag.CaptainTeamID = CaptainTeamID;
+
             return View(team);
         }
 
@@ -214,7 +240,7 @@ namespace SN_BNB.Controllers
         // POST: Teams/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team)
@@ -240,7 +266,7 @@ namespace SN_BNB.Controllers
             }
 
             var team = await _context.Teams.FindAsync(id);
-            if(User.IsInRole("Captain") && team.ID != CaptainTeamID)
+            if (User.IsInRole("Captain") && team.ID != CaptainTeamID)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -290,7 +316,7 @@ namespace SN_BNB.Controllers
             return View(team);
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: Teams/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -334,7 +360,7 @@ namespace SN_BNB.Controllers
                          select d;
             ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
         }
-        
-       
+
+
     }
 }

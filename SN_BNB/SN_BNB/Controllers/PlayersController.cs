@@ -135,8 +135,8 @@ namespace SN_BNB.Controllers
             var players = from p in _context.Players
                             .Include(p => p.Team)
                             //.ThenInclude( t => t.DivisionID)
-                            .Include(p => p.AssignedMatchPlayers)
-                            .ThenInclude(p => p.Match)
+                            //.Include(p => p.AssignedMatchPlayers)
+                            //.ThenInclude(p => p.Match)
                           select p;
 
 
@@ -341,9 +341,9 @@ namespace SN_BNB.Controllers
 
             var player = await _context.Players
                 .Include(p => p.Team)
-                .Include(p => p.AssignedMatchPlayers)
-                .ThenInclude( n => n.Match)
-                .ThenInclude ( f => f.Fixture)
+                //.Include(p => p.AssignedMatchPlayers)
+                //.ThenInclude( n => n.Match)
+                //.ThenInclude ( f => f.Fixture)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (player == null)
             {

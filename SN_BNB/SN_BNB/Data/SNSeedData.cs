@@ -45,7 +45,6 @@ namespace SN_BNB.Data
                      new Team
                      {
                          TeamName = "White Oaks 1",
-                         TeamPoints = 0,
                          TeamCreatedOn = DateTime.Today,
                          DivisionID = 1,
                          TeamBio = "This is Team White Oaks 1"
@@ -53,7 +52,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Ridley 1",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 2,
                         TeamBio = "This is Team Ridley 1"
@@ -61,7 +59,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "BAC 1",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3,
                         TeamBio = "This is Team BAC 1"
@@ -69,7 +66,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Brock 1",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 4,
                         TeamBio = "This is Team Brock 1"
@@ -77,7 +73,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "BAC 2",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 2
 
@@ -85,7 +80,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "CAB 2",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 2
 
@@ -93,7 +87,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "CAB 1",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3
 
@@ -101,7 +94,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Brick 1",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 1
 
@@ -109,7 +101,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Brick 2",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3
 
@@ -117,7 +108,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Brock 2",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 4
 
@@ -125,7 +115,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Ridley 2",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3
 
@@ -133,7 +122,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "White Oaks 2",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 2
 
@@ -141,7 +129,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Brock 3",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 1
 
@@ -149,7 +136,6 @@ namespace SN_BNB.Data
                     new Team
                     {
                         TeamName = "Ridley 3",
-                        TeamPoints = 0,
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 2
 
@@ -510,7 +496,7 @@ namespace SN_BNB.Data
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
-                     }, 
+                     },
                      new Fixture
                      {
                          Title = "Brock1 vs Ridley2",

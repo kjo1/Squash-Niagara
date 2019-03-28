@@ -19,28 +19,49 @@ namespace SN_BNB.Models
         [Display(Name = "Team Name")]
         public string TeamName { get; set; }
 
-        [Display(Name = "Team Points")]
-        [Range(0, 12)]
+        [Display(Name = "Point(s)")]
+        [Range(1, int.MaxValue, ErrorMessage = "Point(s) Cannot be negative.")]
         public int TeamPoints { get; set; }
+        //{
+        //    get
+        //    {
+        //        int matchPoints = 0;
+
+        //        if (HomeFixtures != null)
+        //        {
+        //            foreach (Fixture f in HomeFixtures)
+        //                matchPoints += f.Matches.Count(m => m.Player1Score > m.Player2Score);
+        //        }
+        //        if (AwayFixtures != null)
+        //        {
+        //            foreach (Fixture f in AwayFixtures)
+        //                matchPoints += f.Matches.Count(m => m.Player1Score < m.Player2Score);
+        //        }
+        //        matchPoints += TeamWins;
+
+        //        return matchPoints;
+        //    }
+        //    set { }
+        //}
 
         [DataType(DataType.Date)]
         [Display(Name = "Team Created")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? TeamCreatedOn { get; set; }
 
-        [Display(Name = "Win(s)")]
+        [Display(Name = "Won")]
         public int TeamWins
         {
             get
             {
-                return  (HomeFixtures?
-                    .Count(f => f.HomeScore > f.AwayScore) ?? 0) + 
+                return (HomeFixtures?
+                    .Count(f => f.HomeScore > f.AwayScore) ?? 0) +
                     (AwayFixtures?
-                    .Count(f => f.AwayScore > f.HomeScore)?? 0);
+                    .Count(f => f.AwayScore > f.HomeScore) ?? 0);
             }
         }
 
-        [Display(Name = "Loss(es)")]
+        [Display(Name = "Lost")]
         public int TeamLosses
         {
             get
@@ -49,7 +70,7 @@ namespace SN_BNB.Models
                     .Count(f => f.HomeScore < f.AwayScore) ?? 0) +
                     (AwayFixtures?
                     .Count(f => f.AwayScore < f.HomeScore) ?? 0);
-            } 
+            }
         }
 
         [Display(Name = "Bio")]
@@ -68,14 +89,23 @@ namespace SN_BNB.Models
         {
             get
             {
-                int matches = HomeFixtures.Count + AwayFixtures.Count;
-                return (decimal)TeamWins / (decimal)matches;
+                return (decimal)TeamWins / (decimal)TeamPlayed;
             }
         }
 
         [Display(Name = "Seasons")]
         public ICollection<Season_has_Team> Season_has_Teams { get; set; }
+
+        public int TeamPlayed
+        {
+            get
+            {
+                return (HomeFixtures?
+                    .Count ?? 0) +
+                    (AwayFixtures?
+                    .Count ?? 0);
+            }
+        }
+
     }
-
-
 }

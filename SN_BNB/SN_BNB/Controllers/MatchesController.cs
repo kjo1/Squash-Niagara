@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using SN_BNB.Data;
 using SN_BNB.Models;
-using SN_BNB.ViewModels;
 
 namespace SN_BNB.Controllers
 {
@@ -22,84 +20,10 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Matches
-        public async Task<IActionResult> Index(string SearchPlayer, string sortDirection, string sortField, string actionButton)
+        public async Task<IActionResult> Index()
         {
-            //PopulateDropDownLists();
-            var matches = from d in _context.Matches
-                          .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)
-                          select d;
-            if (!string.IsNullOrEmpty(SearchPlayer))
-            {
-                matches = matches.Where(m => m.Player.FullName.Contains(SearchPlayer));
-            }
-
-            if (!String.IsNullOrEmpty(actionButton))
-            {
-                if (actionButton != "Filter")
-                {
-                    if (actionButton == sortField)
-                    {
-                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
-                    }
-                    sortField = actionButton;
-                }
-            }
-            if(sortField == "Players")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches
-                        .OrderBy(m => m.Player);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.Player);
-                }
-            }
-            else if (sortField == "Position")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches
-                        .OrderBy(m => m.MatchPosition);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.MatchPosition);
-                }
-            }
-            else if (sortField == "Time")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches
-                        .OrderBy(m => m.MatchTime);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.MatchTime);
-                }
-            }
-            else
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches
-                        .OrderBy(m => m.Player);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.Player);
-                }
-            }
-            ViewData["sortField"] = sortField;
-            ViewData["sortDirection"] = sortDirection;
-
-            return View(await matches.ToListAsync());
+            var sNContext = _context.Matches.Include(m => m.Fixture).Include(m => m.Player1).Include(m => m.Player2);
+            return View(await sNContext.ToListAsync());
         }
 
         // GET: Matches/Details/5
@@ -112,7 +36,8 @@ namespace SN_BNB.Controllers
 
             var match = await _context.Matches
                 .Include(m => m.Fixture)
-                .Include(m => m.Player)
+                .Include(m => m.Player1)
+                .Include(m => m.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (match == null)
             {
@@ -125,12 +50,10 @@ namespace SN_BNB.Controllers
         // GET: Matches/Create
         public IActionResult Create()
         {
-            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "Title");
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email");
-            Match match = new Match();
-            //PopulateDropDownLists();
-            PopulateAssignedPlayerData(match);
-            return View(match);
+            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID");
+            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email");
+            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email");
+            return View();
         }
 
         // POST: Matches/Create
@@ -138,29 +61,17 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
+        public async Task<IActionResult> Create([Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,Player1ID,Player2ID")] Match match)
         {
-            try
+            if (ModelState.IsValid)
             {
-                UpdateMatchPlayers(selectedOptions, match);
-                if (ModelState.IsValid)
-                {
-                    _context.Add(match);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                //ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-                //ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
-
+                _context.Add(match);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "Unable to save changes");
-            }
-            //PopulateDropDownLists();
-            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "Title");
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email");
-            PopulateAssignedPlayerData(match);
+            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
+            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
+            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email", match.Player2ID);
             return View(match);
         }
 
@@ -172,19 +83,14 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            var match = await _context.Matches
-                .Include(m => m.AssignedMatchPlayers).ThenInclude(m => m.Player)
-                .AsNoTracking()
-                .SingleOrDefaultAsync(d => d.ID == id);
-
+            var match = await _context.Matches.FindAsync(id);
             if (match == null)
             {
                 return NotFound();
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.AssignedMatchPlayerID);
-            //PopulateDropDownLists();
-            PopulateAssignedPlayerData(match);
+            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
+            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email", match.Player2ID);
             return View(match);
         }
 
@@ -193,18 +99,12 @@ namespace SN_BNB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,PlayerID")] Match match, string[] selectedOptions)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,Player1ID,Player2ID")] Match match)
         {
-            var matchToUpdate = await _context.Matches
-                .Include(m => m.AssignedMatchPlayers).ThenInclude(d => d.Player)
-                .SingleOrDefaultAsync(d => d.ID == id);
-
             if (id != match.ID)
             {
                 return NotFound();
             }
-
-            UpdateMatchPlayers(selectedOptions, matchToUpdate);
 
             if (ModelState.IsValid)
             {
@@ -212,10 +112,6 @@ namespace SN_BNB.Controllers
                 {
                     _context.Update(match);
                     await _context.SaveChangesAsync();
-                }
-                catch (RetryLimitExceededException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -231,9 +127,8 @@ namespace SN_BNB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.AssignedMatchPlayerID);
-            PopulateAssignedPlayerData(matchToUpdate);
-            //PopulateDropDownLists();
+            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
+            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email", match.Player2ID);
             return View(match);
         }
 
@@ -247,7 +142,8 @@ namespace SN_BNB.Controllers
 
             var match = await _context.Matches
                 .Include(m => m.Fixture)
-                .Include(m => m.Player)
+                .Include(m => m.Player1)
+                .Include(m => m.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (match == null)
             {
@@ -267,75 +163,6 @@ namespace SN_BNB.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private void PopulateAssignedPlayerData(Match match)
-        {
-            var allPlayers = _context.Players;
-            var matPlayers = new HashSet<int>(match.AssignedMatchPlayers.Select(b => b.PlayerID));
-            var selected = new List<PlayerMatchVM>();
-            var available = new List<PlayerMatchVM>();
-            foreach (var p in allPlayers)
-            {
-                if (matPlayers.Contains(p.ID))
-                {
-                    selected.Add(new PlayerMatchVM
-                    {
-                        PlayerID = p.ID,
-                        Name = p.FullName
-                    });
-                }
-                else
-                {
-                    available.Add(new PlayerMatchVM
-                    {
-                        PlayerID = p.ID,
-                        Name = p.FullName
-                    });
-                }
-            }
-            ViewData["selOpts"] = new MultiSelectList(selected.OrderBy(s => s.Name), "PlayerID", "Name");
-            ViewData["availOpts"] = new MultiSelectList(available.OrderBy(s => s.Name), "PlayerID", "Name");
-        }
-
-        private void UpdateMatchPlayers(string[] selectedOptions, Match matchToUpdate)
-        {
-            if(selectedOptions == null)
-            {
-                matchToUpdate.AssignedMatchPlayers = new List<AssignedMatchPlayer>();
-                return;
-            }
-
-            var selectedOptionsHS = new HashSet<string>(selectedOptions);
-            var matplayers = new HashSet<int>(matchToUpdate.AssignedMatchPlayers.Select(b => b.MatchID));
-            foreach (var p in _context.Players)
-            {
-                if (selectedOptionsHS.Contains(p.ID.ToString()))
-                {
-                    if (!matplayers.Contains(p.ID))
-                    {
-                        matchToUpdate.AssignedMatchPlayers.Add(new AssignedMatchPlayer
-                        {
-                            PlayerID = p.ID,
-                            MatchID = matchToUpdate.ID
-                        });
-                    }
-                }
-                else
-                {
-                    if (matplayers.Contains(p.ID))
-                    {
-                        AssignedMatchPlayer playerToRemove = matchToUpdate.AssignedMatchPlayers.SingleOrDefault<AssignedMatchPlayer>();
-                            _context.Remove(playerToRemove);
-                    }
-                }
-            }
-        }
-
-        //private void PopulateDropDownLists(Match match = null)
-        //{
-        //    ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-        //    ViewData["PlayerID"] = new SelectList(_context.Players, "ID", "Email", match.PlayerID);
-        //}
 
         private bool MatchExists(int id)
         {

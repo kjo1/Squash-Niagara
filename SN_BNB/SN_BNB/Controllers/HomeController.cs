@@ -38,7 +38,7 @@ namespace SN_BNB.Controllers
                     var fixture = _context.Fixtures.Include(f => f.AwayTeam)
                                                     .Include(f => f.HomeTeam)
                                                     .Where(f => (f.idHomeTeam == teamID || f.idAwayTeam == teamID)
-                                                    && DateTime.Now <= f.FixtureDateTime &&  DateTime.Now.AddDays(30) > f.FixtureDateTime).OrderBy(f => f.FixtureDateTime);
+                                                    && DateTime.Now <= f.FixtureDateTime && DateTime.Now.AddDays(30) > f.FixtureDateTime).OrderBy(f => f.FixtureDateTime);
                     ViewBag.fixture = fixture;
                 }
                 catch
@@ -107,6 +107,17 @@ namespace SN_BNB.Controllers
 
         public IActionResult Standings()
         {
+            var players = _context.Players.Include(t => t.Team);
+            var posOnePlayers = new List<Player>();
+            //foreach (Player p in players)
+            //{
+            //    if (p.MatchesByPosition(1) >= 0.5m)
+            //        posOnePlayers.Add(p);
+            //}
+
+
+            ViewBag.ListOfPlayers = posOnePlayers;
+
             return View();
         }
 

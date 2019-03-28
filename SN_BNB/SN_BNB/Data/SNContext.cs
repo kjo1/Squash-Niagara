@@ -47,6 +47,18 @@ namespace SN_BNB.Data
                 .HasForeignKey(t => t.Season_idSeason)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Player>()
+                .HasMany<Match>(d => d.HomeMatches)
+                .WithOne(t => t.Player1)
+                .HasForeignKey(t => t.Player1ID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Player>()
+                .HasMany<Match>(d => d.AwayMatches)
+                .WithOne(t => t.Player2)
+                .HasForeignKey(t => t.Player2ID)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Season_has_Team>()
                 .HasOne(t => t.Team)
                 .WithMany(st => st.Season_has_Teams)
@@ -65,11 +77,6 @@ namespace SN_BNB.Data
                 .HasForeignKey(f => f.idHomeTeam)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<AssignedMatchPlayer>()
-                .HasOne(pt => pt.Match)
-                .WithMany(t => t.AssignedMatchPlayers)
-                .HasForeignKey(pt => pt.MatchID)
-                .OnDelete(DeleteBehavior.Restrict);
 
             //Add a unique index to the Email Address
             modelBuilder.Entity<Player>()
@@ -93,9 +100,6 @@ namespace SN_BNB.Data
             // Insection Table Key Declarations
             modelBuilder.Entity<Season_has_Team>()
                 .HasKey(t => new { t.TeamID, t.SeasonID });
-
-            modelBuilder.Entity<AssignedMatchPlayer>()
-            .HasKey(t => new { t.MatchID, t.PlayerID });
         }
 
         public DbSet<SN_BNB.Models.Location> Location { get; set; }

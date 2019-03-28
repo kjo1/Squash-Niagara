@@ -11,7 +11,7 @@ namespace SN_BNB.Models
     {
         public int ID { get; set; }
 
-        [Display(Name ="Player")]
+        [Display(Name = "Player")]
         public string FullName
         {
             get
@@ -41,10 +41,6 @@ namespace SN_BNB.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name = "Order of Strength")]
-        [Range(1,4)]
-        public decimal OrderOfStrength { get; set; }
-
         [Required(ErrorMessage = "Phone number is required.")]
         [RegularExpression("^\\d{10}$", ErrorMessage = "Please enter a valid 10-digit phone number (no spaces).")]
         [DataType(DataType.PhoneNumber)]
@@ -52,7 +48,7 @@ namespace SN_BNB.Models
         public Int64 Phone { get; set; }
 
         [Required(ErrorMessage = "Position is required.(1 to 4)")]
-        [Range(1,4)]
+        [Range(1, 4)]
         public int Position { get; set; }
 
         public int Played { get; set; }
@@ -64,13 +60,13 @@ namespace SN_BNB.Models
         public int Loss { get; set; }
 
         public int For { get; set; }
-  
+
         public int Against { get; set; }
 
         public int Points { get; set; }
 
         [Required(ErrorMessage = "You must select a assigned Team")]
-        [Display(Name ="Team")]
+        [Display(Name = "Team")]
         public int TeamID { get; set; }
 
         [Required(ErrorMessage = "You must select if you want to hide your phone number from other players.")]
@@ -79,9 +75,32 @@ namespace SN_BNB.Models
 
         public virtual Team Team { get; set; }
 
+        public virtual ICollection<Match> HomeMatches { get; set; }
+        public virtual ICollection<Match> AwayMatches { get; set; }
+
         [NotMappedAttribute]
         public Byte[] ExcelFile { get; set; }
-        public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
 
+        // Number of matches played at a particular position
+        public decimal MatchesByPosition(int Position)
+        {
+            if (Team.TeamPlayed == 0)
+                return 0m;
+            else
+                return (decimal)((HomeMatches?.Count(m => m.Player1ID == ID && m.MatchPosition == Position) ?? 0)
+                    + (AwayMatches?.Count(m => m.Player2ID == ID && m.MatchPosition == Position) ?? 0))
+                    / (decimal)(Team.TeamPlayed);
+        }
+
+        public decimal WinPerPos(int position)
+        {
+            if (Team.TeamPlayed == 0)
+                return 0m;
+            else
+                return (decimal)((HomeMatches?.Count(m => m.Player1ID == ID && m.MatchPosition == Position && m.Player1Score > m.Player2Score) ?? 0)
+                    + (AwayMatches?.Count(m => m.Player2ID == ID && m.MatchPosition == Position && m.Player1Score < m.Player2Score) ?? 0))
+                    / (decimal)(Team.TeamPlayed);
+
+        }
     }
 }
