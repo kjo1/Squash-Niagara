@@ -155,7 +155,17 @@ namespace SN_BNB.Controllers
                         .OrderByDescending(f => f.Season.Season_Title);
                 }
             }
-
+            else //Sorting by Date - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    fixtures = fixtures.OrderByDescending(f => f.FixtureDateTime);
+                }
+                else
+                {
+                    fixtures = fixtures.OrderBy(f => f.FixtureDateTime);
+                }
+            }
             //Set sort for next time
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
