@@ -10,11 +10,12 @@ namespace SN_BNB.Models
     {
         public int ID { get; set; }
 
-
+        [Display(Name ="Score")]
         [Required(ErrorMessage = "You must enter a score for player 1")]
         [Range(0, 6, ErrorMessage = "Please put point(s) between 0 and 6")]
         public int Player1Score { get; set; }
 
+        [Display(Name = "Score")]
         [Range(0, 6, ErrorMessage = "Please put point(s) between 0 and 6")]
         [Required(ErrorMessage = "You must enter a score for player 2")]
         public int Player2Score { get; set; }
@@ -35,14 +36,16 @@ namespace SN_BNB.Models
 
         public Fixture Fixture { get; set; }
 
-        [Display(Name="Home Player")]
+        
         public int Player1ID { get; set; }
 
+        [Display(Name = "Home Player")]
         public virtual Player Player1 { get; set; }
 
-        [Display(Name = "Away Player")]
+        
         public int Player2ID { get; set; }
 
+        [Display(Name = "Away Player")]
         public virtual Player Player2 { get; set; }
 
     }
