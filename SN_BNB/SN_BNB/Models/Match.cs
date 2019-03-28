@@ -9,19 +9,17 @@ namespace SN_BNB.Models
     public class Match
     {
         public int ID { get; set; }
-        public Match()
-        {
-            AssignedMatchPlayers = new HashSet<AssignedMatchPlayer>();
-        }
-        [Required(ErrorMessage ="You must enter a score for player 1")]
+
+
+        [Required(ErrorMessage = "You must enter a score for player 1")]
         [Range(0, 6, ErrorMessage = "Please put point(s) between 0 and 6")]
         public int Player1Score { get; set; }
 
         [Range(0, 6, ErrorMessage = "Please put point(s) between 0 and 6")]
-        [Required(ErrorMessage ="You must enter a score for player 2")]
+        [Required(ErrorMessage = "You must enter a score for player 2")]
         public int Player2Score { get; set; }
 
-        [Required(ErrorMessage ="You must enter a match position")]
+        [Required(ErrorMessage = "You must enter a match position")]
         [Range(1, 4)]
         [Display(Name = "Position")]
         public int MatchPosition { get; set; }
@@ -32,20 +30,16 @@ namespace SN_BNB.Models
         [DisplayFormat(DataFormatString = "{0:hh:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan MatchTime { get; set; }
 
-
         [Display(Name = "Fixture")]
         public int FixtureID { get; set; }
 
-        [Display(Name = "Players")]
-        public int AssignedMatchPlayerID { get; set; }
-
-
         public Fixture Fixture { get; set; }
 
+        public int Player1ID { get; set; }
+        public virtual Player Player1 { get; set; }
 
-        [Display(Name = "Players")]
-        public Player Player { get; set; }
+        public int Player2ID { get; set; }
+        public virtual Player Player2 { get; set; }
 
-        public ICollection<AssignedMatchPlayer> AssignedMatchPlayers { get; set; }
     }
 }

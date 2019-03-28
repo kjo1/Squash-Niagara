@@ -40,39 +40,13 @@
                         <th style="padding-left: 50px;">%</th>
                     </tr>
 
-                    <tr>
-                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Huck, Murray</a></td>
-                        <td style="padding-left: 50px;">71</td>
-                    </tr>
-
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Lipinski, Jakub</a></td>
-                        <td style="padding-left: 50px;">67</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Forgeron, Rachael</a></td>
-                        <td style="padding-left: 50px;">63</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Savarie, Chris</a></td>
-                        <td style="padding-left: 50px;">57</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Crouch, Spencer</a></td>
-                        <td style="padding-left: 50px;">53</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Hajek, Matt</a></td>
-                        <td style="padding-left: 50px;">44</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Holland, Greg</a></td>
-                        <td style="padding-left: 50px;">26</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Sharron, David</a></td>
-                        <td style="padding-left: 50px;">20</td>
-                    </tr>
+                    @foreach (Player p in ViewBag.ListOfPlayers)
+                    {
+                        <tr>
+                            <td>@Html.Raw(p.FullName)</td>
+                            <td>@Html.Raw(p.WinPerPos(1))</td>
+                        </tr>
+                    }
                 </table>
                 <hr />
                 <p class="card-text" style="color: darkred"><i>Not Confirmed</i></p>

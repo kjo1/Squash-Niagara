@@ -121,35 +121,26 @@ namespace SN_BNB.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Content,Date")] News news)
+        public async Task<IActionResult> Edit(string ID, string Title, string Content)
         {
-            if (id != news.ID)
+            try
             {
-                return NotFound();
-            }
+                News news = _context.Find<News>(Convert.ToInt32(ID));
+                news.Title = Title;
+                news.Content = Content;
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
                     _context.Update(news);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NewsExists(news.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return RedirectToAction(nameof(Index));
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(news);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: News/Delete/5
