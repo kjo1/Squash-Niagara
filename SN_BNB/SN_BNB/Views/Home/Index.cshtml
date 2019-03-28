@@ -32,7 +32,7 @@
                                     @foreach (Fixture fu in ViewBag.fixture)
                                     {
                                         <li style="margin-bottom:8px;">
-                                            <span id="dateTime">@fu.FixtureDateTime.ToLongDateString()</span>
+                                            <span id="dateTime" style="font-size:12px">@fu.FixtureDateTime.ToLongDateString()</span><br />
                                             <span id="homeTeam">@fu.HomeTeam.TeamName</span>
                                             <span style="font-weight:600; font-size:16px">vs</span>
                                             <span id="awayTeam">@fu.AwayTeam.TeamName</span>
@@ -40,7 +40,7 @@
                                     }
                                 </ul>
                             </div>
-                            <span style="text-align:center; margin-top:-15px"> <a id="btn" href="/Fixtures/Index" class="btn btn-primary" style="font-weight:700;">All Matches</a></span>
+                            <span style="text-align:center; margin-bottom: 20px;"> <a id="btn" href="/Fixtures/Index" class="btn btn-primary" style="font-weight:700;">All Matches</a></span>
                         </div>
                     </div>
                     <div class="col">
@@ -54,7 +54,7 @@
                                     @foreach (Fixture fx in ViewBag.fixtureLast)
                                     {
                                         <li style="margin-bottom:8px;">
-                                            <span id="dateTime">@fx.FixtureDateTime.ToShortDateString()</span>
+                                            <span id="dateTime" style="font-size:12px;">@fx.FixtureDateTime.ToShortDateString()</span><br />
                                             <span id="homeTeam">@fx.HomeTeam.TeamName</span> <span id="fixScore">  - @fx.HomeScore </span>
                                             <span style="font-weight:600; font-size:16px">vs</span>
                                             <span id="fixScore"> @fx.AwayScore - </span>
@@ -63,7 +63,7 @@
                                     }
                                 </ul>
                             </div>
-                            <span style="text-align:center; margin-top:-15px"> <a id="btn" href="/Fixtures/Index" class="btn btn-primary" style="font-weight:700;">All Matches</a></span>
+                            <span style="text-align:center; margin-top:-15px; margin-bottom: 20px;"> <a id="btn" href="/Fixtures/Index" class="btn btn-primary" style="font-weight:700;">All Matches</a></span><br />
                         </div>
                     </div>
                 </div>

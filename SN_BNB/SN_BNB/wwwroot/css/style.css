@@ -58,13 +58,13 @@ btn-toolbar {
 }
 
 #homeTeam {
-    color: green;
+    color: #5E54A0;
     font-weight: 700;
     font-size: 18px;
 }
 
 #awayTeam {
-    color: red;
+    color: #5E54A0;
     font-weight: 700;
     font-size: 18px;
 }
@@ -74,7 +74,7 @@ btn-toolbar {
 }
 
 #fixScore {
-    color:blue;
+    color: #666666;
     font-weight: 700;
     font-size: 18px;
 }
