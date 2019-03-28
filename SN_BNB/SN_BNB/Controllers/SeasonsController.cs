@@ -31,15 +31,15 @@ namespace SN_BNB.Controllers
             public string LocationAddress;
             public Team HomeTeam;     //need to find team id for sql statement
             public Team AwayTeam;
+            public List<MatchStruct> Matches;
         }
 
         public struct MatchStruct
         {
             public TimeSpan MatchTime;
-            public int Player1Score;
-            public int Player2Score;
-            public int MatchPosition;
-            public Fixture MatchFixture;
+            public Player Player1;
+            public Player Player2;
+            public int Position;
         }
 
         // GET: Seasons/ExcelUpload
@@ -52,8 +52,9 @@ namespace SN_BNB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExcelUpload([Bind("ID,Season_Title")] Season season, IFormFile file)
         {
-            //get all of the Teams so we can search through them
+            //get all of the Teams and Players so we can search through them
             var teams = from t in _context.Teams select t;
+            var players = from p in _context.Players select p;
 
             //create a struct to hold fixture data
             List<FixtureStruct> dataStructs = new List<FixtureStruct>();
@@ -77,14 +78,14 @@ namespace SN_BNB.Controllers
                 var end = worksheet.Dimension.End;
 
                 DateTime matchDate;
-                for (int row = start.Row; row<=end.Row; row++)
+                for (int row = start.Row; row<=end.Row; row+=4)
                 {
                     //convert to a DateTime
                     if(!DateTime.TryParseExact(worksheet.Cells[row, 1].Text, "dd/mm/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out matchDate))
                     {
                         //show the user an error
                     }
-                    FixtureStruct tempStruct = new FixtureStruct
+                    FixtureStruct fixtureStruct = new FixtureStruct
                     {
                         FixtureDate = matchDate,
                         LocationCity = worksheet.Cells[row, 2].Text,
@@ -94,7 +95,23 @@ namespace SN_BNB.Controllers
                         HomeTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 4].Text).First(),
                         AwayTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 5].Text).First()
                     };
-                    dataStructs.Add(tempStruct);
+                    //loop through the Matches and update struct
+                    List<MatchStruct> matchList = new List<MatchStruct>(4);
+                    for (int i = 0; i >= 4; i++)
+                    {
+                        MatchStruct matchStruct = new MatchStruct
+                        {
+                            MatchTime = TimeSpan.Parse(worksheet.Cells[row+i, 2].Text),
+                            Position = Convert.ToInt32(worksheet.Cells[row, 3].Text),
+
+                            //Get Player object by executing a WHERE with TeamName
+                            Player1 = players.Where(t => t.FullName == worksheet.Cells[row, 4].Text).First(),
+                            Player2 = players.Where(t => t.FullName == worksheet.Cells[row, 5].Text).First(),
+                        };
+                        matchList.Add(matchStruct);
+                    }
+                    fixtureStruct.Matches = matchList;
+                    dataStructs.Add(fixtureStruct);
                 }
 
                 //make a new season
@@ -116,6 +133,20 @@ namespace SN_BNB.Controllers
                     _context.Fixtures.Add(tempFixture);
                     newFixtureList.Add(tempFixture);
 
+                    //update tables
+                    _context.SaveChanges();
+
+                    //make the new matches using the structs in each FixtureStruct
+                    foreach(MatchStruct matchStruct in fixtureStruct.Matches)
+                    {
+                        Match tempMatch = new Match();
+                        tempMatch.FixtureID = tempFixture.ID;
+                        tempMatch.Player1 = matchStruct.Player1;
+                        tempMatch.Player2 = matchStruct.Player2;
+                        tempMatch.MatchTime = matchStruct.MatchTime;
+                        tempMatch.MatchPosition = matchStruct.Position;
+                        await _context.Matches.AddAsync(tempMatch);
+                    }
                     //update tables
                     _context.SaveChanges();
                 }
