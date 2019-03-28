@@ -13,7 +13,13 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Player1)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Player1Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player2)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Player2Score)
@@ -27,12 +33,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Fixture)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Player1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Player2)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -40,7 +40,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Player1.FullName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Player1Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player2.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Player2Score)
@@ -52,14 +58,9 @@
                 @Html.DisplayFor(modelItem => item.MatchTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fixture.ID)
+                @Html.DisplayFor(modelItem => item.Fixture.Title)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player1.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player2.Email)
-            </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
