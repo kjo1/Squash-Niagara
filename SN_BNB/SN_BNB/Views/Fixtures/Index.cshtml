@@ -6,14 +6,15 @@
 <link href="~/css/team.css" rel="stylesheet" />
 <br />
 <h3>Schedule</h3>
-@if (User.IsInRole("Admin"))
-{
-    <p id="createNew">
-        <a asp-action="Create" style="color:purple;">Create New</a>
-    </p>
-}
-<form asp-action="Index">
-    <div class="container">
+<div class="container">
+    @if (User.IsInRole("Admin"))
+    {
+        <p id="createNew">
+            <a asp-action="Create" style="color:purple;">Create New</a>
+        </p>
+    }
+    <form asp-action="Index">
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -193,5 +194,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</form>
+
+    </form>
+</div>
