@@ -78,7 +78,7 @@ namespace SN_BNB.Controllers
                 var end = worksheet.Dimension.End;
 
                 DateTime matchDate;
-                for (int row = start.Row; row<=end.Row; row+=4)
+                for (int row = start.Row; row<=end.Row; row+=5)
                 {
                     //convert to a DateTime
                     if(!DateTime.TryParseExact(worksheet.Cells[row, 1].Text, "dd/mm/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out matchDate))
@@ -92,25 +92,24 @@ namespace SN_BNB.Controllers
                         LocationAddress = worksheet.Cells[row, 3].Text,
 
                         //Get Team object by executing a WHERE with TeamName
-                        HomeTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 4].Text).First(),
-                        AwayTeam = teams.Where(t => t.TeamName == worksheet.Cells[row, 5].Text).First()
+                        HomeTeam = teams.FirstOrDefault(t => t.TeamName == worksheet.Cells[row, 4].Text),
+                        AwayTeam = teams.FirstOrDefault(t => t.TeamName == worksheet.Cells[row, 5].Text)
                     };
                     //loop through the Matches and update struct
-                    List<MatchStruct> matchList = new List<MatchStruct>(4);
-                    for (int i = 1; i < 4; i++)
+                    fixtureStruct.Matches = new List<MatchStruct>(4);
+                    for (int i = 1; i <= 4; i++)
                     {
                         MatchStruct matchStruct = new MatchStruct
                         {
-                            MatchTime = TimeSpan.Parse(worksheet.Cells[row+i, 2].Text),
-                            Position = Convert.ToInt32(worksheet.Cells[row+i, 3].Text),
+                            Position = Convert.ToInt32(worksheet.Cells[row+i, 2].Text),
+                            MatchTime = TimeSpan.ParseExact(worksheet.Cells[row+i, 3].Text, "hh\\:mm", null),
 
                             //Get Player object by executing a WHERE with TeamName
-                            Player1 = players.Where(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 4].Text).First(),
-                            Player2 = players.Where(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 5].Text).First(),
+                            Player1 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 4].Text),
+                            Player2 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 5].Text),
                         };
-                        matchList.Add(matchStruct);
+                        fixtureStruct.Matches.Add(matchStruct);
                     }
-                    fixtureStruct.Matches = matchList;
                     dataStructs.Add(fixtureStruct);
                 }
 
