@@ -316,6 +316,25 @@ namespace SN_BNB.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public struct PlayerMatchStruct
+        {
+            public Player MatchPlayer;
+            public int PreviousPostion;
+            public int CurrentPosition;
+        }
+
+        public async Task<IActionResult> CheckSeason(int id)
+        {
+            /* Make a list of PlayerMatchStructs */
+            /* Loop through each fixture */
+            /* Loop through each match in the fixture */
+            /* For each Match, track the Players positions in the PlayerMatchStructs list */
+            /* If the difference between a previous position and it's following is greater than 1, set a flag */
+            /* Alert the user to inconsistencies */
+            /* Display the page */
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool SeasonExists(int id)
         {
             return _context.Seasons.Any(e => e.ID == id);
