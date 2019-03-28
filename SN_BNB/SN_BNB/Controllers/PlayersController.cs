@@ -11,10 +11,13 @@ using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using SN_BNB.Data;
 using SN_BNB.Models;
+using PagedList;
+using PagedList.Mvc;
+using System.Web.Mvc;
 
 namespace SN_BNB.Controllers
 {
-    public class PlayersController : Controller
+    public class PlayersController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly SNContext _context;
         public static List<Player> newPlayerList;    //contains all the new players added so they can be shown to the user
@@ -59,9 +62,9 @@ namespace SN_BNB.Controllers
             return View(new Season());
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExcelUpload([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID,OrderOfStrength")] Player player, IFormFile file)
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExcelUpload([Microsoft.AspNetCore.Mvc.Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID,OrderOfStrength")] Player player, IFormFile file)
         {
             //get all of the Teams so we can search through them
             var teams = from t in _context.Teams select t;
@@ -128,9 +131,11 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID, int? DivisionID)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string currentFilter, string actionButton, string searchString, int? TeamID, int? DivisionID, int? page)
         {
             PopulateFilterList();
+
+            ViewBag.CurrentSort = sortDirection;
 
             var players = from p in _context.Players
                             .Include(p => p.Team)
@@ -142,9 +147,15 @@ namespace SN_BNB.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
+                page = 1;
                 players = players.Where(p => p.LastName.ToUpper().Contains(searchString.ToUpper())
                                        || p.FirstName.ToUpper().Contains(searchString.ToUpper()));
             }
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+
             if (TeamID.HasValue)
             {
                 players = players.Where(t => t.TeamID == TeamID);
@@ -327,7 +338,9 @@ namespace SN_BNB.Controllers
 
             ViewBag.CaptainTeamID = CaptainTeamID;
 
-            return View(await players.ToListAsync());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(players.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Players/Details/5
@@ -355,7 +368,7 @@ namespace SN_BNB.Controllers
 
 
         // GET: Players/Create
-        [Authorize(Roles ="Admin")]
+        [Microsoft.AspNetCore.Authorization.Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             PopulateDropDownLists();
@@ -365,10 +378,10 @@ namespace SN_BNB.Controllers
         // POST: Players/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID,OrderOfStrength")] Player player)
+        [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Microsoft.AspNetCore.Mvc.Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID,OrderOfStrength")] Player player)
         {
             if (ModelState.IsValid)
             {
@@ -382,7 +395,7 @@ namespace SN_BNB.Controllers
 
         
         // GET: Players/Edit/5
-        [Authorize(Roles ="Admin, Captain")]
+        [Microsoft.AspNetCore.Authorization.Authorize(Roles ="Admin, Captain")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -407,10 +420,10 @@ namespace SN_BNB.Controllers
         // POST: Players/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID,OrderOfStrength")] Player player)
+        [Microsoft.AspNetCore.Authorization.Authorize]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Microsoft.AspNetCore.Mvc.Bind("ID,FirstName,MiddleName,LastName,Gender,Email,Phone,Position,Played,Win,Loss,For,Against,Points,TeamID,OrderOfStrength")] Player player)
         {
             if (id != player.ID)
             {
@@ -437,11 +450,11 @@ namespace SN_BNB.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeamID"] = new SelectList(_context.Teams, "ID", "TeamName", player.TeamID);
+            ViewData["TeamID"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(_context.Teams, "ID", "TeamName", player.TeamID);
             return View(player);
         }
 
-        [Authorize(Roles ="Admin")]
+        [Microsoft.AspNetCore.Authorization.Authorize(Roles ="Admin")]
         // GET: Players/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -461,10 +474,10 @@ namespace SN_BNB.Controllers
             return View(player);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
         // POST: Players/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [Microsoft.AspNetCore.Mvc.HttpPost, Microsoft.AspNetCore.Mvc.ActionName("Delete")]
+        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var player = await _context.Players.FindAsync(id);
@@ -478,7 +491,7 @@ namespace SN_BNB.Controllers
             return _context.Players.Any(e => e.ID == id);
         }
 
-        private SelectList TeamSelectList(int? id)
+        private Microsoft.AspNetCore.Mvc.Rendering.SelectList TeamSelectList(int? id)
         {
             IOrderedQueryable<Team> dQuery;
             if (User.IsInRole("Captain"))
@@ -493,7 +506,7 @@ namespace SN_BNB.Controllers
                          orderby t.TeamName
                          select t;
             }
-            return new SelectList(dQuery, "ID", "TeamName", id);
+            return new Microsoft.AspNetCore.Mvc.Rendering.SelectList(dQuery, "ID", "TeamName", id);
         }
 
         private void PopulateDropDownLists(Player player = null)
@@ -510,15 +523,15 @@ namespace SN_BNB.Controllers
                           orderby d.DivisionName
                           select d;
 
-            ViewData["DivisionID"] = new SelectList(dQueryD, "ID", "DivisionName");
+            ViewData["DivisionID"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(dQueryD, "ID", "DivisionName");
 
-            ViewData["TeamID"] = new SelectList(dQuery, "ID", "TeamName");
+            ViewData["TeamID"] = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(dQuery, "ID", "TeamName");
         }
 
 
 
-        [HttpGet]
-        public JsonResult GetTeams(int? id)
+        [Microsoft.AspNetCore.Mvc.HttpGet]
+        public Microsoft.AspNetCore.Mvc.JsonResult GetTeams(int? id)
         {
             return Json(TeamSelectList(id));
         }

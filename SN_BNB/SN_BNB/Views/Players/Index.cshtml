@@ -1,10 +1,13 @@
-﻿@model IEnumerable<SN_BNB.Models.Player>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SN_BNB.Models.Player>;
 
+<link href="~/css/team.css" rel="stylesheet" />
 @{
+    ViewBag.Title = "Players";
     ViewData["Title"] = "Index";
 }
 <br />
-<link href="~/css/team.css" rel="stylesheet" />
 <h3>Players</h3>
 @if (User.IsInRole("Admin"))
 {
@@ -25,10 +28,10 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div id="division">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control", @style="width:290px" })
+                    @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control", @style = "width:290px" })
 
                     @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control" })
-                    @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name" })
+                    @Html.TextBox("searchString", null, ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name" })
                     <button id="btnSearch" class="btn btn-outline-success my-3 my-sm-0" type="submit">Search</button>
                 </div>
             </div>
@@ -42,8 +45,8 @@
                 <thead class="thead-light">
                     <tr>
                         @*<th id="playCol">
-                            Rank
-                        </th>*@
+                                Rank
+                            </th>*@
 
                         <th>
                             <input id="playCol" type="submit" name="actionButton" value="Player" class="btn btn-link" />
@@ -112,14 +115,14 @@
                                     @if (ViewBag.CaptainTeamID == -1 || item.TeamID == ViewBag.CaptainTeamID)
                                     {
                                         <a asp-action="Edit" asp-route-id="@item.ID">
-                                            <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit"/>
+                                            <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
                                         </a> <span>|</span>
                                     }
                                 }
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <a asp-action="Delete" asp-route-id="@item.ID">
-                                        <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive"/>
+                                        <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive" />
                                     </a>
                                 }
                             </td>
@@ -127,6 +130,11 @@
                     }
                 </tbody>
             </table>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", 
+           new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            
         </div>
     </div>
 </form>
