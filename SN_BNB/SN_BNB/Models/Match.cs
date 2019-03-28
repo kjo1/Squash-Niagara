@@ -28,7 +28,7 @@ namespace SN_BNB.Models
         [Display(Name = "Time")]
         [Required]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan MatchTime { get; set; }
 
         [Display(Name = "Fixture")]
