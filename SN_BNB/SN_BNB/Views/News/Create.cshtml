@@ -87,6 +87,10 @@
                 Go ahead&hellip;
             </div>
         </div>
+
+        <br />
+        <h5 id="validationError" style="color:red;visibility:hidden">One or more fields were not filled.</h5>
+
         <button type="button" id="submitBtn">Create</button>
     </form>
 </div>
@@ -112,23 +116,25 @@
         var theTitle = $jq('#Title').val();
         var theContent = $editor.cleanHtml();
         var theData = { Title: theTitle, Content: theContent };
-        if (theTitle == null || theContent == null)
+        if (theTitle == "" || theContent == "")     //validation error
         {
-
+            $('#validationError').css('visibility', 'visible');
         }
+        else {
+            $('#validationError').css('visibility', 'hidden');
 
-
-        $jq.ajax({
-            type: "POST",
-            url: 'Create',
-            data: theData,
-            success: function () {
-                alert('Posted to the news feed.');
-            },
-            error: function () {
-                alert('Due to an error, this is unable to be posted. Try again or reformat your post.');
+            $jq.ajax({
+                type: "POST",
+                url: 'Create',
+                data: theData,
+                success: function () {
+                    alert('Posted to the news feed.');
+                },
+                error: function () {
+                    alert('Due to an error, this is unable to be posted. Try again or reformat your post.');
+                }
             }
+            );
         }
-        );
     });
 </script>
