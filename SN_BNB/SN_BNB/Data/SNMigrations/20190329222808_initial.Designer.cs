@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190326182631_initial")]
+    [Migration("20190329222808_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,22 +18,9 @@ namespace SN_BNB.Data.SNMigrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("SN")
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayer", b =>
-                {
-                    b.Property<int>("MatchID");
-
-                    b.Property<int>("PlayerID");
-
-                    b.HasKey("MatchID", "PlayerID");
-
-                    b.HasIndex("PlayerID");
-
-                    b.ToTable("AssignedMatchPlayer");
-                });
 
             modelBuilder.Entity("SN_BNB.Models.Division", b =>
                 {
@@ -119,7 +106,9 @@ namespace SN_BNB.Data.SNMigrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AssignedMatchPlayerID");
+                    b.Property<bool>("ConfirmedByAway");
+
+                    b.Property<bool>("ConfirmedByHome");
 
                     b.Property<int>("FixtureID");
 
@@ -127,17 +116,21 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<TimeSpan>("MatchTime");
 
+                    b.Property<int>("Player1ID");
+
                     b.Property<int>("Player1Score");
 
-                    b.Property<int>("Player2Score");
+                    b.Property<int>("Player2ID");
 
-                    b.Property<int?>("PlayerID");
+                    b.Property<int>("Player2Score");
 
                     b.HasKey("ID");
 
                     b.HasIndex("FixtureID");
 
-                    b.HasIndex("PlayerID");
+                    b.HasIndex("Player1ID");
+
+                    b.HasIndex("Player2ID");
 
                     b.ToTable("Matches");
                 });
@@ -191,8 +184,6 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<string>("MiddleName")
                         .HasMaxLength(45);
-
-                    b.Property<decimal>("OrderOfStrength");
 
                     b.Property<long>("Phone");
 
@@ -290,19 +281,6 @@ namespace SN_BNB.Data.SNMigrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SN_BNB.Models.AssignedMatchPlayer", b =>
-                {
-                    b.HasOne("SN_BNB.Models.Match", "Match")
-                        .WithMany("AssignedMatchPlayers")
-                        .HasForeignKey("MatchID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SN_BNB.Models.Player", "Player")
-                        .WithMany("AssignedMatchPlayers")
-                        .HasForeignKey("PlayerID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("SN_BNB.Models.Fixture", b =>
                 {
                     b.HasOne("SN_BNB.Models.Location", "Location")
@@ -332,9 +310,15 @@ namespace SN_BNB.Data.SNMigrations
                         .HasForeignKey("FixtureID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SN_BNB.Models.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerID");
+                    b.HasOne("SN_BNB.Models.Player", "Player1")
+                        .WithMany("HomeMatches")
+                        .HasForeignKey("Player1ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SN_BNB.Models.Player", "Player2")
+                        .WithMany("AwayMatches")
+                        .HasForeignKey("Player2ID")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SN_BNB.Models.Player", b =>
