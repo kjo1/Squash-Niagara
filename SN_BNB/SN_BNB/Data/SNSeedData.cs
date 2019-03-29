@@ -581,7 +581,68 @@ namespace SN_BNB.Data
                      );
                     context.SaveChanges();
                 }
-
+                if (!context.Matches.Any())
+                {
+                    context.Matches.AddRange(
+                     new Match
+                     {
+                         FixtureID = 8,
+                         MatchTime = TimeSpan.Parse("14:00"),
+                         Player1ID = 4,
+                         Player2ID = 8
+                     },
+                     new Match
+                     {
+                         FixtureID = 8,
+                         MatchTime = TimeSpan.Parse("15:00"),
+                         Player1ID = 2,
+                         Player2ID = 4
+                     },
+                     new Match
+                     {
+                         FixtureID = 8,
+                         MatchTime = TimeSpan.Parse("16:00"),
+                         Player1ID = 1,
+                         Player2ID = 3
+                     },
+                     new Match
+                     {
+                         FixtureID = 8,
+                         MatchTime = TimeSpan.Parse("17:00"),
+                         Player1ID = 5,
+                         Player2ID = 3
+                     },
+                    new Match
+                    {
+                        FixtureID = 3,
+                        MatchTime = TimeSpan.Parse("14:00"),
+                        Player1ID = 4,
+                        Player2ID = 8
+                    },
+                     new Match
+                     {
+                         FixtureID = 3,
+                         MatchTime = TimeSpan.Parse("15:00"),
+                         Player1ID = 2,
+                         Player2ID = 4
+                     },
+                     new Match
+                     {
+                         FixtureID = 3,
+                         MatchTime = TimeSpan.Parse("16:00"),
+                         Player1ID = 1,
+                         Player2ID = 3
+                     },
+                     new Match
+                     {
+                         FixtureID = 3,
+                         MatchTime = TimeSpan.Parse("17:00"),
+                         Player1ID = 5,
+                         Player2ID = 3
+                     }
+                     );
+                    context.SaveChanges();
+                }
             }
         }
     }
