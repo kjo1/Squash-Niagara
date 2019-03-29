@@ -24,7 +24,7 @@
     {
         <p>
             <button class="btn btn-outline-success my-3 my-sm-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="btnSearch">
-                Excel
+                Excel Upload
             </button>
         </p>
         <div class="collapse" id="collapseExample">
@@ -40,8 +40,7 @@
 
             </div>
         </div>
-    }
-
+    }    
 
 
 
@@ -53,8 +52,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto" style="list-style:none;">
-                    <li class="nav-item">
-                        @Html.DropDownList("DivisionID", null, "Select Division", htmlAttributes: new { @class = "form-control", @style = "width:290px", onchange = "this.form.submit();" })
+                    <li class="nav-item">                                              
+                        @Html.DropDownList("DivisionID", null, "Select a Division", htmlAttributes: new { @class = "form-control", @style = "width:290px", onchange = "this.form.submit();" })
                     </li>
                 </ul>
 
@@ -64,6 +63,7 @@
             </div>
 
         </nav>
+        <input type="hidden" name="postBack" value="a"/>
         <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
         <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
 

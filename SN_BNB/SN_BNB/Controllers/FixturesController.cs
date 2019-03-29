@@ -218,23 +218,32 @@ namespace SN_BNB.Controllers
                     //update Team.TeamPoints
                     Team HomeTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idHomeTeam);
                     Team AwayTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idAwayTeam);
+                    if(HomeTeam.DivisionID != AwayTeam.DivisionID)
+                    {
+                        throw new DbUpdateException("Teams must be in the same division.", new Exception());
+                    }
                     HomeTeam.TeamPoints += fixture.HomeScore;
                     AwayTeam.TeamPoints += fixture.AwayScore;
                     _context.Update(HomeTeam);
                     _context.Update(AwayTeam);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(DbUpdateException dex) // figure out the key
+                {
+                    ModelState.AddModelError("idHomeTeam", dex.Message);
+                    //return BadRequest(ModelState);
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
-                }
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    ModelState.AddModelError("", ex.Message);
+                }                               
             }
-
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
             ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             return View(fixture);
+
         }
 
         // GET: Fixtures/Edit/5
@@ -281,18 +290,27 @@ namespace SN_BNB.Controllers
                     //update Team.TeamPoints
                     Team HomeTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idHomeTeam);
                     Team AwayTeam = _context.Teams.FirstOrDefault(t => t.ID == fixture.idAwayTeam);
+                    if (HomeTeam.DivisionID != AwayTeam.DivisionID)
+                    {
+                        throw new DbUpdateException("Teams must be in the same division.", new Exception());
+                    }
                     HomeTeam.TeamPoints += (fixture.HomeScore - oldFixture.HomeScore);
                     AwayTeam.TeamPoints += (fixture.AwayScore - oldFixture.AwayScore);
                     _context.Update(HomeTeam);
                     _context.Update(AwayTeam);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException dex)
+                {
+                    ModelState.AddModelError("", dex.Message);
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    ModelState.AddModelError("", "Unidentified error, contact administrator. ");
                 }
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
+                
             }
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
             ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");

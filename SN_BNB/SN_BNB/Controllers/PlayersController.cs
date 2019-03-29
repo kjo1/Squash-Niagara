@@ -21,18 +21,18 @@ namespace SN_BNB.Controllers
 
         //pls dont delete Kevin! i need this for later im watching you
 
-        //private int _divisionUserID = int.MinValue;
-        //private int DivisionUserID
-        //{
-        //    get
-        //    {
-        //        if (_divisionUserID == int.MinValue)
-        //        {
-        //            _divisionUserID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).Team.DivisionID;
-        //        }
-        //        return _divisionUserID;
-        //    }
-        //}
+        private int _divisionUserID = int.MinValue;
+        private int DivisionUserID
+        {
+            get
+            {
+                if (_divisionUserID == int.MinValue)
+                {
+                    _divisionUserID = _context.Players.Include(p => p.Team).FirstOrDefault(p => p.Email == User.Identity.Name).Team.DivisionID;
+                }
+                return _divisionUserID;
+            }
+        }
 
 
         private int _captainTeamID = int.MinValue;
@@ -145,8 +145,13 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID, int? DivisionID)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID, int? DivisionID, string postBack)
         {
+
+            if (User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
+            {
+                DivisionID = DivisionUserID;
+            }
             PopulateFilterList();
 
             var players = from p in _context.Players
@@ -155,6 +160,8 @@ namespace SN_BNB.Controllers
                               //.Include(p => p.AssignedMatchPlayers)
                               //.ThenInclude(p => p.Match)
                           select p;
+
+         
 
 
             if (!String.IsNullOrEmpty(searchString))
@@ -171,13 +178,12 @@ namespace SN_BNB.Controllers
                 players = players.Where(t => t.Team.DivisionID == DivisionID);
             }
 
-            //pls dont delete Kevin! i need this for later im watching you
-            //if (DivisionID == null)
+            //else if (User.Identity.IsAuthenticated)
             //{
-            //    players = players.Where(t => t.Team.DivisionID == _divisionUserID);
+            //    //pls dont delete Kevin! i need this for later im watching you
+            //        players = players.Where(t => t.Team.DivisionID == DivisionUserID);
+
             //}
-
-
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {

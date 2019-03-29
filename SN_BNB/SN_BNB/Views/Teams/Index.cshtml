@@ -8,19 +8,13 @@
 
 <div class="container bg-light">
 
-
     <h3 class="pt-3">Teams</h3>
-
 
     @if (User.IsInRole("Admin"))
     {<p id="createNew">
             <a style="color:purple;" asp-action="Create">Create New</a>
         </p>
     }
-
-
-
-
 
 
     <form asp-action="Index">

@@ -77,8 +77,8 @@ namespace SN_BNB.Models
                 default:
                     results.Add(new ValidationResult("Invalid entry for Bonus Point"));
                     break;
-            }
-            return results;
+            }            
+            return results;            
         }
     }
 }
