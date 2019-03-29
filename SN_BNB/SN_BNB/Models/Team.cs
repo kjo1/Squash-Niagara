@@ -22,27 +22,6 @@ namespace SN_BNB.Models
         [Display(Name = "Point(s)")]
         [Range(1, int.MaxValue, ErrorMessage = "Point(s) Cannot be negative.")]
         public int TeamPoints { get; set; }
-        //{
-        //    get
-        //    {
-        //        int matchPoints = 0;
-
-        //        if (HomeFixtures != null)
-        //        {
-        //            foreach (Fixture f in HomeFixtures)
-        //                matchPoints += f.Matches.Count(m => m.Player1Score > m.Player2Score);
-        //        }
-        //        if (AwayFixtures != null)
-        //        {
-        //            foreach (Fixture f in AwayFixtures)
-        //                matchPoints += f.Matches.Count(m => m.Player1Score < m.Player2Score);
-        //        }
-        //        matchPoints += TeamWins;
-
-        //        return matchPoints;
-        //    }
-        //    set { }
-        //}
 
         [DataType(DataType.Date)]
         [Display(Name = "Team Created")]
@@ -95,6 +74,9 @@ namespace SN_BNB.Models
 
         [Display(Name = "Seasons")]
         public ICollection<Season_has_Team> Season_has_Teams { get; set; }
+
+
+        public string ProfilePicture { get; set; }      //will be stored as base64 data
 
         public int TeamPlayed
         {

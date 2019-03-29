@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190329222808_initial")]
+    [Migration("20190329224231_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -247,6 +247,8 @@ namespace SN_BNB.Data.SNMigrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DivisionID");
+
+                    b.Property<string>("ProfilePicture");
 
                     b.Property<string>("TeamBio");
 

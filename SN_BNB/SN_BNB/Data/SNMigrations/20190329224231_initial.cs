@@ -99,7 +99,8 @@ namespace SN_BNB.Data.SNMigrations
                     TeamPoints = table.Column<int>(nullable: false),
                     TeamCreatedOn = table.Column<DateTime>(nullable: true),
                     TeamBio = table.Column<string>(nullable: true),
-                    DivisionID = table.Column<int>(nullable: false)
+                    DivisionID = table.Column<int>(nullable: false),
+                    ProfilePicture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

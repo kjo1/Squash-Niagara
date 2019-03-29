@@ -246,6 +246,8 @@ namespace SN_BNB.Data.SNMigrations
 
                     b.Property<int>("DivisionID");
 
+                    b.Property<string>("ProfilePicture");
+
                     b.Property<string>("TeamBio");
 
                     b.Property<DateTime?>("TeamCreatedOn");
