@@ -258,7 +258,10 @@ namespace SN_BNB.Controllers
                 .Include(f => f.Season)
                 .Include(f => f.HomeTeam)
                 .Include(f => f.AwayTeam)
+                .Include( f => f.Matches)
+                    .ThenInclude(f=> f.Player1)
                 .FirstOrDefaultAsync(f => f.ID == id);
+            
             if (fixture == null)
             {
                 return NotFound();
@@ -315,6 +318,7 @@ namespace SN_BNB.Controllers
             ViewData["Season_idSeason"] = new SelectList(_context.Seasons, "ID", "Season_Title", fixture.Season_idSeason);
             ViewData["idHomeTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
             ViewData["idAwayTeam"] = new SelectList(_context.Teams, "ID", "TeamName");
+            //ViewBag.Matches = _context.Matches.Where(m => m.FixtureID == fixture.ID);
             return View(fixture);
         }
 

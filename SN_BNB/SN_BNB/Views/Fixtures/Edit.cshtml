@@ -42,6 +42,13 @@
                 <input asp-for="AwayScore" class="form-control" id="awayScore"/>
                 <span asp-validation-for="AwayScore" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                @foreach(Match match in ViewBag.Matches)
+                {
+                    @match.Player1.FullName <span>vs</span> 
+
+                }*@
+            </div>
             <div class="form-group" style="vertical-align:middle">
                 <div>
                     <div class="sliderInput">
