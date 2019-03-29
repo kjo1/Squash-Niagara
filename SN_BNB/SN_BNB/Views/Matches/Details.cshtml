@@ -11,10 +11,36 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Fixture)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fixture.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MatchTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MatchTime)
+        </dd>
+
+        <dt>
+            Home Player
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player1.FullName)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Player1Score)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Player1Score)
+        </dd>
+
+        <dt>
+            Away Player
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player2.FullName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Player2Score)
@@ -27,30 +53,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.MatchPosition)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MatchTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MatchTime)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Fixture)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fixture.ID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Player1)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Player1.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Player2)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Player2.Email)
         </dd>
     </dl>
 </div>

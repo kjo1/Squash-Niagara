@@ -36,16 +36,20 @@ namespace SN_BNB.Models
 
         public Fixture Fixture { get; set; }
 
-        
+        [Display(Name = "Home Player")]
+        [Required(ErrorMessage = "Please select a Home Player")]
+        [Range(1, int.MaxValue)]
         public int Player1ID { get; set; }
 
-        [Display(Name = "Home Player")]
+        
         public virtual Player Player1 { get; set; }
 
-        
+        [Display(Name = "Away Player")]
+        [Required(ErrorMessage = "Please select an Away Player")]
+        [Range(1, int.MaxValue)]
         public int Player2ID { get; set; }
 
-        [Display(Name = "Away Player")]
+
         public virtual Player Player2 { get; set; }
 
     }

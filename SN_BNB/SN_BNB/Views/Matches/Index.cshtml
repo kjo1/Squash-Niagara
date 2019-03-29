@@ -3,70 +3,106 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/css/team.css" rel="stylesheet" />
 <br />
 <h2>Matches</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p id="createNew">
+    <a asp-action="Create" style="color:purple;">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Player1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Player1Score)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Player2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Player2Score)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MatchPosition)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MatchTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fixture)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player1.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player1Score)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player2.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player2Score)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MatchPosition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MatchTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fixture.Title)
-            </td>
+<form asp-action="Index">
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar mr-auto" style="list-style:none">
+                <li class="nav-item">
+                    <span> </span>
+                </li>
+            </ul>
+
+            @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Player/Fixture" })
+            <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </nav>
+    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+
+    <div class="table-responsive-sm">
+        <table class="table table-light table-hover table-striped">
+            <thead class="thead-light">
+
+                <tr>
+                    <th>
+                        <input id="playCol" type="submit" name="actionButton" value="Fixture" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input id="playCol" type="submit" name="actionButton" value="Time" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input id="playCol" type="submit" name="actionButton" value="Home Player" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input id="playCol" type="submit" name="actionButton" value="Score" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input id="playCol" type="submit" name="actionButton" value="Away Player" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input id="playCol" type="submit" name="actionButton" value="Score" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input id="playCol" type="submit" name="actionButton" value="Position" class="btn btn-link" />
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="aa">
+                            @Html.DisplayFor(modelItem => item.Fixture.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MatchTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Player1.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Player1Score)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Player2.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Player2Score)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MatchPosition)
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID">
+                                    <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
+                                    <span></span>
+                                </a> |
+                                <a asp-action="Details" asp-route-id="@item.ID">
+                                    <img src="~/images/detail.png" style="width:28px; height:28px" data-toggle="tooltip" title="Details" />
+                                </a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">
+                                    <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive" />
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>

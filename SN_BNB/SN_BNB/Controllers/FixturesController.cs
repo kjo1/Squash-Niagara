@@ -367,6 +367,5 @@ namespace SN_BNB.Controllers
             ViewData["idAwayTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idAwayTeam);
             ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
         }
-
     }
 }

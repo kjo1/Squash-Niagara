@@ -20,10 +20,92 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Matches
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString, int? divisionID, string sortDirection, string sortField, string actionButton)
         {
-            var sNContext = _context.Matches.Include(m => m.Fixture).Include(m => m.Player1).Include(m => m.Player2);
-            return View(await sNContext.ToListAsync());
+            PopulateDropDownLists();
+            var sNContext = _context;
+            var matches = from m in _context.Matches
+                          .Include(m => m.Fixture)
+                          .Include(m => m.Player1)
+                          .Include(m => m.Player2)
+                          select m;
+
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                matches = matches.Where(m => m.Player1.FirstName.ToUpper().Contains(SearchString.ToUpper())
+                                        || m.Player1.LastName.ToUpper().Contains(SearchString.ToUpper())
+                                        || m.Player2.FirstName.ToUpper().Contains(SearchString.ToUpper())
+                                        || m.Player2.LastName.ToUpper().Contains(SearchString.ToUpper())
+                                        || m.Fixture.HomeTeam.TeamName.ToUpper().Contains(SearchString.ToUpper())
+                                        || m.Fixture.AwayTeam.TeamName.ToUpper().Contains(SearchString.ToUpper()));
+            }
+            if (!String.IsNullOrEmpty(actionButton))
+            {
+                if (actionButton != "Filter")
+                {
+                    if (actionButton == sortField)
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;
+                }
+            }
+            if (sortField == "Away Players")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches
+                        .OrderBy(m => m.Player2);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.Player2);
+                }
+            }
+            else if (sortField == "Position")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches
+                        .OrderBy(m => m.MatchPosition);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.MatchPosition);
+                }
+            }
+            else if (sortField == "Time")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches
+                        .OrderBy(m => m.MatchTime);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.MatchTime);
+                }
+            }
+            else //Sorting by Points - the default sort order
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    matches = matches.OrderBy(m => m.Player1);
+                }
+                else
+                {
+                    matches = matches
+                        .OrderByDescending(m => m.Player1);
+                }
+            }
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
+            return View(await matches.ToListAsync());
         }
 
         // GET: Matches/Details/5
@@ -50,9 +132,7 @@ namespace SN_BNB.Controllers
         // GET: Matches/Create
         public IActionResult Create()
         {
-            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID");
-            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email");
-            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email");
+            PopulateDropDownLists();
             return View();
         }
 
@@ -88,9 +168,8 @@ namespace SN_BNB.Controllers
             {
                 return NotFound();
             }
-            ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
-            ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
-            ViewData["Player2ID"] = new SelectList(_context.Players, "ID", "Email", match.Player2ID);
+
+            PopulateDropDownLists(match);
             return View(match);
         }
 
@@ -167,6 +246,24 @@ namespace SN_BNB.Controllers
         private bool MatchExists(int id)
         {
             return _context.Matches.Any(e => e.ID == id);
+        }
+        private void PopulateDropDownLists(Match match = null)
+        {
+            var aQuery = from m in _context.Fixtures
+                         orderby m.FixtureDateTime
+                         select m;
+            ViewData["FixtureID"] = new SelectList(aQuery, "ID", "Title", match?.FixtureID);
+
+            var bQuery = from m in _context.Players
+                         orderby m.FullName
+                         select m;
+            ViewData["Player1ID"] = new SelectList(bQuery, "ID", "FullName", match?.Player1ID);
+            ViewData["Player2ID"] = new SelectList(bQuery, "ID", "FullName", match?.Player2ID);
+
+            //var dQuery = from f in _context.Divisions
+            //             orderby f.DivisionName
+            //             select f;
+            //ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
         }
     }
 }
