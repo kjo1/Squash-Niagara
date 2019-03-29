@@ -15,7 +15,14 @@
     <div class="container">
         <div class="media ProfilePic">
             <div class="media-left">
-                <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle"><br />
+                @if (Model.ProfilePicture == null)
+                {
+                    <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle"><br />
+                }
+                else
+                {
+                    <img src=@Model.ProfilePicture><br />
+                }
             </div>
             <div class="media-body">
                 <h3 class="media-heading">@Html.DisplayFor(model => model.TeamName)</h3>
@@ -114,6 +121,7 @@
                 @if (ViewBag.CaptainTeamID == -1 || Model.ID == ViewBag.CaptainTeamID)
                 {
                     <a asp-action="Edit" asp-route-id="@Model.ID"> Edit</a>
+                    <button>Upload Team Picture</button>
                 }
             }
             <a asp-action="Index">Back to List</a>

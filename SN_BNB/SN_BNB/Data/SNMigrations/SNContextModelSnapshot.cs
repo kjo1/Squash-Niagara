@@ -104,6 +104,10 @@ namespace SN_BNB.Data.SNMigrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("ConfirmedByAway");
+
+                    b.Property<bool>("ConfirmedByHome");
+
                     b.Property<int>("FixtureID");
 
                     b.Property<int>("MatchPosition");
@@ -241,6 +245,8 @@ namespace SN_BNB.Data.SNMigrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DivisionID");
+
+                    b.Property<string>("ProfilePicture");
 
                     b.Property<string>("TeamBio");
 

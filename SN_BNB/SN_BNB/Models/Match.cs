@@ -8,6 +8,12 @@ namespace SN_BNB.Models
 {
     public class Match
     {
+        public Match()
+        {
+            /* Set confirmation flags to default to false */
+            ConfirmedByHome = false;
+            ConfirmedByAway = false;
+        }
         public int ID { get; set; }
 
         [Display(Name ="Score")]
@@ -52,5 +58,10 @@ namespace SN_BNB.Models
 
         public virtual Player Player2 { get; set; }
 
+        [Display(Name = "Confirmed by Home Team")]
+        public bool ConfirmedByHome { get; set; }
+
+        [Display(Name = "Confirmed by Away Team")]
+        public bool ConfirmedByAway { get; set; }
     }
 }
