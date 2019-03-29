@@ -541,7 +541,15 @@ namespace SN_BNB.Controllers
                           orderby d.DivisionName
                           select d;
 
-            ViewData["DivisionID"] = new SelectList(dQueryD, "ID", "DivisionName");
+            if(User.Identity.IsAuthenticated)
+            {
+                ViewData["DivisionID"] = new SelectList(dQueryD, "ID", "DivisionName", DivisionUserID);
+            }
+            else
+            {
+                ViewData["DivisionID"] = new SelectList(dQueryD, "ID", "DivisionName");
+            }
+            
 
             ViewData["TeamID"] = new SelectList(dQuery, "ID", "TeamName");
         }
