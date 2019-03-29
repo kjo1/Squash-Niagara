@@ -10,7 +10,7 @@
     }
 
 #mainNav:hover {
-    background-color: rgba(94, 84, 160, 0.80);
+    background-color: #efefef;
     transition: 0.5s;
     box-shadow: 0px 0px 4px 0px #000000;
 }
