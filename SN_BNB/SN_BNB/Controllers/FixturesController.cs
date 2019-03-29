@@ -14,6 +14,19 @@ namespace SN_BNB.Controllers
     {
         private readonly SNContext _context;
 
+        private int _divisionUserID = int.MinValue;
+        private int DivisionUserID
+        {
+            get
+            {
+                if (_divisionUserID == int.MinValue)
+                {
+                    _divisionUserID = _context.Players.Include(p => p.Team).FirstOrDefault(p => p.Email == User.Identity.Name).Team.DivisionID;
+                }
+                return _divisionUserID;
+            }
+        }
+
         private int _TeamID = int.MinValue;
         private int TeamID
         {
@@ -36,8 +49,13 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Fixtures
-        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton, bool RadioChecked, int? DivisionID )
+        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton, bool RadioChecked, int? DivisionID, string postBack )
         {
+            if (User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
+            {
+                DivisionID = DivisionUserID;
+            }
+
             PopulateDropDownLists();
             var sNContext = _context;
             var fixtures = from f in _context.Fixtures
@@ -387,7 +405,16 @@ namespace SN_BNB.Controllers
                          select f;
             ViewData["idHomeTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idHomeTeam);
             ViewData["idAwayTeam"] = new SelectList(tQuery, "ID", "TeamName", fixture?.idAwayTeam);
-            ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
+
+            if (User.Identity.IsAuthenticated)
+            {
+               ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName", DivisionUserID);
+            }
+            else
+            {
+               ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
+            }
+           
         }
     }
 }
