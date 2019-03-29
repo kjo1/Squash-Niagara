@@ -7,19 +7,19 @@
 <link href="~/css/team.css" rel="stylesheet" />
 
 <div class="container bg-light">
-    <div class="row pt-3">
-        <div class="col-2">
-            <h3>Teams</h3>
-        </div>
-        <div class="col">
-            @if (User.IsInRole("Admin"))
-            {<p id="createNew">
-                    <a style="color:purple;" asp-action="Create">Create New</a>
-                </p>
-            }
-        </div>
 
-    </div>
+
+    <h3 class="pt-3">Teams</h3>
+
+
+    @if (User.IsInRole("Admin"))
+    {<p id="createNew">
+            <a style="color:purple;" asp-action="Create">Create New</a>
+        </p>
+    }
+
+
+
 
 
 
@@ -38,7 +38,7 @@
                 </ul>
 
                 @Html.DropDownList("DivisionID", null, "Select a Division", htmlAttributes: new { @class = "form-control", @style = "width:250px; margin-right:10px", onchange = "this.form.submit();" })
-                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team"   })
+                @Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Team" })
                 <button id="btnSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </div>
         </nav>

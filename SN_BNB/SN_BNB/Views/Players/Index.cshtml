@@ -7,42 +7,42 @@
 <link href="~/css/team.css" rel="stylesheet" />
 
 <div class="container bg-light">
-    <div class="row pt-3">
-        <div class="col-2">
-            <h3>Players</h3>
-        </div>
-        <div class="col-2">
-            @if (User.IsInRole("Admin"))
-            {
-                <p id="createNew">
-                    <a style="color:purple;" asp-action="Create">Create New</a>
-                </p>
-            }
-        </div>
-        <div class="col-8">
-            @if (User.IsInRole("Admin"))
-            {
-                <p>
-                    <button class="btn btn-outline-success my-3 my-sm-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="btnSearch">
-                        Excel
-                    </button>
-                </p>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
 
-                        <form asp-action="ExcelUpload" style="text-align:center;" method="post" enctype="multipart/form-data" class="form-inline">
-                            <div class="form-group">
-                                <label class="control-label">Excel File:</label>
-                                <input type="file" class="btn" name="file" />
-                                <input type="submit" value="Upload Data" class="btn btn-primary" />
-                            </div>
-                        </form>
 
+    <h3 class="pt-3">Players</h3>
+
+
+    @if (User.IsInRole("Admin"))
+    {
+        <p id="createNew">
+            <a style="color:purple;" asp-action="Create">Create New</a>
+        </p>
+    }
+
+
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            <button class="btn btn-outline-success my-3 my-sm-0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="btnSearch">
+                Excel
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+
+                <form asp-action="ExcelUpload" style="text-align:center;" method="post" enctype="multipart/form-data" class="form-inline">
+                    <div class="form-group">
+                        <label class="control-label">Excel File:</label>
+                        <input type="file" class="btn" name="file" />
+                        <input type="submit" value="Upload Data" class="btn btn-primary" />
                     </div>
-                </div>
-            }
+                </form>
+
+            </div>
         </div>
-    </div>
+    }
+
+
 
 
     <form asp-action="Index">
