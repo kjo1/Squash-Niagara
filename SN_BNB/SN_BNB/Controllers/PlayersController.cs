@@ -18,12 +18,29 @@ namespace SN_BNB.Controllers
     {
         private readonly SNContext _context;
         public static List<Player> newPlayerList;    //contains all the new players added so they can be shown to the user
+
+        //pls dont delete Kevin! i need this for later im watching you
+
+        //private int _divisionUserID = int.MinValue;
+        //private int DivisionUserID
+        //{
+        //    get
+        //    {
+        //        if (_divisionUserID == int.MinValue)
+        //        {
+        //            _divisionUserID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).Team.DivisionID;
+        //        }
+        //        return _divisionUserID;
+        //    }
+        //}
+
+
         private int _captainTeamID = int.MinValue;
         private int CaptainTeamID
         {
             get
             {
-                if(_captainTeamID == int.MinValue)
+                if (_captainTeamID == int.MinValue)
                 {
                     if (User.IsInRole("Captain"))
                         _captainTeamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
@@ -36,7 +53,7 @@ namespace SN_BNB.Controllers
 
         public PlayersController(SNContext context)
         {
-            _context = context;           
+            _context = context;
         }
 
         public struct PlayerStruct
@@ -134,9 +151,9 @@ namespace SN_BNB.Controllers
 
             var players = from p in _context.Players
                             .Include(p => p.Team)
-                            //.ThenInclude( t => t.DivisionID)
-                            //.Include(p => p.AssignedMatchPlayers)
-                            //.ThenInclude(p => p.Match)
+                              //.ThenInclude( t => t.DivisionID)
+                              //.Include(p => p.AssignedMatchPlayers)
+                              //.ThenInclude(p => p.Match)
                           select p;
 
 
@@ -153,6 +170,14 @@ namespace SN_BNB.Controllers
             {
                 players = players.Where(t => t.Team.DivisionID == DivisionID);
             }
+
+            //pls dont delete Kevin! i need this for later im watching you
+            //if (DivisionID == null)
+            //{
+            //    players = players.Where(t => t.Team.DivisionID == _divisionUserID);
+            //}
+
+
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
@@ -355,7 +380,7 @@ namespace SN_BNB.Controllers
 
 
         // GET: Players/Create
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             PopulateDropDownLists();
@@ -380,9 +405,9 @@ namespace SN_BNB.Controllers
             return View(player);
         }
 
-        
+
         // GET: Players/Edit/5
-        [Authorize(Roles ="Admin, Captain")]
+        [Authorize(Roles = "Admin, Captain")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -391,7 +416,7 @@ namespace SN_BNB.Controllers
             }
 
             var player = await _context.Players.FindAsync(id);
-            if(User.IsInRole("Captain") && player.TeamID != CaptainTeamID)
+            if (User.IsInRole("Captain") && player.TeamID != CaptainTeamID)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -441,7 +466,7 @@ namespace SN_BNB.Controllers
             return View(player);
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: Players/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -482,7 +507,7 @@ namespace SN_BNB.Controllers
         {
             IOrderedQueryable<Team> dQuery;
             if (User.IsInRole("Captain"))
-            {                
+            {
                 dQuery = from t in _context.Teams.Where(t => t.ID == CaptainTeamID)
                          orderby t.TeamName
                          select t;
