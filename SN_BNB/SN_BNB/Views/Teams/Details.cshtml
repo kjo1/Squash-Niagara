@@ -6,12 +6,14 @@
 
 <br /><br /><br />
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="~/css/TeamProfileMobile.css" rel="stylesheet" />
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!------ Include the above in your HEAD tag ---------->
 <body>
     <div class="container">
-        <div class="media">
+        <div class="media ProfilePic">
             <div class="media-left">
                 <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle"><br />
             </div>
@@ -70,14 +72,14 @@
                 <h4>Players</h4>
                 <hr />
                 <table class="table table-bordered table-hover">
-                    
-                        @foreach (Player player in ViewBag.Players)
-                        {
-                    <tr>
-                        <td><a href="/Players/Details/@player.ID">@player.FullName</a></td>
-                    </tr>
-                        }
-                    
+
+                    @foreach (Player player in ViewBag.Players)
+                    {
+                        <tr>
+                            <td><a href="/Players/Details/@player.ID">@player.FullName</a></td>
+                        </tr>
+                    }
+
                 </table>
 
             </div>
@@ -91,8 +93,10 @@
                         {
                             <tr>
                                 <td>
-                                    <span id="dateTime">@f.Date</span></td>
-                                   <td> <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
+                                    <span id="dateTime">@f.Date</span>
+                                </td>
+                                <td>
+                                    <span id="homeTeam">@(f.HomeTeamName ?? Model.TeamName)</span>
                                     <span style="font-weight:600; font-size:16px">vs</span>
                                     <span id="awayTeam">@(f.AwayTeamName ?? Model.TeamName)</span>
                                 </td>
