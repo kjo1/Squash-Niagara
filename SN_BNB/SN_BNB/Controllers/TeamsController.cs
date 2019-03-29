@@ -18,6 +18,20 @@ namespace SN_BNB.Controllers
     public class TeamsController : Controller
     {
         private readonly SNContext _context;
+
+        private int _divisionUserID = int.MinValue;
+        private int DivisionUserID
+        {
+            get
+            {
+                if (_divisionUserID == int.MinValue)
+                {
+                    _divisionUserID = _context.Players.Include(p => p.Team).FirstOrDefault(p => p.Email == User.Identity.Name).Team.DivisionID;
+                }
+                return _divisionUserID;
+            }
+        }
+
         private int _captainTeamID = int.MinValue;
         private int CaptainTeamID
         {
@@ -40,8 +54,13 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Teams
-        public async Task<IActionResult> Index(string searchString, int? divisionID, string sortDirection, string sortField, string actionButton)
+        public async Task<IActionResult> Index(string searchString, int? divisionID, string sortDirection, string sortField, string actionButton, string postBack)
         {
+            if(User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
+            {
+                divisionID = DivisionUserID;
+            }
+
             PopulateDropDownLists();
             var teams = from t in _context.Teams
                         .Include(t => t.Division)
@@ -272,7 +291,15 @@ namespace SN_BNB.Controllers
             var dQuery = from d in _context.Divisions
                          orderby d.DivisionName
                          select d;
-            ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName", DivisionUserID);
+            }
+            else
+            {
+                ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
+            }
+            
         }
 
 

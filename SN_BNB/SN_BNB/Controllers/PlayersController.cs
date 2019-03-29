@@ -178,12 +178,6 @@ namespace SN_BNB.Controllers
                 players = players.Where(t => t.Team.DivisionID == DivisionID);
             }
 
-            //else if (User.Identity.IsAuthenticated)
-            //{
-            //    //pls dont delete Kevin! i need this for later im watching you
-            //        players = players.Where(t => t.Team.DivisionID == DivisionUserID);
-
-            //}
 
             if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
             {
