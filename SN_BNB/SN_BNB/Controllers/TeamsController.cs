@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using SN_BNB.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System.Drawing;
+using System.IO;
 
 namespace SN_BNB.Controllers
 {
@@ -51,6 +54,26 @@ namespace SN_BNB.Controllers
         public TeamsController(SNContext context)
         {
             _context = context;
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadProfilePicture([Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team, IFormFile file)
+        {
+            if (file.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    string s = Convert.ToBase64String(fileBytes);
+                    team.ProfilePicture = s;
+                    _context.Update(team);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            return View(team);
         }
 
         // GET: Teams
@@ -223,10 +246,10 @@ namespace SN_BNB.Controllers
         // POST: Teams/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,TeamName,TeamPoints,TeamCreatedOn,DivisionID")] Team team, IFormFile file)
         {
             if (id != team.ID)
             {
@@ -237,6 +260,18 @@ namespace SN_BNB.Controllers
             {
                 try
                 {
+                    if (file.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            file.CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            Path.GetExtension(file.FileName);
+                            string returnString = "data:image/" + Path.GetExtension(file.FileName) + ";base64,";
+                            returnString += Convert.ToBase64String(fileBytes);
+                            team.ProfilePicture = returnString;
+                        }
+                    }
                     _context.Update(team);
                     await _context.SaveChangesAsync();
                 }

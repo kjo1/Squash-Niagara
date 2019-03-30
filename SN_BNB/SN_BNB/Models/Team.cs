@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace SN_BNB.Models
         public string TeamName { get; set; }
 
         [Display(Name = "Point(s)")]
-        [Range(1, int.MaxValue, ErrorMessage = "Point(s) Cannot be negative.")]
+        [Range(0, int.MaxValue, ErrorMessage = "Point(s) Cannot be negative.")]
         public int TeamPoints { get; set; }
 
         [DataType(DataType.Date)]
@@ -68,7 +69,11 @@ namespace SN_BNB.Models
         {
             get
             {
-                return (decimal)TeamWins / (decimal)TeamPlayed;
+                if (TeamPlayed != 0)
+                {
+                    return (decimal)TeamWins / (decimal)TeamPlayed;
+                }
+                else { return (decimal)0; }
             }
         }
 
@@ -88,6 +93,7 @@ namespace SN_BNB.Models
                     .Count ?? 0);
             }
         }
-
+        [NotMappedAttribute]
+        public Byte[] ProfilePictureFile { get; set; }
     }
 }

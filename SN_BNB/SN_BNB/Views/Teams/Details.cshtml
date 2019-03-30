@@ -121,7 +121,6 @@
                 @if (ViewBag.CaptainTeamID == -1 || Model.ID == ViewBag.CaptainTeamID)
                 {
                     <a asp-action="Edit" asp-route-id="@Model.ID"> Edit</a>
-                    <button>Upload Team Picture</button>
                 }
             }
             <a asp-action="Index">Back to List</a>
