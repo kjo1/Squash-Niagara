@@ -189,7 +189,7 @@ namespace SN_BNB.Controllers
             ViewData["sortDirection"] = sortDirection;
             ViewBag.TeamID = TeamID;
 
-			int pageSize = 8;
+			int pageSize = 10;
 			return View(await PaginatedList<Fixture>.CreateAsync(fixtures.AsNoTracking(), page ?? 1, pageSize));
 		}
 
