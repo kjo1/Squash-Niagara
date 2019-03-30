@@ -145,15 +145,16 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID, int? DivisionID, string postBack)
+        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID, int? DivisionID, string postBack, int? page)
         {
 
-            if (User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
-            {
-                DivisionID = DivisionUserID;
-            }
-            PopulateFilterList();
+			if (User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
+			{
+				page = 1;
+				DivisionID = DivisionUserID;
+			}
 
+            PopulateFilterList();
             var players = from p in _context.Players
                             .Include(p => p.Team)
                               //.ThenInclude( t => t.DivisionID)
@@ -161,14 +162,11 @@ namespace SN_BNB.Controllers
                               //.ThenInclude(p => p.Match)
                           select p;
 
-         
-
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                players = players.Where(p => p.LastName.ToUpper().Contains(searchString.ToUpper())
-                                       || p.FirstName.ToUpper().Contains(searchString.ToUpper()));
-            }
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				players = players.Where(p => p.LastName.ToUpper().Contains(searchString.ToUpper())
+									   || p.FirstName.ToUpper().Contains(searchString.ToUpper()));
+			}
             if (TeamID.HasValue)
             {
                 players = players.Where(t => t.TeamID == TeamID);
@@ -349,11 +347,11 @@ namespace SN_BNB.Controllers
             //Set sort for next time
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
-
             ViewBag.CaptainTeamID = CaptainTeamID;
 
-            return View(await players.ToListAsync());
-        }
+			int pageSize = 3;
+			return View(await PaginatedList<Player>.CreateAsync(players.AsNoTracking(), page ?? 1, pageSize));
+		}
 
         // GET: Players/Details/5
         public async Task<IActionResult> Details(int? id)

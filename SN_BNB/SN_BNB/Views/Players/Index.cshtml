@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SN_BNB.Models.Player>
+﻿@model PaginatedList<SN_BNB.Models.Player>
 
 @{
     ViewData["Title"] = "Index";
@@ -67,92 +67,111 @@
         <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
         <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
 
-        <div class="table-responsive-sm">
-            <table class="table table-light table-hover table-striped">
-                <thead class="thead-light">
-                    <tr>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Player" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Team" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Played" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Won" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Lost" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="For" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Against" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <span data-toggle="tooltip" title="6= 3:0//  5 = 3:1//  4 = 3:2//  3 = 2:3//  2 = 1:3//  1 = 0:3">
-                                <input id="playCol" type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
-                            </span>
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr style="width:auto;">
-                            @*<th></th>*@
-                            <td id="aa">
-                                <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
-                            </td>
-                            <td>
-                                <a href="/Teams/Details/@item.TeamID">
-                                    @Html.DisplayFor(modelItem => item.Team.TeamName)
-                                </a>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Played)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Win)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Loss)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.For)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Against)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Points)
-                            </td>
-                            <td style="width:120px">
-                                @if (User.IsInRole("Admin") || User.IsInRole("Captain"))
-                                {
-                                    @*Make sure is a captain or admin*@
-                                    @if (ViewBag.CaptainTeamID == -1 || item.TeamID == ViewBag.CaptainTeamID)
-                                    {
-                                        <a asp-action="Edit" asp-route-id="@item.ID">
-                                            <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
-                                        </a> <span>|</span>
-                                    }
-                                }
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <a asp-action="Delete" asp-route-id="@item.ID">
-                                        <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive" />
-                                    </a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+		<div class="table-responsive-sm">
+			<table class="table table-light table-hover table-striped">
+				<thead class="thead-light">
+					<tr>
+						<th>
+							<input id="playCol" type="submit" name="actionButton" value="Player" class="btn btn-link" />
+						</th>
+						<th>
+							<input id="playCol" type="submit" name="actionButton" value="Team" class="btn btn-link" />
+						</th>
+						<th>
+							<input id="playCol" type="submit" name="actionButton" value="Played" class="btn btn-link" />
+						</th>
+						<th>
+							<input id="playCol" type="submit" name="actionButton" value="Won" class="btn btn-link" />
+						</th>
+						<th>
+							<input id="playCol" type="submit" name="actionButton" value="Lost" class="btn btn-link" />
+						</th>
+						<th>
+							<input id="playCol" type="submit" name="actionButton" value="For" class="btn btn-link" />
+						</th>
+						<th>
+							<input id="playCol" type="submit" name="actionButton" value="Against" class="btn btn-link" />
+						</th>
+						<th>
+							<span data-toggle="tooltip" title="6= 3:0//  5 = 3:1//  4 = 3:2//  3 = 2:3//  2 = 1:3//  1 = 0:3">
+								<input id="playCol" type="submit" name="actionButton" value="Point(s)" class="btn btn-link" />
+							</span>
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr style="width:auto;">
+							@*<th></th>*@
+							<td id="aa">
+								<a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.FullName)</a>
+							</td>
+							<td>
+								<a href="/Teams/Details/@item.TeamID">
+									@Html.DisplayFor(modelItem => item.Team.TeamName)
+								</a>
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Played)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Win)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Loss)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.For)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Against)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Points)
+							</td>
+							<td style="width:120px">
+								@if (User.IsInRole("Admin") || User.IsInRole("Captain"))
+								{
+									@*Make sure is a captain or admin*@
+									@if (ViewBag.CaptainTeamID == -1 || item.TeamID == ViewBag.CaptainTeamID)
+									{
+										<a asp-action="Edit" asp-route-id="@item.ID">
+											<img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
+										</a> <span>|</span>
+									}
+								}
+								@if (User.IsInRole("Admin"))
+								{
+									<a asp-action="Delete" asp-route-id="@item.ID">
+										<img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive" />
+									</a>
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			@{
+				var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+				var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+			}
+
+			<a asp-action="Index"
+			   asp-route-sortOrder="@ViewData["CurrentSort"]"
+			   asp-route-page="@(Model.PageIndex - 1)"
+			   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+			   class="btn btn-default @prevDisabled">
+				Previous
+			</a>
+			<a asp-action="Index"
+			   asp-route-sortOrder="@ViewData["CurrentSort"]"
+			   asp-route-page="@(Model.PageIndex + 1)"
+			   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+			   class="btn btn-default @nextDisabled">
+				Next
+			</a>
+		</div>
     </form>
 </div>
