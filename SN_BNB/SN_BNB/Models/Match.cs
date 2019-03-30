@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace SN_BNB.Models
             /* Set confirmation flags to default to false */
             ConfirmedByHome = false;
             ConfirmedByAway = false;
+
+            FlaggedForInconsistencies = null;
         }
         public int ID { get; set; }
 
@@ -63,5 +66,9 @@ namespace SN_BNB.Models
 
         [Display(Name = "Confirmed by Away Team")]
         public bool ConfirmedByAway { get; set; }
+
+
+        [NotMappedAttribute]
+        public bool? FlaggedForInconsistencies { get; set; }
     }
 }
