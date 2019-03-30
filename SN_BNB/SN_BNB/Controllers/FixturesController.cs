@@ -48,8 +48,8 @@ namespace SN_BNB.Controllers
             _context = context;
         }
 
-        // GET: Fixtures
-        public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton, bool RadioChecked, int? DivisionID, string postBack )
+		// GET: Fixtures
+		public async Task<IActionResult> Index(string searchString, string sortDirection, string sortField, string actionButton, bool RadioChecked, int? DivisionID, string postBack, int? page)
         {
             if (User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
             {
@@ -189,8 +189,9 @@ namespace SN_BNB.Controllers
             ViewData["sortDirection"] = sortDirection;
             ViewBag.TeamID = TeamID;
 
-            return View(await fixtures.ToListAsync());
-        }
+			int pageSize = 8;
+			return View(await PaginatedList<Fixture>.CreateAsync(fixtures.AsNoTracking(), page ?? 1, pageSize));
+		}
 
         // GET: Fixtures/Details/5
         public async Task<IActionResult> Details(int? id)

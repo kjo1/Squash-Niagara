@@ -139,7 +139,7 @@ namespace SN_BNB.Controllers
 			ViewData["sortDirection"] = sortDirection;
 			ViewBag.CaptainTeamID = CaptainTeamID;
 
-			int pageSize = 3;
+			int pageSize = 8;
             return View(await PaginatedList<Team>.CreateAsync(teams.AsNoTracking(), page ?? 1, pageSize));
         }
 
