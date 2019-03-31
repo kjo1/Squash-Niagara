@@ -124,8 +124,6 @@ namespace SN_BNB.Controllers
                 {
                     Fixture tempFixture = new Fixture();
                     tempFixture.FixtureDateTime = fixtureStruct.FixtureDate;
-                    tempFixture.HomeScore = 0;
-                    tempFixture.AwayScore = 0;
                     tempFixture.idHomeTeam = _context.Teams.Find(fixtureStruct.HomeTeam.ID).ID;
                     tempFixture.idAwayTeam = _context.Teams.Find(fixtureStruct.AwayTeam.ID).ID;
                     tempFixture.Season_idSeason = _context.Seasons.Find(season.ID).ID;
