@@ -42,6 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\Identity\Pages\_Layout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Players\EditExcel.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
