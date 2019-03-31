@@ -25,23 +25,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Season_Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SeasonStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SeasonEnd)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            @foreach (var fixture in item.Fixtures)
+            {
+                @foreach (var match in fixture.Matches)
+                {
+                    <tr style="@(match.FlaggedForInconsistencies==true ? "background-color:  yellow" : string.Empty)">
+                        <td>
+                            @Html.DisplayFor(modelItem => match.MatchPosition)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => match.Player1.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => match.Player2.FullName)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
     </tbody>
 </table>
