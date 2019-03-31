@@ -51,6 +51,7 @@ namespace SN_BNB.Models
                     (AwayFixtures?
                     .Count(f => f.AwayScore < f.HomeScore) ?? 0);
             }
+
         }
 
         [Display(Name = "Bio")]

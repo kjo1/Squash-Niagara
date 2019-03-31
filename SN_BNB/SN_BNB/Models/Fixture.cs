@@ -17,23 +17,36 @@ namespace SN_BNB.Models
         //[Required]
         public string Title { get; set; }
 
-        [Display(Name ="Date/Time")]
+        [Display(Name = "Date/Time")]
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FixtureDateTime { get; set; }
 
         [Display(Name = "Home Team Score")]
-        [Range(0, 5, ErrorMessage = "Please put point(s) between 0 and 5")]
-        public int HomeScore { get; set; }
 
-       
+        public int HomeScore
+        {
+            get
+            {
+                return (Matches?.Count(m => m.Player1Score > m.Player2Score) ?? 0);
+            }
+            set { }
+        }
+
+
         [Display(Name = "Away Team Score")]
-        [Range(0, 5, ErrorMessage = "Please put point(s) between 0 and 5")]
-        public int AwayScore { get; set; }
+        public int AwayScore
+        {
+            get
+            {
+                return Matches?.Count(m => m.Player2Score > m.Player1Score) ?? 0;
+            }
+            set { }
+        }
 
 
-        [Display(Name="Home Team")]
+        [Display(Name = "Home Team")]
         [Required(ErrorMessage = "Please select a Home Team")]
         [Range(1, int.MaxValue)]
         public int idHomeTeam { get; set; }
@@ -58,7 +71,7 @@ namespace SN_BNB.Models
         public virtual Team HomeTeam { get; set; }
         public virtual Team AwayTeam { get; set; }
 
-        public  ICollection<Match> Matches { get; set; }
+        public ICollection<Match> Matches { get; set; }
 
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -77,8 +90,8 @@ namespace SN_BNB.Models
                 default:
                     results.Add(new ValidationResult("Invalid entry for Bonus Point"));
                     break;
-            }            
-            return results;            
+            }
+            return results;
         }
     }
 }
