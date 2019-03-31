@@ -58,17 +58,33 @@
                                 @match.Player1Score
                             </td>
                             <td>
-                                <a class="btn-link" href="/Matches/Edit/@match.ID">
-                                    @match.Player1.LastName
 
-                                    @match.Player1.FirstName
+                                @if (ViewBag.CaptainTeamID == -1 || match.Fixture.HomeTeam.ID == ViewBag.CaptainTeamID || match.Fixture.AwayTeam.ID == ViewBag.CaptainTeamID)
+                                {
+                                    <a class="btn-link" href="/Matches/Edit/@match.ID">
+                                        @match.Player1.LastName
+                                        @match.Player1.FirstName
 
-                                    <span>vs</span>
+                                        <span>vs</span>
 
-                                    @match.Player2.LastName
+                                        @match.Player2.LastName
 
-                                    @match.Player2.FirstName
-                                </a>
+                                        @match.Player2.FirstName
+                                    </a>
+                                }
+                                else
+                                {
+                                    <p>
+                                        @match.Player1.LastName
+                                        @match.Player1.FirstName
+
+                                        <span>vs</span>
+
+                                        @match.Player2.LastName
+
+                                        @match.Player2.FirstName
+                                    </p>
+                                }
                             </td>
                             <td>
                                 @match.Player2Score
@@ -104,6 +120,10 @@
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> <span>|</span>
+    }
+
     <a asp-action="Index">Back to List</a>
 </div>

@@ -28,7 +28,7 @@ namespace SN_BNB.Controllers
             }
         }
 
-        private int _TeamID = int.MinValue;
+        private int _TeamID = int.MinValue; // only team filter
         private int TeamID
         {
             get
@@ -41,6 +41,22 @@ namespace SN_BNB.Controllers
                         _TeamID = -1;
                 }
                 return _TeamID;
+            }
+        }
+
+        private int _captainTeamID = int.MinValue; // only captain team
+        private int CaptainTeamID
+        {
+            get
+            {
+                if (_captainTeamID == int.MinValue)
+                {
+                    if (User.IsInRole("Captain"))
+                        _captainTeamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
+                    else
+                        _captainTeamID = -1;
+                }
+                return _captainTeamID;
             }
         }
 
@@ -189,6 +205,7 @@ namespace SN_BNB.Controllers
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
             ViewBag.TeamID = TeamID;
+            
 
 			int pageSize = 10;
 			return View(await PaginatedList<Fixture>.CreateAsync(fixtures.AsNoTracking(), page ?? 1, pageSize));
@@ -216,7 +233,7 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
             ViewBag.match1 = _context.Matches.Where(m => m.FixtureID == fixture.ID);
-
+            ViewBag.CaptainTeamID = CaptainTeamID;
             return View(fixture);
         }
 
