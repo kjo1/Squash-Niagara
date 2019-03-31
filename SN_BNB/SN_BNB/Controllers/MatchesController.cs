@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -130,6 +131,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Matches/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             PopulateDropDownLists();
@@ -139,6 +141,7 @@ namespace SN_BNB.Controllers
         // POST: Matches/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,Player1ID,Player2ID")] Match match)
@@ -156,6 +159,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Matches/Edit/5
+        [Authorize(Roles = "Admin, Captain")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -176,6 +180,7 @@ namespace SN_BNB.Controllers
         // POST: Matches/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Captain")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Player1Score,Player2Score,MatchPosition,MatchTime,FixtureID,Player1ID,Player2ID")] Match match)
@@ -212,6 +217,7 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Matches/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -233,6 +239,7 @@ namespace SN_BNB.Controllers
         }
 
         // POST: Matches/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
