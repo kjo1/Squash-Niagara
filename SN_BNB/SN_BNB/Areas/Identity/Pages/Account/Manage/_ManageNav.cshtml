@@ -2,13 +2,27 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-<ul class="nav nav-pills nav-stacked">
-    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-page="./Index">Profile</a></li>
-    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a id="change-password" asp-page="./ChangePassword">Password</a></li>
+@*<link rel="manifest" href="~/manifest.json" />
+<link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/home.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />*@
+@*<ul class="nav nav-pills nav-stacked">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext) nav-item nav-link"><a asp-page="./Index">Profile</a></li>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext) nav-item nav-link"><a id="change-password" asp-page="./ChangePassword">Password</a></li>
     @if (hasExternalLogins)
     {
         <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a id="external-login" asp-page="./ExternalLogins">External logins</a></li>
     }
     @*<li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"><a asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Personal data</a></li>*@
+        <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Personal data</a></li>
+</ul>*@
+<ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    @*<li class="@ManageNavPages.IndexNavClass(ViewContext) nav-link active" id="v-pills-home-tab" data-toggle="pill" href="./Index" role="tab" aria-controls="v-pills-home" aria-selected="true"><a asp-page="./Index">Profile</a></li>
+        <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext) nav-link" id="v-pills-profile-tab" data-toggle="pill" href="./ChangePassword" role="tab" aria-controls="v-pills-profile" aria-selected="false"><a id="change-password" asp-page="./ChangePassword">Password</a></li>*@
+    <li style="text-decoration:none;"><a asp-page="./Index" class="@ManageNavPages.IndexNavClass(ViewContext) btn btn-light" style="width:80%; text-decoration:none">Profile</a></li>
+    <li style="text-decoration:none;"><a asp-page="./ChangePassword" class="@ManageNavPages.ChangePasswordNavClass(ViewContext) btn btn-light" btn btn-light" style="width:80%; text-decoration:none">Password</a></li>
+    @*@if (hasExternalLogins)
+        {
+            <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a id="external-login" asp-page="./ExternalLogins">External logins</a></li>
+        }*@
 </ul>

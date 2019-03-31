@@ -78,3 +78,9 @@ btn-toolbar {
     font-weight: 700;
     font-size: 18px;
 }
+.select{
+    background-color:white;
+}
+    .select ::selection {
+        background-color: #5E54A0;
+    }
