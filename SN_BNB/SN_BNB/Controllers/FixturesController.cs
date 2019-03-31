@@ -205,11 +205,16 @@ namespace SN_BNB.Controllers
                 .Include(f => f.Season)
                 .Include(f => f.AwayTeam)
                 .Include(f => f.HomeTeam)
+                .Include(f=> f.Matches)
+                    .ThenInclude(f => f.Player1)
+                .Include(f => f.Matches)
+                    .ThenInclude(f => f.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (fixture == null)
             {
                 return NotFound();
             }
+            ViewBag.match1 = _context.Matches.Where(m => m.FixtureID == fixture.ID);
 
             return View(fixture);
         }

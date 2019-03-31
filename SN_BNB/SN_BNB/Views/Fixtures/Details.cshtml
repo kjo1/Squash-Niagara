@@ -9,57 +9,99 @@
 <div>
     <h4>Fixture</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FixtureDateTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FixtureDateTime)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HomeScore)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HomeScore)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AwayScore)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AwayScore)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.idHomeTeam)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HomeTeam.TeamName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.idAwayTeam)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AwayTeam.TeamName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BonusPoint)
-        </dt>
-        <dd>
-            @if (Model.BonusPoint == null)
-            {
-                <p>Not Yet Awarded</p>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.BonusPoint)
-            }
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Season)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Season.Season_Title)
-        </dd>
-    </dl>
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Date</th>
+                <th>Home Team</th>
+                <th>Score</th>
+                <th>Away Team</th>
+                <th>Away Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.FixtureDateTime)</td>
+                <td>@Html.DisplayFor(model => model.HomeTeam.TeamName)</td>
+                <td>@Html.DisplayFor(model => model.HomeScore)</td>
+                <td>@Html.DisplayFor(model => model.AwayTeam.TeamName)</td>
+                <td>@Html.DisplayFor(model => model.AwayScore)</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Matches</h4>
+    <hr />
+    <div class="row">
+        <div class="col-7">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th>
+                            Score
+                        </th>
+                        <th>
+                            Match
+                        </th>
+                        <th>
+                            Score
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Match match in ViewBag.match1)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @match.Player1Score
+                            </td>
+                            <td>
+                                <a class="btn-link" href="/Matches/Edit/@match.ID">
+                                    @match.Player1.LastName
+
+                                    @match.Player1.FirstName
+
+                                    <span>vs</span>
+
+                                    @match.Player2.LastName
+
+                                    @match.Player2.FirstName
+                                </a>
+                            </td>
+                            <td>
+                                @match.Player2Score
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-5">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.BonusPoint)
+                </dt>
+                <dd>
+                    @if (Model.BonusPoint == null)
+                    {
+                        <p>Not Yet Awarded</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.BonusPoint)
+                    }
+                </dd>
+                <dt>
+                    Season
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Season.Season_Title)
+                </dd>
+            </dl>
+        </div>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
