@@ -166,6 +166,8 @@ namespace SN_BNB.Controllers
                 }
                 player1.Played += 1;
                 player2.Played += 1;
+                player1.HomeMatches.Add(match);
+                player2.AwayMatches.Add(match);
                 _context.Update(player1);
                 _context.Update(player2);
                 _context.Add(match);
@@ -329,6 +331,8 @@ namespace SN_BNB.Controllers
             }
             player1.Played -= 1;
             player2.Played -= 1;
+            player1.HomeMatches.Remove(match);
+            player2.AwayMatches.Remove(match);
             _context.Update(player1);
             _context.Update(player2);
 

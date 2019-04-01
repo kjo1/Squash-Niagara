@@ -107,16 +107,19 @@ namespace SN_BNB.Controllers
 
         public IActionResult Standings()
         {
-            var players = _context.Players.Include(t => t.Team);
-            var posOnePlayers = new List<Player>();
-            //foreach (Player p in players)
-            //{
-            //    if (p.MatchesByPosition(1) >= 0.5m)
-            //        posOnePlayers.Add(p);
-            //}
+            var players = _context.Players.Include(t => t.Team)
+                .ThenInclude(p=>p.Players)
+                .ThenInclude(p=>p.HomeMatches)
+                .Include(p=>p.AwayMatches);
+            var posPlayers = new List<Player>();
+            foreach (Player p in players)
+            {
+                if (p.MatchesByPosition(1) >= 0.5m)
+                    posPlayers.Add(p);
+            }
 
 
-            ViewBag.ListOfPlayers = posOnePlayers;
+            ViewBag.ListOfPlayers = posPlayers;
 
             return View();
         }

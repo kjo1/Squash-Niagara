@@ -9,6 +9,11 @@ namespace SN_BNB.Models
 {
     public class Player
     {
+        public Player()
+        {
+            this.HomeMatches = new HashSet<Match>();
+            this.AwayMatches = new HashSet<Match>();
+        }
         public int ID { get; set; }
 
         [Display(Name = "Player")]
@@ -82,25 +87,48 @@ namespace SN_BNB.Models
         public Byte[] ExcelFile { get; set; }
 
         // Number of matches played at a particular position
-        public decimal MatchesByPosition(int Position)
+        public decimal MatchesByPosition(int matchPosition)
         {
-            if (Team.TeamPlayed == 0)
+            int playedInPosition = 0;
+            if (Played == 0)
                 return 0m;
             else
-                return (decimal)((HomeMatches?.Count(m => m.Player1ID == ID && m.MatchPosition == Position) ?? 0)
-                    + (AwayMatches?.Count(m => m.Player2ID == ID && m.MatchPosition == Position) ?? 0))
-                    / (decimal)(Team.TeamPlayed);
+            {
+                if (HomeMatches != null) playedInPosition += HomeMatches.Where(m => m.Player1ID == ID && m.MatchPosition == matchPosition).Count();
+                if (AwayMatches != null) playedInPosition += AwayMatches.Where(m => m.Player2ID == ID && m.MatchPosition == matchPosition).Count();
+                return Convert.ToDecimal(playedInPosition) / Convert.ToDecimal(Played);
+            }
         }
 
-        public decimal WinPerPos(int position)
+
+        public decimal WinPerPos(int matchPosition)
         {
-            if (Team.TeamPlayed == 0)
+            int playedInPosition = 0;
+            int wonInPosition = 0;
+            List<Match> homeMatchesInPosition = HomeMatches.Where(m => m.Player1ID == ID && m.MatchPosition == matchPosition).ToList<Match>();
+            List<Match> awayMatchesInPosition = AwayMatches.Where(m => m.Player2ID == ID && m.MatchPosition == matchPosition).ToList<Match>();
+            if (Played==0)
                 return 0m;
             else
-                return (decimal)((HomeMatches?.Count(m => m.Player1ID == ID && m.MatchPosition == Position && m.Player1Score > m.Player2Score) ?? 0)
-                    + (AwayMatches?.Count(m => m.Player2ID == ID && m.MatchPosition == Position && m.Player1Score < m.Player2Score) ?? 0))
-                    / (decimal)(Team.TeamPlayed);
-
+            {
+                if (HomeMatches != null)
+                {
+                    playedInPosition += homeMatchesInPosition.Count;
+                    foreach(Match match in HomeMatches)
+                    {
+                        if (match.Player1Score > match.Player2Score) wonInPosition += 1;
+                    }
+                }
+                if (AwayMatches != null)
+                {
+                    playedInPosition += awayMatchesInPosition.Count;
+                    foreach (Match match in AwayMatches)
+                    {
+                        if (match.Player1Score < match.Player2Score) wonInPosition += 1;
+                    }
+                }
+                return (Convert.ToDecimal(wonInPosition) / Convert.ToDecimal(playedInPosition));
+            }
         }
     }
 }
