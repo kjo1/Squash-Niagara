@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<br />
 <h2>Details</h2>
 
 <div>
@@ -14,34 +14,34 @@
             <tbody>
                 @foreach (Fixture fixture in Model.Fixtures)
                 {
-                    <thead class="thead-light">
-                        <tr>
-                            <th>
-                                @fixture.HomeTeam.TeamName  vs @fixture.AwayTeam.TeamName
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <thead class="thead-light">
-                        <tr>
-                            <th>
-                                Match Position
-                            </th>
-                            <th>
-                                Home Player
-                            </th>
-                            <th>
-                                Home Score
-                            </th>
-                            <th>
-                                Away Player
-                            </th>
-                            <th>
-                                Away Score
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            @fixture.HomeTeam.TeamName  vs @fixture.AwayTeam.TeamName
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            Match Position
+                        </th>
+                        <th>
+                            Home Player
+                        </th>
+                        <th>
+                            Home Score
+                        </th>
+                        <th>
+                            Away Player
+                        </th>
+                        <th>
+                            Away Score
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
                 @foreach (Match match in fixture.Matches)
                 {
                     <tr style="@(match.FlaggedForInconsistencies==true ? "background-color:  rgba(109, 97, 190, 0.25);" : string.Empty)">
@@ -63,52 +63,12 @@
                     </tr>
                 }
             }
-                </tbody>
             </table>
-                <dl class="dl-horizontal">
-                    @foreach (Fixture fixture in Model.Fixtures)
-                    {
-                        @foreach (Match match in fixture.Matches)
-                        {
-                            <dt>
-                                @match.MatchPosition
-                            </dt>
-                            <dt>
-                                @match.Player1.FullName
-                            </dt>
-                            <dt>
-                                @match.Player1Score
-                            </dt>
-                            <dt>
-                                @match.Player2.FullName
-                            </dt>
-                            <dt>
-                                @match.Player2Score
-                            </dt>
-                        }
+        </div>
 
-                    }
-                    @*<dt>
-                            @Html.DisplayNameFor(model => model.Season_Title)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Season_Title)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.SeasonStart)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.SeasonStart)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.SeasonEnd)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.SeasonEnd)
-                        </dd>*@
-                </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" class="btn btn-light" asp-route-id="@Model.ID">Edit</a> |
-        <a asp-action="Index" class="btn btn-light">Back to List</a>
+        <div>
+            <a asp-action="Edit" class="btn btn-light" asp-route-id="@Model.ID">Edit</a> |
+            <a asp-action="Index" class="btn btn-light">Back to List</a>
+        </div>
+
     </div>

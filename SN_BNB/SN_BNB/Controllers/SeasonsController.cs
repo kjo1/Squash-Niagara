@@ -180,6 +180,14 @@ namespace SN_BNB.Controllers
             return View(await _context.Seasons.ToListAsync());
         }
 
+
+        public class PlayerMatch
+        {
+            public Player MatchPlayer;
+            public int PreviousPostion;
+            public int CurrentPosition;
+        }
+
         // GET: Seasons/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -205,8 +213,8 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            /* Make a list of PlayerMatchStructs */
-            List<PlayerMatchStruct> matchStructsList = new List<PlayerMatchStruct>();
+            /* Make a list of PlayerMatch objects */
+            List<PlayerMatch> playerMatchList = new List<PlayerMatch>();
             var seasons = await _context.Seasons.ToListAsync();
 
             /* Loop through each fixture */
@@ -215,8 +223,8 @@ namespace SN_BNB.Controllers
                 /* Loop through each match in the fixture */
                 foreach (Match match in fixture.Matches)
                 {
-                    /* For each Match, track the Players positions in the PlayerMatchStructs list */
-                    if (!match.FlaggedForInconsistencies == null)        //has been checked before, skip
+                    /* For each Match, track the Players positions in the PlayerMatch list */
+                    if (match.FlaggedForInconsistencies != null)        //has been checked before, skip
                     {
                         continue;
                     }
@@ -387,48 +395,6 @@ namespace SN_BNB.Controllers
             _context.Seasons.Remove(season);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        public struct PlayerMatchStruct
-        {
-            public Player MatchPlayer;
-            public int PreviousPostion;
-            public int CurrentPosition;
-        }
-
-        // GET: Seasons/Inconsistencies
-        public async Task<IActionResult> Inconsistencies()
-        {
-            /* Make a list of PlayerMatchStructs */
-            List<PlayerMatchStruct> matchStructsList = new List<PlayerMatchStruct>();
-            var seasons = await _context.Seasons.ToListAsync();
-
-            /* Loop through each fixture */
-            foreach (Fixture fixture in seasons.FirstOrDefault().Fixtures)
-            {
-                /* Loop through each match in the fixture */
-                foreach(Match match in fixture.Matches)
-                {
-                    /* For each Match, track the Players positions in the PlayerMatchStructs list */
-                    if (!match.FlaggedForInconsistencies == null)        //has been checked before, skip
-                    {
-                        continue;
-                    }
-
-                    /* If the difference between a previous position and it's following is greater than 1, set a flag */
-                    if (true)
-                    {
-                        match.FlaggedForInconsistencies = true;
-                    }
-                    else
-                    {
-                        match.FlaggedForInconsistencies = false;
-                    }
-                }
-            }
-            /* Alert the user to inconsistencies */
-            /* Display the page */
-            return View(seasons);
         }
 
         private bool SeasonExists(int id)
