@@ -15,7 +15,13 @@ namespace SN_BNB.Models
         public int ID { get; set; }
 
         //[Required]
-        public string Title { get; set; }
+        public string Title
+        {
+            get {
+                    return HomeTeam.TeamName + " vs " + AwayTeam.TeamName;
+                }
+        }
+
 
         [Display(Name = "Date")]
         [Required]
@@ -31,7 +37,6 @@ namespace SN_BNB.Models
             {
                 return (Matches?.Count(m => m.Player1Score > m.Player2Score) ?? 0);
             }
-            set { }
         }
 
 
@@ -42,7 +47,6 @@ namespace SN_BNB.Models
             {
                 return Matches?.Count(m => m.Player2Score > m.Player1Score) ?? 0;
             }
-            set { }
         }
 
 

@@ -429,7 +429,6 @@ namespace SN_BNB.Data
                     context.Fixtures.AddRange(
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-01"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
@@ -437,7 +436,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley1",
                          FixtureDateTime = DateTime.Parse("2019-04-05"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
@@ -445,7 +443,6 @@ namespace SN_BNB.Data
                      },
                     new Fixture
                     {
-                        Title = "Brock1 vs Ridley1",
                         FixtureDateTime = DateTime.Parse("2019-03-22"),
                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
@@ -453,7 +450,6 @@ namespace SN_BNB.Data
                     },
                     new Fixture
                     {
-                        Title = "Brock1 vs White Oaks 1",
                         FixtureDateTime = DateTime.Parse("2019-03-31"),
                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
@@ -461,7 +457,6 @@ namespace SN_BNB.Data
                     },
                      new Fixture
                      {
-                         Title = "Brock1 vs BAC1",
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
@@ -469,7 +464,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock2 vs BAC1",
                          FixtureDateTime = DateTime.Parse("2019-04-08"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
@@ -477,7 +471,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock3 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
@@ -485,7 +478,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-03-21"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
@@ -494,7 +486,6 @@ namespace SN_BNB.Data
 
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-06"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
@@ -502,7 +493,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-08"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
@@ -510,7 +500,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
@@ -518,7 +507,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-04"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
@@ -526,7 +514,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-03-18"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
@@ -534,7 +521,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-04-01"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
@@ -542,7 +528,6 @@ namespace SN_BNB.Data
                      },
                      new Fixture
                      {
-                         Title = "Brock1 vs Ridley2",
                          FixtureDateTime = DateTime.Parse("2019-03-20"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
