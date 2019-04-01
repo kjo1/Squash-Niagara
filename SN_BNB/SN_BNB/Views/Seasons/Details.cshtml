@@ -10,7 +10,17 @@
     <h4>Season</h4>
     <hr />
     <dl class="dl-horizontal">
+        @foreach(Fixture fixture in Model.Fixtures)
+        {
         <dt>
+            @fixture.FixtureDateTime
+        </dt>
+            <dd>
+                @fixture.HomeScore
+            </dd>
+
+        }
+        @*<dt>
             @Html.DisplayNameFor(model => model.Season_Title)
         </dt>
         <dd>
@@ -27,7 +37,7 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.SeasonEnd)
-        </dd>
+        </dd>*@
     </dl>
 </div>
 <div>

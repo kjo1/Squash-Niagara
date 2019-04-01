@@ -185,6 +185,8 @@ namespace SN_BNB.Controllers
             }
 
             var season = await _context.Seasons
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.Matches)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (season == null)
             {
@@ -385,7 +387,7 @@ namespace SN_BNB.Controllers
             }
             /* Alert the user to inconsistencies */
             /* Display the page */
-            return View(await _context.Seasons.ToListAsync());
+            return View(seasons);
         }
 
         private bool SeasonExists(int id)
