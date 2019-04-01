@@ -43,19 +43,13 @@ namespace SN_BNB.Data.SNMigrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AwayScore");
-
                     b.Property<string>("BonusPoint");
 
                     b.Property<DateTime>("FixtureDateTime");
 
-                    b.Property<int>("HomeScore");
-
                     b.Property<int?>("LocationID");
 
                     b.Property<int>("Season_idSeason");
-
-                    b.Property<string>("Title");
 
                     b.Property<int>("idAwayTeam");
 
