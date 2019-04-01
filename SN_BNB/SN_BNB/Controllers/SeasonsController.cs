@@ -101,13 +101,15 @@ namespace SN_BNB.Controllers
                     {
                         MatchStruct matchStruct = new MatchStruct
                         {
-                            Position = Convert.ToInt32(worksheet.Cells[row+i, 2].Text),
-                            MatchTime = TimeSpan.ParseExact(worksheet.Cells[row+i, 3].Text, "hh\\:mm", null),
+                            Position = Convert.ToInt32(worksheet.Cells[row + i, 2].Text),
+                            MatchTime = TimeSpan.ParseExact(worksheet.Cells[row + i, 3].Text, "hh\\:mm", null),
 
                             //Get Player object by executing a WHERE with TeamName
-                            Player1 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 4].Text),
+                            Player1 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row + i, 4].Text),
                             Player2 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 5].Text),
                         };
+                        matchStruct.Player1.Played += 1;
+                        matchStruct.Player2.Played += 1;
                         fixtureStruct.Matches.Add(matchStruct);
                     }
                     dataStructs.Add(fixtureStruct);
@@ -143,6 +145,8 @@ namespace SN_BNB.Controllers
                         tempMatch.MatchTime = matchStruct.MatchTime;
                         tempMatch.MatchPosition = matchStruct.Position;
                         await _context.Matches.AddAsync(tempMatch);
+                        _context.Players.Update(tempMatch.Player1);
+                        _context.Players.Update(tempMatch.Player2);
                     }
                     //update tables
                     _context.SaveChanges();

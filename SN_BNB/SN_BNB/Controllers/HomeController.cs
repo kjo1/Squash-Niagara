@@ -109,7 +109,7 @@ namespace SN_BNB.Controllers
         {
             var players = _context.Players.Include(t => t.Team)
                 .ThenInclude(p=>p.Players)
-                .ThenInclude(p=>p.HomeMatches)
+                .Include(p=>p.HomeMatches)
                 .Include(p=>p.AwayMatches);
             var posPlayers = new List<Player>();
             foreach (Player p in players)
