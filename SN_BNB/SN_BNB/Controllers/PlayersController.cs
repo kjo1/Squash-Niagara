@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using SN_BNB.Data;
 using SN_BNB.Models;
+using PagedList.Mvc;
 
 namespace SN_BNB.Controllers
 {
@@ -145,14 +146,34 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Players
-        public async Task<IActionResult> Index(string sortDirection, string sortField, string actionButton, string searchString, int? TeamID, int? DivisionID, string postBack, int? page)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string actionButton, string searchString, int? TeamID, int? DivisionID, string postBack, int? page)
         {
 
 			if (User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
 			{
-				page = 1;
 				DivisionID = DivisionUserID;
 			}
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["PlayerSortPar"] = String.IsNullOrEmpty(sortOrder) ? "player_desc" : "";
+            ViewData["TeamSortPar"] = sortOrder == "team" ? "team_desc" : "team";
+            ViewData["PlayedSortPar"] = sortOrder == "played" ? "played_desc" : "played";
+            ViewData["WonSortPar"] = sortOrder == "won" ? "won_desc" : "won";
+            ViewData["LostSortPar"] = sortOrder == "lost" ? "lost_desc" : "lost";
+            ViewData["ForSortPar"] = sortOrder == "for" ? "for_desc" : "for";
+            ViewData["AgainstSortPar"] = sortOrder == "against" ? "against_desc" : "against";
+            ViewData["PointsSortPar"] = sortOrder == "points" ? "points_desc" : "points";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
 
             PopulateFilterList();
             var players = from p in _context.Players
@@ -180,174 +201,67 @@ namespace SN_BNB.Controllers
             {
                 if (actionButton != "Filter")//Change of sort is requested
                 {
-                    if (actionButton == sortField) //Reverse order on same field
+                    if (actionButton == currentFilter) //Reverse order on same field
                     {
-                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                        sortOrder = String.IsNullOrEmpty(currentFilter) ? "desc" : "";
                     }
-                    sortField = actionButton;//Sort by the button clicked
+                    currentFilter = actionButton;//Sort by the button clicked
                 }
             }
 
-            if (sortField == "Team")//Sorting by Team
+            switch (sortOrder)
             {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                         .OrderBy(p => p.Team);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Team);
-                }
-            }
-            else if (sortField == "Player")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.FullName);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.FullName);
-                }
-            }
-            else if (sortField == "Gender")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Gender);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Gender);
-                }
-            }
-            else if (sortField == "Email")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Email);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Email);
-                }
-            }
-            else if (sortField == "Phone")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Phone);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Phone);
-                }
-            }
-            else if (sortField == "Position")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Position);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Position);
-                }
-            }
-            else if (sortField == "Played")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Played);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Played);
-                }
-            }
-            else if (sortField == "Won")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Win);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Win);
-                }
-            }
-            else if (sortField == "Lost")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Loss);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Loss);
-                }
-            }
-            else if (sortField == "For")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.For);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.For);
-                }
-            }
-            else if (sortField == "Against")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players
-                        .OrderBy(p => p.Against);
-                }
-                else
-                {
-                    players = players
-                        .OrderByDescending(p => p.Against);
-                }
-            }
-            else //Sorting by Points - the default sort order
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    players = players.OrderByDescending(p => p.Points);
-                }
-                else
-                {
+                case "player_desc":
+                    players = players.OrderByDescending(p => p.FullName);
+                    break;
+                case "team":
+                    players = players.OrderBy(p => p.Team.TeamName);
+                    break;
+                case "team_desc":
+                    players = players.OrderByDescending(p => p.Team.TeamName);
+                    break;
+                case "played":
+                    players = players.OrderBy(p => p.Played);
+                    break;
+                case "played_desc":
+                    players = players.OrderByDescending(p => p.Played);
+                    break;
+                case "won":
+                    players = players.OrderBy(p => p.Win);
+                    break;
+                case "won_desc":
+                    players = players.OrderByDescending(p => p.Win);
+                    break;
+                case "lost":
+                    players = players.OrderBy(p => p.Loss);
+                    break;
+                case "lost_desc":
+                    players = players.OrderByDescending(p => p.Loss);
+                    break;
+                case "for":
+                    players = players.OrderBy(p => p.For);
+                    break;
+                case "for_desc":
+                    players = players.OrderByDescending(p => p.For);
+                    break;
+                case "against":
+                    players = players.OrderBy(p => p.Against);
+                    break;
+                case "against_desc":
+                    players = players.OrderByDescending(p => p.Against);
+                    break;
+                case "points":
                     players = players.OrderBy(p => p.Points);
-                }
+                    break;
+                case "points_desc":
+                    players = players.OrderByDescending(p => p.Points);
+                    break;
+                default:
+                    players = players.OrderBy(p => p.FullName);
+                    break;
             }
 
-            //Set sort for next time
-            ViewData["sortField"] = sortField;
-            ViewData["sortDirection"] = sortDirection;
             ViewBag.CaptainTeamID = CaptainTeamID;
-
 			int pageSize = 10;
 			return View(await PaginatedList<Player>.CreateAsync(players.AsNoTracking(), page ?? 1, pageSize));
 		}

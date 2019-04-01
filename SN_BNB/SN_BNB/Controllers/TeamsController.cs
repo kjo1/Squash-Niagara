@@ -77,13 +77,31 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Teams
-        public async Task<IActionResult> Index(string searchString, int? divisionID, string sortDirection, string sortField, string actionButton, string postBack, int? page)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? divisionID, string actionButton, string postBack, int? page)
         {
 			if (User.Identity.IsAuthenticated && String.IsNullOrEmpty(postBack))
 			{
 				page = 1;
 				divisionID = DivisionUserID;
 			}
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["TeamSortPar"] = String.IsNullOrEmpty(sortOrder) ? "team_desc" : "";
+            ViewData["WonSortPar"] = sortOrder == "won" ? "won_desc" : "won";
+            ViewData["LostSortPar"] = sortOrder == "lost" ? "lost_desc" : "lost";
+            ViewData["PointsSortPar"] = sortOrder == "points" ? "points_desc" : "points";
+            ViewData["DivisionSortPar"] = sortOrder == "division" ? "division_desc" : "division";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
 
             PopulateDropDownLists();
             var teams = from t in _context.Teams
@@ -107,59 +125,48 @@ namespace SN_BNB.Controllers
             {
                 if (actionButton != "Filter")//Change of sort is requested
                 {
-                    if (actionButton == sortField) //Reverse order on same field
+                    if (actionButton == currentFilter) //Reverse order on same field
                     {
-                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                        sortOrder = String.IsNullOrEmpty(sortOrder) ? "desc" : "";
                     }
-                    sortField = actionButton;//Sort by the button clicked
+                    currentFilter = actionButton;//Sort by the button clicked
                 }
             }
 
-			if (sortField == "Division")
-			{
-				if (String.IsNullOrEmpty(sortDirection))
-				{
-					teams = teams
-						.OrderBy(t => t.DivisionID);
-				}
-				else
-				{
-					teams = teams
-					.OrderByDescending(t => t.DivisionID);
-				}
-			}
+            switch (sortOrder)
+            {
+                case "team_desc":
+                    teams = teams.OrderByDescending(t => t.TeamName);
+                    break;
+                case "division":
+                    teams = teams.OrderBy(t => t.Division);
+                    break;
+                case "division_desc":
+                    teams = teams.OrderByDescending(t => t.Division);
+                    break;
+                case "won":
+                    teams = teams.OrderBy(t => t.TeamWins);
+                    break;
+                case "won_desc":
+                    teams = teams.OrderByDescending(t => t.TeamWins);
+                    break;
+                case "lost":
+                    teams = teams.OrderBy(t => t.TeamLosses);
+                    break;
+                case "lost_desc":
+                    teams = teams.OrderByDescending(t => t.TeamLosses);
+                    break;
+                case "points":
+                    teams = teams.OrderBy(t => t.TeamPoints);
+                    break;
+                case "points_desc":
+                    teams = teams.OrderByDescending(t => t.TeamPoints);
+                    break;
+                default:
+                    teams = teams.OrderBy(t => t.TeamName);
+                    break;
+            }
 
-			if (sortField == "Point(s)")
-			{
-				if (String.IsNullOrEmpty(sortDirection))
-					teams = teams.OrderBy(t => t.TeamPoints);
-				else
-					teams = teams.OrderByDescending(t => t.TeamPoints);
-			}
-			else if (sortField == "Team Name")
-			{
-				if (String.IsNullOrEmpty(sortDirection))
-					teams = teams.OrderBy(t => t.TeamName);
-				else
-					teams = teams.OrderByDescending(t => t.TeamName);
-			}
-			else if (sortField == "Won")
-			{
-				if (String.IsNullOrEmpty(sortDirection))
-					teams = teams.OrderBy(t => t.TeamWins);
-				else
-					teams = teams.OrderByDescending(t => t.TeamWins);
-			}
-			else if (sortField == "Lost")
-			{
-				if (String.IsNullOrEmpty(sortDirection))
-					teams = teams.OrderBy(t => t.TeamLosses);
-				else
-					teams = teams.OrderByDescending(t => t.TeamLosses);
-			}
-
-			ViewData["sortField"] = sortField;
-			ViewData["sortDirection"] = sortDirection;
 			ViewBag.CaptainTeamID = CaptainTeamID;
 
 			int pageSize = 10;
