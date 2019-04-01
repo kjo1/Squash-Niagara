@@ -80,7 +80,7 @@
                 <hr />
                 <table class="table table-bordered table-hover">
 
-                    @foreach (Player player in ViewBag.Players)
+                    @foreach (Player player in Model.Players)
                     {
                         <tr>
                             <td><a href="/Players/Details/@player.ID">@player.FullName</a></td>
