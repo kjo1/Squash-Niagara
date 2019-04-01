@@ -85,7 +85,7 @@
                                 </td>
                                 <td>
                                     @*@item.FixtureDateTime.ToString("MM/dd/yyyy")*@
-                                    @item.FixtureDateTime.ToString("ddd"), @item.FixtureDateTime.ToString("MMMM") @item.FixtureDateTime.ToString("dd"), @item.FixtureDateTime.ToString("yyy")
+                                    @item.FixtureDateTime.ToString("ddd, MMMM dd, yyy")
                                 </td>
                                 <td>
                                     @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))

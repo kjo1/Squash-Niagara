@@ -17,10 +17,10 @@ namespace SN_BNB.Models
         //[Required]
         public string Title { get; set; }
 
-        [Display(Name = "Date/Time")]
+        [Display(Name = "Date")]
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dddd, MMMM dd, yyy}", ApplyFormatInEditMode = true)]
         public DateTime FixtureDateTime { get; set; }
 
         [Display(Name = "Home Team Score")]
