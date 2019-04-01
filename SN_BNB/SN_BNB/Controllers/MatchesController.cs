@@ -148,6 +148,23 @@ namespace SN_BNB.Controllers
         {
             if (ModelState.IsValid)
             {
+                /* Update Player objects */
+                Player player1 = _context.Players.Where(m => m.ID == match.Player1ID).FirstOrDefault();
+                Player player2 = _context.Players.Where(m => m.ID == match.Player2ID).FirstOrDefault();
+                if (match.Player1Score > match.Player2Score)
+                {
+                    player1.Win += 1;
+                    player2.Loss += 1;
+                }
+                else if(match.Player1Score < match.Player2Score)
+                {
+                    player1.Loss += 1;
+                    player2.Win += 1;
+                }
+                player1.Played += 1;
+                player2.Played += 1;
+                _context.Update(player1);
+                _context.Update(player2);
                 _context.Add(match);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -194,6 +211,53 @@ namespace SN_BNB.Controllers
             {
                 try
                 {
+                    /* Update Player objects */
+                    Match oldMatch = _context.Matches.AsNoTracking().Where(m => m.ID == match.ID).FirstOrDefault();
+                    Player player1 = _context.Players.Where(m => m.ID == match.Player1ID).FirstOrDefault();
+                    Player player2 = _context.Players.Where(m => m.ID == match.Player2ID).FirstOrDefault();
+                    int oldWinner = 0;  //0 if no winner, 1 if player1, 2 if player2
+                    if (oldMatch.Player1Score > oldMatch.Player2Score)
+                    {
+                        oldWinner = 1;
+                    }
+                    else if (oldMatch.Player1Score < oldMatch.Player2Score)
+                    {
+                        oldWinner = 2;
+                    }
+
+                    if (match.Player1Score > match.Player2Score)
+                    {
+                        if (oldWinner == 0)
+                        {
+                            player1.Win += 1;
+                            player2.Loss += 1;
+                        }
+                        else if (oldWinner == 2)
+                        {
+                            player1.Win += 1;
+                            player1.Loss -= 1;
+                            player2.Win -= 1;
+                            player2.Loss += 1;
+                        }
+                    }
+                    else if (match.Player1Score < match.Player2Score)
+                    {
+                        if (oldWinner == 0)
+                        {
+                            player1.Win += 1;
+                            player2.Loss += 1;
+                        }
+                        else if (oldWinner == 1)
+                        {
+                            player1.Win -= 1;
+                            player1.Loss += 1;
+                            player2.Win += 1;
+                            player2.Loss -= 1;
+                        }
+                    }
+                    _context.Update(player1);
+                    _context.Update(player2);
+
                     _context.Update(match);
                     await _context.SaveChangesAsync();
                 }
@@ -245,6 +309,26 @@ namespace SN_BNB.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var match = await _context.Matches.FindAsync(id);
+
+            /* Update Player objects */
+            Match oldMatch = _context.Matches.AsNoTracking().Where(m => m.ID == match.ID).FirstOrDefault();
+            Player player1 = _context.Players.Where(m => m.ID == match.Player1ID).FirstOrDefault();
+            Player player2 = _context.Players.Where(m => m.ID == match.Player2ID).FirstOrDefault();
+            if (oldMatch.Player1Score > oldMatch.Player2Score)
+            {
+                player1.Win -= 1;
+                player2.Loss -= 1;
+            }
+            else if (oldMatch.Player1Score < oldMatch.Player2Score)
+            {
+                player1.Loss -= 1;
+                player2.Win -= 1;
+            }
+            player1.Played -= 1;
+            player2.Played -= 1;
+            _context.Update(player1);
+            _context.Update(player2);
+
             _context.Matches.Remove(match);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
