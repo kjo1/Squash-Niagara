@@ -43,8 +43,8 @@
                     @foreach (Player p in ViewBag.ListOfPosOnePlayers)
                     {
                     <tr>
-                        <td>@Html.Raw(p.FullName)</td>
-                        <td>@Html.Raw(p.WinPerPos(1).ToString("P"))</td>
+                        <td style="padding-bottom: 15px; padding-top: 15px;">@Html.Raw(p.FullName)</td>
+                        <td style="padding-left: 50px;">@Html.Raw(p.WinPerPos(1).ToString("P0"))</td>
                     </tr>
                     }
                 </table>
