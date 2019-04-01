@@ -57,7 +57,7 @@
                             <input id="playCol" type="submit" name="actionButton" value="Season" class="btn btn-link" />
                         </th>
                         <th>
-                            <input id="playCol" type="submit" name="actionButton" value="Time" class="btn btn-link" />
+                            <input id="playCol" type="submit" name="actionButton" value="Date" class="btn btn-link" />
                         </th>
                         <th>
                             <input id="playCol" type="submit" name="actionButton" value="Home Team" class="btn btn-link" />
@@ -77,128 +77,134 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color:  rgba(109, 97, 190, 0.25);" : string.Empty)">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Season.Season_Title)
-                            </td>
-                            <td>
-                                @item.FixtureDateTime.ToString("MM/dd/yyyy")
-                            </td>
-                            <td>
-                                @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
-                                {
-                                    <a href="/Teams/Details/@item.HomeTeam.ID"><b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b></a>
-                                }
-                                else
-                                {
-                                    <a href="/Teams/Details/@item.HomeTeam.ID">@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</a>
-                                }
-                            </td>
-                            <td>
-                                @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
-                                {
-                                    @if (item.BonusPoint == "Home")
+                        @if (item.FixtureDateTime >= DateTime.Today)
+                        {
+                            <tr style="@(ViewBag.TeamID == item.HomeTeam.ID || ViewBag.TeamID == item.AwayTeam.ID ? "background-color:  rgba(109, 97, 190, 0.25);" : string.Empty)">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Season.Season_Title)
+                                </td>
+                                <td>
+                                    @*@item.FixtureDateTime.ToString("MM/dd/yyyy")*@
+                                    @item.FixtureDateTime.ToString("ddd"), @item.FixtureDateTime.ToString("MMMM") @item.FixtureDateTime.ToString("dd"), @item.FixtureDateTime.ToString("yyy")
+                                </td>
+                                <td>
+                                    @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                                     {
-                                        <b>@(item.HomeScore + 1)</b>
-                                    }
-                                    else if (item.BonusPoint == "Split")
-                                    {
-
-                                        <b>@(Convert.ToDouble(item.HomeScore) + 0.5)</b>
+                                        <a href="/Teams/Details/@item.HomeTeam.ID"><b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</b></a>
                                     }
                                     else
                                     {
-                                        <b>@Html.DisplayFor(modelItem => item.HomeScore)</b>
+                                        <a href="/Teams/Details/@item.HomeTeam.ID">@Html.DisplayFor(modelItem => item.HomeTeam.TeamName)</a>
                                     }
-                                }
-                                else
-                                {
-                                    @if (item.BonusPoint == "Home")
+                                </td>
+                                <td>
+                                    @if (item.HomeScore >= item.AwayScore && !(item.HomeScore == 0 && item.AwayScore == 0))
                                     {
-                                        @(item.HomeScore + 1)
-                                    }
-                                    else if (item.BonusPoint == "Split")
-                                    {
+                                        @if (item.BonusPoint == "Home")
+                                        {
+                                            <b>@(item.HomeScore + 1)</b>
+                                        }
+                                        else if (item.BonusPoint == "Split")
+                                        {
 
-                                        @(Convert.ToDouble(item.HomeScore) + 0.5)
+                                            <b>@(Convert.ToDouble(item.HomeScore) + 0.5)</b>
+                                        }
+                                        else
+                                        {
+                                            <b>@Html.DisplayFor(modelItem => item.HomeScore)</b>
+                                        }
                                     }
                                     else
                                     {
-                                        @Html.DisplayFor(modelItem => item.HomeScore)
-                                    }
-                                }
-                            </td>
+                                        @if (item.BonusPoint == "Home")
+                                        {
+                                            @(item.HomeScore + 1)
+                                        }
+                                        else if (item.BonusPoint == "Split")
+                                        {
 
-                            <td>
-                                @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
-                                {
-                                    <a href="/Teams/Details/@item.AwayTeam.ID">
-                                        <b>@Html.DisplayFor(modelItem => item.AwayTeam.TeamName)</b>
+                                            @(Convert.ToDouble(item.HomeScore) + 0.5)
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(modelItem => item.HomeScore)
+                                        }
+                                    }
+                                </td>
+
+                                <td>
+                                    @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
+                                    {
+                                        <a href="/Teams/Details/@item.AwayTeam.ID">
+                                            <b>@Html.DisplayFor(modelItem => item.AwayTeam.TeamName)</b>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Teams/Details/@item.AwayTeam.ID">
+                                            @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+                                        </a>
+                                    }
+                                </td>
+
+                                <td>
+                                    @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
+                                    {
+                                        @if (item.BonusPoint == "Away")
+                                        {
+                                            <b>@(item.AwayScore + 1)</b>
+                                        }
+                                        else if (item.BonusPoint == "Split")
+                                        {
+
+                                            <b>@(Convert.ToDouble(item.AwayScore) + 0.5)</b>
+                                        }
+                                        else
+                                        {
+                                            <b>@Html.DisplayFor(modelItem => item.AwayScore)</b>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @if (item.BonusPoint == "Away")
+                                        {
+                                            @(item.AwayScore + 1)
+                                        }
+                                        else if (item.BonusPoint == "Split")
+                                        {
+
+                                            @(Convert.ToDouble(item.AwayScore) + 0.5)
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(modelItem => item.AwayScore)
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.ID">
+                                        <img src="~/images/detail.png" style="width:28px; height:28px" data-toggle="tooltip" title="Details" />
                                     </a>
-                                }
-                                else
-                                {
-                                    <a href="/Teams/Details/@item.AwayTeam.ID">
-                                        @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-                                    </a>
-                                }
-                            </td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <span>|</span>
+                                        <a asp-action="Edit" asp-route-id="@item.ID">
+                                            <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
+                                            <span></span>
+                                        </a> <span>|</span>
 
-                            <td>
-                                @if (item.AwayScore >= item.HomeScore && !(item.HomeScore == 0 && item.AwayScore == 0))
-                                {
-                                    @if (item.BonusPoint == "Away")
-                                    {
-                                        <b>@(item.AwayScore + 1)</b>
+                                        <a asp-action="Delete" asp-route-id="@item.ID">
+                                            <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive" />
+                                        </a>
                                     }
-                                    else if (item.BonusPoint == "Split")
-                                    {
-
-                                        <b>@(Convert.ToDouble(item.AwayScore) + 0.5)</b>
-                                    }
-                                    else
-                                    {
-                                        <b>@Html.DisplayFor(modelItem => item.AwayScore)</b>
-                                    }
-                                }
-                                else
-                                {
-                                    @if (item.BonusPoint == "Away")
-                                    {
-                                        @(item.AwayScore + 1)
-                                    }
-                                    else if (item.BonusPoint == "Split")
-                                    {
-
-                                        @(Convert.ToDouble(item.AwayScore) + 0.5)
-                                    }
-                                    else
-                                    {
-                                        @Html.DisplayFor(modelItem => item.AwayScore)
-                                    }
-                                }
-                            </td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.ID">
-                                    <img src="~/images/detail.png" style="width:28px; height:28px" data-toggle="tooltip" title="Details" />
-                                </a>
-                                @if (User.IsInRole("Admin"))
-                                {
-                                <span>|</span>
-                                <a asp-action="Edit" asp-route-id="@item.ID">
-                                    <img src="~/images/edit.png" style="width:28px; height:28px" data-toggle="tooltip" title="Edit" />
-                                    <span></span>
-                                </a> <span>|</span>
-
-                                <a asp-action="Delete" asp-route-id="@item.ID">
-                                    <img src="~/images/Archive.png" style="width:28px; height:28px" data-toggle="tooltip" title="Archive" />
-                                </a>
-                                }
-                            </td>
+                                </td>
 
 
-                        </tr>
+                            </tr>
+                        }
                     }
+
+                    
                 </tbody>
             </table>
 
