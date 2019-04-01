@@ -187,16 +187,49 @@ namespace SN_BNB.Controllers
             var season = await _context.Seasons
                 .Include(s => s.Fixtures)
                 .ThenInclude(f => f.Matches)
-                .ThenInclude(m=>m.Player1)
+                .ThenInclude(m => m.Player1)
                 .Include(s => s.Fixtures)
                 .ThenInclude(f => f.Matches)
                 .ThenInclude(m => m.Player2)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.HomeTeam)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.AwayTeam)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (season == null)
             {
                 return NotFound();
             }
 
+            /* Make a list of PlayerMatchStructs */
+            List<PlayerMatchStruct> matchStructsList = new List<PlayerMatchStruct>();
+            var seasons = await _context.Seasons.ToListAsync();
+
+            /* Loop through each fixture */
+            foreach (Fixture fixture in seasons.FirstOrDefault().Fixtures)
+            {
+                /* Loop through each match in the fixture */
+                foreach (Match match in fixture.Matches)
+                {
+                    /* For each Match, track the Players positions in the PlayerMatchStructs list */
+                    if (!match.FlaggedForInconsistencies == null)        //has been checked before, skip
+                    {
+                        continue;
+                    }
+
+                    /* If the difference between a previous position and it's following is greater than 1, set a flag */
+                    if (true)
+                    {
+                        match.FlaggedForInconsistencies = true;
+                    }
+                    else
+                    {
+                        match.FlaggedForInconsistencies = false;
+                    }
+                }
+            }
+            /* Alert the user to inconsistencies */
+            /* Display the page */
             return View(season);
         }
 
