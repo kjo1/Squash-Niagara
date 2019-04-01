@@ -27,6 +27,9 @@ namespace SN_BNB.Controllers
             var sNContext = _context;
             var matches = from m in _context.Matches
                           .Include(m => m.Fixture)
+                            .ThenInclude(m => m.HomeTeam)
+                           .Include(m => m.Fixture)
+                            .ThenInclude(m => m.AwayTeam)
                           .Include(m => m.Player1)
                           .Include(m => m.Player2)
                           select m;
@@ -344,10 +347,10 @@ namespace SN_BNB.Controllers
         }
         private void PopulateDropDownLists(Match match = null)
         {
-            var aQuery = from m in _context.Fixtures
+            var aQuery = from m in _context.Fixtures.Include(m =>m.AwayTeam).Include(m=> m.HomeTeam)
                          orderby m.FixtureDateTime
                          select m;
-            ViewData["FixtureID"] = new SelectList(aQuery, "ID", "Title", match?.FixtureID);
+            ViewData["FixtureID"] = new SelectList(aQuery, "ID", "Title");
 
             var bQuery = from m in _context.Players
                          orderby m.FullName
