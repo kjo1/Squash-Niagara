@@ -11,6 +11,7 @@ using OfficeOpenXml;
 using SN_BNB.Data;
 using SN_BNB.Models;
 using System.Web;
+using System.Collections;
 
 namespace SN_BNB.Controllers
 {
@@ -101,13 +102,15 @@ namespace SN_BNB.Controllers
                     {
                         MatchStruct matchStruct = new MatchStruct
                         {
-                            Position = Convert.ToInt32(worksheet.Cells[row+i, 2].Text),
-                            MatchTime = TimeSpan.ParseExact(worksheet.Cells[row+i, 3].Text, "hh\\:mm", null),
+                            Position = Convert.ToInt32(worksheet.Cells[row + i, 2].Text),
+                            MatchTime = TimeSpan.ParseExact(worksheet.Cells[row + i, 3].Text, "hh\\:mm", null),
 
                             //Get Player object by executing a WHERE with TeamName
-                            Player1 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 4].Text),
+                            Player1 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row + i, 4].Text),
                             Player2 = players.FirstOrDefault(t => (t.FirstName + " " + t.LastName) == worksheet.Cells[row+i, 5].Text),
                         };
+                        matchStruct.Player1.Played += 1;
+                        matchStruct.Player2.Played += 1;
                         fixtureStruct.Matches.Add(matchStruct);
                     }
                     dataStructs.Add(fixtureStruct);
@@ -143,6 +146,8 @@ namespace SN_BNB.Controllers
                         tempMatch.MatchTime = matchStruct.MatchTime;
                         tempMatch.MatchPosition = matchStruct.Position;
                         await _context.Matches.AddAsync(tempMatch);
+                        _context.Players.Update(tempMatch.Player1);
+                        _context.Players.Update(tempMatch.Player2);
                     }
                     //update tables
                     _context.SaveChanges();
@@ -176,6 +181,14 @@ namespace SN_BNB.Controllers
             return View(await _context.Seasons.ToListAsync());
         }
 
+
+        public class PlayerMatch
+        {
+            public Player MatchPlayer;
+            public int PreviousPostion;
+            public int CurrentPosition;
+        }
+
         // GET: Seasons/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -185,12 +198,59 @@ namespace SN_BNB.Controllers
             }
 
             var season = await _context.Seasons
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.Matches)
+                .ThenInclude(m => m.Player1)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.Matches)
+                .ThenInclude(m => m.Player2)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.HomeTeam)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.AwayTeam)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (season == null)
             {
                 return NotFound();
             }
 
+
+            ///* Loop through each fixture */
+            //foreach (Fixture fixture in season.Fixtures)
+            //{
+            //    /* Loop through each match in the fixture */
+            //    foreach (Match match in fixture.Matches)
+            //    {
+            //        /* For each Match, track the Players positions in the PlayerMatch list */
+            //        if (match.FlaggedForInconsistencies != null)        //has been checked before, skip
+            //        {
+            //            continue;
+            //        }
+            //        IDictionaryEnumerator player1DictEnum = match.Player1.PositionDict.GetEnumerator();
+            //        int currentPos = 0;
+            //        int currentID = 0;
+            //        int previousPos = 0;
+            //        while (player1DictEnum.MoveNext())
+            //        {
+            //            previousPos = currentPos;
+            //            currentPos = Convert.ToInt32(player1DictEnum.Value);
+            //            currentID = Convert.ToInt32(player1MDictEnum.Key);
+
+            //            /* If the difference between a previous position and it's following is greater than 1, set a flag */
+            //            if (previousPos != 0 && !((currentPos - previousPos) == 1) || (currentPos - previousPos) == -1)
+            //            {
+            //                /* Alert the user to inconsistencies */
+            //                match.FlaggedForInconsistencies = true;
+            //            }
+            //            else match.FlaggedForInconsistencies = false;
+
+            //            _context.Update(match);
+            //        }
+            //    }
+            //}
+            //await _context.SaveChangesAsync();
+
+            /* Display the page */
             return View(season);
         }
 
@@ -344,48 +404,6 @@ namespace SN_BNB.Controllers
             _context.Seasons.Remove(season);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        public struct PlayerMatchStruct
-        {
-            public Player MatchPlayer;
-            public int PreviousPostion;
-            public int CurrentPosition;
-        }
-
-        // GET: Seasons/Inconsistencies
-        public async Task<IActionResult> Inconsistencies()
-        {
-            /* Make a list of PlayerMatchStructs */
-            List<PlayerMatchStruct> matchStructsList = new List<PlayerMatchStruct>();
-            var seasons = await _context.Seasons.ToListAsync();
-
-            /* Loop through each fixture */
-            foreach (Fixture fixture in seasons.FirstOrDefault().Fixtures)
-            {
-                /* Loop through each match in the fixture */
-                foreach(Match match in fixture.Matches)
-                {
-                    /* For each Match, track the Players positions in the PlayerMatchStructs list */
-                    if (!match.FlaggedForInconsistencies == null)        //has been checked before, skip
-                    {
-                        continue;
-                    }
-
-                    /* If the difference between a previous position and it's following is greater than 1, set a flag */
-                    if (true)
-                    {
-                        match.FlaggedForInconsistencies = true;
-                    }
-                    else
-                    {
-                        match.FlaggedForInconsistencies = false;
-                    }
-                }
-            }
-            /* Alert the user to inconsistencies */
-            /* Display the page */
-            return View(await _context.Seasons.ToListAsync());
         }
 
         private bool SeasonExists(int id)

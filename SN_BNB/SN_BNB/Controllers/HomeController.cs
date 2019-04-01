@@ -109,17 +109,38 @@ namespace SN_BNB.Controllers
         {
             var players = _context.Players.Include(t => t.Team)
                 .ThenInclude(p=>p.Players)
-                .ThenInclude(p=>p.HomeMatches)
+                .Include(p=>p.HomeMatches)
                 .Include(p=>p.AwayMatches);
-            var posPlayers = new List<Player>();
+            var posOnePlayers = new List<Player>();
+            var posTwoPlayers = new List<Player>();
+            var posThreePlayers = new List<Player>();
+            var posFourPlayers = new List<Player>();
             foreach (Player p in players)
             {
                 if (p.MatchesByPosition(1) >= 0.5m)
-                    posPlayers.Add(p);
+                    posOnePlayers.Add(p);
+            }
+            foreach (Player p in players)
+            {
+                if (p.MatchesByPosition(2) >= 0.5m)
+                    posTwoPlayers.Add(p);
+            }
+            foreach (Player p in players)
+            {
+                if (p.MatchesByPosition(3) >= 0.5m)
+                    posThreePlayers.Add(p);
+            }
+            foreach (Player p in players)
+            {
+                if (p.MatchesByPosition(4) >= 0.5m)
+                    posFourPlayers.Add(p);
             }
 
 
-            ViewBag.ListOfPlayers = posPlayers;
+            ViewBag.ListOfPosOnePlayers = posOnePlayers;
+            ViewBag.ListOfPosTwoPlayers = posTwoPlayers;
+            ViewBag.ListOfPosThreePlayers = posThreePlayers;
+            ViewBag.ListOfPosFourPlayers = posFourPlayers;
 
             return View();
         }
