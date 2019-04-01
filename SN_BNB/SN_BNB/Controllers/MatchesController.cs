@@ -168,8 +168,8 @@ namespace SN_BNB.Controllers
                 player2.Played += 1;
                 player1.HomeMatches.Add(match);
                 player2.AwayMatches.Add(match);
-                player1.MatchPositionDict.Add(match.ID, match.MatchPosition);
-                player2.MatchPositionDict.Add(match.ID, match.MatchPosition);
+                //player1.PositionDict.Add(match.ID, match.MatchPosition);
+                //player2.PositionDict.Add(match.ID, match.MatchPosition);
                 _context.Update(player1);
                 _context.Update(player2);
                 _context.Add(match);
@@ -335,8 +335,8 @@ namespace SN_BNB.Controllers
             player2.Played -= 1;
             player1.HomeMatches.Remove(match);
             player2.AwayMatches.Remove(match);
-            player1.MatchPositionDict.Remove(match.ID);
-            player2.MatchPositionDict.Remove(match.ID);
+            //player1.PositionDict.Remove(match.ID);
+            //player2.PositionDict.Remove(match.ID);
             _context.Update(player1);
             _context.Update(player2);
 

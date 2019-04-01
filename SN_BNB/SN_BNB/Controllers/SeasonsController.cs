@@ -11,6 +11,7 @@ using OfficeOpenXml;
 using SN_BNB.Data;
 using SN_BNB.Models;
 using System.Web;
+using System.Collections;
 
 namespace SN_BNB.Controllers
 {
@@ -213,34 +214,42 @@ namespace SN_BNB.Controllers
                 return NotFound();
             }
 
-            /* Make a list of PlayerMatch objects */
-            List<PlayerMatch> playerMatchList = new List<PlayerMatch>();
-            var seasons = await _context.Seasons.ToListAsync();
 
-            /* Loop through each fixture */
-            foreach (Fixture fixture in seasons.FirstOrDefault().Fixtures)
-            {
-                /* Loop through each match in the fixture */
-                foreach (Match match in fixture.Matches)
-                {
-                    /* For each Match, track the Players positions in the PlayerMatch list */
-                    if (match.FlaggedForInconsistencies != null)        //has been checked before, skip
-                    {
-                        continue;
-                    }
+            ///* Loop through each fixture */
+            //foreach (Fixture fixture in season.Fixtures)
+            //{
+            //    /* Loop through each match in the fixture */
+            //    foreach (Match match in fixture.Matches)
+            //    {
+            //        /* For each Match, track the Players positions in the PlayerMatch list */
+            //        if (match.FlaggedForInconsistencies != null)        //has been checked before, skip
+            //        {
+            //            continue;
+            //        }
+            //        IDictionaryEnumerator player1DictEnum = match.Player1.PositionDict.GetEnumerator();
+            //        int currentPos = 0;
+            //        int currentID = 0;
+            //        int previousPos = 0;
+            //        while (player1DictEnum.MoveNext())
+            //        {
+            //            previousPos = currentPos;
+            //            currentPos = Convert.ToInt32(player1DictEnum.Value);
+            //            currentID = Convert.ToInt32(player1MDictEnum.Key);
 
-                    /* If the difference between a previous position and it's following is greater than 1, set a flag */
-                    if (true)
-                    {
-                        match.FlaggedForInconsistencies = true;
-                    }
-                    else
-                    {
-                        match.FlaggedForInconsistencies = false;
-                    }
-                }
-            }
-            /* Alert the user to inconsistencies */
+            //            /* If the difference between a previous position and it's following is greater than 1, set a flag */
+            //            if (previousPos != 0 && !((currentPos - previousPos) == 1) || (currentPos - previousPos) == -1)
+            //            {
+            //                /* Alert the user to inconsistencies */
+            //                match.FlaggedForInconsistencies = true;
+            //            }
+            //            else match.FlaggedForInconsistencies = false;
+
+            //            _context.Update(match);
+            //        }
+            //    }
+            //}
+            //await _context.SaveChangesAsync();
+
             /* Display the page */
             return View(season);
         }

@@ -88,8 +88,8 @@ namespace SN_BNB.Models
         [NotMappedAttribute]
         public Byte[] ExcelFile { get; set; }
 
-        [NotMappedAttribute]
-        public OrderedDictionary MatchPositionDict { get; set; }    //contains the Match.ID and the position played
+        //[NotMappedAttribute]
+        //public OrderedDictionary PositionDict { get; set; }    //contains the Match.ID and the position played
 
         // Number of matches played at a particular position
         public decimal MatchesByPosition(int matchPosition)
