@@ -12,12 +12,24 @@
     <dl class="dl-horizontal">
         @foreach(Fixture fixture in Model.Fixtures)
         {
-        <dt>
-            @fixture.FixtureDateTime
-        </dt>
-            <dd>
-                @fixture.HomeScore
-            </dd>
+            @foreach(Match match in fixture.Matches)
+            {
+                <dt>
+                    @match.MatchPosition
+                </dt>
+                <dt>
+                    @match.Player1.FullName
+                </dt>
+                <dt>
+                    @match.Player1Score
+                </dt>
+                <dt>
+                    @match.Player2.FullName
+                </dt>
+                <dt>
+                    @match.Player2Score
+                </dt>
+            }
 
         }
         @*<dt>

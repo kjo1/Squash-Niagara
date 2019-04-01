@@ -187,6 +187,10 @@ namespace SN_BNB.Controllers
             var season = await _context.Seasons
                 .Include(s => s.Fixtures)
                 .ThenInclude(f => f.Matches)
+                .ThenInclude(m=>m.Player1)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.Matches)
+                .ThenInclude(m => m.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (season == null)
             {
