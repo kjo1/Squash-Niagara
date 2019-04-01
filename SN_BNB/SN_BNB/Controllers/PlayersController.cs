@@ -157,9 +157,8 @@ namespace SN_BNB.Controllers
             PopulateFilterList();
             var players = from p in _context.Players
                             .Include(p => p.Team)
-                              //.ThenInclude( t => t.DivisionID)
-                              //.Include(p => p.AssignedMatchPlayers)
-                              //.ThenInclude(p => p.Match)
+                            .Include(p => p.HomeMatches)
+                            .Include(p => p.AwayMatches)
                           select p;
 
 			if (!String.IsNullOrEmpty(searchString))
@@ -364,9 +363,8 @@ namespace SN_BNB.Controllers
 
             var player = await _context.Players
                 .Include(p => p.Team)
-                //.Include(p => p.AssignedMatchPlayers)
-                //.ThenInclude( n => n.Match)
-                //.ThenInclude ( f => f.Fixture)
+                .Include(p => p.HomeMatches)
+                .Include(p => p.AwayMatches)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (player == null)
             {
@@ -475,6 +473,8 @@ namespace SN_BNB.Controllers
 
             var player = await _context.Players
                 .Include(p => p.Team)
+                .Include(p => p.HomeMatches)
+                .Include(p => p.AwayMatches)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (player == null)
             {

@@ -42,10 +42,10 @@
 
                     @foreach (Player p in ViewBag.ListOfPlayers)
                     {
-                        <tr>
-                            <td>@Html.Raw(p.FullName)</td>
-                            <td>@Html.Raw(p.WinPerPos(1))</td>
-                        </tr>
+                    <tr>
+                        <td>@Html.Raw(p.FullName)</td>
+                        <td>@Html.Raw(p.WinPerPos(1).ToString("P"))</td>
+                    </tr>
                     }
                 </table>
                 <hr />
