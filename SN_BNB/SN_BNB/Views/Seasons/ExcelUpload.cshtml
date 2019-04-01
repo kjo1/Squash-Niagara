@@ -19,14 +19,14 @@
             <div class="form-group">
                 <input type="file" asp-for="ExcelFile" name="file" />
                 <label hidden name="dateErrorlbl" class="control-label">One or more of the fields with date/time were invalid. Use a field like dd/mm/yyyy hh:mm AM or dd/mm/yyyy hh:mm PM.</label>
-                <input type="submit" id="btnSearch" value="Upload File" class="btn btn-default" />
+                <input type="submit" id="btnSearch" value="Upload File" class="btn btn-light" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-light">Back to List</a>
 </div>
 
 @section Scripts {
