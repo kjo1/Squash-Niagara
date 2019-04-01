@@ -20,13 +20,11 @@ namespace SN_BNB.Models
         public int ID { get; set; }
 
         [Display(Name ="Score")]
-        [Required(ErrorMessage = "You must enter a score for player 1")]
         [Range(0, 6, ErrorMessage = "Please put point(s) between 0 and 6")]
         public int Player1Score { get; set; }
 
         [Display(Name = "Score")]
         [Range(0, 6, ErrorMessage = "Please put point(s) between 0 and 6")]
-        [Required(ErrorMessage = "You must enter a score for player 2")]
         public int Player2Score { get; set; }
 
         [Required(ErrorMessage = "You must enter a match position")]
