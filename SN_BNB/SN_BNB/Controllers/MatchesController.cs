@@ -168,8 +168,9 @@ namespace SN_BNB.Controllers
                 player2.Played += 1;
                 player1.HomeMatches.Add(match);
                 player2.AwayMatches.Add(match);
-                player1.PositionList.Add(new MatchPosition(match.ID, match.MatchPosition));
-                player2.PositionList.Add(new MatchPosition(match.ID, match.MatchPosition));
+                MatchPosition matchPosition = new MatchPosition(match.ID, match.MatchPosition);
+                player1.PositionList.Add(matchPosition);
+                player2.PositionList.Add(matchPosition);
                 _context.Update(player1);
                 _context.Update(player2);
                 _context.Add(match);

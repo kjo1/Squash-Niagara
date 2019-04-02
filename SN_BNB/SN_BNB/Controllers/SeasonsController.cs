@@ -201,9 +201,11 @@ namespace SN_BNB.Controllers
                 .Include(s => s.Fixtures)
                 .ThenInclude(f => f.Matches)
                 .ThenInclude(m => m.Player1)
+                //.ThenInclude(p => p.PositionList)
                 .Include(s => s.Fixtures)
                 .ThenInclude(f => f.Matches)
                 .ThenInclude(m => m.Player2)
+                //.ThenInclude(p=>p.PositionList)
                 .Include(s => s.Fixtures)
                 .ThenInclude(f => f.HomeTeam)
                 .Include(s => s.Fixtures)
@@ -215,40 +217,46 @@ namespace SN_BNB.Controllers
             }
 
 
-            ///* Loop through each fixture */
-            //foreach (Fixture fixture in season.Fixtures)
-            //{
-            //    /* Loop through each match in the fixture */
-            //    foreach (Match match in fixture.Matches)
-            //    {
-            //        /* For each Match, track the Players positions in the PlayerMatch list */
-            //        if (match.FlaggedForInconsistencies != null)        //has been checked before, skip
-            //        {
-            //            continue;
-            //        }
-            //        IDictionaryEnumerator player1DictEnum = match.Player1.PositionDict.GetEnumerator();
-            //        int currentPos = 0;
-            //        int currentID = 0;
-            //        int previousPos = 0;
-            //        while (player1DictEnum.MoveNext())
-            //        {
-            //            previousPos = currentPos;
-            //            currentPos = Convert.ToInt32(player1DictEnum.Value);
-            //            currentID = Convert.ToInt32(player1MDictEnum.Key);
+            /* Loop through each fixture */
+            foreach (Fixture fixture in season.Fixtures)
+            {
+                /* Loop through each match in the fixture */
+                foreach (Match match in fixture.Matches)
+                {
+                    /* For each Match, track the Players positions in the PlayerMatch list */
+                    MatchPosition matchPositionObject = new MatchPosition(match.ID, match.MatchPosition);
+                    Player player1 = match.Player1;
+                    player1.PositionList.Add(matchPositionObject);
+                    Player player2 = match.Player2;
+                    player2.PositionList.Add(matchPositionObject);
+                    _context.Update(player1);
+                    _context.Update(player2);
+                }
+            }
+            await _context.SaveChangesAsync();
 
-            //            /* If the difference between a previous position and it's following is greater than 1, set a flag */
-            //            if (previousPos != 0 && !((currentPos - previousPos) == 1) || (currentPos - previousPos) == -1)
-            //            {
-            //                /* Alert the user to inconsistencies */
-            //                match.FlaggedForInconsistencies = true;
-            //            }
-            //            else match.FlaggedForInconsistencies = false;
+            foreach (Player player in _context.Players)
+            {
+                for (int i = 0; i < player.PositionList.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        Match match = _context.Matches.FirstOrDefault(m => m.ID == player.PositionList.ToList<MatchPosition>()[i].matchID);
 
-            //            _context.Update(match);
-            //        }
-            //    }
-            //}
-            //await _context.SaveChangesAsync();
+                        /* If the difference between a previous position and it's following is greater than 1, set a flag */
+                        if ((player.PositionList.ToList<MatchPosition>()[i].position - player.PositionList.ToList<MatchPosition>()[i - 1].position) > 1 || (player.PositionList.ToList<MatchPosition>()[i].position - player.PositionList.ToList<MatchPosition>()[i - 1].position) < -1)
+                        {
+                            match.FlaggedForInconsistencies = true;
+                        }
+                        else
+                        {
+                            match.FlaggedForInconsistencies = false;
+                        }
+                        _context.Update(match);
+                    }
+                }
+            }
+            await _context.SaveChangesAsync();
 
             /* Display the page */
             return View(season);
