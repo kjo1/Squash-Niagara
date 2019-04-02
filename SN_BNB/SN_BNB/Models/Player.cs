@@ -15,7 +15,7 @@ namespace SN_BNB.Models
         {
             this.HomeMatches = new HashSet<Match>();
             this.AwayMatches = new HashSet<Match>();
-            this.PositionList = new HashSet<MatchPosition>();
+            //this.PositionList = new HashSet<MatchPosition>();
         }
         public int ID { get; set; }
 
