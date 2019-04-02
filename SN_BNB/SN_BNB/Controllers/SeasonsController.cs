@@ -218,7 +218,7 @@ namespace SN_BNB.Controllers
 
 
             /* Loop through each fixture */
-            foreach (Fixture fixture in season.Fixtures)
+            foreach (Fixture fixture in season.Fixtures.OrderBy(f=>f.FixtureDateTime))
             {
                 /* Loop through each match in the fixture */
                 foreach (Match match in fixture.Matches)
@@ -235,26 +235,27 @@ namespace SN_BNB.Controllers
             }
             await _context.SaveChangesAsync();
 
+            /* Find all the inconsistencies now */
             foreach (Player player in _context.Players)
             {
+                /* Loop through all of the players matches */
                 for (int i = 0; i < player.PositionList.Count; i++)
                 {
                     if (i != 0)
                     {
                         Match match = _context.Matches.FirstOrDefault(m => m.ID == player.PositionList.ToList<MatchPosition>()[i].matchID);
 
-                        /* If the difference between a previous position and it's following is greater than 1, set a flag */
+                        /* If the difference between a previous position and it's following is greater than 1, and the Matches are in the same division, set a flag */
                         if ((player.PositionList.ToList<MatchPosition>()[i].position - player.PositionList.ToList<MatchPosition>()[i - 1].position) > 1 || (player.PositionList.ToList<MatchPosition>()[i].position - player.PositionList.ToList<MatchPosition>()[i - 1].position) < -1)
                         {
                             match.FlaggedForInconsistencies = true;
                         }
-                        else
-                        {
-                            match.FlaggedForInconsistencies = false;
-                        }
+                        else match.FlaggedForInconsistencies = false;
                         _context.Update(match);
                     }
                 }
+                /* Reset the PositionList */
+                player.PositionList = null;
             }
             await _context.SaveChangesAsync();
 

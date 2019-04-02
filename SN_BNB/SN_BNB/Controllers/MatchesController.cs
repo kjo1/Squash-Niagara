@@ -168,9 +168,6 @@ namespace SN_BNB.Controllers
                 player2.Played += 1;
                 player1.HomeMatches.Add(match);
                 player2.AwayMatches.Add(match);
-                MatchPosition matchPosition = new MatchPosition(match.ID, match.MatchPosition);
-                player1.PositionList.Add(matchPosition);
-                player2.PositionList.Add(matchPosition);
                 _context.Update(player1);
                 _context.Update(player2);
                 _context.Add(match);
@@ -336,20 +333,6 @@ namespace SN_BNB.Controllers
             player2.Played -= 1;
             player1.HomeMatches.Remove(match);
             player2.AwayMatches.Remove(match);
-            foreach(MatchPosition matchPosition in player1.PositionList)
-            {
-                if (matchPosition.matchID == match.ID)
-                {
-                    player1.PositionList.Remove(matchPosition);
-                }
-            }
-            foreach (MatchPosition matchPosition in player2.PositionList)
-            {
-                if (matchPosition.matchID == match.ID)
-                {
-                    player2.PositionList.Remove(matchPosition);
-                }
-            }
             _context.Update(player1);
             _context.Update(player2);
 
