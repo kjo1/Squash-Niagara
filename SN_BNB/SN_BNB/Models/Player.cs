@@ -15,6 +15,7 @@ namespace SN_BNB.Models
         {
             this.HomeMatches = new HashSet<Match>();
             this.AwayMatches = new HashSet<Match>();
+            this.PositionList = new HashSet<MatchPosition>();
         }
         public int ID { get; set; }
 
@@ -88,8 +89,7 @@ namespace SN_BNB.Models
         [NotMappedAttribute]
         public Byte[] ExcelFile { get; set; }
 
-        //[NotMappedAttribute]
-        //public OrderedDictionary PositionDict { get; set; }    //contains the Match.ID and the position played
+        public ICollection<MatchPosition> PositionList { get; set; }    //contains the Match.ID and the position played
 
         // Number of matches played at a particular position
         public decimal MatchesByPosition(int matchPosition)

@@ -168,8 +168,9 @@ namespace SN_BNB.Controllers
                 player2.Played += 1;
                 player1.HomeMatches.Add(match);
                 player2.AwayMatches.Add(match);
-                //player1.PositionDict.Add(match.ID, match.MatchPosition);
-                //player2.PositionDict.Add(match.ID, match.MatchPosition);
+                MatchPosition matchPosition = new MatchPosition(match.ID, match.MatchPosition);
+                player1.PositionList.Add(matchPosition);
+                player2.PositionList.Add(matchPosition);
                 _context.Update(player1);
                 _context.Update(player2);
                 _context.Add(match);
@@ -335,8 +336,20 @@ namespace SN_BNB.Controllers
             player2.Played -= 1;
             player1.HomeMatches.Remove(match);
             player2.AwayMatches.Remove(match);
-            //player1.PositionDict.Remove(match.ID);
-            //player2.PositionDict.Remove(match.ID);
+            foreach(MatchPosition matchPosition in player1.PositionList)
+            {
+                if (matchPosition.matchID == match.ID)
+                {
+                    player1.PositionList.Remove(matchPosition);
+                }
+            }
+            foreach (MatchPosition matchPosition in player2.PositionList)
+            {
+                if (matchPosition.matchID == match.ID)
+                {
+                    player2.PositionList.Remove(matchPosition);
+                }
+            }
             _context.Update(player1);
             _context.Update(player2);
 
@@ -361,11 +374,6 @@ namespace SN_BNB.Controllers
                          select m;
             ViewData["Player1ID"] = new SelectList(bQuery, "ID", "FullName", match?.Player1ID);
             ViewData["Player2ID"] = new SelectList(bQuery, "ID", "FullName", match?.Player2ID);
-
-            //var dQuery = from f in _context.Divisions
-            //             orderby f.DivisionName
-            //             select f;
-            //ViewData["DivisionID"] = new SelectList(dQuery, "ID", "DivisionName");
         }
     }
 }
