@@ -35,8 +35,8 @@
                         <tr>
                             @{
                                 int cnt = 0;
-                                List<SN_BNB.ViewModels.AssignedTeamVM> Teams = ViewBag.Teams;
-                                foreach (var team in Teams)
+                                //List<SN_BNB.ViewModels.AssignedTeamVM> Teams = ViewBag.Teams;
+                                foreach (var team in ViewBag.Teams)
                                 {
                                     if (cnt++ % 3 == 0)
                                     {

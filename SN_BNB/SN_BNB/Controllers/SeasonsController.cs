@@ -12,6 +12,7 @@ using SN_BNB.Data;
 using SN_BNB.Models;
 using System.Web;
 using System.Collections;
+using SN_BNB.ViewModels;
 
 namespace SN_BNB.Controllers
 {
@@ -262,8 +263,10 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Seasons/Create
-        public IActionResult Create()
+        public IActionResult Create()            
         {
+            List<AssignedTeamVM> teams = new List<AssignedTeamVM>();
+            ViewBag.Teams = teams;
             return View();
         }
 
