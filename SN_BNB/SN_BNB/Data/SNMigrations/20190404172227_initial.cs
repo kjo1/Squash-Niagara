@@ -65,9 +65,7 @@ namespace SN_BNB.Data.SNMigrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Season_Title = table.Column<string>(nullable: false),
-                    SeasonStart = table.Column<DateTime>(nullable: false),
-                    SeasonEnd = table.Column<DateTime>(nullable: false)
+                    Season_Title = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

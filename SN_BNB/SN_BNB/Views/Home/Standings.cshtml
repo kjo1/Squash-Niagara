@@ -65,31 +65,13 @@
                         <th style="padding-left: 50px;">%</th>
                     </tr>
 
+                    @foreach (Player p in ViewBag.ListOfPosTwoPlayers)
+                    {
                     <tr>
-                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Forgeron, Dave</a></td>
-                        <td style="padding-left: 50px;">67</td>
+                        <td style="padding-bottom: 15px; padding-top: 15px;">@Html.Raw(p.FullName)</td>
+                        <td style="padding-left: 50px;">@Html.Raw(p.WinPerPos(2).ToString("P0"))</td>
                     </tr>
-
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Corey, Jeff</a></td>
-                        <td style="padding-left: 50px;">52</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Stones, Doug</a></td>
-                        <td style="padding-left: 50px;">48</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Colcott, Craig</a></td>
-                        <td style="padding-left: 50px;">46</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Seet, Kok-Wah</a></td>
-                        <td style="padding-left: 50px;">42</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Gadula, Curtis</a></td>
-                        <td style="padding-left: 50px;">40</td>
-                    </tr>
+                    }
                 </table>
                 <hr />
                 <p class="card-text" style="color: limegreen"><i>Confirmed</i></p>
@@ -108,27 +90,13 @@
                         <th style="padding-left: 50px;">%</th>
                     </tr>
 
-                    <tr>
-                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Vanderzalm, Brett</a></td>
-                        <td style="padding-left: 50px;">100</td>
-                    </tr>
-
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Rapley, Dave</a></td>
-                        <td style="padding-left: 50px;">67</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Shaw, Hamish</a></td>
-                        <td style="padding-left: 50px;">63</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Muir, Jeff</a></td>
-                        <td style="padding-left: 50px;">40</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Kelm, George</a></td>
-                        <td style="padding-left: 50px;">0</td>
-                    </tr>
+                    @foreach (Player p in ViewBag.ListOfPosThreePlayers)
+                    {
+                        <tr>
+                            <td style="padding-bottom: 15px; padding-top: 15px;">@Html.Raw(p.FullName)</td>
+                            <td style="padding-left: 50px;">@Html.Raw(p.WinPerPos(3).ToString("P0"))</td>
+                        </tr>
+                    }
                 </table>
                 <hr />
                 <p class="card-text" style="color: darkred"><i>Not Confirmed</i></p>
@@ -147,35 +115,13 @@
                         <th style="padding-left: 50px;">%</th>
                     </tr>
 
-                    <tr>
-                        <td style="  padding-bottom: 15px; padding-top: 15px;"><a href="#">Scott, Angus</a></td>
-                        <td style="padding-left: 50px;">65</td>
-                    </tr>
-
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Cappelletti, Joey</a></td>
-                        <td style="padding-left: 50px;">63</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Roussel, Chris</a></td>
-                        <td style="padding-left: 50px;">62</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Lewis, Scott</a></td>
-                        <td style="padding-left: 50px;">57</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Purnell, Mike</a></td>
-                        <td style="padding-left: 50px;">37</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Devalk, Robert</a></td>
-                        <td style="padding-left: 50px;">35</td>
-                    </tr>
-                    <tr>
-                        <td style="  padding-bottom: 15px;"><a href="#">Hogg, Chris</a></td>
-                        <td style="padding-left: 50px;">25</td>
-                    </tr>
+                    @foreach (Player p in ViewBag.ListOfPosFourPlayers)
+                    {
+                        <tr>
+                            <td style="padding-bottom: 15px; padding-top: 15px;">@Html.Raw(p.FullName)</td>
+                            <td style="padding-left: 50px;">@Html.Raw(p.WinPerPos(4).ToString("P0"))</td>
+                        </tr>
+                    }
                 </table>
                 <hr />
                 <p class="card-text" style="color: darkred"><i>Not Confirmed</i></p>

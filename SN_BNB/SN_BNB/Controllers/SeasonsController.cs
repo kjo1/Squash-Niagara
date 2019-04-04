@@ -117,9 +117,6 @@ namespace SN_BNB.Controllers
                     dataStructs.Add(fixtureStruct);
                 }
 
-                //make a new season
-                season.SeasonStart = DateTime.Now;
-
                 await _context.AddAsync(season);
                 await _context.SaveChangesAsync();
 
@@ -179,7 +176,18 @@ namespace SN_BNB.Controllers
         // GET: Seasons
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Seasons.ToListAsync());
+            var season = _context.Seasons
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.Matches)
+                .ThenInclude(m => m.Player1)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.Matches)
+                .ThenInclude(m => m.Player2)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.HomeTeam)
+                .Include(s => s.Fixtures)
+                .ThenInclude(f => f.AwayTeam);
+            return View(await season.ToListAsync());
         }
 
 

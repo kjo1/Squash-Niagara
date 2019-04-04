@@ -21,11 +21,31 @@ namespace SN_BNB.Models
         [Required]
         [Display(Name = "Season Start Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime SeasonStart { get; set; }
+        public DateTime SeasonStart { get
+            {
+                DateTime earliest = DateTime.MaxValue;
+                foreach(Fixture fixture in Fixtures)
+                {
+                    earliest = new DateTime(Math.Min(earliest.Ticks, fixture.FixtureDateTime.Ticks));
+                }
+                return earliest;
+            }
+        }
 
         [Display(Name = "Season End Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime SeasonEnd { get; set; }
+        public DateTime SeasonEnd
+        {
+            get
+            {
+                DateTime latest = DateTime.MinValue;
+                foreach (Fixture fixture in Fixtures)
+                {
+                    latest = new DateTime(Math.Max(latest.Ticks, fixture.FixtureDateTime.Ticks));
+                }
+                return latest;
+            }
+        }
 
         [NotMappedAttribute]
         public Byte[] ExcelFile { get; set; }

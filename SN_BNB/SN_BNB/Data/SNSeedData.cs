@@ -366,26 +366,26 @@ namespace SN_BNB.Data
                      new Season
                      {
                          Season_Title = "Summer 2018",
-                         SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
-                         SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
+                         //SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
+                         //SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "Winter 2018",
-                         SeasonStart = DateTime.ParseExact("22/12/2018", "dd/MM/yyyy", null),
-                         SeasonEnd = DateTime.ParseExact("01/03/2019", "dd/MM/yyyy", null)
+                         //SeasonStart = DateTime.ParseExact("22/12/2018", "dd/MM/yyyy", null),
+                         //SeasonEnd = DateTime.ParseExact("01/03/2019", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "Summer 2019",
-                         SeasonStart = DateTime.ParseExact("21/06/2019", "dd/MM/yyyy", null),
-                         SeasonEnd = DateTime.ParseExact("23/09/2019", "dd/MM/yyyy", null)
+                         //SeasonStart = DateTime.ParseExact("21/06/2019", "dd/MM/yyyy", null),
+                         //SeasonEnd = DateTime.ParseExact("23/09/2019", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "Winter 2019",
-                         SeasonStart = DateTime.ParseExact("22/12/2019", "dd/MM/yyyy", null),
-                         SeasonEnd = DateTime.ParseExact("01/03/2020", "dd/MM/yyyy", null)
+                         //SeasonStart = DateTime.ParseExact("22/12/2019", "dd/MM/yyyy", null),
+                         //SeasonEnd = DateTime.ParseExact("01/03/2020", "dd/MM/yyyy", null)
                      }
                      );
                     context.SaveChanges();

@@ -207,10 +207,6 @@ namespace SN_BNB.Data.SNMigrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("SeasonEnd");
-
-                    b.Property<DateTime>("SeasonStart");
-
                     b.Property<string>("Season_Title")
                         .IsRequired();
 

@@ -10,7 +10,7 @@ using SN_BNB.Data;
 namespace SN_BNB.Data.SNMigrations
 {
     [DbContext(typeof(SNContext))]
-    [Migration("20190402155927_initial")]
+    [Migration("20190404172227_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -208,10 +208,6 @@ namespace SN_BNB.Data.SNMigrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("SeasonEnd");
-
-                    b.Property<DateTime>("SeasonStart");
 
                     b.Property<string>("Season_Title")
                         .IsRequired();
