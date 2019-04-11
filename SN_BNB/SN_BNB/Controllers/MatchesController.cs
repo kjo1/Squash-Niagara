@@ -30,6 +30,8 @@ namespace SN_BNB.Controllers
                             .ThenInclude(m => m.HomeTeam)
                            .Include(m => m.Fixture)
                             .ThenInclude(m => m.AwayTeam)
+                           .Include(m => m.Fixture)
+                            .ThenInclude(m => m.Season)
                           .Include(m => m.Player1)
                           .Include(m => m.Player2)
                           select m;
@@ -122,6 +124,11 @@ namespace SN_BNB.Controllers
 
             var match = await _context.Matches
                 .Include(m => m.Fixture)
+                   .ThenInclude(m => m.HomeTeam)
+                .Include(m => m.Fixture)
+                   .ThenInclude(m => m.AwayTeam)
+                .Include(m => m.Fixture)
+                   .ThenInclude(m => m.Season)
                 .Include(m => m.Player1)
                 .Include(m => m.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);
@@ -296,6 +303,11 @@ namespace SN_BNB.Controllers
 
             var match = await _context.Matches
                 .Include(m => m.Fixture)
+                   .ThenInclude(m => m.HomeTeam)
+                .Include(m => m.Fixture)
+                   .ThenInclude(m => m.AwayTeam)
+                .Include(m => m.Fixture)
+                   .ThenInclude(m => m.Season)
                 .Include(m => m.Player1)
                 .Include(m => m.Player2)
                 .FirstOrDefaultAsync(m => m.ID == id);

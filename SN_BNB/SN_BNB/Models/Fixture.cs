@@ -18,7 +18,7 @@ namespace SN_BNB.Models
         public string Title
         {
             get {
-                    return HomeTeam.TeamName + " vs " + AwayTeam.TeamName;
+                return " " + Season.SeasonStart.Year;
                 }
         }
 
