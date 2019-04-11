@@ -487,41 +487,27 @@ namespace SN_BNB.Data
                      new Season
                      {
                          Season_Title = "2015",
-                         //SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
 
                          Season_Title = "2016",
-                         //SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "2017",
-                         //SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "2018",
-                         //SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "2019",
-                         //SeasonStart = DateTime.ParseExact("22/12/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("01/03/2019", "dd/MM/yyyy", null)
-                         //SeasonStart = DateTime.ParseExact("22/12/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("01/03/2019", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "2018",
-                         //SeasonStart = DateTime.ParseExact("21/06/2019", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("23/09/2019", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
