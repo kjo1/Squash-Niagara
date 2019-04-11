@@ -365,25 +365,25 @@ namespace SN_BNB.Data
                     context.Seasons.AddRange(
                      new Season
                      {
-                         Season_Title = "Summer 2018",
+                         Season_Title = "2016",
                          //SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
                          //SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
-                         Season_Title = "Winter 2018",
+                         Season_Title = "2017",
                          //SeasonStart = DateTime.ParseExact("22/12/2018", "dd/MM/yyyy", null),
                          //SeasonEnd = DateTime.ParseExact("01/03/2019", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
-                         Season_Title = "Summer 2019",
+                         Season_Title = "2018",
                          //SeasonStart = DateTime.ParseExact("21/06/2019", "dd/MM/yyyy", null),
                          //SeasonEnd = DateTime.ParseExact("23/09/2019", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
-                         Season_Title = "Winter 2019",
+                         Season_Title = "2019",
                          //SeasonStart = DateTime.ParseExact("22/12/2019", "dd/MM/yyyy", null),
                          //SeasonEnd = DateTime.ParseExact("01/03/2020", "dd/MM/yyyy", null)
                      }
@@ -432,56 +432,56 @@ namespace SN_BNB.Data
                          FixtureDateTime = DateTime.Parse("2019-04-01"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-05"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Winter 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
                      },
                     new Fixture
                     {
                         FixtureDateTime = DateTime.Parse("2019-03-22"),
                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
-                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Winter 2018").ID
+                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
                     },
                     new Fixture
                     {
                         FixtureDateTime = DateTime.Parse("2019-03-31"),
                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
-                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Winter 2018").ID
+                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
                     },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Winter 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-08"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2019").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2016").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-03-21"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2016").ID
                      },
 
                      new Fixture
@@ -489,49 +489,49 @@ namespace SN_BNB.Data
                          FixtureDateTime = DateTime.Parse("2019-04-06"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Winter 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-08"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Winter 2019").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-11"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Winter 2019").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-04"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-03-18"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-04-01"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
                      },
                      new Fixture
                      {
                          FixtureDateTime = DateTime.Parse("2019-03-20"),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "Summer 2018").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
                      }
                      );
                     context.SaveChanges();
@@ -544,56 +544,65 @@ namespace SN_BNB.Data
                          FixtureID = 8,
                          MatchTime = TimeSpan.Parse("14:00"),
                          Player1ID = 4,
-                         Player2ID = 8
+                         Player2ID = 8,
+                         MatchPosition = 1
+                         
                      },
                      new Match
                      {
                          FixtureID = 8,
                          MatchTime = TimeSpan.Parse("15:00"),
                          Player1ID = 2,
-                         Player2ID = 4
+                         Player2ID = 4,
+                         MatchPosition = 2
                      },
                      new Match
                      {
                          FixtureID = 8,
                          MatchTime = TimeSpan.Parse("16:00"),
                          Player1ID = 1,
-                         Player2ID = 3
+                         Player2ID = 3,
+                         MatchPosition = 3
                      },
                      new Match
                      {
                          FixtureID = 8,
                          MatchTime = TimeSpan.Parse("17:00"),
                          Player1ID = 5,
-                         Player2ID = 3
+                         Player2ID = 3,
+                         MatchPosition = 4
                      },
                     new Match
                     {
                         FixtureID = 3,
                         MatchTime = TimeSpan.Parse("14:00"),
                         Player1ID = 4,
-                        Player2ID = 8
+                        Player2ID = 8,
+                        MatchPosition = 1
                     },
                      new Match
                      {
                          FixtureID = 3,
                          MatchTime = TimeSpan.Parse("15:00"),
                          Player1ID = 2,
-                         Player2ID = 4
+                         Player2ID = 4,
+                         MatchPosition = 2
                      },
                      new Match
                      {
                          FixtureID = 3,
                          MatchTime = TimeSpan.Parse("16:00"),
                          Player1ID = 1,
-                         Player2ID = 3
+                         Player2ID = 3,
+                         MatchPosition = 3
                      },
                      new Match
                      {
                          FixtureID = 3,
                          MatchTime = TimeSpan.Parse("17:00"),
                          Player1ID = 5,
-                         Player2ID = 3
+                         Player2ID = 3,
+                         MatchPosition = 4
                      }
                      );
                     context.SaveChanges();
