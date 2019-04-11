@@ -14,14 +14,6 @@ namespace SN_BNB.Models
         }
         public int ID { get; set; }
 
-        //[Required]
-        public string Title
-        {
-            get {
-                return HomeTeam.TeamName + " vs " + AwayTeam.TeamName;// + " " + Season.SeasonStart.Year;
-                }
-        }
-
 
         [Display(Name = "Date")]
         [Required]
@@ -30,7 +22,6 @@ namespace SN_BNB.Models
         public DateTime FixtureDateTime { get; set; }
 
         [Display(Name = "Home Team Score")]
-
         public int HomeScore
         {
             get
@@ -72,11 +63,13 @@ namespace SN_BNB.Models
 
         public virtual Location Location { get; set; }
         public virtual Season Season { get; set; }
-        public virtual Team HomeTeam { get; set; }
-        public virtual Team AwayTeam { get; set; }
+        public Team HomeTeam { get; set; }
+        public Team AwayTeam { get; set; }
 
         public ICollection<Match> Matches { get; set; }
 
+        //[Required]
+        public string Title { get { return "TEST"; } }//HomeTeam.TeamName + " vs " + AwayTeam.TeamName;// + " " + Season.SeasonStart.Year;
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
