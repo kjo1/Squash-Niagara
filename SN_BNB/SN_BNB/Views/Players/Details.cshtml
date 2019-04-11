@@ -4,10 +4,87 @@
     ViewData["Title"] = "Details";
 }
 <br />
-<h2>Details</h2>
+@*<h2>Details</h2>*@
 
 <div>
-    <h4>Player</h4>
+    <div class="container">
+  <div class="row">
+      <div class="col">
+          <h3>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3><br />
+          <h4>Details</h4>
+          <br />
+          <dl class="dl-horizontal">
+              <dt>
+                  @Html.DisplayNameFor(model => model.Gender)
+              </dt>
+              <dd>
+                  @Html.DisplayFor(model => model.Gender)
+              </dd>
+              <dt>
+                  @Html.DisplayNameFor(model => model.Email)
+              </dt>
+              @if (Model.PlayerWantsInfoHidden && !(User.IsInRole("Admin") || User.IsInRole("Captain")))
+              {
+                  <dd>Hidden by request of player</dd>
+              }
+              else
+              {
+                  <dd>@Html.DisplayFor(modelItem => Model.Email)</dd>
+              }
+              <dt>
+                  @Html.DisplayNameFor(model => model.Phone)
+              </dt>
+              @if (Model.PlayerWantsInfoHidden && !(User.IsInRole("Admin") || User.IsInRole("Captain")))
+              {
+                  <dd>Hidden by request of player</dd>
+              }
+              else
+              {
+                  <dd>@Html.DisplayFor(modelItem => Model.Phone)</dd>
+              }
+              <dt>
+                  @Html.DisplayNameFor(model => model.Position)
+              </dt>
+              <dd>
+                  @Html.DisplayFor(model => model.Position)
+              </dd>
+              <dt>
+                  Played
+              </dt>
+              <dd>
+                  @*@Html.Raw(Model.AssignedMatchPlayers.Count(m => m.Match.Fixture.FixtureDateTime.Ticks < DateTime.Now.Ticks).ToString())*@
+              </dd>
+              <dt>
+                  @Html.DisplayNameFor(model => model.Win)
+              </dt>
+              <dd>
+                  @Html.DisplayFor(model => model.Win)
+              </dd>
+              <dt>
+                  @Html.DisplayNameFor(model => model.Loss)
+              </dt>
+              <dd>
+                  @Html.DisplayFor(model => model.Loss)
+              </dd>
+              <dt>
+                  @Html.DisplayNameFor(model => model.Team)
+              </dt>
+              <dd>
+                  @Html.DisplayFor(model => model.Team.TeamName)
+              </dd>
+          </dl>
+      </div>
+      <div class="col">
+          <br /><br /><br />
+          <h4>Match Info</h4>
+          <h5>Upcoming</h5>
+          <h5>Previous</h5>
+
+</div>
+  </div>
+</div>
+
+    @*<h4>Player</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -65,9 +142,9 @@
         <dt>
             Played
         </dt>
-        <dd>
+        <dd>*@
             @*@Html.Raw(Model.AssignedMatchPlayers.Count(m => m.Match.Fixture.FixtureDateTime.Ticks < DateTime.Now.Ticks).ToString())*@
-        </dd>
+        @*</dd>
         <dt>
             @Html.DisplayNameFor(model => model.Win)
         </dt>
@@ -86,7 +163,7 @@
         <dd>
             @Html.DisplayFor(model => model.Team.TeamName)
         </dd>
-    </dl>
+    </dl>*@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
