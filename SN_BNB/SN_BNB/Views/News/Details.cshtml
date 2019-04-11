@@ -11,7 +11,7 @@
     <div class="container">
         <h3>@Html.DisplayFor(model => model.Title)</h3><br />
         <div class="container-fluid">
-        <p>@Html.DisplayFor(model => model.Content)</p><br />
+        <p>@Html.Raw(Model.Content)</p><br />
         </div>
         <p><i>@Html.DisplayFor(model => model.Date)</i></p>
     </div>
