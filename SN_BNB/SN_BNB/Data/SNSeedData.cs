@@ -47,34 +47,129 @@ namespace SN_BNB.Data
                          TeamName = "White Oaks 1",
                          TeamCreatedOn = DateTime.Today,
                          DivisionID = 1,
-                         TeamBio = "This is Team White Oaks 1"
+                         TeamBio = "This is Team White Oaks 1",
+                         TeamPoints = 30
+                     },
+                     new Team
+                     {
+                         TeamName = "White Oaks 2",
+                         TeamCreatedOn = DateTime.Today,
+                         DivisionID = 2,
+                         TeamBio = "This is Team White Oaks 2",
+                         TeamPoints = 20
+                     },
+                     new Team
+                     {
+                         TeamName = "White Oaks 3",
+                         TeamCreatedOn = DateTime.Today,
+                         DivisionID = 3,
+                         TeamBio = "This is Team White Oaks 3",
+                         TeamPoints = 10
+                     },
+                     new Team
+                     {
+                         TeamName = "White Oaks 4",
+                         TeamCreatedOn = DateTime.Today,
+                         DivisionID = 4,
+                         TeamBio = "This is Team White Oaks 4",
+                         TeamPoints = 15
                      },
                     new Team
                     {
                         TeamName = "Ridley 1",
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 2,
+                        DivisionID = 1,
                         TeamBio = "This is Team Ridley 1"
                     },
                     new Team
                     {
-                        TeamName = "BAC 1",
+                        TeamName = "Ridley 2",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 2,
+                        TeamBio = "This is Team Ridley 2",
+                        TeamPoints = 33
+                    },
+                    new Team
+                    {
+                        TeamName = "Ridley 3",
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3,
-                        TeamBio = "This is Team BAC 1"
+                        TeamBio = "This is Team Ridley 3"
+                    },
+                    new Team
+                    {
+                        TeamName = "Ridley 4",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 4,
+                        TeamBio = "This is Team Ridley 4"
+                    },
+                    new Team
+                    {
+                        TeamName = "BNB 1",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 1,
+                        TeamBio = "This is Team BNB 1",
+                        TeamPoints = 73
+                    },
+                    new Team
+                    {
+                        TeamName = "BNB 2",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 2,
+                        TeamBio = "This is Team BNB 2",
+                        TeamPoints = 34
+                    },
+                    new Team
+                    {
+                        TeamName = "BNB 3",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 3,
+                        TeamBio = "This is Team BNB 3",
+                        TeamPoints = 42
+                    },
+                    new Team
+                    {
+                        TeamName = "BNB 4",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 4,
+                        TeamBio = "This is Team BNB 4",
+                        TeamPoints = 20
+
                     },
                     new Team
                     {
                         TeamName = "Brock 1",
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 4,
-                        TeamBio = "This is Team Brock 1"
+                        DivisionID = 1,
+                        TeamBio = "This is Team Brock 1",
+                        TeamPoints = 38
                     },
                     new Team
                     {
-                        TeamName = "BAC 2",
+                        TeamName = "Brock 2",
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 2
+                        DivisionID = 2,
+                        TeamBio = "This is Team Brock 2"
+                    },
+                    new Team
+                    {
+                        TeamName = "Brock 3",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 3,
+                        TeamBio = "This is Team Brock 3"
+                    },
+                    new Team
+                    {
+                        TeamName = "Brock 4",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 4,
+                        TeamBio = "This is Team Brock 4"
+                    },
+                    new Team
+                    {
+                        TeamName = "CAB 1",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 1
 
                     },
                     new Team
@@ -86,9 +181,16 @@ namespace SN_BNB.Data
                     },
                     new Team
                     {
-                        TeamName = "CAB 1",
+                        TeamName = "CAB 3",
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 3
+
+                    },
+                    new Team
+                    {
+                        TeamName = "CAB 4",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 4
 
                     },
                     new Team
@@ -96,49 +198,24 @@ namespace SN_BNB.Data
                         TeamName = "Brick 1",
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 1
-
                     },
                     new Team
                     {
                         TeamName = "Brick 2",
                         TeamCreatedOn = DateTime.Today,
-                        DivisionID = 3
-
+                        DivisionID = 2
                     },
                     new Team
                     {
-                        TeamName = "Brock 2",
+                        TeamName = "Brick 3",
+                        TeamCreatedOn = DateTime.Today,
+                        DivisionID = 3
+                    },
+                    new Team
+                    {
+                        TeamName = "Brick 4",
                         TeamCreatedOn = DateTime.Today,
                         DivisionID = 4
-
-                    },
-                    new Team
-                    {
-                        TeamName = "Ridley 2",
-                        TeamCreatedOn = DateTime.Today,
-                        DivisionID = 3
-
-                    },
-                    new Team
-                    {
-                        TeamName = "White Oaks 2",
-                        TeamCreatedOn = DateTime.Today,
-                        DivisionID = 2
-
-                    },
-                    new Team
-                    {
-                        TeamName = "Brock 3",
-                        TeamCreatedOn = DateTime.Today,
-                        DivisionID = 1
-
-                    },
-                    new Team
-                    {
-                        TeamName = "Ridley 3",
-                        TeamCreatedOn = DateTime.Today,
-                        DivisionID = 2
-
                     }
                 );
                     context.SaveChanges();
@@ -173,7 +250,7 @@ namespace SN_BNB.Data
                     new Player
                     {
                         FirstName = "Matt",
-                        LastName = "Bowie",
+                        LastName = "Bowie1",
                         Gender = "M",
                         Email = "Matt_Bowie@outlook.com",
                         Phone = 8880000800,
@@ -183,30 +260,74 @@ namespace SN_BNB.Data
                     },
                     new Player
                     {
-                        FirstName = "Dave",
-                        LastName = "Forgeron",
+                        FirstName = "Kevin",
+                        LastName = "MC2",
                         Gender = "M",
-                        Email = "Dave_Forgeron@outlook.com",
+                        Email = "kevin@outlook.com",
                         Phone = 8880008000,
                         Position = 2,
-                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 1").ID,
+                        PlayerWantsInfoHidden = false
+                    },
+                    new Player
+                    {
+                        FirstName = "Yorguin",
+                        LastName = "Mu2",
+                        Gender = "M",
+                        Email = "yorguin@outlook.com",
+                        Phone = 8880008000,
+                        Position = 2,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 2").ID,
+                        PlayerWantsInfoHidden = false
+                    },
+                    new Player
+                    {
+                        FirstName = "Ryan",
+                        LastName = "Cr3",
+                        Gender = "M",
+                        Email = "ryan@outlook.com",
+                        Phone = 8880008000,
+                        Position = 3,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 3").ID,
+                        PlayerWantsInfoHidden = false
+                    },
+                    new Player
+                    {
+                        FirstName = "Evan",
+                        LastName = "What4",
+                        Gender = "M",
+                        Email = "Evan@outlook.com",
+                        Phone = 8880008000,
+                        Position = 4,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 4").ID,
+                        PlayerWantsInfoHidden = false
+                    },
+                    new Player
+                    {
+                        FirstName = "Kanghyun",
+                        LastName = "Jo1",
+                        Gender = "M",
+                        Email = "kang@outlook.com",
+                        Phone = 8880008000,
+                        Position = 1,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 1").ID,
                         PlayerWantsInfoHidden = false
                     },
                     new Player
                     {
                         FirstName = "Rachael",
-                        LastName = "Forgeron",
+                        LastName = "Forgeron1",
                         Gender = "F",
                         Email = "admin1@outlook.com",
                         Phone = 9055551202,
-                        Position = 3,
-                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                        Position = 1,
+                        TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                         PlayerWantsInfoHidden = true
                     },
                     new Player
                     {
                         FirstName = "Jakub",
-                        LastName = "Lipinski",
+                        LastName = "Lipinski3",
                         Gender = "M",
                         Email = "Jakub_Lipinski@outlook.com",
                         Phone = 8880088000,
@@ -217,7 +338,7 @@ namespace SN_BNB.Data
                     new Player
                     {
                         FirstName = "Brendan",
-                        LastName = "Yuki",
+                        LastName = "Yuki2",
                         Gender = "M",
                         Email = "byuki@outlook.com",
                         Phone = 9056254141,
@@ -228,7 +349,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Steven",
-                         LastName = "Stone",
+                         LastName = "Stone4",
                          Gender = "M",
                          Email = "sstone@gmail.com",
                          Phone = 9053295625,
@@ -239,7 +360,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Cynthia",
-                         LastName = "Shirona",
+                         LastName = "Shirona3",
                          Gender = "F",
                          Email = "cshirona@outlook.com",
                          Phone = 9055551257,
@@ -250,7 +371,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "May",
-                         LastName = "Haruka",
+                         LastName = "Haruka2",
                          Gender = "F",
                          Email = "mharuka@outlook.com",
                          Phone = 9055559892,
@@ -261,7 +382,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Vanya",
-                         LastName = "Hargreeves",
+                         LastName = "Hargreeves1",
                          Gender = "F",
                          Email = "vhargreeves@outlook.com",
                          Phone = 9052251202,
@@ -272,7 +393,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Alexander",
-                         LastName = "Macedon",
+                         LastName = "Macedon4",
                          Gender = "M",
                          Email = "greatalex@outlook.com",
                          Phone = 9053211202,
@@ -283,7 +404,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Archie",
-                         LastName = "Price",
+                         LastName = "Price4",
                          Gender = "M",
                          Email = "aprice@outlook.com",
                          Phone = 2892344321,
@@ -294,7 +415,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Maxie",
-                         LastName = "Lang",
+                         LastName = "Lang3",
                          Gender = "M",
                          Email = "mlang@outlook.com",
                          Phone = 2890988907,
@@ -305,7 +426,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Nate",
-                         LastName = "River",
+                         LastName = "River2",
                          Gender = "M",
                          Email = "nriver@outlook.com",
                          Phone = 2896549874,
@@ -316,7 +437,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Serena",
-                         LastName = "Paschall",
+                         LastName = "Paschall1",
                          Gender = "F",
                          Email = "spaschall@outlook.com",
                          Phone = 2899518475,
@@ -327,7 +448,7 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Dawn",
-                         LastName = "Jenness",
+                         LastName = "Jenness2",
                          Gender = "F",
                          Email = "djenness@outlook.com",
                          Phone = 2896231592,
@@ -338,18 +459,18 @@ namespace SN_BNB.Data
                      new Player
                      {
                          FirstName = "Captain",
-                         LastName = "Last",
+                         LastName = "Last2",
                          Gender = "m",
                          Email = "captain1@outlook.com",
                          Phone = 2896237777,
                          Position = 2,
-                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         TeamID = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
                          PlayerWantsInfoHidden = false
                      },
                      new Player
                      {
                          FirstName = "Player",
-                         LastName = "First",
+                         LastName = "First2",
                          Gender = "m",
                          Email = "player1@outlook.com",
                          Phone = 2896230007,
@@ -365,21 +486,28 @@ namespace SN_BNB.Data
                     context.Seasons.AddRange(
                      new Season
                      {
+                         Season_Title = "2015",
+                     },
+                     new Season
+                     {
+
                          Season_Title = "2016",
-                         //SeasonStart = DateTime.ParseExact("21/06/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("23/09/2018", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "2017",
-                         //SeasonStart = DateTime.ParseExact("22/12/2018", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("01/03/2019", "dd/MM/yyyy", null)
                      },
                      new Season
                      {
                          Season_Title = "2018",
-                         //SeasonStart = DateTime.ParseExact("21/06/2019", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("23/09/2019", "dd/MM/yyyy", null)
+                     },
+                     new Season
+                     {
+                         Season_Title = "2019",
+                     },
+                     new Season
+                     {
+                         Season_Title = "2018",
                      },
                      new Season
                      {
@@ -429,109 +557,131 @@ namespace SN_BNB.Data
                     context.Fixtures.AddRange(
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-01"),
+                         FixtureDateTime = DateTime.ParseExact("2019-04-16", "yyyy-MM-dd", null),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
-                     },
-                     new Fixture
-                     {
-                         FixtureDateTime = DateTime.Parse("2019-04-05"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
-                     },
-                    new Fixture
-                    {
-                        FixtureDateTime = DateTime.Parse("2019-03-22"),
-                        idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
-                        idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
-                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
-                    },
-                    new Fixture
-                    {
-                        FixtureDateTime = DateTime.Parse("2019-03-31"),
-                        idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
-                        idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
-                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
-                    },
-                     new Fixture
-                     {
-                         FixtureDateTime = DateTime.Parse("2019-04-11"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
-                     },
-                     new Fixture
-                     {
-                         FixtureDateTime = DateTime.Parse("2019-04-08"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 1").ID,
                          Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-11"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2016").ID
+                         FixtureDateTime = DateTime.ParseExact("2019-04-23", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
+
+                     },
+                    new Fixture
+                    {
+                        FixtureDateTime = DateTime.ParseExact("2019-03-26", "yyyy-MM-dd", null),
+                        idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                        idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
+                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
+                    },
+                    new Fixture
+                    {
+                        FixtureDateTime = DateTime.ParseExact("2019-03-19", "yyyy-MM-dd", null),
+                        idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                        idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 1").ID,
+                        Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
+                    },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.ParseExact("2019-04-23", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 1").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-03-21"),
+                         FixtureDateTime = DateTime.ParseExact("2019-04-23", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.ParseExact("2019-04-30", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 3").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.ParseExact("2019-03-26", "yyyy-MM-dd", null),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2016").ID
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
 
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-06"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 2").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
+                         FixtureDateTime = DateTime.ParseExact("2019-04-09", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 3").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-08"),
+                         FixtureDateTime = DateTime.ParseExact("2019-04-09", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 3").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brock 3").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.ParseExact("2019-04-08", "yyyy-MM-dd", null),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "White Oaks 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 1").ID,
                          Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-11"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BAC 2").ID,
+                         FixtureDateTime = DateTime.ParseExact("2019-04-16", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
                          Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-04"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
-                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
+                         FixtureDateTime = DateTime.ParseExact("2019-04-02", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-03-18"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
+                         FixtureDateTime = DateTime.ParseExact("2019-03-19", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 2").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-04-01"),
-                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
+                         FixtureDateTime = DateTime.ParseExact("2019-04-02", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.ParseExact("2019-03-19", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Brick 2").ID,
+                         idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 2").ID,
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2018").ID
+                     },
+                     new Fixture
+                     {
+                         FixtureDateTime = DateTime.ParseExact("2019-04-02", "yyyy-MM-dd", null),
+                         idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "BNB 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      },
                      new Fixture
                      {
-                         FixtureDateTime = DateTime.Parse("2019-03-20"),
+                         FixtureDateTime = DateTime.ParseExact("2019-03-26", "yyyy-MM-dd", null),
                          idHomeTeam = context.Teams.FirstOrDefault(t => t.TeamName == "Ridley 1").ID,
                          idAwayTeam = context.Teams.FirstOrDefault(t => t.TeamName == "CAB 1").ID,
-                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2017").ID
+                         Season_idSeason = context.Seasons.FirstOrDefault(s => s.Season_Title == "2019").ID
                      }
                      );
                     context.SaveChanges();
@@ -546,7 +696,7 @@ namespace SN_BNB.Data
                          Player1ID = 4,
                          Player2ID = 8,
                          MatchPosition = 1
-                         
+
                      },
                      new Match
                      {
@@ -601,9 +751,158 @@ namespace SN_BNB.Data
                          FixtureID = 3,
                          MatchTime = TimeSpan.Parse("17:00"),
                          Player1ID = 5,
+                         Player2ID = 3
+                     },//@@@@@@
+                     new Match
+                     {
+                         FixtureID = 1,
+                         MatchTime = TimeSpan.Parse("15:00"),
+                         Player1ID = 2,
+                         Player2ID = 4
+                     },
+                     new Match
+                     {
+                         FixtureID = 1,
+                         MatchTime = TimeSpan.Parse("16:00"),
+                         Player1ID = 1,
+                         Player2ID = 3
+                     },
+                     new Match
+                     {
+                         FixtureID = 1,
+                         MatchTime = TimeSpan.Parse("17:00"),
+                         Player1ID = 5,
+                         Player2ID = 3
+                     },
+                    new Match
+                    {
+                        FixtureID = 2,
+                        MatchTime = TimeSpan.Parse("14:00"),
+                        Player1ID = 4,
+                        Player2ID = 8
+                    },
+                     new Match
+                     {
+                         FixtureID = 2,
+                         MatchTime = TimeSpan.Parse("15:00"),
+                         Player1ID = 2,
+                         Player2ID = 4
+                     },
+                     new Match
+                     {
+                         FixtureID = 2,
+                         MatchTime = TimeSpan.Parse("16:00"),
+                         Player1ID = 1,
+                         Player2ID = 3
+                     },
+                     new Match
+                     {
+                         FixtureID = 2,
+                         MatchTime = TimeSpan.Parse("17:00"),
+                         Player1ID = 5,
                          Player2ID = 3,
                          MatchPosition = 4
+
                      }
+                     // },//@@@@@@
+                     // new Match
+                     // {
+                     //     FixtureID = 4,
+                     //     MatchTime = TimeSpan.Parse("15:00"),
+                     //     Player1ID = 2,
+                     //     Player2ID = 4
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 4,
+                     //     MatchTime = TimeSpan.Parse("16:00"),
+                     //     Player1ID = 1,
+                     //     Player2ID = 3
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 4,
+                     //     MatchTime = TimeSpan.Parse("17:00"),
+                     //     Player1ID = 5,
+                     //     Player2ID = 3
+                     // },
+                     //new Match
+                     //{
+                     //    FixtureID = 5,
+                     //    MatchTime = TimeSpan.Parse("14:00"),
+                     //    Player1ID = 4,
+                     //    Player2ID = 8
+                     //},
+                     // new Match
+                     // {
+                     //     FixtureID = 5,
+                     //     MatchTime = TimeSpan.Parse("15:00"),
+                     //     Player1ID = 2,
+                     //     Player2ID = 4
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 5,
+                     //     MatchTime = TimeSpan.Parse("16:00"),
+                     //     Player1ID = 1,
+                     //     Player2ID = 3
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 5,
+                     //     MatchTime = TimeSpan.Parse("17:00"),
+                     //     Player1ID = 5,
+                     //     Player2ID = 3
+                     // },//@@@@@@
+                     // new Match
+                     // {
+                     //     FixtureID = 6,
+                     //     MatchTime = TimeSpan.Parse("15:00"),
+                     //     Player1ID = 2,
+                     //     Player2ID = 4
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 6,
+                     //     MatchTime = TimeSpan.Parse("16:00"),
+                     //     Player1ID = 1,
+                     //     Player2ID = 3
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 6,
+                     //     MatchTime = TimeSpan.Parse("17:00"),
+                     //     Player1ID = 5,
+                     //     Player2ID = 3
+                     // },
+                     //new Match
+                     //{
+                     //    FixtureID = 7,
+                     //    MatchTime = TimeSpan.Parse("14:00"),
+                     //    Player1ID = 4,
+                     //    Player2ID = 8
+                     //},
+                     // new Match
+                     // {
+                     //     FixtureID = 7,
+                     //     MatchTime = TimeSpan.Parse("15:00"),
+                     //     Player1ID = 2,
+                     //     Player2ID = 4
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 7,
+                     //     MatchTime = TimeSpan.Parse("16:00"),
+                     //     Player1ID = 1,
+                     //     Player2ID = 3
+                     // },
+                     // new Match
+                     // {
+                     //     FixtureID = 7,
+                     //     MatchTime = TimeSpan.Parse("17:00"),
+                     //     Player1ID = 5,
+                     //     Player2ID = 3
+                     // }
                      );
                     context.SaveChanges();
                 }
