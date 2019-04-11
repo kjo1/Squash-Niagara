@@ -48,10 +48,10 @@ namespace SN_BNB.Controllers
                 {
                     News news = _context.News.Last();
  
-                    ViewBag.news = news;
+                    ViewBag.News = news;
                 }
                 catch
-                { ViewBag.news = new News(); }
+                { ViewBag.News = new News(); }
 
                 try
                 {
