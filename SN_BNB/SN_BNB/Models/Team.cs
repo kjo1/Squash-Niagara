@@ -23,6 +23,7 @@ namespace SN_BNB.Models
         [Display(Name = "Point(s)")]
         [Range(0, int.MaxValue, ErrorMessage = "Point(s) Cannot be negative.")]
         public int TeamPoints { get; set; }
+        //return HomeFixtures.Sum(h => h.HomeScore) + AwayFixtures.Sum(a => a.AwayScore); kevin did it already in the fixture controller
 
         [DataType(DataType.Date)]
         [Display(Name = "Team Created")]

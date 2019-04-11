@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="frmEdit" onsubmit="goBack();">
             <div class="form-group">
                 <label asp-for="MatchTime" class="control-label"></label>
                 <input asp-for="MatchTime" class="form-control" />
@@ -50,7 +50,7 @@
             </div>
 
             <div class="form-group">
-                <input id="btnSearch" type="submit" value="Save" class="btn btn-light" />
+                <input id="btnSearch" type="submit" value="Save" class="btn btn-light"/>
             </div>
         </form>
     </div>
@@ -63,3 +63,12 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<SCRIPT LANGUAGE="JavaScript">
+
+    //document.getElementById("btnSearch").onsubmit = goBack();
+      function goBack() {
+        window.history.go(-1);
+    }
+    
+
+</SCRIPT>

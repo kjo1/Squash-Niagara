@@ -201,7 +201,6 @@ namespace SN_BNB.Controllers
             {
                 return NotFound();
             }
-
             PopulateDropDownLists(match);
             return View(match);
         }
@@ -218,7 +217,9 @@ namespace SN_BNB.Controllers
             {
                 return NotFound();
             }
-
+             // geting the matches
+            //var fixtureID = _context.Matches.Include(m => m.Fixture).Where(f => f.ID == id);
+            //var fixID = _context.Fixtures.Include(m => m.Matches).Where(f => f.Matches.First(m => f.ID == id).FixtureID == fixtureID);
             if (ModelState.IsValid)
             {
                 try
@@ -291,7 +292,8 @@ namespace SN_BNB.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                string fmatch = _context.Matches.First(m => m.ID == id).FixtureID.ToString();
+                return RedirectToAction("Details/" + fmatch, "Fixtures");
             }
             ViewData["FixtureID"] = new SelectList(_context.Fixtures, "ID", "ID", match.FixtureID);
             ViewData["Player1ID"] = new SelectList(_context.Players, "ID", "Email", match.Player1ID);
