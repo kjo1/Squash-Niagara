@@ -59,9 +59,10 @@
 
                 @Html.DropDownList("TeamID", null, "Select a Team", htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();", @style = "margin-right:10px;" })
                 @*@Html.TextBox("searchString", null, htmlAttributes: new { @class = "form-control", @placeholder = "Search by Name", @style = "marging-right:10px;" })*@
-                <input type="text" name="searchString" value="@ViewData["CurrentString"]" placeholder="Search by Name" class="form-control" style="margin-right:10px"/>
-                
+                <input type="text" name="searchString" value="@ViewData["CurrentString"]" placeholder="Search by Name" class="form-control" style="margin-right:10px" />
+
                 <button id="btnSearch" class="btn btn-outline-success my-3 my-sm-0" type="submit">Search</button>
+                <a asp-action="Index" id="btnSearch" class="btn btn-outline-success my-3 my-sm-0">Clear</a>
             </div>
 
         </nav>
