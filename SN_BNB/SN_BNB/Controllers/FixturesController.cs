@@ -271,6 +271,8 @@ namespace SN_BNB.Controllers
                 .Include(f => f.AwayTeam)
                 .Include( f => f.Matches)
                     .ThenInclude(f=> f.Player1)
+                .Include(f=>f.Matches)
+                    .ThenInclude(f=>f.Player2)
                 .FirstOrDefaultAsync(f => f.ID == id);
             
             if (fixture == null)

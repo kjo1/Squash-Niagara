@@ -224,7 +224,14 @@ namespace SN_BNB.Controllers
                 try
                 {
                     /* Update Player objects */
-                    Match oldMatch = _context.Matches.AsNoTracking().Where(m => m.ID == match.ID).FirstOrDefault();
+                    Match oldMatch = _context.Matches.AsNoTracking().Where(m => m.ID == match.ID)
+                        .Include(m=>m.Fixture)
+                           .ThenInclude(f=>f.Season)
+                        .Include(m=>m.Fixture)
+                           .ThenInclude(f=>f.HomeTeam)
+                        .Include(m=>m.Fixture)
+                           .ThenInclude(f=>f.AwayTeam)
+                        .FirstOrDefault();
                     Player player1 = _context.Players.Where(m => m.ID == match.Player1ID).FirstOrDefault();
                     Player player2 = _context.Players.Where(m => m.ID == match.Player2ID).FirstOrDefault();
                     int oldWinner = 0;  //0 if no winner, 1 if player1, 2 if player2
