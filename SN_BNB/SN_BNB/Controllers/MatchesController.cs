@@ -21,8 +21,28 @@ namespace SN_BNB.Controllers
         }
 
         // GET: Matches
-        public async Task<IActionResult> Index(string SearchString, int? divisionID, string sortDirection, string sortField, string actionButton)
+        public async Task<IActionResult> Index(string searchString, int? divisionID, string sortOrder, string currentFilter, string actionButton, int? page)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["HomeSortPar"] = String.IsNullOrEmpty(sortOrder) ? "home" : "";
+            ViewData["TimeSortPar"] = sortOrder == "time" ? "time_desc" : "time";
+            ViewData["FixtureSortPar"] = sortOrder == "fixture" ? "fixture_desc" : "fixture";
+            ViewData["AwaySortPar"] = sortOrder == "away" ? "away_desc" : "away";
+            ViewData["HomeScoreSortPar"] = sortOrder == "hscore" ? "hscore_desc" : "hscore";
+            ViewData["AwayScoreSortPar"] = sortOrder == "ascore" ? "ascore_desc" : "ascore";
+            ViewData["PositionSortPar"] = sortOrder == "position" ? "position_desc" : "position";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
             PopulateDropDownLists();
             var sNContext = _context;
             var matches = from m in _context.Matches
@@ -37,81 +57,61 @@ namespace SN_BNB.Controllers
                           select m;
 
 
-            if (!string.IsNullOrEmpty(SearchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                matches = matches.Where(m => m.Player1.FirstName.ToUpper().Contains(SearchString.ToUpper())
-                                        || m.Player1.LastName.ToUpper().Contains(SearchString.ToUpper())
-                                        || m.Player2.FirstName.ToUpper().Contains(SearchString.ToUpper())
-                                        || m.Player2.LastName.ToUpper().Contains(SearchString.ToUpper())
-                                        || m.Fixture.HomeTeam.TeamName.ToUpper().Contains(SearchString.ToUpper())
-                                        || m.Fixture.AwayTeam.TeamName.ToUpper().Contains(SearchString.ToUpper()));
+                matches = matches.Where(m => m.Player1.FirstName.ToUpper().Contains(searchString.ToUpper())
+                                        || m.Player1.LastName.ToUpper().Contains(searchString.ToUpper())
+                                        || m.Player2.FirstName.ToUpper().Contains(searchString.ToUpper())
+                                        || m.Player2.LastName.ToUpper().Contains(searchString.ToUpper())
+                                        || m.Fixture.HomeTeam.TeamName.ToUpper().Contains(searchString.ToUpper())
+                                        || m.Fixture.AwayTeam.TeamName.ToUpper().Contains(searchString.ToUpper()));
             }
-            if (!String.IsNullOrEmpty(actionButton))
-            {
-                if (actionButton != "Filter")
-                {
-                    if (actionButton == sortField)
-                    {
-                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
-                    }
-                    sortField = actionButton;
-                }
-            }
-            if (sortField == "Away Players")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches
-                        .OrderBy(m => m.Player2);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.Player2);
-                }
-            }
-            else if (sortField == "Position")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches
-                        .OrderBy(m => m.MatchPosition);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.MatchPosition);
-                }
-            }
-            else if (sortField == "Time")
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches
-                        .OrderBy(m => m.MatchTime);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.MatchTime);
-                }
-            }
-            else //Sorting by Points - the default sort order
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    matches = matches.OrderBy(m => m.Player1);
-                }
-                else
-                {
-                    matches = matches
-                        .OrderByDescending(m => m.Player1);
-                }
-            }
-            ViewData["sortField"] = sortField;
-            ViewData["sortDirection"] = sortDirection;
 
-            return View(await matches.ToListAsync());
+            switch (sortOrder)
+            {
+                case "time":
+                    matches = matches.OrderBy(f => f.MatchTime);
+                    break;
+                case "time_desc":
+                    matches = matches.OrderByDescending(f => f.MatchTime);
+                    break;
+                case "fixture":
+                    matches = matches.OrderBy(f => f.Fixture);
+                    break;
+                case "fixture_desc":
+                    matches = matches.OrderByDescending(f => f.Fixture);
+                    break;
+                case "away":
+                    matches = matches.OrderBy(f => f.Player2);
+                    break;
+                case "away_desc":
+                    matches = matches.OrderByDescending(f => f.Player2);
+                    break;
+                case "hscore":
+                    matches = matches.OrderBy(f => f.Player1Score);
+                    break;
+                case "hscore_desc":
+                    matches = matches.OrderByDescending(f => f.Player1Score);
+                    break;
+                case "ascore":
+                    matches = matches.OrderBy(f => f.Player2Score);
+                    break;
+                case "ascore_desc":
+                    matches = matches.OrderByDescending(f => f.Player2Score);
+                    break;
+                case "position":
+                    matches = matches.OrderBy(f => f.MatchPosition);
+                    break;
+                case "position_desc":
+                    matches = matches.OrderByDescending(f => f.MatchPosition);
+                    break;
+                default:
+                    matches = matches.OrderByDescending(f => f.Player1);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Match>.CreateAsync(matches.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Matches/Details/5

@@ -79,7 +79,7 @@ namespace SN_BNB.Controllers
             ViewData["HomeSortPar"] = sortOrder == "home" ? "home_desc" : "home";
             ViewData["HomeScoreSortPar"] = sortOrder == "home_score" ? "home_score__desc" : "home_score";
             ViewData["AwaySortPar"] = sortOrder == "away" ? "away_desc" : "away";
-            ViewData["AwayScoreSortPar"] = sortOrder == "away_score" ? "away_score__desc" : "away";
+            ViewData["AwayScoreSortPar"] = sortOrder == "away_score" ? "away_score__desc" : "away_score";
 
             if (searchString != null)
             {
