@@ -323,7 +323,7 @@ namespace SN_BNB.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Unidentified error, contact administrator. ");
+                    ModelState.AddModelError("", "Unidentified error, contact administrator. " + ex.Message);
                 }
                 
             }
