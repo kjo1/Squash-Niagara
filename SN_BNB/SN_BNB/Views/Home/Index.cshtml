@@ -14,7 +14,7 @@
             <div class="jumbotron">
                 <h3>News</h3>
                 <hr>
-                <p>Game in Ridley College has been cancelled for Tuesday 26th! Keep tuned for updates.</p>
+                <p>@Html.Raw(ViewBag.News.Content)</p>
             </div>
         </div>
         @if (User.Identity.IsAuthenticated)

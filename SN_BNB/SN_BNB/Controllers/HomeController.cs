@@ -46,6 +46,15 @@ namespace SN_BNB.Controllers
 
                 try
                 {
+                    News news = _context.News.Last();
+ 
+                    ViewBag.news = news;
+                }
+                catch
+                { ViewBag.news = new News(); }
+
+                try
+                {
                     int teamID = _context.Players.FirstOrDefault(p => p.Email == User.Identity.Name).TeamID;
 
                     var fixtureLast = _context.Fixtures.Include(f => f.AwayTeam)
