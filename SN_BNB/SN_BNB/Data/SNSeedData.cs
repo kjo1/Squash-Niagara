@@ -486,34 +486,24 @@ namespace SN_BNB.Data
                     context.Seasons.AddRange(
                      new Season
                      {
-                         Season_Title = "2015",
+                         Season_Title = "2015"
                      },
                      new Season
                      {
 
-                         Season_Title = "2016",
+                         Season_Title = "2016"
                      },
                      new Season
                      {
-                         Season_Title = "2017",
+                         Season_Title = "2017"
                      },
                      new Season
                      {
-                         Season_Title = "2018",
+                         Season_Title = "2018"
                      },
                      new Season
                      {
-                         Season_Title = "2019",
-                     },
-                     new Season
-                     {
-                         Season_Title = "2018",
-                     },
-                     new Season
-                     {
-                         Season_Title = "2019",
-                         //SeasonStart = DateTime.ParseExact("22/12/2019", "dd/MM/yyyy", null),
-                         //SeasonEnd = DateTime.ParseExact("01/03/2020", "dd/MM/yyyy", null)
+                         Season_Title = "2019"
                      }
                      );
                     context.SaveChanges();
